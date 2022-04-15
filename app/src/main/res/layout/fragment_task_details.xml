@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    tools:context=".view.TaskDetailsFragment">
+
+    <TextView
+        android:id="@+id/task_details_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/task_details_title_default"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/task_details_date_created"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/task_details_date_created_default"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@id/task_details_favorite"
+        app:layout_constraintStart_toStartOf="@id/task_details_title"
+        app:layout_constraintTop_toBottomOf="@id/task_details_title" />
+
+    <TextView
+        android:id="@+id/task_details_date_updated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/task_details_date_updated_default"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@id/task_details_favorite"
+        app:layout_constraintStart_toEndOf="@id/task_details_date_created"
+        app:layout_constraintTop_toBottomOf="@id/task_details_title" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/task_details_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_favorite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/task_details_title" />
+
+    <ScrollView
+        android:id="@+id/task_details_content_scrollview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/task_details_favorite">
+
+        <TextView
+            android:id="@+id/task_details_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/task_details_content_default" />
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
