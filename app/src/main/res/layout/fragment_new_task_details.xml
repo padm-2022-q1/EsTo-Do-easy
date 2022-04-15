@@ -37,7 +37,6 @@
         android:layout_marginTop="8dp"
         android:text="@string/task_details_date_created_default"
         android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@id/task_details_favorite"
         app:layout_constraintStart_toStartOf="@id/task_details_group"
         app:layout_constraintTop_toBottomOf="@id/task_details_group" />
 
@@ -49,18 +48,19 @@
         android:layout_marginTop="8dp"
         android:text="@string/task_details_date_updated_default"
         android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@id/task_details_favorite"
         app:layout_constraintStart_toEndOf="@id/task_details_date_created"
         app:layout_constraintTop_toBottomOf="@id/task_details_group" />
-
-    <androidx.constraintlayout.utils.widget.ImageFilterView
-        android:id="@+id/task_details_favorite"
+    <TextView
+        android:id="@+id/task_details_dependencies_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_favorite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/task_details_group" />
+        android:text="@string/task_details_dependencies_label"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/task_details_date_updated"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerview_next_tasks_list"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_next_tasks_list"
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/task_details_favorite">
+        app:layout_constraintTop_toBottomOf="@id/task_details_dependencies_label">
 
     </androidx.recyclerview.widget.RecyclerView>
 

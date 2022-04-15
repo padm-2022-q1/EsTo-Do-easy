@@ -26,4 +26,5 @@
     <string name="next_tasks_item_label">Next Tasks</string>
     <string name="default_group">Group</string>
     <string name="task_details_group_label">Group for this Task</string>
+    <string name="task_details_dependencies_label">Dependencies</string>
 </resources>
