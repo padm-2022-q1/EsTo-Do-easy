@@ -17,7 +17,6 @@ class TaskDetailsFragment : Fragment() {
     private lateinit var binding: FragmentTaskDetailsBinding
     private val viewModel: MainViewModel by activityViewModels()
     private val args: TaskDetailsFragmentArgs by navArgs()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

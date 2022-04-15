@@ -9,12 +9,21 @@
     <string name="task_details_title_default">Title</string>
     <string name="task_details_date_created_default">Created: 01/01/22 00:00</string>
     <string name="task_details_date_created_value">Created: %s</string>
-    <string name="task_details_date_updated_default">Updated: 01/01/22 00:00</string>
-    <string name="task_details_date_updated_value">Updated: %s</string>
+    <string name="task_details_date_updated_default">Deadline: 01/01/22 00:00</string>
+    <string name="task_details_date_updated_value">Deadline: %s</string>
     <string name="task_details_content_default">Content</string>
     <string name="menu_item_list_home_label">Home</string>
     <string name="menu_item_list_schedule_label">Schedule</string>
     <string name="menu_item_list_dash_label">Dashboard</string>
     <string name="menu_item_list_planner_label">Planner</string>
     <string name="menu_item_list_perfil_label">Perfil</string>
+    <string name="study_techniques_item_description">Description</string>
+    <string name="home_study_techniques_label">Study Technique</string>
+    <string name="study_techniques_item_group_label">Group</string>
+    <string name="study_techniques_item_time_elapsed_default">00:00</string>
+    <string name="study_techniques_item_selector_label">Select a Technique</string>
+    <string name="suggested_task_label">Suggested Task</string>
+    <string name="next_tasks_item_label">Next Tasks</string>
+    <string name="default_group">Group</string>
+    <string name="task_details_group_label">Group for this Task</string>
 </resources>

@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import br.edu.ufabc.EsToDoeasy.databinding.ActivityMainBinding
-import br.edu.ufabc.EsToDoeasy.view.TaskListFragmentDirections
+import br.edu.ufabc.EsToDoeasy.view.HomeFragmentDirections
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 
 /**
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     private fun bindEvents() {
         viewModel.clickedItemId.observe(this) {
             it?.let {
-                val action = TaskListFragmentDirections.tasksShowDetails(it)
+                val action = HomeFragmentDirections.tasksShowDetails(it)
                 navController.navigate(action)
             }
         }

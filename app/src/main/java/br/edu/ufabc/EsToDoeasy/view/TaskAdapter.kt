@@ -3,6 +3,7 @@ package br.edu.ufabc.EsToDoeasy.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import br.edu.ufabc.EsToDoeasy.databinding.NextTaskListItemBinding
 import br.edu.ufabc.EsToDoeasy.databinding.TaskListItemBinding
 import br.edu.ufabc.EsToDoeasy.model.Task
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
@@ -18,7 +19,7 @@ class TaskAdapter(
     /**
      * Task item view holder.
      */
-    class TaskHolder(itemBinding: TaskListItemBinding, viewModel: MainViewModel) :
+    class TaskHolder(itemBinding: NextTaskListItemBinding, viewModel: MainViewModel) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
         /**
@@ -29,7 +30,8 @@ class TaskAdapter(
         /**
          * Title text view component.
          */
-        val title = itemBinding.taskListItemTitle
+        val title = itemBinding.studyTechniquesItemTitle
+        val timeElapsed = itemBinding.studyTechniquesItemTimeElapsed
 
         init {
             itemBinding.root.setOnClickListener {
@@ -47,7 +49,7 @@ class TaskAdapter(
         viewType: Int
     ): TaskHolder =
         TaskHolder(
-            TaskListItemBinding.inflate(
+            NextTaskListItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -59,7 +61,10 @@ class TaskAdapter(
         val task = tasks[position]
 
         holder.id = getItemId(position)
-        holder.title.text = task.title
+        holder.title.text = task.title.substring(0,5)
+        val hours : Long = (task.timeElapsed)/60
+        val minutes : Long = (task.timeElapsed)-hours*60
+        holder.timeElapsed.text = "0%d:0%d".format(hours,minutes)
     }
 
     override fun getItemCount(): Int = tasks.size
