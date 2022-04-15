@@ -2,18 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menu_item_list_all"
-        android:icon="@drawable/ic_note"
-        android:title="@string/bottom_navigation_menu_all_label" />
+        android:id="@+id/menu_item_list_home"
+        android:icon="@drawable/ic_action_home"
+        android:title="@string/menu_item_list_home_label" />
 
     <item
-        android:id="@+id/menu_item_list_favorite"
-        android:icon="@drawable/ic_favorite_heart"
-        android:title="@string/bottom_navigation_menu_favorite_label" />
+        android:id="@+id/menu_item_list_schedule"
+        android:icon="@drawable/ic_action_schedule"
+        android:title="@string/menu_item_list_schedule_label" />
 
     <item
-        android:id="@+id/menu_item_list_archived"
-        android:icon="@drawable/ic_archive"
-        android:title="@string/bottom_navigation_menu_archived_label" />
+        android:id="@+id/menu_item_list_dash"
+        android:icon="@drawable/ic_action_dash"
+        android:title="@string/menu_item_list_dash_label" />
+    <item
+        android:id="@+id/menu_item_list_planner"
+        android:icon="@drawable/ic_action_planner"
+        android:title="@string/menu_item_list_planner_label" />
 
+    <item
+        android:id="@+id/menu_item_list_perfil"
+        android:icon="@drawable/ic_action_perfil"
+        android:title="@string/menu_item_list_perfil_label" />
 </menu>

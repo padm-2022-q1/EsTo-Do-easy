@@ -54,7 +54,7 @@ class TaskListFragment : Fragment() {
     private fun initComponents() {
         val menu = binding.mainNavigation
 
-        val allBadge = menu.getOrCreateBadge(R.id.menu_item_list_all)
+        val allBadge = menu.getOrCreateBadge(R.id.menu_item_list_home)
         allBadge.isVisible = true
         allBadge.number = viewModel.getAll().size
     }
@@ -62,9 +62,9 @@ class TaskListFragment : Fragment() {
     private fun bindEvents() {
         binding.mainNavigation.setOnItemSelectedListener {
             val criteria = when (it.itemId) {
-                R.id.menu_item_list_all -> FilterCriteria.ALL
-                R.id.menu_item_list_favorite -> FilterCriteria.FAVORITE
-                R.id.menu_item_list_archived -> FilterCriteria.ARCHIVED
+                R.id.menu_item_list_home -> FilterCriteria.ALL
+                R.id.menu_item_list_schedule -> FilterCriteria.FAVORITE
+                R.id.menu_item_list_dash -> FilterCriteria.ARCHIVED
                 else -> FilterCriteria.ALL
             }
 

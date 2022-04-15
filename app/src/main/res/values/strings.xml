@@ -12,4 +12,9 @@
     <string name="task_details_date_updated_default">Updated: 01/01/22 00:00</string>
     <string name="task_details_date_updated_value">Updated: %s</string>
     <string name="task_details_content_default">Content</string>
+    <string name="menu_item_list_home_label">Home</string>
+    <string name="menu_item_list_schedule_label">Schedule</string>
+    <string name="menu_item_list_dash_label">Dashboard</string>
+    <string name="menu_item_list_planner_label">Planner</string>
+    <string name="menu_item_list_perfil_label">Perfil</string>
 </resources>
