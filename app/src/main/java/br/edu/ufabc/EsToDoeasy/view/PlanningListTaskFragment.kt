@@ -10,6 +10,10 @@ import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentPlanningTaskListBinding
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 
+/**
+ * Planning task list view.
+ */
+
 class PlanningListTaskFragment : Fragment(){
     private lateinit var binding: FragmentPlanningTaskListBinding
     private val viewModel: MainViewModel by activityViewModels()
@@ -24,11 +28,20 @@ class PlanningListTaskFragment : Fragment(){
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onStart() {
+        super.onStart()
 
-//        val group = viewModel.get(args.id)
+        activity?.let {
+            updateRecyclerView()
+        }
+    }
 
-//        binding.groupName.text = group.name
+    private fun updateRecyclerView() {
+        binding.recyclerviewPlanningTaskList.apply {
+            adapter = PlanningAdapter(
+                viewModel.getAllGroups(),
+                viewModel
+            )
+        }
     }
 }

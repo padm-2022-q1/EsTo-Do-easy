@@ -6,20 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavController
 import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentPlanningGroupListBinding
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 
 /**
- * Planning list view.
+ * Planning group list view.
  */
 class PlanningListGroupFragment : Fragment() {
     private lateinit var binding: FragmentPlanningGroupListBinding
     private val viewModel: MainViewModel by activityViewModels()
-
-    /**
-     * Filter criteria for tasks listing.
-     */
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +42,15 @@ class PlanningListGroupFragment : Fragment() {
                 viewModel.getAllGroups(),
                 viewModel
             )
+        }
+    }
+
+    private fun bindEvents() {
+        viewModel.clickedItemId.observe(this) {
+            it?.let {
+                val action = PlanningListGroupFragmentDirections.actionPlanningListFragmentToPlanningListTaskFragment()
+                navController.navigate(action)
+            }
         }
     }
 

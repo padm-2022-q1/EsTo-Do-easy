@@ -8,6 +8,9 @@ import br.edu.ufabc.EsToDoeasy.databinding.PlanningListItemBinding
 import br.edu.ufabc.EsToDoeasy.model.Group
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 
+/**
+ * Task item adapter.
+ */
 class PlanningAdapter (
     private val groups: List<Group>,
     private val viewModel: MainViewModel
