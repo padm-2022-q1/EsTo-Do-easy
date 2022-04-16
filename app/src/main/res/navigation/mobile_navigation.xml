@@ -46,6 +46,29 @@
     <fragment
         android:id="@+id/menu_item_list_profile"
         android:name="br.edu.ufabc.EsToDoeasy.view.ProfilePageFragment" >
+        <action
+            android:id="@+id/action_menu_item_list_profile_to_navigation_login_profile"
+            app:destination="@id/navigation_login_profile" />
+        <action
+            android:id="@+id/action_menu_item_list_profile_to_navigation_settings_profile"
+            app:destination="@id/navigation_settings_profile" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_login_profile"
+        android:name="br.edu.ufabc.EsToDoeasy.view.LoginPage" >
+        <action
+            android:id="@+id/action_navigation_login_profile_to_menu_item_list_profile"
+            app:destination="@id/menu_item_list_profile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_settings_profile"
+        android:name="br.edu.ufabc.EsToDoeasy.view.ProfileSettingsFragment" >
+        <action
+            android:id="@+id/action_navigation_login_profile_to_menu_item_list_profile"
+            app:destination="@id/menu_item_list_profile" />
     </fragment>
 
     <fragment

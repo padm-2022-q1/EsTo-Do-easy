@@ -89,6 +89,38 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        viewModel.clickedSignOutProfile.observe(this){
+            it?.let{
+                val action = ProfilePageFragmentDirections.
+                actionMenuItemListProfileToNavigationLoginProfile()
+                navController.navigate(action)
+            }
+        }
+
+        viewModel.clickedLoginLogin.observe(this){
+            it?.let{
+                val action = LoginPageDirections.
+                actionNavigationLoginProfileToMenuItemListProfile()
+                navController.navigate(action)
+            }
+        }
+
+        viewModel.clickedSettingsProfile.observe(this){
+            it?.let{
+                val action = ProfilePageFragmentDirections.
+                actionMenuItemListProfileToNavigationSettingsProfile()
+                navController.navigate(action)
+            }
+        }
+
+        viewModel.clickedSkipLogin.observe(this){
+            it?.let{
+                val action = LoginPageDirections.
+                actionNavigationLoginProfileToMenuItemListProfile()
+                navController.navigate(action)
+            }
+        }
+
     }
 }
 

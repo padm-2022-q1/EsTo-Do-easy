@@ -55,7 +55,7 @@
         android:id="@+id/profile_sync_google_calendar"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="@string/profile_sync_google_calendar_button_text"
         app:icon="@drawable/ic_icons8_google"
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
@@ -66,18 +66,36 @@
         />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/profile_achivements_button"
+        android:id="@+id/profile_settings_button"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/profile_achievements_button_text"
-        app:icon="@drawable/ic_baseline_stars_24"
+
+        android:text="@string/profile_settings_button_text"
+        app:icon="@drawable/ic_baseline_settings_24"
+        app:iconSize="48sp"
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         app:layout_constraintLeft_toLeftOf="@id/profile_email_profile"
         app:layout_constraintTop_toBottomOf="@id/profile_sync_google_calendar"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/profile_achivements_button"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+
+        android:text="@string/profile_achievements_button_text"
+        app:icon="@drawable/ic_baseline_stars_24"
+        app:iconSize="48sp"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        app:layout_constraintLeft_toLeftOf="@id/profile_email_profile"
+        app:layout_constraintTop_toBottomOf="@id/profile_settings_button"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        />
+
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/profile_sign_out"

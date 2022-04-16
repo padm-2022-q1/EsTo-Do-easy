@@ -42,6 +42,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val clickedTaskToPlay by lazy { SingleLiveEvent<Boolean?>() }
 
+    val clickedSignOutProfile by lazy { SingleLiveEvent<Boolean?>() }
+
+    val clickedSkipLogin by lazy { SingleLiveEvent<Boolean?>() }
+
+    val clickedLoginLogin by lazy { SingleLiveEvent<Boolean?>() }
+
+    val clickedSettingsProfile by lazy { SingleLiveEvent<Boolean?>() }
+
     fun getSuggestTask() = getAll()[0]
     /**
      * Returns all tasks.
