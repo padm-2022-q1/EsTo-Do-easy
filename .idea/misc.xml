@@ -3,13 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/fragment_home_.xml" value="0.1" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/fragment_note_list.xml" value="0.11302083333333333" />
-        <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/fragment_study_techniques_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/fragment_task_details.xml" value="0.20416666666666666" />
-        <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/next_task_list_item.xml" value="0.20416666666666666" />
-        <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/task_list_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/menu/main_navigation_menu.xml" value="0.1" />
         <entry key="..\:/Workspace/atv02-notes-hirusora/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Workspace/atv02-notes-hirusora/app/src/main/res/layout/fragment_note_details.xml" value="0.33" />
@@ -19,21 +14,21 @@
         <entry key="..\:/Workspace/atv02-notes-hirusora/app/src/main/res/menu/main_navigation_menu.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable-anydpi/ic_action_ dashboard.xml" value="0.119" />
         <entry key="app/src/main/res/drawable-anydpi/ic_action_ schedule.xml" value="0.195" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_action_home.xml" value="0.2845" />
         <entry key="app/src/main/res/drawable-anydpi/ic_archive.xml" value="0.195" />
         <entry key="app/src/main/res/drawable-anydpi/ic_favorite.xml" value="0.195" />
         <entry key="app/src/main/res/drawable-anydpi/ic_favorite_heart.xml" value="0.195" />
         <entry key="app/src/main/res/drawable-anydpi/ic_note.xml" value="0.195" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.195" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.195" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/fragment_home_.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_new_task_details.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/fragment_study_techniques.xml" value="0.2125" />
-        <entry key="app/src/main/res/layout/fragment_study_techniques_item.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_task_details.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/fragment_task_list.xml" value="0.2125" />
-        <entry key="app/src/main/res/layout/next_task_list_item.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/task_list_item.xml" value="0.67" />
+        <entry key="app/src/main/res/drawable/ic_login_google_login_background.xml" value="0.2845" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_login_page.xml" value="0.3390625" />
+        <entry key="app/src/main/res/layout/fragment_profile_page.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_profile_settings.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_task_details.xml" value="0.3390625" />
+        <entry key="app/src/main/res/layout/fragment_task_list.xml" value="0.3390625" />
+        <entry key="app/src/main/res/layout/task_list_item.xml" value="0.1" />
         <entry key="app/src/main/res/menu/main_navigation_menu.xml" value="0.1078125" />
       </map>
     </option>
@@ -43,12 +38,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.5" />
-      </ProjectState>
-    </option>
   </component>
 </project>
