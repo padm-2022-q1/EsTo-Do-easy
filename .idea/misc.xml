@@ -35,11 +35,14 @@
         <entry key="app/src/main/res/layout/fragment_task_details.xml" value="0.3390625" />
         <entry key="app/src/main/res/layout/fragment_task_list.xml" value="0.3390625" />
         <entry key="app/src/main/res/layout/next_task_list_item.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/planning_group_item.xml" value="0.17443351859769132" />
+        <entry key="app/src/main/res/layout/planning_list_item.xml" value="0.17443351859769132" />
         <entry key="app/src/main/res/layout/task_list_item.xml" value="0.1" />
         <entry key="app/src/main/res/menu/main_navigation_menu.xml" value="0.1078125" />
       </map>
     </option>
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

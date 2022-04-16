@@ -49,7 +49,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/planningListFragment"
+        android:id="@+id/menu_item_list_planner"
         android:name="br.edu.ufabc.EsToDoeasy.view.PlanningListGroupFragment"
         tools:layout="@layout/fragment_planning_group_list" >
         <action

@@ -7,7 +7,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-<<<<<<< HEAD
     <color name="grey">#7A7A7A</color>
     <color name="background">#0044AA</color>
     <color name="bluelight">#449DEF</color>
@@ -16,7 +15,6 @@
     <color name="greendark">#53933F</color>
     <color name="orangelight">#F3AE1B</color>
     <color name="orangedark">#BB6008</color>
-=======
-    <color name="gray">#808080</color>
->>>>>>> 3b7705c (planejamento xml and fragment)
+<color name="gray">#808080</color>
+
 </resources>
