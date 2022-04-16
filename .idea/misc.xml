@@ -28,10 +28,13 @@
         <entry key="app/src/main/res/layout/fragment_login_page.xml" value="0.3390625" />
         <entry key="app/src/main/res/layout/fragment_new_task_details.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_pomodoro.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_profile_page.xml" value="0.17443351859769132" />
+        <entry key="app/src/main/res/layout/fragment_profile_settings.xml" value="0.17443351859769132" />
         <entry key="app/src/main/res/layout/fragment_study_techniques_item.xml" value="0.543884892086331" />
         <entry key="app/src/main/res/layout/fragment_study_techniques_select.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/fragment_task_details.xml" value="0.3390625" />
         <entry key="app/src/main/res/layout/fragment_task_list.xml" value="0.3390625" />
+        <entry key="app/src/main/res/layout/next_task_list_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/task_list_item.xml" value="0.1" />
         <entry key="app/src/main/res/menu/main_navigation_menu.xml" value="0.1078125" />
       </map>

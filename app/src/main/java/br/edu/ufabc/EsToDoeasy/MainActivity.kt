@@ -5,10 +5,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.onNavDestinationSelected
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import br.edu.ufabc.EsToDoeasy.databinding.ActivityMainBinding
-import br.edu.ufabc.EsToDoeasy.view.HomeFragmentDirections
-import br.edu.ufabc.EsToDoeasy.view.TaskListFragment
+import br.edu.ufabc.EsToDoeasy.view.*
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 /**
  * The main activity.
@@ -32,25 +36,32 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.main_fragment_container) as NavHostFragment
         navController = navHostFragment.navController
 
-        val menu = binding.mainNavigation
+        val menu: BottomNavigationView = binding.mainNavigation
         val allBadge = menu.getOrCreateBadge(R.id.menu_item_list_home)
         allBadge.isVisible = true
         allBadge.number = viewModel.getAll().size
 
+        val plannerBadge = menu.getOrCreateBadge(R.id.menu_item_list_planner)
+        plannerBadge.isVisible = true
+        plannerBadge.number = viewModel.getAll().size
+
+//        val appBarConfiguration = AppBarConfiguration(
+//            setOf(
+//                R.id.menu_item_list_home, R.id.menu_item_list_planner,R.id.menu_item_list_schedule
+//            )
+//        )
+//        setupActionBarWithNavController(navController, appBarConfiguration)
+
+        menu.setupWithNavController(navController)
+
     }
 
     private fun bindEvents() {
-        binding.mainNavigation.setOnItemSelectedListener {
-            val criteria = when (it.itemId) {
-                R.id.menu_item_list_home -> TaskListFragment.FilterCriteria.ALL
-                R.id.menu_item_list_schedule -> TaskListFragment.FilterCriteria.FAVORITE
-                R.id.menu_item_list_dash -> TaskListFragment.FilterCriteria.ARCHIVED
-                else -> TaskListFragment.FilterCriteria.ALL
-            }
-
-            true
-        }
-
+//        binding.mainNavigation.setOnItemSelectedListener {
+//            it.onNavDestinationSelected(navController)
+//
+//        }
+        // details
         viewModel.clickedItemId.observe(this) {
             it?.let {
                 val action = HomeFragmentDirections.tasksShowDetails(it)
@@ -58,23 +69,26 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
+        // play
         viewModel.clickedTaskToPlay.observe(this) {
             it?.let {
                 val action = HomeFragmentDirections.actionNavigationListToNavigationPomodoro()
                 navController.navigate(action)
             }
         }
-
+        //
         viewModel.clickedSelection.observe(this) {
             it?.let {
-                if (it){
-                    val action = HomeFragmentDirections.actionNavigationListToNavigationStudySelect()
+                if (it) {
+                    val action =
+                        HomeFragmentDirections.actionNavigationListToNavigationStudySelect()
                     navController.navigate(action)
                 } else {
                     navController.popBackStack()
                 }
             }
         }
+
     }
 }
+

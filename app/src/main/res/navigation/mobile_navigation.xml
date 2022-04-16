@@ -2,10 +2,10 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/navigation_list">
+    app:startDestination="@id/menu_item_list_home">
 
     <fragment
-        android:id="@+id/navigation_list"
+        android:id="@+id/menu_item_list_home"
         android:name="br.edu.ufabc.EsToDoeasy.view.HomeFragment" >
         <action
             android:id="@+id/tasks_show_details"
@@ -20,7 +20,7 @@
             app:destination="@id/navigation_study_select" />
         <action
             android:id="@+id/action_navigation_list_to_navigation_pomodoro"
-            app:destination="@id/navigation_pomodoro" />
+            app:destination="@id/menu_item_list_schedule" />
     </fragment>
 
     <fragment
@@ -38,8 +38,13 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_pomodoro"
+        android:id="@+id/menu_item_list_schedule"
         android:name="br.edu.ufabc.EsToDoeasy.view.PomodoroFragment" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/menu_item_list_profile"
+        android:name="br.edu.ufabc.EsToDoeasy.view.ProfilePageFragment" >
     </fragment>
 
 </navigation>
