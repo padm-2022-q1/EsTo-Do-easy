@@ -7,22 +7,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
-import br.edu.ufabc.EsToDoeasy.databinding.FragmentTaskDetailsBinding
+import br.edu.ufabc.EsToDoeasy.databinding.FragmentNewTaskDetailsBinding
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 
 /**
  * Tasks details view.
  */
-class TaskDetailsFragment : Fragment() {
-    private lateinit var binding: FragmentTaskDetailsBinding
+class NewTaskDetailsFragment : Fragment() {
+    private lateinit var binding: FragmentNewTaskDetailsBinding
     private val viewModel: MainViewModel by activityViewModels()
-    private val args: TaskDetailsFragmentArgs by navArgs()
+    private val args: NewTaskDetailsFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentTaskDetailsBinding.inflate(inflater, container, false)
+        binding = FragmentNewTaskDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -31,6 +31,8 @@ class TaskDetailsFragment : Fragment() {
 
         val task = viewModel.get(args.id)
 
-        binding.taskDetailsTitle.text = task.title
+        binding.taskDetailsGroup.text = task.groupId.toString()
+        binding.taskDetailsDateCreated.text = task.dateStarted.toString()
+        binding.taskDetailsDateUpdated.text = task.dateFinished.toString()
     }
 }

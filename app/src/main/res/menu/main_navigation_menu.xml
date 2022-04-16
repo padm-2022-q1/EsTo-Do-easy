@@ -21,7 +21,7 @@
         android:title="@string/menu_item_list_planner_label" />
 
     <item
-        android:id="@+id/menu_item_list_perfil"
+        android:id="@+id/menu_item_list_profile"
         android:icon="@drawable/ic_action_profile"
-        android:title="@string/menu_item_list_perfil_label" />
+        android:title="@string/menu_item_list_profile_label" />
 </menu>

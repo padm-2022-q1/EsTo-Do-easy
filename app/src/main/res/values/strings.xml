@@ -13,7 +13,7 @@
     <string name="menu_item_list_schedule_label">Schedule</string>
     <string name="menu_item_list_dash_label">Dashboard</string>
     <string name="menu_item_list_planner_label">Planner</string>
-    <string name="menu_item_list_perfil_label">Perfil</string>
+    <string name="menu_item_list_profile_label">Profile</string>
     <string name="study_techniques_label">Study technique</string>
     <string name="study_techniques_item_description">Description</string>
     <string name="home_study_techniques_label">Study Technique</string>
