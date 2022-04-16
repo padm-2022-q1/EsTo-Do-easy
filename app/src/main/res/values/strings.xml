@@ -31,4 +31,14 @@
     <string name="task_item_time_elapsed_icon_description">Task elapsed time</string>
     <string name="study_technique_item_play_description">Start study technique timer</string>
     <string name="task_item_play_description">Start task timer</string>
+    <string name="menu_item_list_perfil_label">Perfil</string>
+    <string name="login_email_hint">E-mail</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_login_text">Login</string>
+    <string name="login_skip_login_text">Skip</string>
+    <string name="login_forgot_password_text">Forgot your Password?</string>
+    <string name="login_login_with_google_account_text">Login with Google Account</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
 </resources>
+
