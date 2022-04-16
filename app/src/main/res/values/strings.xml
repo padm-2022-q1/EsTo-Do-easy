@@ -42,7 +42,25 @@
     <string name="pomodoro_focus_default_time">24:59</string>
     <string name="pomodoro_action_pause">Pause</string>
     <string name="sound_slider_icon">sound slider icon</string>
+    <string name="profile_email_text_base">Your@Email.com</string>
+    <string name="profile_username_text_base">Username</string>
+    <string name="profile_sync_google_calendar_button_text">Sync with Google Calendar</string>
+    <string name="profile_achievements_button_text">Achievements</string>
+    <string name="profile_sign_out_text">sign out</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile_setting_about_text">About</string>
+    <string name="profile_feedback_button_text">Send Feedback</string>
+    <string name="profile_setting_about_creators_text">Developed by: Fabio, Jonathan, Michelle and Vitor</string>
+    <string name="profile_settings_refer_text_button">Refer a Friend</string>
+    <string name="profile_settings_airplane_mode_text">Airplane Mode</string>
+    <string name="profile_settings_haptic_feedback">Haptic Feedback</string>
+    <string name="profile_settings_24_hours_clock">Use 24 hours Clock</string>
+    <string name="profile_settings_theme_bottom">Theme</string>
+    <string name="profile_settings_pomodoro_settings">Pomodoro Settings</string>
+    <string name="profile_settings_notifications_switch">Notifications</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>
+
 
