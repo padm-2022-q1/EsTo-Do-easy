@@ -26,6 +26,13 @@ class NewTaskDetailsFragment : Fragment() {
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        updateRecyclerView()
+    }
+
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -34,5 +41,14 @@ class NewTaskDetailsFragment : Fragment() {
         binding.taskDetailsGroup.text = task.groupId.toString()
         binding.taskDetailsDateCreated.text = task.dateStarted.toString()
         binding.taskDetailsDateUpdated.text = task.dateFinished.toString()
+    }
+
+    private fun updateRecyclerView(){
+        binding.recyclerviewNextTasksList.apply {
+            adapter = TaskAdapter(
+                viewModel.getDependencies(args.id),
+                viewModel
+            )
+        }
     }
 }

@@ -38,11 +38,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      */
     val clickedItemId by lazy { SingleLiveEvent<Long?>() }
 
+    val clickedSelection by lazy { SingleLiveEvent<Boolean?>() }
+
+    val clickedTaskToPlay by lazy { SingleLiveEvent<Boolean?>() }
+
+    fun getSuggestTask() = getAll()[0]
     /**
      * Returns all tasks.
      */
     fun getAll() = repository.getAllTasks()
 
+    /**
+     * Returns all dependencies for a given task
+     */
+    fun getDependencies(id: Long) = repository.getDependencies(id)
     /**
      * Returns a single task information by its given ID.
      */

@@ -38,6 +38,10 @@
     <string name="login_skip_login_text">Skip</string>
     <string name="login_forgot_password_text">Forgot your Password?</string>
     <string name="login_login_with_google_account_text">Login with Google Account</string>
+    <string name="configure_pomodoro_button">Configure Pomodoro</string>
+    <string name="pomodoro_focus_default_time">24:59</string>
+    <string name="pomodoro_action_pause">Pause</string>
+    <string name="sound_slider_icon">sound slider icon</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

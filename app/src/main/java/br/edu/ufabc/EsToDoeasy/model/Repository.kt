@@ -75,6 +75,11 @@ class Repository {
     fun getAllGroups() = validGroups()
 
     /**
+     * Returns all dependecies for a given task
+     */
+    fun getDependencies(id: Long) = validTasks().filter { getTask(id).children.contains(it.id) }
+    
+    /**
      * Returns a single task information by its given ID.
      */
     fun getTask(id: Long) =

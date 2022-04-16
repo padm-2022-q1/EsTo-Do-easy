@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
+        bindEvents()
         initComponents()
 
         activity?.let {
@@ -49,6 +49,21 @@ class HomeFragment : Fragment() {
                 viewModel
             )
         }
+    }
+
+    private fun bindEvents(){
+        binding.cardviewSuggestedTaskItem.setOnClickListener{
+            viewModel.clickedItemId.value = viewModel.getSuggestTask().id
+        }
+
+        binding.cardviewStudyTechniquesItemSelector.setOnClickListener{
+            viewModel.clickedSelection.value = true
+        }
+
+        binding.suggestedTaskItemPlay.setOnClickListener{
+            viewModel.clickedTaskToPlay.value = true
+        }
+
     }
 
     // Some test Here

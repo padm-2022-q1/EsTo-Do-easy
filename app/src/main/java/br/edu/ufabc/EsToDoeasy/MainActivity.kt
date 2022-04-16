@@ -57,5 +57,24 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(action)
             }
         }
+
+
+        viewModel.clickedTaskToPlay.observe(this) {
+            it?.let {
+                val action = HomeFragmentDirections.actionNavigationListToNavigationPomodoro()
+                navController.navigate(action)
+            }
+        }
+
+        viewModel.clickedSelection.observe(this) {
+            it?.let {
+                if (it){
+                    val action = HomeFragmentDirections.actionNavigationListToNavigationStudySelect()
+                    navController.navigate(action)
+                } else {
+                    navController.popBackStack()
+                }
+            }
+        }
     }
 }

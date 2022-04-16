@@ -3,6 +3,7 @@ package br.edu.ufabc.EsToDoeasy.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import br.edu.ufabc.EsToDoeasy.databinding.FragmentStudyTechniquesItemBinding
 import br.edu.ufabc.EsToDoeasy.databinding.NextTaskListItemBinding
 import br.edu.ufabc.EsToDoeasy.model.Task
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
@@ -10,15 +11,15 @@ import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 /**
  * Task item adapter.
  */
-class TaskAdapter(
-    private val tasks: List<Task>,
+class TechiniquesAdapter (
+    val tasks: List<String>,
     private val viewModel: MainViewModel
-) : RecyclerView.Adapter<TaskAdapter.TaskHolder>() {
+) : RecyclerView.Adapter<TechiniquesAdapter.TechiniquesHolder>() {
 
     /**
      * Task item view holder.
      */
-    class TaskHolder(itemBinding: NextTaskListItemBinding, viewModel: MainViewModel) :
+    class TechiniquesHolder(itemBinding: FragmentStudyTechniquesItemBinding, viewModel: MainViewModel) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
         /**
@@ -29,8 +30,8 @@ class TaskAdapter(
         /**
          * Title text view component.
          */
-        val title = itemBinding.nextTaskItemTitle
-        val timeElapsed = itemBinding.nextTaskItemTimeElapsed
+        val title = itemBinding.studyTechniquesItemTitle
+        val description = itemBinding.studyTechniquesItemDescription
 
         init {
             itemBinding.root.setOnClickListener {
@@ -38,10 +39,7 @@ class TaskAdapter(
                  * This was made using var property because it wasn't accepting
                  * getItemId(position: Long), only getItemId(), which always returned -1.
                  */
-                viewModel.clickedItemId.value = id
-            }
-            itemBinding.nextTaskItemPlay.setOnClickListener{
-                viewModel.clickedTaskToPlay.value = true
+                viewModel.clickedSelection.value = false
             }
         }
     }
@@ -49,9 +47,9 @@ class TaskAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): TaskHolder =
-        TaskHolder(
-            NextTaskListItemBinding.inflate(
+    ): TechiniquesHolder =
+        TechiniquesHolder(
+            FragmentStudyTechniquesItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -59,17 +57,18 @@ class TaskAdapter(
             viewModel
         )
 
-    override fun onBindViewHolder(holder: TaskHolder, position: Int) {
-        val task = tasks[position]
+    override fun onBindViewHolder(holder: TechiniquesHolder, position: Int) {
+        //val task = tasks[position]
 
-        holder.id = getItemId(position)
-        holder.title.text = task.title.substring(0, 15)
-        val hours: Long = (task.timeElapsed) / 60
-        val minutes: Long = (task.timeElapsed) - hours * 60
-        holder.timeElapsed.text = "0%d:0%d".format(hours, minutes)
+
+        //holder.id = getItemId(position)
+        holder.title.text = tasks[position]
+//        val hours: Long = (task.timeElapsed) / 60
+//        val minutes: Long = (task.timeElapsed) - hours * 60
+//        holder.timeElapsed.text = "0%d:0%d".format(hours, minutes)
     }
 
     override fun getItemCount(): Int = tasks.size
 
-    override fun getItemId(position: Int): Long = tasks[position].id
+    override fun getItemId(position: Int): Long = position.toLong()
 }
