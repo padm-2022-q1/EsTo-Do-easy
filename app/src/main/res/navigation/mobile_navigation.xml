@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
     app:startDestination="@id/navigation_list">
 
@@ -25,5 +26,19 @@
             app:argType="long"
             android:defaultValue="-1L" />
     </fragment>
+
+    <fragment
+        android:id="@+id/planningListFragment"
+        android:name="br.edu.ufabc.EsToDoeasy.view.PlanningListGroupFragment"
+        tools:layout="@layout/fragment_planning_group_list" >
+        <action
+            android:id="@+id/action_planningListFragment_to_planningDetailsFragment"
+            app:destination="@id/planningDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/planningDetailsFragment"
+        android:name="br.edu.ufabc.EsToDoeasy.view.PlanningListTaskFragment"
+        tools:layout="@layout/fragment_planning_task_list" />
 
 </navigation>

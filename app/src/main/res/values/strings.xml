@@ -32,6 +32,7 @@
     <string name="study_technique_item_play_description">Start study technique timer</string>
     <string name="task_item_play_description">Start task timer</string>
     <string name="menu_item_list_perfil_label">Perfil</string>
+<<<<<<< HEAD
     <string name="login_email_hint">E-mail</string>
     <string name="login_password_hint">Password</string>
     <string name="login_login_text">Login</string>
@@ -59,3 +60,13 @@
 
 </resources>
 
+=======
+    <string name="planning_title">Grupo de Atividade</string>
+    <string name="planning_tasks_title">hint</string>
+    <string name="planning_details_title">Tarefas</string>
+    <string name="planning_details_group_name">Grupo</string>
+    <string name="planning_edit_text">Editar</string>
+    <string name="planning_list_item_title_default">NomeProjeto</string>
+    <string name="planning_list_item_name_task_default">NomeTarefa</string>
+</resources>
+>>>>>>> 3b7705c (planejamento xml and fragment)

@@ -44,6 +44,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun getAll() = repository.getAllTasks()
 
     /**
+     * Returns all groups.
+     */
+    fun getAllGroups() = repository.getAllGroups()
+
+    /**
      * Returns a single task information by its given ID.
      */
     fun get(id: Long) = repository.getTask(id)
