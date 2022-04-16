@@ -3,9 +3,6 @@
     <string name="task_list_item_title_default">Title</string>
     <string name="task_list_item_content_default">Content</string>
     <string name="task_list_item_date_default">01/01/22 00:00</string>
-    <string name="bottom_navigation_menu_all_label">All</string>
-    <string name="bottom_navigation_menu_favorite_label">Favorite</string>
-    <string name="bottom_navigation_menu_archived_label">Archived</string>
     <string name="task_details_title_default">Title</string>
     <string name="task_details_date_created_default">Created: 01/01/22 00:00</string>
     <string name="task_details_date_created_value">Created: %s</string>
@@ -17,14 +14,21 @@
     <string name="menu_item_list_dash_label">Dashboard</string>
     <string name="menu_item_list_planner_label">Planner</string>
     <string name="menu_item_list_perfil_label">Perfil</string>
+    <string name="study_techniques_label">Study technique</string>
     <string name="study_techniques_item_description">Description</string>
     <string name="home_study_techniques_label">Study Technique</string>
     <string name="study_techniques_item_group_label">Group</string>
-    <string name="study_techniques_item_time_elapsed_default">00:00</string>
-    <string name="study_techniques_item_selector_label">Select a Technique</string>
+    <string name="task_item_time_elapsed_default">00:00</string>
+    <string name="study_techniques_item_selector_label">Change</string>
     <string name="suggested_task_label">Suggested Task</string>
     <string name="next_tasks_item_label">Next Tasks</string>
     <string name="default_group">Group</string>
     <string name="task_details_group_label">Group for this Task</string>
     <string name="task_details_dependencies_label">Dependencies</string>
+    <string name="study_techniques_item_default">Pomodoro</string>
+    <string name="task_item_icon_description">Show suggested task details</string>
+    <string name="study_techniques_item_icon_description">Change study technique</string>
+    <string name="task_item_time_elapsed_icon_description">Task elapsed time</string>
+    <string name="study_technique_item_play_description">Start study technique timer</string>
+    <string name="task_item_play_description">Start task timer</string>
 </resources>

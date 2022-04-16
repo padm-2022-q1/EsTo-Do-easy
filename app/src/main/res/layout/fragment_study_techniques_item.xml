@@ -18,7 +18,7 @@
             android:padding="8dp">
 
             <TextView
-                android:id="@+id/study_techniques_item_title"
+                android:id="@+id/suggested_task_item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/task_list_item_title_default"
@@ -34,8 +34,8 @@
                 android:ellipsize="end"
                 android:maxLines="4"
                 android:text="@string/study_techniques_item_description"
-                app:layout_constraintStart_toStartOf="@id/study_techniques_item_title"
-                app:layout_constraintTop_toBottomOf="@id/study_techniques_item_title" />
+                app:layout_constraintStart_toStartOf="@id/suggested_task_item_title"
+                app:layout_constraintTop_toBottomOf="@id/suggested_task_item_title" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

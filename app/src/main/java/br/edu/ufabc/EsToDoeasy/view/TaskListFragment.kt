@@ -34,9 +34,6 @@ class TaskListFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        initComponents()
-        bindEvents()
-
         activity?.let {
             updateRecyclerView(FilterCriteria.ALL)
         }
@@ -48,29 +45,6 @@ class TaskListFragment : Fragment() {
                 viewModel.getAll(),
                 viewModel
             )
-        }
-    }
-
-    private fun initComponents() {
-        val menu = binding.mainNavigation
-
-        val allBadge = menu.getOrCreateBadge(R.id.menu_item_list_home)
-        allBadge.isVisible = true
-        allBadge.number = viewModel.getAll().size
-    }
-
-    private fun bindEvents() {
-        binding.mainNavigation.setOnItemSelectedListener {
-            val criteria = when (it.itemId) {
-                R.id.menu_item_list_home -> FilterCriteria.ALL
-                R.id.menu_item_list_schedule -> FilterCriteria.FAVORITE
-                R.id.menu_item_list_dash -> FilterCriteria.ARCHIVED
-                else -> FilterCriteria.ALL
-            }
-
-            updateRecyclerView(criteria)
-
-            true
         }
     }
 }
