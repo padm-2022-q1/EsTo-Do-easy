@@ -59,8 +59,12 @@
     <string name="profile_settings_theme_bottom">Theme</string>
     <string name="profile_settings_pomodoro_settings">Pomodoro Settings</string>
     <string name="profile_settings_notifications_switch">Notifications</string>
-    <!-- TODO: Remove or change this placeholder text -->
-
+    <string name="planning_title">Grupo de Atividade</string>
+    <string name="planning_tasks_title">hint</string>
+    <string name="planning_details_title">Tarefas</string>
+    <string name="planning_details_group_name">Grupo</string>
+    <string name="planning_edit_text">Editar</string>
+    <string name="planning_list_item_title_default">NomeProjeto</string>
+    <string name="planning_list_item_name_task_default">NomeTarefa</string>
 </resources>
-
 
