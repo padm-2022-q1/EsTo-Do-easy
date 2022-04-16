@@ -30,6 +30,4 @@
         app:layout_constraintTop_toBottomOf="@+id/text_planning_title_label" />
 
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

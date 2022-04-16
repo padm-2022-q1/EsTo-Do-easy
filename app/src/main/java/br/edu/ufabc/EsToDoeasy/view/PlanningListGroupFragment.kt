@@ -33,12 +33,9 @@ class PlanningListGroupFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        initComponents()
-        bindEvents()
-
-//        activity?.let {
-//            updateRecyclerView(FilterCriteria.ALL)
-//        }
+        activity?.let {
+            updateRecyclerView()
+        }
     }
 
     private fun updateRecyclerView() {
@@ -50,20 +47,5 @@ class PlanningListGroupFragment : Fragment() {
         }
     }
 
-    private fun initComponents() {
-        val menu = binding.mainNavigation
-
-        val allBadge = menu.getOrCreateBadge(R.id.menu_item_list_planner)
-        allBadge.isVisible = true
-        allBadge.number = viewModel.getAllGroups().size
-    }
-
-    private fun bindEvents() {
-        binding.mainNavigation.setOnItemSelectedListener {
-            updateRecyclerView()
-
-            true
-        }
-    }
 
 }
