@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="8dp"
-    tools:context=".view.TaskDetailsFragment">
+    tools:context=".view.NewTaskDetailsFragment">
 
     <TextView
         android:id="@+id/task_details_title"

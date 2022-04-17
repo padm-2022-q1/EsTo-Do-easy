@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 //        val appBarConfiguration = AppBarConfiguration(
 //            setOf(
 //                R.id.menu_item_list_home, R.id.menu_item_list_planner,R.id.menu_item_list_schedule
-//            )
+//
 //        )
 //        setupActionBarWithNavController(navController, appBarConfiguration)
 
@@ -91,7 +91,67 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        viewModel.clickedAtDetails.observe( this){
+            it?.let {
+                val action = NewTaskDetailsFragmentDirections.actionTaskDetailsToTaskDetails(it)
+                navController.navigate(action)
+            }
+        }
 
+        viewModel.clickedSignOutProfile.observe(this){
+            it?.let{
+                val action = ProfilePageFragmentDirections.
+                actionMenuItemListProfileToNavigationLoginProfile()
+                navController.navigate(action)
+            }
+        }
+
+        viewModel.clickedLoginLogin.observe(this){
+            it?.let{
+                val action = LoginPageDirections.
+                actionNavigationLoginProfileToMenuItemListProfile()
+                navController.navigate(action)
+            }
+        }
+
+        viewModel.clickedSettingsProfile.observe(this){
+            it?.let{
+                val action = ProfilePageFragmentDirections.
+                actionMenuItemListProfileToNavigationSettingsProfile()
+                navController.navigate(action)
+            }
+        }
+
+        viewModel.clickedSkipLogin.observe(this){
+            it?.let{
+                val action = LoginPageDirections.
+                actionNavigationLoginProfileToMenuItemListProfile()
+                navController.navigate(action)
+            }
+        }
+
+        viewModel.clickedGroupId.observe(this) {
+            it?.let {
+                val action = PlanningListGroupFragmentDirections.actionPlanningListFragmentToPlanningListTaskFragment(it)
+                navController.navigate(action)
+            }
+        }
+
+        viewModel.clickedPlanningTaskId.observe(this) {
+            it?.let {
+                val action = PlanningListTaskFragmentDirections.actionPlanningListTaskFragmentToPlanningTaskDetailsFragment(it)
+                navController.navigate(action)
+            }
+        }
+
+
+        viewModel.clickedAchievementProfile.observe(this){
+            it?.let{
+                val action = ProfilePageFragmentDirections.
+                actionMenuItemListProfileToNavigationAchievementsProfile()
+                navController.navigate(action)
+            }
+        }
     }
 }
 

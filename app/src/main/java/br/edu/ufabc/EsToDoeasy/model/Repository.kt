@@ -11,6 +11,7 @@ import java.util.*
 class Repository {
     private lateinit var tasks: List<Task>
     private lateinit var groups: List<Group>
+    private lateinit var achievements: List<Achievement>
 
     private data class TaskJson(
         val id: Long,
@@ -50,6 +51,25 @@ class Repository {
         fun toGroup() = Group(id, name)
     }
 
+    private data class AchievementJson(
+        val id: Long,
+        val title: String,
+        val details: String,
+        val date: String,
+        val achieved: String,
+        val difficulty: String
+    ) {
+        val formatter = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.US)
+        fun toAchievement() = Achievement(
+            id,
+            title,
+            details,
+            date,
+            achieved,
+            difficulty
+        )
+    }
+
     /**
      * Loads tasks data from given JSON input stream.
      */
@@ -64,6 +84,14 @@ class Repository {
         groups = Klaxon().parseArray<TaskGroup>(stream)?.map { it.toGroup() } ?: emptyList()
     }
 
+    fun getTasksbyGroupId(groupId: Long) = validTasks().filter { getTask(groupId).children.contains(it.groupId)}
+
+    /**
+     * Loads achievements data from given JSON input stream.
+     */
+    fun loadDataAchievements(stream: InputStream) {
+        achievements = Klaxon().parseArray<AchievementJson>(stream)?.map { it.toAchievement() } ?: emptyList()
+    }
     /**
      * Returns all tasks.
      */
@@ -73,6 +101,12 @@ class Repository {
      * Returns all groups.
      */
     fun getAllGroups() = validGroups()
+
+    /**
+     * Returns all achievements.
+     */
+    fun getAllAchievements() = validAchievements()
+
 
     /**
      * Returns all dependecies for a given task
@@ -91,9 +125,19 @@ class Repository {
     fun getGroup(id: Long) =
         validGroups().find { it.id == id } ?: throw NoSuchElementException("Group not found")
 
+    /**
+     * Returns a single achievement information by its given ID.
+     */
+    fun getAchievement(id: Long) =
+        validAchievements().find { it.id == id } ?: throw NoSuchElementException("Achievement not found")
+
     private fun validTasks() = if (this::tasks.isInitialized) tasks else
         throw NullPointerException("Repository has not been initialized")
 
     private fun validGroups() = if (this::groups.isInitialized) groups else
         throw NullPointerException("Repository has not been initialized")
+
+    private fun validAchievements() = if (this::achievements.isInitialized) achievements else
+        throw NullPointerException("Repository has not been initialized")
+
 }
