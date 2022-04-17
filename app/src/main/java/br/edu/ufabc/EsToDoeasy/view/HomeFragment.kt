@@ -84,11 +84,17 @@ class HomeFragment : Fragment() {
         }
 
         binding.cardviewStudyTechniquesItemSelector.setOnClickListener {
-            viewModel.clickedSelection.value = true
+            viewModel.clickedStudyTechniqueSelect.value = true
         }
 
         binding.suggestedTaskItemPlay.setOnClickListener {
             viewModel.clickedTaskToPlay.value = true
+        }
+
+        viewModel.selectedStudyTechnique.observe(this) {
+            it?.let {
+                binding.studyTechniquesItem.text = it
+            }
         }
     }
 }

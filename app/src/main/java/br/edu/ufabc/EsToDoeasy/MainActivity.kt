@@ -5,9 +5,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.onNavDestinationSelected
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import br.edu.ufabc.EsToDoeasy.databinding.ActivityMainBinding
 import br.edu.ufabc.EsToDoeasy.view.*
@@ -79,8 +76,8 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(action)
             }
         }
-        //
-        viewModel.clickedSelection.observe(this) {
+
+        viewModel.clickedStudyTechniqueSelect.observe(this) {
             it?.let {
                 if (it) {
                     val action =
@@ -91,64 +88,69 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        viewModel.clickedAtDetails.observe( this){
+
+        viewModel.clickedAtDetails.observe(this) {
             it?.let {
                 val action = TaskDetailsFragmentDirections.actionTaskDetailsToTaskDetails(it)
                 navController.navigate(action)
             }
         }
 
-        viewModel.clickedSignOutProfile.observe(this){
-            it?.let{
-                val action = ProfilePageFragmentDirections.
-                actionMenuItemListProfileToNavigationLoginProfile()
+        viewModel.clickedSignOutProfile.observe(this) {
+            it?.let {
+                val action =
+                    ProfilePageFragmentDirections.actionMenuItemListProfileToNavigationLoginProfile()
                 navController.navigate(action)
             }
         }
 
-        viewModel.clickedLoginLogin.observe(this){
-            it?.let{
-                val action = LoginPageDirections.
-                actionNavigationLoginProfileToMenuItemListProfile()
+        viewModel.clickedLoginLogin.observe(this) {
+            it?.let {
+                val action = LoginPageDirections.actionNavigationLoginProfileToMenuItemListProfile()
                 navController.navigate(action)
             }
         }
 
-        viewModel.clickedSettingsProfile.observe(this){
-            it?.let{
-                val action = ProfilePageFragmentDirections.
-                actionMenuItemListProfileToNavigationSettingsProfile()
+        viewModel.clickedSettingsProfile.observe(this) {
+            it?.let {
+                val action =
+                    ProfilePageFragmentDirections.actionMenuItemListProfileToNavigationSettingsProfile()
                 navController.navigate(action)
             }
         }
 
-        viewModel.clickedSkipLogin.observe(this){
-            it?.let{
-                val action = LoginPageDirections.
-                actionNavigationLoginProfileToMenuItemListProfile()
+        viewModel.clickedSkipLogin.observe(this) {
+            it?.let {
+                val action = LoginPageDirections.actionNavigationLoginProfileToMenuItemListProfile()
                 navController.navigate(action)
             }
         }
 
         viewModel.clickedGroupId.observe(this) {
             it?.let {
-                val action = PlanningListGroupFragmentDirections.actionPlanningListFragmentToPlanningListTaskFragment(it)
+                val action =
+                    PlanningListGroupFragmentDirections.actionPlanningListFragmentToPlanningListTaskFragment(
+                        it
+                    )
                 navController.navigate(action)
             }
         }
 
         viewModel.clickedPlanningTaskId.observe(this) {
             it?.let {
-                val action = PlanningListTaskFragmentDirections.actionPlanningListTaskFragmentToPlanningTaskDetailsFragment(it)
+                val action =
+                    PlanningListTaskFragmentDirections.actionPlanningListTaskFragmentToPlanningTaskDetailsFragment(
+                        it
+                    )
                 navController.navigate(action)
             }
         }
 
 
-        viewModel.clickedAchievementProfile.observe(this){
-            it?.let{
-                val action = ProfilePageFragmentDirections.
-                actionMenuItemListProfileToNavigationAchievementsProfile()
+        viewModel.clickedAchievementProfile.observe(this) {
+            it?.let {
+                val action =
+                    ProfilePageFragmentDirections.actionMenuItemListProfileToNavigationAchievementsProfile()
                 navController.navigate(action)
             }
         }
