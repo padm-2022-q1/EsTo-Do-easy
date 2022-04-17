@@ -89,10 +89,25 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
         viewModel.clickedAtDetails.observe(this) {
             it?.let {
                 val action = TaskDetailsFragmentDirections.actionTaskDetailsToTaskDetails(it)
                 navController.navigate(action)
+            }
+        }
+
+        viewModel.clickedAtConfigPomodoro.observe( this){
+            it?.let {
+                val action = PomodoroFragmentDirections.actionNavigationPomodoroToSettingPomodoro()
+                navController.navigate(action)
+            }
+        }
+
+        viewModel.clickedSignOutProfile.observe(this) {
+            it?.let {
+                val action =
+                    ProfilePageFragmentDirections.actionMenuItemListProfileToNavigationLoginProfile()
             }
         }
 

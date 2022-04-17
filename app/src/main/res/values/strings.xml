@@ -90,5 +90,24 @@
     <string name="task_difficulty_default">MEDIUM</string>
     <string name="task_list_item_alert_description">Task should be done before the current one</string>
     <string name="task_item_alert_description">Alert</string>
+    <string name="pomodoro_focus_time_label">Focus</string>
+    <string name="pomodoro_focus_time_defaut_value">25 min</string>
+    <string name="pomodoro_shortbreak_time">Short Break</string>
+    <string name="pomodoro_shortbreak_time_value">5 min</string>
+    <string name="pomodoro_longbreak_time">Long Break</string>
+    <string name="pomodoro_longbreak_time_value">15 min</string>
+    <string name="textview_pomodoro_sound_options">Sounds</string>
+    <string name="pomodoro_configure_timer_ticktack">Tick Tack</string>
+    <string name="pomodoro_configure_end_focus_sound">End of a Focus Session</string>
+    <string name="pomodoro_configure_end_break_sound">End of a Break Session</string>
+    <string name="textview_pomodoro_general">General</string>
+    <string name="pomodoro_configure_general_focus_start">Automatic Start Focus Session</string>
+    <string name="pomodoro_configure_general_break_start">Automatic Start a Break Session</string>
+    <string name="pomodoro_skip">Skip</string>
+    <string name="pomodoro_shortbreak">4:59</string>
+    <string name="pomodoro_longbreak">14:59</string>
+    <string name="pomodoro_focus">24:59</string>
+    <string name="skip_break_label">Skip Break</string>
+    <string name="pomodoro_pause_focus">Pause</string>
 </resources>
 

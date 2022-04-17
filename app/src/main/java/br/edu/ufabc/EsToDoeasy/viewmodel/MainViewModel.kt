@@ -61,6 +61,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val clickedAtDetails by lazy { SingleLiveEvent<Long?>() }
 
+
+    val clickedAtConfigPomodoro by lazy { SingleLiveEvent<Boolean?>() }
+
+    val clickedAtSkipSession by lazy { SingleLiveEvent<Long?>() }
+
     val clickedAtAddTask by lazy { SingleLiveEvent<Boolean?>() }
 
     /**
