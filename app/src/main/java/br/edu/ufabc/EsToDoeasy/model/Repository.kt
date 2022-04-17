@@ -84,6 +84,8 @@ class Repository {
         groups = Klaxon().parseArray<TaskGroup>(stream)?.map { it.toGroup() } ?: emptyList()
     }
 
+    fun getTasksbyGroupId(groupId: Long) = validTasks().filter { getTask(groupId).children.contains(it.groupId)}
+
     /**
      * Loads achievements data from given JSON input stream.
      */

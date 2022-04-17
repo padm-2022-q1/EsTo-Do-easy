@@ -59,6 +59,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val clickedSettingsProfile by lazy { SingleLiveEvent<Boolean?>() }
 
+    val clickedGroupId by lazy { SingleLiveEvent<Long?>() }
+
+    val clickedPlanningTaskId by lazy { SingleLiveEvent<Long?>() }
+
     val clickedAchievementProfile by lazy { SingleLiveEvent<Boolean?>() }
 
     val clickedAchievementItemId by lazy { SingleLiveEvent<Long?>() }
@@ -82,6 +86,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      * Returns a single task information by its given ID.
      */
     fun get(id: Long) = repository.getTask(id)
+
+    fun getTasksbyGroupId (id: Long) = repository.getTasksbyGroupId(id)
 
     /**
      * Returns all achievement.
