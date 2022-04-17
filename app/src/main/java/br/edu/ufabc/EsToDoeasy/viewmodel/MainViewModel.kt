@@ -83,6 +83,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val clickedAchievementItemId by lazy { SingleLiveEvent<Long?>() }
 
+    val clickedDashboardDaily by lazy { SingleLiveEvent<Boolean?>() }
+
     fun getSuggestTask() = getAll()[0]
 
     /**

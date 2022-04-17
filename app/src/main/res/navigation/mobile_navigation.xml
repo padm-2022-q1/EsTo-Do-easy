@@ -127,5 +127,7 @@
             app:argType="long" />
     </fragment>
 
-
+    <fragment
+        android:id="@+id/menu_item_list_dash"
+        android:name="br.edu.ufabc.EsToDoeasy.view.DashboardFragment" />
 </navigation>

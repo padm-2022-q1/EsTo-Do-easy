@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="8dp"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    tools:context=".view.DashboardFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/report_button_diary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@color/purple_700"
+            android:paddingVertical="12dp"
+            android:text="@string/report_button_text_daily"
+            app:cornerRadius="0dp"
+            app:layout_constraintEnd_toStartOf="@+id/report_button_weekly"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/report_button_weekly"
+            app:strokeColor="@color/purple_700"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/report_button_weekly"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/purple_200"
+            android:paddingVertical="12dp"
+            android:text="@string/report_button_text_weakly"
+            app:cornerRadius="0dp"
+            app:layout_constraintEnd_toStartOf="@+id/report_button_monthly"
+            app:layout_constraintStart_toEndOf="@+id/report_button_diary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/purple_700"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/report_button_monthly"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/purple_200"
+            android:paddingVertical="12dp"
+            android:text="@string/report_button_text_monthly"
+            app:cornerRadius="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/report_button_weekly"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/purple_700"
+            app:strokeWidth="2dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/report_button_diary">
+
+            <com.anychart.anychart.AnyChartView
+                android:id="@+id/dashboard_chart_time_spent_by_activity"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <com.anychart.anychart.AnyChartView
+                android:id="@+id/dashboard_chart_time_spent_by_group"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

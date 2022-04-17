@@ -146,8 +146,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
         viewModel.clickedAchievementProfile.observe(this) {
+            it?.let {
+                val action =
+                    ProfilePageFragmentDirections.actionMenuItemListProfileToNavigationAchievementsProfile()
+                navController.navigate(action)
+            }
+        }
+
+        viewModel.clickedDashboardDaily.observe(this) {
             it?.let {
                 val action =
                     ProfilePageFragmentDirections.actionMenuItemListProfileToNavigationAchievementsProfile()
