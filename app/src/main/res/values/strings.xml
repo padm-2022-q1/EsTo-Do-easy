@@ -79,5 +79,8 @@
     <string name="planning_task_details_radio_group_level_priority_low">Fácil</string>
     <string name="planning_task_details_radio_group_level_priority_medium">Média</string>
     <string name="planning_task_details_radio_group_level_priority_high">Alta</string>
+    <string name="report_button_text_daily">Diário</string>
+    <string name="report_button_text_weakly">Semanal</string>
+    <string name="report_button_text_monthly">Mensal</string>
 </resources>
 
