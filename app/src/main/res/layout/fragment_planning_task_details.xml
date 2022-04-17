@@ -1,141 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
-    tools:context=".view.PlanningTaskDetailsFragment"
-    >
+    android:padding="16dp"
+    tools:context=".view.PlanningTaskDetailsFragment">
 
-    <TextView
-        android:id="@+id/planning_details_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/planning_details_title_default"/>
-
-    <EditText
-        android:id="@+id/planning_task_details_date_start_edit_text"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date"
-        android:autofillHints="10/09/2022"
-        android:layout_marginTop="@dimen/planning_task_details_margin_top"
-        android:hint="@string/planning_task_details_date_start_hint"
-        app:layout_constraintTop_toBottomOf="@+id/planning_details_title"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/planning_task_details_date_end_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date"
-        android:autofillHints="15/09/2022"
-        android:layout_marginTop="@dimen/planning_task_details_margin_top"
-        android:hint="@string/planning_task_details_date_end_hint"
-        app:layout_constraintTop_toBottomOf="@+id/planning_task_details_date_start_edit_text"
-        app:layout_constraintStart_toStartOf="parent"/>
+        <TextView
+            android:id="@+id/planning_details_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/planning_details_title_default"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/planning_task_details_mult_line_task_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:autofillHints="Preencha com os detalhes da atividade"
-        android:layout_marginTop="@dimen/planning_task_details_margin_top"
-        android:hint="@string/planning_task_details_mult_line_task_details"
-        app:layout_constraintTop_toBottomOf="@id/planning_task_details_date_end_edit_text" />
-
-    <TextView
-        android:id="@+id/planning_details_project_name_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold"
-        android:text="@string/planning_task_details_name_project_label_default"
-        app:layout_constraintTop_toBottomOf="@id/planning_task_details_mult_line_task_edit_text"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <TextView
-        android:id="@+id/planning_details_activity_level_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:textSize="11sp"
-        android:text="@string/planning_task_details_activity_level_label"
-        app:layout_constraintTop_toBottomOf="@id/planning_details_project_name_text"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <RadioGroup
-        android:id="@+id/planning_details_activity_level_radio_group"
-        android:checkedButton="@+id/radio_button_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/planning_details_activity_level_label"
-        app:layout_constraintStart_toStartOf="parent"
-        android:orientation="horizontal"
-        >
-        <RadioButton
-            android:id="@+id/radio_button_activity_level_easy"
+        <EditText
+            android:id="@+id/planning_task_details_date_start_edit_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/planning_task_details_radio_group_level_activity_easy"/>
-        <RadioButton
-            android:id="@+id/radio_button_activity_level_medium"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/planning_task_details_radio_group_level_activity_medium"/>
-        <RadioButton
-            android:id="@+id/radio_button_activity_level_hard"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/planning_task_details_radio_group_level_activity_hard"/>
-    </RadioGroup>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/planning_task_details_margin_top"
+            android:autofillHints="10/09/2022"
+            android:ems="10"
+            android:hint="@string/planning_task_details_date_start_hint"
+            android:inputType="date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/planning_details_title" />
 
-    <TextView
-        android:id="@+id/planning_details_priority_level_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="11sp"
-        android:layout_marginTop="@dimen/planning_task_details_margin_top"
-        android:text="@string/planning_task_details_activity_level_label"
-        app:layout_constraintTop_toBottomOf="@id/planning_details_activity_level_radio_group"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <RadioGroup
-        android:id="@+id/planning_details_priority_level_radio_group"
-        android:checkedButton="@+id/radio_button_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/planning_details_priority_level_label"
-        app:layout_constraintStart_toStartOf="parent"
-        android:orientation="horizontal"
-        >
-        <RadioButton
-            android:id="@+id/radio_button_priority_level_low"
+        <EditText
+            android:id="@+id/planning_task_details_date_end_edit_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/planning_task_details_radio_group_level_priority_low" />
-        <RadioButton
-            android:id="@+id/radio_button_priority_level_medium"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/planning_task_details_radio_group_level_priority_medium"/>
-        <RadioButton
-            android:id="@+id/radio_button_priority_level_high"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/planning_task_details_radio_group_level_priority_high"/>
-    </RadioGroup>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/planning_task_details_margin_top"
+            android:autofillHints="15/09/2022"
+            android:ems="10"
+            android:hint="@string/planning_task_details_date_end_hint"
+            android:inputType="date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/planning_task_details_date_start_edit_text" />
 
+        <EditText
+            android:id="@+id/planning_task_details_date_due_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/planning_task_details_margin_top"
+            android:autofillHints="15/09/2022"
+            android:ems="10"
+            android:hint="@string/planning_task_details_date_due_hint"
+            android:inputType="date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/planning_task_details_date_end_edit_text" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/planning_task_details_mult_line_task_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/planning_task_details_margin_top"
+            android:autofillHints="Preencha com os detalhes da atividade"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="@string/planning_task_details_mult_line_task_details"
+            android:inputType="textMultiLine"
+            app:layout_constraintTop_toBottomOf="@id/planning_task_details_date_due_edit_text" />
+
+        <TextView
+            android:id="@+id/planning_details_project_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/planning_task_details_name_project_label_default"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/planning_task_details_mult_line_task_edit_text" />
+
+        <TextView
+            android:id="@+id/planning_details_activity_level_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/planning_task_details_activity_level_label"
+            android:textSize="11sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/planning_details_project_name_text" />
+
+        <RadioGroup
+            android:id="@+id/planning_details_activity_level_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkedButton="@+id/radio_button_1"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/planning_details_activity_level_label">
+
+            <RadioButton
+                android:id="@+id/radio_button_activity_level_easy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/planning_task_details_radio_group_level_activity_easy" />
+
+            <RadioButton
+                android:id="@+id/radio_button_activity_level_medium"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/planning_task_details_radio_group_level_activity_medium" />
+
+            <RadioButton
+                android:id="@+id/radio_button_activity_level_hard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/planning_task_details_radio_group_level_activity_hard" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/planning_details_priority_level_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/planning_task_details_margin_top"
+            android:text="@string/planning_task_details_priority_level_label"
+            android:textSize="11sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/planning_details_activity_level_radio_group" />
+
+        <RadioGroup
+            android:id="@+id/planning_details_priority_level_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkedButton="@+id/radio_button_1"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/planning_details_priority_level_label">
+
+            <RadioButton
+                android:id="@+id/radio_button_priority_level_low"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/planning_task_details_radio_group_level_priority_low" />
+
+            <RadioButton
+                android:id="@+id/radio_button_priority_level_medium"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/planning_task_details_radio_group_level_priority_medium" />
+
+            <RadioButton
+                android:id="@+id/radio_button_priority_level_high"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/planning_task_details_radio_group_level_priority_high" />
+        </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

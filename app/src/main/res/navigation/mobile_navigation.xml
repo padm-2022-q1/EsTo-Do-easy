@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_navigation_list_to_navigation_pomodoro"
             app:destination="@id/navigation_pomodoro" />
+        <action
+            android:id="@+id/action_navigation_list_to_navigation_planner"
+            app:destination="@id/menu_item_list_planner" />
     </fragment>
 
     <fragment
@@ -38,7 +41,7 @@
 
     <fragment
         android:id="@+id/navigation_pomodoro"
-        android:name="br.edu.ufabc.EsToDoeasy.view.PomodoroFragment" >
+        android:name="br.edu.ufabc.EsToDoeasy.view.PomodoroFragment">
         <action
             android:id="@+id/action_navigation_pomodoro_to_setting_pomodoro"
             app:destination="@id/setting_pomodoro" />

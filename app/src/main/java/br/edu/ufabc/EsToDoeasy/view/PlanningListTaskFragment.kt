@@ -13,8 +13,7 @@ import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 /**
  * Planning task list view.
  */
-
-class PlanningListTaskFragment : Fragment(){
+class PlanningListTaskFragment : Fragment() {
     private lateinit var binding: FragmentPlanningTaskListBinding
     private val viewModel: MainViewModel by activityViewModels()
     private val args: PlanningListTaskFragmentArgs by navArgs()
@@ -38,8 +37,8 @@ class PlanningListTaskFragment : Fragment(){
 
     private fun updateRecyclerView() {
         binding.recyclerviewPlanningTaskList.apply {
-            adapter = TaskAdapter(
-                viewModel.getTasksbyGroupId(args.id),
+            adapter = PlanningTaskAdapter(
+                viewModel.getTasksByGroupId(args.id),
                 viewModel
             )
         }

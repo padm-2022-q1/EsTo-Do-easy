@@ -125,7 +125,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      */
     fun get(id: Long) = repository.getTask(id)
 
-    fun getTasksbyGroupId(id: Long) = repository.getTasksbyGroupId(id)
+    fun getTasksByGroupId(id: Long) = repository.getTasksbyGroupId(id)
 
     /**
      * Returns all achievement.

@@ -95,6 +95,10 @@ class HomeFragment : Fragment() {
             viewModel.clickedTaskToPlay.value = true
         }
 
+        binding.addTaskItem.setOnClickListener {
+            viewModel.clickedAtAddTask.value = true
+        }
+
         viewModel.selectedStudyTechnique.observe(this) {
             it?.let {
                 binding.studyTechniquesItem.text = it

@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.clickedAtConfigPomodoro.observe( this){
+        viewModel.clickedAtConfigPomodoro.observe(this) {
             it?.let {
                 val action = PomodoroFragmentDirections.actionNavigationPomodoroToSettingPomodoro()
                 navController.navigate(action)
@@ -173,6 +173,13 @@ class MainActivity : AppCompatActivity() {
             it?.let {
                 val action =
                     ProfilePageFragmentDirections.actionMenuItemListProfileToNavigationAchievementsProfile()
+                navController.navigate(action)
+            }
+        }
+
+        viewModel.clickedAtAddTask.observe(this) {
+            it?.let {
+                val action = HomeFragmentDirections.actionNavigationListToNavigationPlanner()
                 navController.navigate(action)
             }
         }

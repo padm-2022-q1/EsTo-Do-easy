@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/purple_200"
             android:paddingVertical="12dp"
-            android:text="@string/report_button_text_weakly"
+            android:text="@string/report_button_text_weekly"
             app:cornerRadius="0dp"
             app:layout_constraintEnd_toStartOf="@+id/report_button_monthly"
             app:layout_constraintStart_toEndOf="@+id/report_button_diary"
