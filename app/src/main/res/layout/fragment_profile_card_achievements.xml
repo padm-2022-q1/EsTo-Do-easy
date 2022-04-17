@@ -28,7 +28,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/achievement_detail_icon" />
+                android:contentDescription="@string/achievement_detail_icon"
+                app:tint="@color/white" />
 
             <TextView
                 android:id="@+id/profile_achievements_item_title"
