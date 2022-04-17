@@ -64,6 +64,8 @@ class Repository {
         groups = Klaxon().parseArray<TaskGroup>(stream)?.map { it.toGroup() } ?: emptyList()
     }
 
+    fun getTasksbyGroupId(groupId: Long) = validTasks().filter { getTask(groupId).children.contains(it.groupId)}
+
     /**
      * Returns all tasks.
      */
