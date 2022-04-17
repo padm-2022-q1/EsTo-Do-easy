@@ -104,10 +104,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.clickedSignOutProfile.observe(this){
-            it?.let{
-                val action = ProfilePageFragmentDirections.
-                actionMenuItemListProfileToNavigationLoginProfile()
+        viewModel.clickedSignOutProfile.observe(this) {
+            it?.let {
+                val action =
+                    ProfilePageFragmentDirections.actionMenuItemListProfileToNavigationLoginProfile()
+            }
+        }
 
         viewModel.clickedSignOutProfile.observe(this) {
             it?.let {
