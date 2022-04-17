@@ -1,5 +1,6 @@
 package br.edu.ufabc.EsToDoeasy.view
 
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -30,7 +31,16 @@ class TaskAdapter(
          * Title text view component.
          */
         val title = itemBinding.nextTaskItemTitle
+
+        /**
+         * Time elapsed text view component.
+         */
         val timeElapsed = itemBinding.nextTaskItemTimeElapsed
+
+        /**
+         * Time elapsed icon component.
+         */
+        val timeElapsedIcon = itemBinding.nextTaskItemTimeElapsedIcon
 
         init {
             itemBinding.root.setOnClickListener {
@@ -40,7 +50,7 @@ class TaskAdapter(
                  */
                 viewModel.clickedItemId.value = id
             }
-            itemBinding.nextTaskItemPlay.setOnClickListener{
+            itemBinding.nextTaskItemPlay.setOnClickListener {
                 viewModel.clickedTaskToPlay.value = true
             }
         }
@@ -63,10 +73,11 @@ class TaskAdapter(
         val task = tasks[position]
 
         holder.id = getItemId(position)
-        holder.title.text = task.title.substring(0, 15)
-        val hours: Long = (task.timeElapsed) / 60
-        val minutes: Long = (task.timeElapsed) - hours * 60
-        holder.timeElapsed.text = "0%d:0%d".format(hours, minutes)
+        holder.title.text = task.title
+        holder.timeElapsed.text = DateUtils.formatElapsedTime(task.timeElapsed)
+
+        holder.timeElapsed.alpha = if (task.timeElapsed != 0L) 1.0F else 0.6F
+        holder.timeElapsedIcon.alpha = if (task.timeElapsed != 0L) 1.0F else 0.6F
     }
 
     override fun getItemCount(): Int = tasks.size

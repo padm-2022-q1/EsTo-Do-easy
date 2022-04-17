@@ -42,11 +42,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val clickedTaskToPlay by lazy { SingleLiveEvent<Boolean?>() }
 
-    fun getSuggestTask() = getAll()[0]
+    /**
+     * Returns the suggested task to be done.
+     */
+    fun getSuggestTask() = getAll().find { it.children.isEmpty() }
+
     /**
      * Returns all tasks.
      */
     fun getAll() = repository.getAllTasks()
+
+    /**
+     * Returns all tasks to be done next.
+     */
+    fun getAllNextTasks() = repository.getAllTasks().filter { it.id != getSuggestTask()?.id }
 
     /**
      * Returns all groups.
@@ -57,8 +66,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      * Returns all dependencies for a given task
      */
     fun getDependencies(id: Long) = repository.getDependencies(id)
+
     /**
      * Returns a single task information by its given ID.
      */
     fun get(id: Long) = repository.getTask(id)
+
+    /**
+     * Returns a group by its given ID.
+     */
+    fun getGroup(id: Long) = repository.getGroup(id)
 }

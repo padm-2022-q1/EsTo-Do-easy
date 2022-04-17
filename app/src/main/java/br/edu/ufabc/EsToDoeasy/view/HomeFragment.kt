@@ -1,7 +1,7 @@
 package br.edu.ufabc.EsToDoeasy.view
 
-import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,11 +17,6 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: MainViewModel by activityViewModels()
 
-    /**
-     * Filter criteria for tasks listing.
-     */
-    enum class FilterCriteria { ALL, FAVORITE, ARCHIVED }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,44 +28,60 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        bindEvents()
+
         initComponents()
+        bindEvents()
 
         activity?.let {
-            updateRecyclerView(FilterCriteria.ALL)
+            updateRecyclerView()
         }
     }
 
-    private fun updateRecyclerView(criteria: FilterCriteria) {
-
+    private fun updateRecyclerView() {
         binding.recyclerviewNextTasksList.apply {
             adapter = TaskAdapter(
-                viewModel.getAll(),
+                viewModel.getAllNextTasks(),
                 viewModel
             )
         }
     }
 
-    private fun bindEvents(){
-        binding.cardviewSuggestedTaskItem.setOnClickListener{
-            viewModel.clickedItemId.value = viewModel.getSuggestTask().id
+    private fun initComponents() {
+        val task = viewModel.getSuggestTask()
+        if (task != null) {
+            val group = viewModel.getGroup(task.groupId)
+
+            binding.suggestedTaskItemTitle.text = task.title
+            binding.suggestedTaskItemGroup.text = group.name
+            binding.suggestedTaskItemTimeElapsed.text =
+                DateUtils.formatElapsedTime(task.timeElapsed)
+
+            binding.suggestedTaskItemTimeElapsed.alpha = if (task.timeElapsed != 0L) 1.0F else 0.6F
+            binding.suggestedTaskItemTimeElapsedIcon.alpha =
+                if (task.timeElapsed != 0L) 1.0F else 0.6F
+
+            binding.cardviewSuggestedTaskItem.visibility = View.VISIBLE
+            binding.suggestedTaskItemNoContent.visibility = View.INVISIBLE
+        } else {
+            binding.cardviewSuggestedTaskItem.visibility = View.INVISIBLE
+            binding.suggestedTaskItemNoContent.visibility = View.VISIBLE
+        }
+    }
+
+    private fun bindEvents() {
+        val task = viewModel.getSuggestTask()
+        task?.let {
+            binding.cardviewSuggestedTaskItem.setOnClickListener {
+                viewModel.clickedItemId.value = task.id
+            }
         }
 
-        binding.cardviewStudyTechniquesItemSelector.setOnClickListener{
+        binding.cardviewStudyTechniquesItemSelector.setOnClickListener {
             viewModel.clickedSelection.value = true
         }
 
-        binding.suggestedTaskItemPlay.setOnClickListener{
+        binding.suggestedTaskItemPlay.setOnClickListener {
             viewModel.clickedTaskToPlay.value = true
         }
-
-    }
-
-    // Some test Here
-    @SuppressLint("SetTextI18n")
-    private fun initComponents() {
-        binding.suggestedTaskItemTitle.text = "Task 1"
-        binding.suggestedTaskItemGroup.text = "Group 1"
-        binding.suggestedTaskItemTimeElapsed.text = "00:45"
     }
 }

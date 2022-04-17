@@ -66,5 +66,7 @@
     <string name="planning_edit_text">Editar</string>
     <string name="planning_list_item_title_default">NomeProjeto</string>
     <string name="planning_list_item_name_task_default">NomeTarefa</string>
+    <string name="suggested_task_item_no_content_label">No suggested task item yet</string>
+    <string name="next_tasks_item_no_content_label">No next tasks data yet</string>
 </resources>
 
