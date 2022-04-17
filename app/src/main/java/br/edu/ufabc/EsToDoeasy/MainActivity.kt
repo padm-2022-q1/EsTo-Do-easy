@@ -1,6 +1,7 @@
 package br.edu.ufabc.EsToDoeasy
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -33,6 +34,8 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.main_fragment_container) as NavHostFragment
         navController = navHostFragment.navController
 
+        binding.mainNavigation.visibility = View.VISIBLE
+
         val menu: BottomNavigationView = binding.mainNavigation
         val allBadge = menu.getOrCreateBadge(R.id.menu_item_list_home)
         allBadge.isVisible = true
@@ -46,7 +49,6 @@ class MainActivity : AppCompatActivity() {
 //        setupActionBarWithNavController(navController, appBarConfiguration)
 
         menu.setupWithNavController(navController)
-
     }
 
     private fun bindEvents() {
@@ -105,6 +107,7 @@ class MainActivity : AppCompatActivity() {
                 val action =
                     ProfilePageFragmentDirections.actionMenuItemListProfileToNavigationLoginProfile()
                 navController.navigate(action)
+                binding.mainNavigation.visibility = View.GONE
             }
         }
 
@@ -112,6 +115,7 @@ class MainActivity : AppCompatActivity() {
             it?.let {
                 val action = LoginPageDirections.actionNavigationLoginProfileToMenuItemListProfile()
                 navController.navigate(action)
+                binding.mainNavigation.visibility = View.VISIBLE
             }
         }
 
@@ -127,6 +131,7 @@ class MainActivity : AppCompatActivity() {
             it?.let {
                 val action = LoginPageDirections.actionNavigationLoginProfileToMenuItemListProfile()
                 navController.navigate(action)
+                binding.mainNavigation.visibility = View.VISIBLE
             }
         }
 
@@ -172,6 +177,12 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(action)
             }
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        binding.mainNavigation.visibility = View.VISIBLE
     }
 }
 
