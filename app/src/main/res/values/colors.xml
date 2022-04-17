@@ -22,4 +22,5 @@
     <color name="verde">#85d55e</color>
     <color name="laranja">#fed096</color>
     <color name="amarelo">#fcf99f</color>
+    <color name="transparent">#00000000</color>
 </resources>

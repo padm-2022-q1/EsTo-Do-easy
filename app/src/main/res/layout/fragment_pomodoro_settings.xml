@@ -1,260 +1,261 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_pomodoro_focus_time_selector"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/cardview_pomodoro_shortbreak_time_selector">
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_pomodoro_focus_time_selector"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@id/cardview_pomodoro_shortbreak_time_selector"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/pomodoro_focus_time"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/pomodoro_focus_time_label"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/pomodoro_focus_time_value"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:padding="8dp">
 
-            <TextView
-                android:id="@+id/pomodoro_focus_time_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pomodoro_focus_time_defaut_value"
-                android:textColor="@color/text_faded"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pomodoro_focus_time" />
+                <TextView
+                    android:id="@+id/pomodoro_focus_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pomodoro_focus_time_label"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/pomodoro_focus_time_value"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/pomodoro_focus_time_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pomodoro_focus_time_defaut_value"
+                    android:textColor="@color/text_faded"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pomodoro_focus_time" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_pomodoro_shortbreak_time_selector"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/cardview_pomodoro_focus_time_selector">
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_pomodoro_shortbreak_time_selector"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/cardview_pomodoro_focus_time_selector">
 
-            <TextView
-                android:id="@+id/pomodoro_shortbreak_time"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/pomodoro_shortbreak_time"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/pomodoro_shortbreak_time_value"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:padding="8dp">
 
-            <TextView
-                android:id="@+id/pomodoro_shortbreak_time_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pomodoro_shortbreak_time_value"
-                android:textColor="@color/text_faded"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pomodoro_shortbreak_time" />
+                <TextView
+                    android:id="@+id/pomodoro_shortbreak_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pomodoro_shortbreak_time"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/pomodoro_shortbreak_time_value"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/pomodoro_shortbreak_time_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pomodoro_shortbreak_time_value"
+                    android:textColor="@color/text_faded"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pomodoro_shortbreak_time" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_pomodoro_longbreak_time_selector"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/cardview_pomodoro_shortbreak_time_selector"
-        tools:layout_editor_absoluteX="8dp">
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_pomodoro_longbreak_time_selector"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/cardview_pomodoro_shortbreak_time_selector"
+            tools:layout_editor_absoluteX="8dp">
 
-            <TextView
-                android:id="@+id/pomodoro_longbreak_time"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/pomodoro_longbreak_time"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/pomodoro_longbreak_time_value"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:padding="8dp">
 
-            <TextView
-                android:id="@+id/pomodoro_longbreak_time_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pomodoro_longbreak_time_value"
-                android:textColor="@color/text_faded"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pomodoro_longbreak_time" />
+                <TextView
+                    android:id="@+id/pomodoro_longbreak_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pomodoro_longbreak_time"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/pomodoro_longbreak_time_value"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/pomodoro_longbreak_time_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pomodoro_longbreak_time_value"
+                    android:textColor="@color/text_faded"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pomodoro_longbreak_time" />
 
-
-    <TextView
-        android:id="@+id/textview_pomodoro_sound"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textSize="16sp"
-        android:text="@string/textview_pomodoro_sound_options"
-        app:layout_constraintBottom_toTopOf="@id/pomodoro_configure_timer"
-        app:layout_constraintStart_toStartOf="@+id/cardview_pomodoro_longbreak_time_selector"
-        app:layout_constraintTop_toBottomOf="@id/cardview_pomodoro_longbreak_time_selector">
-
-    </TextView>
-
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/pomodoro_configure_timer"
-        android:padding="16dp"
-        android:layout_marginTop="4dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textview_pomodoro_sound"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/pomodoro_configure_timer_ticktack"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:background="@color/bluedark"
-        android:textAlignment="center"
-        >
-    </com.google.android.material.switchmaterial.SwitchMaterial>
-
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/pomodoro_configure_end_focus_sound"
-        android:padding="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintRight_toRightOf="@id/pomodoro_configure_timer"
-        app:layout_constraintTop_toBottomOf="@id/pomodoro_configure_timer"
-        app:layout_constraintBottom_toTopOf="@id/pomodoro_configure_end_break_sound"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/pomodoro_configure_end_focus_sound"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:background="@color/bluedark"
-        android:textAlignment="center"
-        >
-    </com.google.android.material.switchmaterial.SwitchMaterial>
-
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/pomodoro_configure_end_break_sound"
-        android:padding="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintRight_toRightOf="@id/pomodoro_configure_timer"
-        app:layout_constraintTop_toBottomOf="@id/pomodoro_configure_end_focus_sound"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/pomodoro_configure_end_break_sound"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:background="@color/bluedark"
-        android:textAlignment="center"
-        >
-    </com.google.android.material.switchmaterial.SwitchMaterial>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
 
-    <TextView
-        android:id="@+id/textview_pomodoro_general"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textSize="16sp"
-        android:text="@string/textview_pomodoro_general"
-        app:layout_constraintStart_toStartOf="@+id/cardview_pomodoro_longbreak_time_selector"
-        app:layout_constraintTop_toBottomOf="@id/pomodoro_configure_end_break_sound"
-        app:layout_constraintBottom_toTopOf="@+id/pomodoro_configure_general_focus_start"
-        >
+        <TextView
+            android:id="@+id/textview_pomodoro_sound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/textview_pomodoro_sound_options"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/pomodoro_configure_timer"
+            app:layout_constraintStart_toStartOf="@+id/cardview_pomodoro_longbreak_time_selector"
+            app:layout_constraintTop_toBottomOf="@id/cardview_pomodoro_longbreak_time_selector">
 
-    </TextView>
+        </TextView>
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/pomodoro_configure_general_focus_start"
-        android:padding="16dp"
-        android:layout_marginTop="4dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textview_pomodoro_general"
-        app:layout_constraintBottom_toTopOf="@+id/pomodoro_configure_general_break_start"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/pomodoro_configure_general_focus_start"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:background="@color/bluedark"
-        android:textAlignment="center"
-        >
-    </com.google.android.material.switchmaterial.SwitchMaterial>
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/pomodoro_configure_timer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/bluedark"
+            android:padding="16dp"
+            android:text="@string/pomodoro_configure_timer_ticktack"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/textview_pomodoro_sound">
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/pomodoro_configure_general_break_start"
-        android:padding="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintRight_toRightOf="@id/pomodoro_configure_timer"
-        app:layout_constraintTop_toBottomOf="@id/pomodoro_configure_general_focus_start"
-        app:layout_constraintBottom_toTopOf="@id/pomodoro_configure_notifications"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/pomodoro_configure_general_break_start"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:background="@color/bluedark"
-        android:textAlignment="center"
-        >
-    </com.google.android.material.switchmaterial.SwitchMaterial>
+        </com.google.android.material.switchmaterial.SwitchMaterial>
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/pomodoro_configure_notifications"
-        android:padding="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintRight_toRightOf="@id/pomodoro_configure_timer"
-        app:layout_constraintTop_toBottomOf="@id/pomodoro_configure_general_break_start"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/profile_settings_notifications_switch"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:background="@color/bluedark"
-        android:textAlignment="center"
-        >
-    </com.google.android.material.switchmaterial.SwitchMaterial>
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/pomodoro_configure_end_focus_sound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/bluedark"
+            android:padding="16dp"
+            android:text="@string/pomodoro_configure_end_focus_sound"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/pomodoro_configure_end_break_sound"
+            app:layout_constraintRight_toRightOf="@id/pomodoro_configure_timer"
+            app:layout_constraintTop_toBottomOf="@id/pomodoro_configure_timer">
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/pomodoro_configure_end_break_sound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/bluedark"
+            android:padding="16dp"
+            android:text="@string/pomodoro_configure_end_break_sound"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintRight_toRightOf="@id/pomodoro_configure_timer"
+            app:layout_constraintTop_toBottomOf="@id/pomodoro_configure_end_focus_sound">
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
 
 
+        <TextView
+            android:id="@+id/textview_pomodoro_general"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/textview_pomodoro_general"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/pomodoro_configure_general_focus_start"
+            app:layout_constraintStart_toStartOf="@+id/cardview_pomodoro_longbreak_time_selector"
+            app:layout_constraintTop_toBottomOf="@id/pomodoro_configure_end_break_sound">
 
+        </TextView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/pomodoro_configure_general_focus_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/bluedark"
+            android:padding="16dp"
+            android:text="@string/pomodoro_configure_general_focus_start"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/pomodoro_configure_general_break_start"
+            app:layout_constraintTop_toBottomOf="@id/textview_pomodoro_general">
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/pomodoro_configure_general_break_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/bluedark"
+            android:padding="16dp"
+            android:text="@string/pomodoro_configure_general_break_start"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/pomodoro_configure_notifications"
+            app:layout_constraintRight_toRightOf="@id/pomodoro_configure_timer"
+            app:layout_constraintTop_toBottomOf="@id/pomodoro_configure_general_focus_start">
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/pomodoro_configure_notifications"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/bluedark"
+            android:padding="16dp"
+            android:text="@string/profile_settings_notifications_switch"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintRight_toRightOf="@id/pomodoro_configure_timer"
+            app:layout_constraintTop_toBottomOf="@id/pomodoro_configure_general_break_start">
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
