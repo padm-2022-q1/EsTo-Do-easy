@@ -1,14 +1,6 @@
 <resources>
     <string name="app_name">EsTo-Do-easy</string>
-    <string name="task_list_item_title_default">Title</string>
-    <string name="task_list_item_content_default">Content</string>
-    <string name="task_list_item_date_default">01/01/22 00:00</string>
-    <string name="task_details_title_default">Title</string>
-    <string name="task_details_date_created_default">Created: 01/01/22 00:00</string>
-    <string name="task_details_date_created_value">Created: %s</string>
-    <string name="task_details_date_updated_default">Deadline: 01/01/22 00:00</string>
-    <string name="task_details_date_updated_value">Deadline: %s</string>
-    <string name="task_details_content_default">Content</string>
+    <string name="task_title_default">Title</string>
     <string name="menu_item_list_home_label">Home</string>
     <string name="menu_item_list_schedule_label">Schedule</string>
     <string name="menu_item_list_dash_label">Dashboard</string>
@@ -23,7 +15,7 @@
     <string name="suggested_task_label">Suggested Task</string>
     <string name="next_tasks_item_label">Next Tasks</string>
     <string name="default_group">Group</string>
-    <string name="task_details_group_label">Group for this Task</string>
+    <string name="task_details_group_label">Group</string>
     <string name="task_details_dependencies_label">Dependencies</string>
     <string name="study_techniques_item_default">Pomodoro</string>
     <string name="task_list_item_icon_description">Show task details</string>
@@ -86,6 +78,16 @@
     <string name="report_button_text_monthly">Mensal</string>
     <string name="suggested_task_item_no_content_label">No suggested task item yet</string>
     <string name="next_tasks_item_no_content_label">No next tasks data yet</string>
-    <string name="task_list_item_due_date_default">01/01/2022</string>
+    <string name="task_details_title_label">Title</string>
+    <string name="task_group_default">Group</string>
+    <string name="task_details_date_started_label">Start date</string>
+    <string name="date_default">01/01/2022</string>
+    <string name="task_details_date_finished_label">Finish date</string>
+    <string name="task_details_date_due_label">Due date</string>
+    <string name="task_details_priority_label">Priority</string>
+    <string name="task_priority_default">MEDIUM</string>
+    <string name="task_details_difficulty_label">Difficulty</string>
+    <string name="task_difficulty_default">MEDIUM</string>
+    <string name="task_list_item_alert_description">Task should be done before the current one</string>
 </resources>
 

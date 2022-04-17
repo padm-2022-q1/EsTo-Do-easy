@@ -27,11 +27,11 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/dependecies_task_item_alert"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/task_item_play_description"
+                android:contentDescription="@string/task_list_item_alert_description"
                 android:src="@drawable/ic_action_alert"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/dependecies_next_task_item_time_elapsed_icon"
@@ -45,7 +45,7 @@
                 android:layout_marginHorizontal="4dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@string/task_list_item_title_default"
+                android:text="@string/task_title_default"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/dependecies_task_item_alert"
                 app:layout_constraintStart_toEndOf="@id/dependecies_task_item_checkbox"

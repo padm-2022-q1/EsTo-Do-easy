@@ -33,7 +33,7 @@
                 android:layout_marginHorizontal="4dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@string/task_list_item_title_default"
+                android:text="@string/task_title_default"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/next_task_item_time_elapsed_icon"
                 app:layout_constraintStart_toEndOf="@+id/next_task_item_play"

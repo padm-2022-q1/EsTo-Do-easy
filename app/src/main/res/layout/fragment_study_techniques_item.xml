@@ -21,7 +21,7 @@
                 android:id="@+id/study_techniques_item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@string/task_list_item_title_default"
+                android:text="@string/task_title_default"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

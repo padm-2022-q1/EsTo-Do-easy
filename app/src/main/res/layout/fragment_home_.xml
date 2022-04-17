@@ -57,10 +57,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/study_techniques_item_selector_label"
+                android:textColor="@color/text_faded"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/study_techniques_item_icon"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/text_faded" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/study_techniques_item_icon"
@@ -118,7 +118,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="4dp"
-                android:text="@string/task_list_item_title_default"
+                android:text="@string/task_title_default"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/suggested_task_item_group"
                 app:layout_constraintEnd_toStartOf="@id/suggested_task_item_time_elapsed_icon"

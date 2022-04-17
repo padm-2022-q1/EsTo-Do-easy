@@ -9,6 +9,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentTaskDetailsBinding
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Tasks details view.
@@ -17,6 +19,7 @@ class TaskDetailsFragment : Fragment() {
     private lateinit var binding: FragmentTaskDetailsBinding
     private val viewModel: MainViewModel by activityViewModels()
     private val args: TaskDetailsFragmentArgs by navArgs()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,18 +31,24 @@ class TaskDetailsFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        initComponents()
+
         updateRecyclerView()
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    private fun initComponents() {
         val task = viewModel.get(args.id)
+        val group = viewModel.getGroup(task.groupId)
+        val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.US)
 
-        binding.taskDetailsGroup.text = viewModel.getAllGroups()[1].name
-        binding.taskDetailsDateCreated.text = task.dateStarted.toString()
-        binding.taskDetailsDateUpdated.text = task.dateFinished.toString()
+        binding.taskDetailsTitle.text = task.title
+        binding.taskDetailsGroup.text = group.name
+        binding.taskDetailsDateStarted.text = formatter.format(task.dateStarted)
+        binding.taskDetailsDateFinished.text = formatter.format(task.dateFinished)
+        binding.taskDetailsDateDue.text = formatter.format(task.dateDue)
+        binding.taskDetailsPriority.text = task.priority.name
+        binding.taskDetailsDifficulty.text = task.difficulty.name
     }
 
     private fun updateRecyclerView() {
