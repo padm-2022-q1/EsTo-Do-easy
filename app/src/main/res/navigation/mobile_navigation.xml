@@ -49,21 +49,75 @@
     <fragment
         android:id="@+id/menu_item_list_profile"
         android:name="br.edu.ufabc.EsToDoeasy.view.ProfilePageFragment" >
+        <action
+            android:id="@+id/action_menu_item_list_profile_to_navigation_login_profile"
+            app:destination="@id/navigation_login_profile" />
+        <action
+            android:id="@+id/action_menu_item_list_profile_to_navigation_settings_profile"
+            app:destination="@id/navigation_settings_profile" />
+        <action
+            android:id="@+id/action_menu_item_list_profile_to_navigation_achievements_profile"
+            app:destination="@id/navigation_achievements_profile"  />
     </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_login_profile"
+        android:name="br.edu.ufabc.EsToDoeasy.view.LoginPage" >
+        <action
+            android:id="@+id/action_navigation_login_profile_to_menu_item_list_profile"
+            app:destination="@id/menu_item_list_profile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_settings_profile"
+        android:name="br.edu.ufabc.EsToDoeasy.view.ProfileSettingsFragment" >
+        <action
+            android:id="@+id/action_navigation_login_profile_to_menu_item_list_profile"
+            app:destination="@id/menu_item_list_profile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_achievements_profile"
+        android:name="br.edu.ufabc.EsToDoeasy.view.ProfileAchievementsFragment" >
+        <action
+            android:id="@+id/action_navigation_login_profile_to_menu_item_list_profile"
+            app:destination="@id/menu_item_list_profile" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/menu_item_list_planner"
         android:name="br.edu.ufabc.EsToDoeasy.view.PlanningListGroupFragment"
         tools:layout="@layout/fragment_planning_group_list" >
         <action
-            android:id="@+id/action_planningListFragment_to_planningDetailsFragment"
-            app:destination="@id/planningDetailsFragment" />
+            android:id="@+id/action_planningListFragment_to_planningListTaskFragment"
+            app:destination="@id/planningListTaskFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/planningDetailsFragment"
+        android:id="@+id/planningListTaskFragment"
         android:name="br.edu.ufabc.EsToDoeasy.view.PlanningListTaskFragment"
-        tools:layout="@layout/fragment_planning_task_list" />
+        tools:layout="@layout/fragment_planning_task_list">
+        <argument
+            android:name="id"
+            app:argType="long"
+            android:defaultValue="-1L" />
+        <action
+            android:id="@+id/action_planningListTaskFragment_to_planningTaskDetailsFragment"
+            app:destination="@id/planningTaskDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/planningTaskDetailsFragment"
+        android:name="br.edu.ufabc.EsToDoeasy.view.PlanningTaskDetailsFragment"
+        android:label="fragment_planning_task_details"
+        tools:layout="@layout/fragment_planning_task_details" >
+        <argument
+            android:name="id"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
 
 
 

@@ -66,6 +66,24 @@
     <string name="planning_edit_text">Editar</string>
     <string name="planning_list_item_title_default">NomeProjeto</string>
     <string name="planning_list_item_name_task_default">NomeTarefa</string>
+    <string name="profile_settings_button_text">Settings</string>
+    <string name="fragment_profile_achievements_text_default">Achievement</string>
+    <string name="achievement_detail_icon">Achievement Detail Icon</string>
+    <string name="planning_details_title_default">taskname</string>
+    <string name="planning_task_details_date_start_hint">Data início</string>
+    <string name="planning_task_details_date_end_hint">Data fim</string>
+    <string name="planning_task_details_mult_line_task_details">Criar aplicativo toDo!</string>
+    <string name="planning_task_details_name_project_label_default">Projeto</string>
+    <string name="planning_task_details_radio_group_level_activity_easy">Fácil</string>
+    <string name="planning_task_details_radio_group_level_activity_medium">Médio</string>
+    <string name="planning_task_details_radio_group_level_activity_hard">Difícil</string>
+    <string name="planning_task_details_activity_level_label">Nível da atividade</string>
+    <string name="planning_task_details_radio_group_level_priority_low">Fácil</string>
+    <string name="planning_task_details_radio_group_level_priority_medium">Média</string>
+    <string name="planning_task_details_radio_group_level_priority_high">Alta</string>
+    <string name="report_button_text_daily">Diário</string>
+    <string name="report_button_text_weakly">Semanal</string>
+    <string name="report_button_text_monthly">Mensal</string>
     <string name="suggested_task_item_no_content_label">No suggested task item yet</string>
     <string name="next_tasks_item_no_content_label">No next tasks data yet</string>
 </resources>

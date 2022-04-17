@@ -1,30 +1,34 @@
 package br.edu.ufabc.EsToDoeasy.view
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.navArgs
-import br.edu.ufabc.EsToDoeasy.databinding.FragmentPlanningTaskListBinding
+import br.edu.ufabc.EsToDoeasy.databinding.FragmentProfileAchievementsBinding
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 
 /**
- * Planning task list view.
+ * A simple [Fragment] subclass.
+ * Use the [ProfileAchievementsFragment.newInstance] factory method to
+ * create an instance of this fragment.
  */
-
-class PlanningListTaskFragment : Fragment(){
-    private lateinit var binding: FragmentPlanningTaskListBinding
+class ProfileAchievementsFragment : Fragment() {
+    private lateinit var binding: FragmentProfileAchievementsBinding
     private val viewModel: MainViewModel by activityViewModels()
-    private val args: PlanningListTaskFragmentArgs by navArgs()
+
+    /**
+     * Filter criteria for tasks listing.
+     */
+    enum class FilterCriteria { Y, N }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPlanningTaskListBinding.inflate(inflater, container, false)
+        binding = FragmentProfileAchievementsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -37,9 +41,9 @@ class PlanningListTaskFragment : Fragment(){
     }
 
     private fun updateRecyclerView() {
-        binding.recyclerviewPlanningTaskList.apply {
-            adapter = TaskAdapter(
-                viewModel.getTasksbyGroupId(args.id),
+        binding.RecyclerviewProfileAchievements.apply {
+            adapter = AchievementAdapter(
+                viewModel.getAllAchievements(),
                 viewModel
             )
         }
