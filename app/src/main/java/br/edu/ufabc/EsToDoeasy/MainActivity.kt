@@ -120,6 +120,13 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(action)
             }
         }
+        
+        viewModel.clickedGroupId.observe(this) {
+            it?.let {
+                val action = PlanningListGroupFragmentDirections.actionPlanningListFragmentToPlanningListTaskFragment(it)
+                navController.navigate(action)
+            }
+        }
 
     }
 }

@@ -78,15 +78,16 @@
         <action
             android:id="@+id/action_planningListFragment_to_planningListTaskFragment"
             app:destination="@id/planningListTaskFragment" />
-        <argument
-            android:name="id"
-            app:argType="long"
-            android:defaultValue="-1L" />
     </fragment>
 
     <fragment
         android:id="@+id/planningListTaskFragment"
         android:name="br.edu.ufabc.EsToDoeasy.view.PlanningListTaskFragment"
-        tools:layout="@layout/fragment_planning_task_list" />
+        tools:layout="@layout/fragment_planning_task_list">
+        <argument
+            android:name="id"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
 
 </navigation>

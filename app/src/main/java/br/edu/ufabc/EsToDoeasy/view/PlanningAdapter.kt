@@ -37,7 +37,7 @@ class PlanningAdapter (
                      * This was made using var property because it wasn't accepting
                      * getItemId(position: Long), only getItemId(), which always returned -1.
                      */
-                    viewModel.clickedItemId.value = id
+                    viewModel.clickedGroupId.value = id
                 }
             }
         }

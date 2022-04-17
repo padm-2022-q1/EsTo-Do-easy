@@ -17,7 +17,7 @@ import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 class PlanningListTaskFragment : Fragment(){
     private lateinit var binding: FragmentPlanningTaskListBinding
     private val viewModel: MainViewModel by activityViewModels()
-    private val args: PlanningListGroupFragmentArgs by navArgs()
+    private val args: PlanningListTaskFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
