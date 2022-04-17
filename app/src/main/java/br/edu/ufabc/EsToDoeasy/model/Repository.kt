@@ -114,7 +114,7 @@ class Repository {
 
 
     /**
-     * Returns all dependecies for a given task
+     * Returns all dependecies for a given task.
      */
     fun getDependencies(id: Long) = validTasks().filter { getTask(id).children.contains(it.id) }
 
