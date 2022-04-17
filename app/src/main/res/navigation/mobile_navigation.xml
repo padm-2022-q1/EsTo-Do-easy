@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_menu_item_list_profile_to_navigation_settings_profile"
             app:destination="@id/navigation_settings_profile" />
+        <action
+            android:id="@+id/action_menu_item_list_profile_to_navigation_achievements_profile"
+            app:destination="@id/navigation_achievements_profile"  />
     </fragment>
 
 
@@ -70,6 +73,15 @@
             android:id="@+id/action_navigation_login_profile_to_menu_item_list_profile"
             app:destination="@id/menu_item_list_profile" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_achievements_profile"
+        android:name="br.edu.ufabc.EsToDoeasy.view.ProfileAchievementsFragment" >
+        <action
+            android:id="@+id/action_navigation_login_profile_to_menu_item_list_profile"
+            app:destination="@id/menu_item_list_profile" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/menu_item_list_planner"

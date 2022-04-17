@@ -67,5 +67,7 @@
     <string name="planning_list_item_title_default">NomeProjeto</string>
     <string name="planning_list_item_name_task_default">NomeTarefa</string>
     <string name="profile_settings_button_text">Settings</string>
+    <string name="fragment_profile_achievements_text_default">Achievement</string>
+    <string name="achievement_detail_icon">Achievement Detail Icon</string>
 </resources>
 

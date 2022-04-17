@@ -45,5 +45,9 @@ class ProfilePageFragment : Fragment() {
             viewModel.clickedSettingsProfile.value = true
         }
 
+        binding.profileAchievementsButton.setOnClickListener{
+            viewModel.clickedAchievementProfile.value = true
+        }
+
     }
 }

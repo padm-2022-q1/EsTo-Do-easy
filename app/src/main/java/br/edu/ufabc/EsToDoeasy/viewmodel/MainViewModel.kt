@@ -19,6 +19,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
          * Groups JSON file asset name.
          */
         const val groupFile = "groups.json"
+
+        /**
+         * Achievement JSON file asset name.
+         */
+        const val achievementFile = "achievements.json"
     }
 
     private val repository = Repository()
@@ -30,6 +35,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
         application.resources.assets.open(groupFile).use {
             repository.loadDataGroups(it)
+        }
+
+        application.resources.assets.open(achievementFile).use{
+            repository.loadDataAchievements(it)
         }
     }
 
@@ -50,6 +59,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val clickedSettingsProfile by lazy { SingleLiveEvent<Boolean?>() }
 
+    val clickedAchievementProfile by lazy { SingleLiveEvent<Boolean?>() }
+
+    val clickedAchievementItemId by lazy { SingleLiveEvent<Long?>() }
+
     fun getSuggestTask() = getAll()[0]
     /**
      * Returns all tasks.
@@ -69,4 +82,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      * Returns a single task information by its given ID.
      */
     fun get(id: Long) = repository.getTask(id)
+
+    /**
+     * Returns all achievement.
+     */
+    fun getAllAchievements() = repository.getAllAchievements()
+
 }
