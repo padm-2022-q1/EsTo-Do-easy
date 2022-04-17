@@ -107,8 +107,10 @@
     <string name="pomodoro_skip">Skip</string>
     <string name="pomodoro_shortbreak">4:59</string>
     <string name="pomodoro_longbreak">14:59</string>
+    <string name="pomodoro_end_session">00:00</string>
     <string name="pomodoro_focus">24:59</string>
     <string name="skip_break_label">Skip Break</string>
+    <string name="pomodoro_start_new_session">Start new session</string>
     <string name="pomodoro_pause_focus">Pause</string>
 </resources>
 

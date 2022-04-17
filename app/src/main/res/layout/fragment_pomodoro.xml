@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pomodoro_back"
     android:layout_width="match_parent"
-    android:background="@color/laranja"
+    android:background="@color/orange"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     

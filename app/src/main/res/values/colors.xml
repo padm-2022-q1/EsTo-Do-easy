@@ -18,9 +18,9 @@
     <color name="danger">#D32F2F</color>
     <color name="text_faded">#BDBDBD</color>
     <color name="text_primary">#757575</color>
-    <color name="roxo">#ba86e5</color>
-    <color name="verde">#85d55e</color>
-    <color name="laranja">#fed096</color>
-    <color name="amarelo">#fcf99f</color>
+    <color name="purple">#ba86e5</color>
+    <color name="green">#85d55e</color>
+    <color name="orange">#fed096</color>
+    <color name="yellow">#fcf99f</color>
     <color name="transparent">#00000000</color>
 </resources>
