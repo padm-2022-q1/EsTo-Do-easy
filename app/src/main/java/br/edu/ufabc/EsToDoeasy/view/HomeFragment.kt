@@ -73,6 +73,10 @@ class HomeFragment : Fragment() {
             binding.cardviewSuggestedTaskItem.visibility = View.INVISIBLE
             binding.suggestedTaskItemNoContent.visibility = View.VISIBLE
         }
+
+        viewModel.selectedStudyTechnique.value?.let {
+            binding.studyTechniquesItem.text = viewModel.selectedStudyTechnique.value
+        }
     }
 
     private fun bindEvents() {
