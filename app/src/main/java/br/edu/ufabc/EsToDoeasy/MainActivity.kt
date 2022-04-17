@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 //        val appBarConfiguration = AppBarConfiguration(
 //            setOf(
 //                R.id.menu_item_list_home, R.id.menu_item_list_planner,R.id.menu_item_list_schedule
-//            )
+//
 //        )
 //        setupActionBarWithNavController(navController, appBarConfiguration)
 

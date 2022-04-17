@@ -57,7 +57,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * Returns the suggested task to be done.
      */
-    fun getSuggestTask() = getAll().find { it.children.isEmpty() }
 
     val clickedSignOutProfile by lazy { SingleLiveEvent<Boolean?>() }
 

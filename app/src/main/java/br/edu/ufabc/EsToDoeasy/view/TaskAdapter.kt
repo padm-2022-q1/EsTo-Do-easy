@@ -53,9 +53,9 @@ class TaskAdapter(
             itemBinding.nextTaskItemPlay.setOnClickListener {
                 viewModel.clickedTaskToPlay.value = true
             }
-            itemBinding.root.setOnClickListener{
-                viewModel.clickedPlanningTaskId.value = id
-            }
+
+            //viewModel.clickedPlanningTaskId.value = id
+
         }
     }
 
