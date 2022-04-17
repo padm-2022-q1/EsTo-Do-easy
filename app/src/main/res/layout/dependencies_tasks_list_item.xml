@@ -31,12 +31,12 @@
                 android:id="@+id/dependecies_task_item_alert"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_action_alert"
                 android:contentDescription="@string/task_item_play_description"
+                android:src="@drawable/ic_action_alert"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/dependecies_next_task_item_time_elapsed_icon"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/bluelight" />
+                app:tint="@color/danger" />
 
             <TextView
                 android:id="@+id/dependecies_next_task_item_title"
@@ -56,19 +56,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
-                android:alpha="0.6"
                 android:contentDescription="@string/task_item_time_elapsed_icon_description"
                 android:src="@drawable/ic_action_time"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/dependecies_next_task_item_time_elapsed"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/text_faded" />
 
             <TextView
                 android:id="@+id/dependecies_next_task_item_time_elapsed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:alpha="0.6"
                 android:text="@string/task_item_time_elapsed_default"
+                android:textColor="@color/text_faded"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/dependecies_next_task_item_icon"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -77,12 +77,12 @@
                 android:id="@+id/dependecies_next_task_item_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:alpha="0.6"
                 android:contentDescription="@string/task_list_item_icon_description"
                 android:src="@drawable/ic_action_next"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/text_faded" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

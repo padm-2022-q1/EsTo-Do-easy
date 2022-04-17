@@ -15,6 +15,7 @@
     <color name="greendark">#53933F</color>
     <color name="orangelight">#F3AE1B</color>
     <color name="orangedark">#BB6008</color>
-<color name="gray">#808080</color>
-
+    <color name="danger">#D32F2F</color>
+    <color name="text_faded">#BDBDBD</color>
+    <color name="text_primary">#757575</color>
 </resources>

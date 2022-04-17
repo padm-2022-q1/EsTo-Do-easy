@@ -7,22 +7,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
-import br.edu.ufabc.EsToDoeasy.databinding.FragmentNewTaskDetailsBinding
+import br.edu.ufabc.EsToDoeasy.databinding.FragmentTaskDetailsBinding
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 
 /**
  * Tasks details view.
  */
-class NewTaskDetailsFragment : Fragment() {
-    private lateinit var binding: FragmentNewTaskDetailsBinding
+class TaskDetailsFragment : Fragment() {
+    private lateinit var binding: FragmentTaskDetailsBinding
     private val viewModel: MainViewModel by activityViewModels()
-    private val args: NewTaskDetailsFragmentArgs by navArgs()
+    private val args: TaskDetailsFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentNewTaskDetailsBinding.inflate(inflater, container, false)
+        binding = FragmentTaskDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -30,7 +30,6 @@ class NewTaskDetailsFragment : Fragment() {
         super.onStart()
         updateRecyclerView()
     }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,7 +42,7 @@ class NewTaskDetailsFragment : Fragment() {
         binding.taskDetailsDateUpdated.text = task.dateFinished.toString()
     }
 
-    private fun updateRecyclerView(){
+    private fun updateRecyclerView() {
         binding.recyclerviewNextTasksList.apply {
             adapter = DependenciesTaskAdapter(
                 viewModel.getDependencies(args.id),

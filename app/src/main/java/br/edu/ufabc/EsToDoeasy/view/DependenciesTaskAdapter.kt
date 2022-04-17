@@ -4,6 +4,7 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.DependenciesTasksListItemBinding
@@ -23,7 +24,10 @@ class DependenciesTaskAdapter(
     /**
      * Task item view holder.
      */
-    class DependenciesTaskHolder(itemBinding: DependenciesTasksListItemBinding, viewModel: MainViewModel) :
+    class DependenciesTaskHolder(
+        itemBinding: DependenciesTasksListItemBinding,
+        viewModel: MainViewModel
+    ) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
         /**
@@ -55,6 +59,11 @@ class DependenciesTaskAdapter(
          * Time elapsed icon component.
          */
         val timeElapsedIcon = itemBinding.dependeciesNextTaskItemTimeElapsedIcon
+
+        /**
+         * List item context.
+         */
+        val context = itemBinding.root.context
 
         init {
             itemBinding.root.setOnClickListener {
@@ -90,16 +99,20 @@ class DependenciesTaskAdapter(
         holder.title.text = task.title
         holder.timeElapsed.text = DateUtils.formatElapsedTime(task.timeElapsed)
 
-        if(task.status==Status.DONE){
+        if (task.status == Status.DONE) {
             holder.status.visibility = View.VISIBLE
-        }else if (task.status==Status.DOING || task.status==Status.TODO ){
+        } else if (task.status == Status.DOING || task.status == Status.TODO) {
             holder.status.visibility = View.VISIBLE
             holder.status.setBackgroundResource(R.drawable.ic_action_not_done_task)
             holder.alter.visibility = View.VISIBLE
         }
 
-        holder.timeElapsed.alpha = if (task.timeElapsed != 0L) 1.0F else 0.6F
-        holder.timeElapsedIcon.alpha = if (task.timeElapsed != 0L) 1.0F else 0.6F
+        val color = ContextCompat.getColor(
+            holder.context,
+            if (task.timeElapsed != 0L) R.color.text_primary else R.color.text_faded
+        )
+        holder.timeElapsed.setTextColor(color)
+        holder.timeElapsedIcon.setColorFilter(color)
     }
 
     override fun getItemCount(): Int = tasks.size

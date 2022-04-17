@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/navigation_details"
-        android:name="br.edu.ufabc.EsToDoeasy.view.NewTaskDetailsFragment">
+        android:name="br.edu.ufabc.EsToDoeasy.view.TaskDetailsFragment">
         <argument
             android:name="id"
             app:argType="long"

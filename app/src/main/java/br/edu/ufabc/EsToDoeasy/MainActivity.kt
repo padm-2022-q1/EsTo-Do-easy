@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         }
         viewModel.clickedAtDetails.observe( this){
             it?.let {
-                val action = NewTaskDetailsFragmentDirections.actionTaskDetailsToTaskDetails(it)
+                val action = TaskDetailsFragmentDirections.actionTaskDetailsToTaskDetails(it)
                 navController.navigate(action)
             }
         }
