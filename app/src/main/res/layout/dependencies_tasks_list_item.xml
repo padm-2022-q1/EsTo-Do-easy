@@ -31,12 +31,12 @@
                 android:id="@+id/dependecies_task_item_alert"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_action_alert"
-                android:contentDescription="@string/task_item_play_description"
+                android:background="@drawable/ic_action_alert"
+                android:contentDescription="@string/task_item_alert_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/dependecies_next_task_item_time_elapsed_icon"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/bluelight" />
+            />
 
             <TextView
                 android:id="@+id/dependecies_next_task_item_title"

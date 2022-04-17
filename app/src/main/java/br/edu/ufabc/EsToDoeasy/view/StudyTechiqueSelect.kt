@@ -42,7 +42,7 @@ class StudyTechiqueSelect : Fragment() {
 
         binding.recyclerviewStudyTechniquesList.apply {
             adapter = TechiniquesAdapter(
-                listOf("Pomodoro","Livre","Teste","some"),
+                listOf("Pomodoro","Getting Things Done (GTD)","Eat that Frog","Free"),
                 viewModel
             )
         }

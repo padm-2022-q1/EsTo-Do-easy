@@ -86,5 +86,6 @@
     <string name="report_button_text_monthly">Mensal</string>
     <string name="suggested_task_item_no_content_label">No suggested task item yet</string>
     <string name="next_tasks_item_no_content_label">No next tasks data yet</string>
+    <string name="task_item_alert_description">Alert</string>
 </resources>
 

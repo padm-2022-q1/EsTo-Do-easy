@@ -38,7 +38,7 @@ class NewTaskDetailsFragment : Fragment() {
 
         val task = viewModel.get(args.id)
 
-        binding.taskDetailsGroup.text = viewModel.getAllGroups()[1].name
+        binding.taskDetailsGroup.text = viewModel.getAllGroups()[task.groupId.toInt()-1].name
         binding.taskDetailsDateCreated.text = task.dateStarted.toString()
         binding.taskDetailsDateUpdated.text = task.dateFinished.toString()
     }

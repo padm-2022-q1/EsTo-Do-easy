@@ -4,6 +4,7 @@ import SingleLiveEvent
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import br.edu.ufabc.EsToDoeasy.model.Repository
+import br.edu.ufabc.EsToDoeasy.model.Status
 
 /**
  * Application's main ViewModel.
@@ -83,12 +84,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * Returns all tasks to be done next.
      */
-    fun getAllNextTasks() = repository.getAllTasks().filter { it.id != getSuggestTask()?.id }
+    fun getAllNextTasks() = repository.getAllTasks().filter { it.id != getSuggestTask()?.id && it.status!=Status.DONE }
 
     /**
      * Returns all groups.
      */
     fun getAllGroups() = repository.getAllGroups()
+
+
+
 
     /**
      * Returns all dependencies for a given task
