@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <Button
+        android:id="@+id/report_button_diary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Diário"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/report_button_weakly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Semanal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/report_button_diary" />
+
+    <Button
+        android:id="@+id/report_button_monthly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mensal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/report_button_weakly" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
