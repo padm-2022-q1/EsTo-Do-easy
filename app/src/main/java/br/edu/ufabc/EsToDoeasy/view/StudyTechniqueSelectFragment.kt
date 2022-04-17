@@ -1,6 +1,5 @@
 package br.edu.ufabc.EsToDoeasy.view
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,16 +10,11 @@ import br.edu.ufabc.EsToDoeasy.databinding.FragmentStudyTechniquesSelectBinding
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 
 /**
- * Tasks list view.
+ * Study techniques list view.
  */
-class StudyTechiqueSelect : Fragment() {
+class StudyTechniqueSelectFragment : Fragment() {
     private lateinit var binding: FragmentStudyTechniquesSelectBinding
     private val viewModel: MainViewModel by activityViewModels()
-
-    /**
-     * Filter criteria for tasks listing.
-     */
-    enum class FilterCriteria { ALL, FAVORITE, ARCHIVED }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,15 +28,15 @@ class StudyTechiqueSelect : Fragment() {
     override fun onStart() {
         super.onStart()
         activity?.let {
-            updateRecyclerView(FilterCriteria.ALL)
+            updateRecyclerView()
         }
     }
 
-    private fun updateRecyclerView(criteria: FilterCriteria) {
+    private fun updateRecyclerView() {
 
         binding.recyclerviewStudyTechniquesList.apply {
-            adapter = TechiniquesAdapter(
-                listOf("Pomodoro","Getting Things Done (GTD)","Eat that Frog","Free"),
+            adapter = StudyTechniqueAdapter(
+                listOf("Pomodoro", "Getting Things Done (GTD)", "Eat that Frog", "Free"),
                 viewModel
             )
         }

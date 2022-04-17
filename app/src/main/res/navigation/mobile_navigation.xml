@@ -42,7 +42,7 @@
 
     <fragment
         android:id="@+id/navigation_study_select"
-        android:name="br.edu.ufabc.EsToDoeasy.view.StudyTechiqueSelect" />
+        android:name="br.edu.ufabc.EsToDoeasy.view.StudyTechniqueSelectFragment" />
 
     <fragment
         android:id="@+id/menu_item_list_schedule"
