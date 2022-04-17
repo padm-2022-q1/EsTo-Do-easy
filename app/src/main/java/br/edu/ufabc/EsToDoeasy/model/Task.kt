@@ -47,6 +47,11 @@ data class Task(
     val dateFinished: Date?,
 
     /**
+     * The task's due date.
+     */
+    val dateDue: Date,
+
+    /**
      * Total elapsed task duration.
      */
     val timeElapsed: Long,

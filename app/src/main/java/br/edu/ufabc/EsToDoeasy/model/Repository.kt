@@ -19,6 +19,7 @@ class Repository {
         val details: String,
         val dateStarted: String,
         val dateFinished: String,
+        val dateDue: String,
         val timeElapsed: Long,
         val groupId: Long,
         val difficulty: String,
@@ -34,6 +35,7 @@ class Repository {
             details,
             formatter.parse(dateStarted),
             formatter.parse(dateFinished),
+            formatter.parse(dateDue),
             timeElapsed,
             groupId,
             Difficulty.valueOf(difficulty),
@@ -84,14 +86,17 @@ class Repository {
         groups = Klaxon().parseArray<TaskGroup>(stream)?.map { it.toGroup() } ?: emptyList()
     }
 
-    fun getTasksbyGroupId(groupId: Long) = validTasks().filter { getTask(groupId).children.contains(it.groupId)}
+    fun getTasksbyGroupId(groupId: Long) =
+        validTasks().filter { getTask(groupId).children.contains(it.groupId) }
 
     /**
      * Loads achievements data from given JSON input stream.
      */
     fun loadDataAchievements(stream: InputStream) {
-        achievements = Klaxon().parseArray<AchievementJson>(stream)?.map { it.toAchievement() } ?: emptyList()
+        achievements =
+            Klaxon().parseArray<AchievementJson>(stream)?.map { it.toAchievement() } ?: emptyList()
     }
+
     /**
      * Returns all tasks.
      */
@@ -112,7 +117,7 @@ class Repository {
      * Returns all dependecies for a given task
      */
     fun getDependencies(id: Long) = validTasks().filter { getTask(id).children.contains(it.id) }
-    
+
     /**
      * Returns a single task information by its given ID.
      */
@@ -129,7 +134,8 @@ class Repository {
      * Returns a single achievement information by its given ID.
      */
     fun getAchievement(id: Long) =
-        validAchievements().find { it.id == id } ?: throw NoSuchElementException("Achievement not found")
+        validAchievements().find { it.id == id }
+            ?: throw NoSuchElementException("Achievement not found")
 
     private fun validTasks() = if (this::tasks.isInitialized) tasks else
         throw NullPointerException("Repository has not been initialized")

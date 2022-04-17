@@ -63,9 +63,7 @@ class ScheduledTaskAdapter(
 
         holder.id = getItemId(position)
         holder.title.text = task.title
-
-        // TODO: Change to due date.
-        holder.dueDate.text = SimpleDateFormat("dd/MM/yyyy", Locale.US).format(task.dateFinished)
+        holder.dueDate.text = SimpleDateFormat("dd/MM/yyyy", Locale.US).format(task.dateDue)
     }
 
     override fun getItemCount(): Int = tasks.size

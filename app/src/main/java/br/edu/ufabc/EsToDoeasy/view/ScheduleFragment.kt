@@ -31,11 +31,10 @@ class ScheduleFragment : Fragment() {
 
         val tasks = viewModel.getAllDueTasks()
 
-        val dates = tasks.mapNotNull { it.dateFinished }
-        dates.forEach {
-            binding.calendarviewScheduled.date = it.time
-        }
-
+//        val dates = tasks.mapNotNull { it.dateFinished }
+//        dates.forEach {
+//            binding.calendarviewScheduled.date = it.time
+//        }
 
         activity?.let {
             updateRecyclerView(tasks)
@@ -45,8 +44,7 @@ class ScheduleFragment : Fragment() {
     private fun updateRecyclerView(tasks: List<Task>) {
         binding.recyclerviewScheduledTasksList.apply {
             adapter = ScheduledTaskAdapter(
-                // TODO: Change to due date.
-                tasks.sortedBy { it.dateFinished },
+                tasks.sortedBy { it.dateDue },
                 viewModel
             )
         }
