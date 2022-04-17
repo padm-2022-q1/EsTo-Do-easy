@@ -42,6 +42,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val clickedTaskToPlay by lazy { SingleLiveEvent<Boolean?>() }
 
+    val clickedAtDetails by lazy { SingleLiveEvent<Long?>() }
     /**
      * Returns the suggested task to be done.
      */

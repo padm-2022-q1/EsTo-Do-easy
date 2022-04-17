@@ -88,7 +88,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
+        viewModel.clickedAtDetails.observe( this){
+            it?.let {
+                val action = NewTaskDetailsFragmentDirections.actionTaskDetailsToTaskDetails(it)
+                navController.navigate(action)
+            }
+        }
     }
 }
 

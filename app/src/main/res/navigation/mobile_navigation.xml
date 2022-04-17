@@ -31,6 +31,9 @@
             android:name="id"
             app:argType="long"
             android:defaultValue="-1L" />
+        <action
+            android:id="@+id/action_task_details_to_task_details"
+            app:destination="@id/navigation_details" />
     </fragment>
 
     <fragment
@@ -61,5 +64,7 @@
         android:id="@+id/planningDetailsFragment"
         android:name="br.edu.ufabc.EsToDoeasy.view.PlanningListTaskFragment"
         tools:layout="@layout/fragment_planning_task_list" />
+
+
 
 </navigation>

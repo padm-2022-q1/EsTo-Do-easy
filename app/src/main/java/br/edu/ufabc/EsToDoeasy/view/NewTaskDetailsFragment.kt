@@ -38,14 +38,14 @@ class NewTaskDetailsFragment : Fragment() {
 
         val task = viewModel.get(args.id)
 
-        binding.taskDetailsGroup.text = task.groupId.toString()
+        binding.taskDetailsGroup.text = viewModel.getAllGroups()[1].name
         binding.taskDetailsDateCreated.text = task.dateStarted.toString()
         binding.taskDetailsDateUpdated.text = task.dateFinished.toString()
     }
 
     private fun updateRecyclerView(){
         binding.recyclerviewNextTasksList.apply {
-            adapter = TaskAdapter(
+            adapter = DependenciesTaskAdapter(
                 viewModel.getDependencies(args.id),
                 viewModel
             )

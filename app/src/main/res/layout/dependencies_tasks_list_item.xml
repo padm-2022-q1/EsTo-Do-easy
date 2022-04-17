@@ -17,17 +17,29 @@
             android:padding="8dp">
 
             <ImageButton
-                android:id="@+id/next_task_item_play"
+                android:id="@+id/dependecies_task_item_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_action_play_task"
+                android:background="@drawable/ic_action_done_task"
                 android:contentDescription="@string/task_item_play_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+            <ImageButton
+                android:id="@+id/dependecies_task_item_alert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_alert"
+                android:contentDescription="@string/task_item_play_description"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/dependecies_next_task_item_time_elapsed_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/bluelight" />
+
             <TextView
-                android:id="@+id/next_task_item_title"
+                android:id="@+id/dependecies_next_task_item_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="4dp"
@@ -35,12 +47,12 @@
                 android:maxLines="1"
                 android:text="@string/task_list_item_title_default"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/next_task_item_time_elapsed_icon"
-                app:layout_constraintStart_toEndOf="@+id/next_task_item_play"
+                app:layout_constraintEnd_toStartOf="@+id/dependecies_task_item_alert"
+                app:layout_constraintStart_toEndOf="@id/dependecies_task_item_checkbox"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/next_task_item_time_elapsed_icon"
+                android:id="@+id/dependecies_next_task_item_time_elapsed_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
@@ -48,21 +60,21 @@
                 android:contentDescription="@string/task_item_time_elapsed_icon_description"
                 android:src="@drawable/ic_action_time"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/next_task_item_time_elapsed"
+                app:layout_constraintEnd_toStartOf="@id/dependecies_next_task_item_time_elapsed"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/next_task_item_time_elapsed"
+                android:id="@+id/dependecies_next_task_item_time_elapsed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.6"
                 android:text="@string/task_item_time_elapsed_default"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/next_task_item_icon"
+                app:layout_constraintEnd_toStartOf="@id/dependecies_next_task_item_icon"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/next_task_item_icon"
+                android:id="@+id/dependecies_next_task_item_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.6"
