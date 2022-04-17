@@ -3,7 +3,6 @@ package br.edu.ufabc.EsToDoeasy.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import br.edu.ufabc.EsToDoeasy.databinding.TaskListItemBinding
 import br.edu.ufabc.EsToDoeasy.databinding.PlanningListItemBinding
 import br.edu.ufabc.EsToDoeasy.model.Group
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel

@@ -78,6 +78,10 @@
         <action
             android:id="@+id/action_planningListFragment_to_planningListTaskFragment"
             app:destination="@id/planningListTaskFragment" />
+        <argument
+            android:name="id"
+            app:argType="long"
+            android:defaultValue="-1L" />
     </fragment>
 
     <fragment

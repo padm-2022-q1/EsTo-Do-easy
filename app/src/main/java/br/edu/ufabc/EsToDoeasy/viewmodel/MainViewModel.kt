@@ -69,4 +69,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      * Returns a single task information by its given ID.
      */
     fun get(id: Long) = repository.getTask(id)
+
+    fun getTasksbyGroupId (id: Long) = repository.getTasksbyGroupId(id)
 }
