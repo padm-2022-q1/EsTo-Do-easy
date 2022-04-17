@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentHomeBinding
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentPomodoroBinding
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
@@ -34,5 +35,32 @@ class PomodoroFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        bindEvents()
+    }
+    private fun bindEvents() {
+
+        binding.pomodoroConfigure.setOnClickListener {
+            viewModel.clickedAtConfigPomodoro.value = true
+        }
+        binding.pomodoroSkip.setOnClickListener {
+            // check the current state of this page through the time
+            val status = binding.text.text
+
+            if (status.equals("24:59")){
+                binding.text.text = getString(R.string.pomodoro_shortbreak)
+                binding.pomodoroBack.setBackgroundResource(R.color.verde)
+                binding.pomodoroActionButton.text = getString(R.string.skip_break_label)
+            } else if (status.equals("4:59")) {
+                binding.text.text = getString(R.string.pomodoro_longbreak)
+                binding.pomodoroActionButton.text = getString(R.string.skip_break_label)
+                binding.pomodoroBack.setBackgroundResource(R.color.roxo)
+            } else {
+                binding.text.text = getString(R.string.pomodoro_focus)
+                binding.pomodoroActionButton.text = getString(R.string.pomodoro_pause_focus)
+                binding.pomodoroBack.setBackgroundResource(R.color.laranja)
+            }
+
+
+        }
     }
 }
