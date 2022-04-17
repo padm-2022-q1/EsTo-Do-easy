@@ -38,7 +38,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             repository.loadDataGroups(it)
         }
 
-        application.resources.assets.open(achievementFile).use{
+        application.resources.assets.open(achievementFile).use {
             repository.loadDataAchievements(it)
         }
     }
@@ -53,7 +53,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      */
     val clickedScheduledTaskId by lazy { SingleLiveEvent<Long?>() }
 
-    val clickedSelection by lazy { SingleLiveEvent<Boolean?>() }
+    val clickedStudyTechniqueSelect by lazy { SingleLiveEvent<Boolean?>() }
+
+    val selectedStudyTechnique by lazy { SingleLiveEvent<String?>() }
 
     val clickedTaskToPlay by lazy { SingleLiveEvent<Boolean?>() }
 
@@ -65,6 +67,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val clickedAtSkipSession by lazy { SingleLiveEvent<Long?>() }
 
     val clickedAtAddTask by lazy { SingleLiveEvent<Boolean?>() }
+
     /**
      * Returns the suggested task to be done.
      */
@@ -86,6 +89,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val clickedAchievementItemId by lazy { SingleLiveEvent<Long?>() }
 
     fun getSuggestTask() = getAll()[0]
+
     /**
      * Returns all tasks.
      */
@@ -94,7 +98,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * Returns all tasks to be done next.
      */
-    fun getAllNextTasks() = repository.getAllTasks().filter { it.id != getSuggestTask()?.id && it.status!=Status.DONE }
+    fun getAllNextTasks() = repository.getAllTasks()
+        .filter { it.id != getSuggestTask().id && it.status != Status.DONE }
 
     /**
      * Returns all tasks that aren't done or achived.
@@ -108,8 +113,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun getAllGroups() = repository.getAllGroups()
 
 
-
-
     /**
      * Returns all dependencies for a given task
      */
@@ -120,7 +123,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      */
     fun get(id: Long) = repository.getTask(id)
 
-    fun getTasksbyGroupId (id: Long) = repository.getTasksbyGroupId(id)
+    fun getTasksbyGroupId(id: Long) = repository.getTasksbyGroupId(id)
 
     /**
      * Returns all achievement.

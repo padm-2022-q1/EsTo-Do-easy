@@ -4,26 +4,27 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentStudyTechniquesItemBinding
-import br.edu.ufabc.EsToDoeasy.databinding.NextTaskListItemBinding
-import br.edu.ufabc.EsToDoeasy.model.Task
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 
 /**
- * Task item adapter.
+ * Study technique item adapter.
  */
-class TechiniquesAdapter (
+class StudyTechniqueAdapter(
     val tasks: List<String>,
     private val viewModel: MainViewModel
-) : RecyclerView.Adapter<TechiniquesAdapter.TechiniquesHolder>() {
+) : RecyclerView.Adapter<StudyTechniqueAdapter.StudyTechniqueHolder>() {
 
     /**
-     * Task item view holder.
+     * Study technique item view holder.
      */
-    class TechiniquesHolder(itemBinding: FragmentStudyTechniquesItemBinding, viewModel: MainViewModel) :
+    class StudyTechniqueHolder(
+        itemBinding: FragmentStudyTechniquesItemBinding,
+        viewModel: MainViewModel
+    ) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
         /**
-         * Task identifier.
+         * Unique identifier.
          */
         var id: Long = 0
 
@@ -31,15 +32,16 @@ class TechiniquesAdapter (
          * Title text view component.
          */
         val title = itemBinding.studyTechniquesItemTitle
+
+        /**
+         * Description text view component.
+         */
         val description = itemBinding.studyTechniquesItemDescription
 
         init {
             itemBinding.root.setOnClickListener {
-                /*
-                 * This was made using var property because it wasn't accepting
-                 * getItemId(position: Long), only getItemId(), which always returned -1.
-                 */
-                viewModel.clickedSelection.value = false
+                viewModel.clickedStudyTechniqueSelect.value = false
+                viewModel.selectedStudyTechnique.value = title.text.toString()
             }
         }
     }
@@ -47,8 +49,8 @@ class TechiniquesAdapter (
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): TechiniquesHolder =
-        TechiniquesHolder(
+    ): StudyTechniqueHolder =
+        StudyTechniqueHolder(
             FragmentStudyTechniquesItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -57,15 +59,11 @@ class TechiniquesAdapter (
             viewModel
         )
 
-    override fun onBindViewHolder(holder: TechiniquesHolder, position: Int) {
+    override fun onBindViewHolder(holder: StudyTechniqueHolder, position: Int) {
         //val task = tasks[position]
-
 
         //holder.id = getItemId(position)
         holder.title.text = tasks[position]
-//        val hours: Long = (task.timeElapsed) / 60
-//        val minutes: Long = (task.timeElapsed) - hours * 60
-//        holder.timeElapsed.text = "0%d:0%d".format(hours, minutes)
     }
 
     override fun getItemCount(): Int = tasks.size

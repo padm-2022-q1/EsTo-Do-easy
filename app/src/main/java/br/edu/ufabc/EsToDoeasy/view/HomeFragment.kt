@@ -73,6 +73,10 @@ class HomeFragment : Fragment() {
             binding.cardviewSuggestedTaskItem.visibility = View.INVISIBLE
             binding.suggestedTaskItemNoContent.visibility = View.VISIBLE
         }
+
+        viewModel.selectedStudyTechnique.value?.let {
+            binding.studyTechniquesItem.text = viewModel.selectedStudyTechnique.value
+        }
     }
 
     private fun bindEvents() {
@@ -84,11 +88,17 @@ class HomeFragment : Fragment() {
         }
 
         binding.cardviewStudyTechniquesItemSelector.setOnClickListener {
-            viewModel.clickedSelection.value = true
+            viewModel.clickedStudyTechniqueSelect.value = true
         }
 
         binding.suggestedTaskItemPlay.setOnClickListener {
             viewModel.clickedTaskToPlay.value = true
+        }
+
+        viewModel.selectedStudyTechnique.observe(this) {
+            it?.let {
+                binding.studyTechniquesItem.text = it
+            }
         }
     }
 }
