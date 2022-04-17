@@ -1,153 +1,195 @@
 [
-	{
-		"id": 1,
-		"title": "Autenticação Server-Side via JWT",
-		"details": "Fazer a rota de autenticação do site nutriverde",
-		"dateStarted": "2021-10-09T00:28:02",
-		"dateFinished": "2022-02-28T12:06:23",
-		"timeElapsed": 60,
-		"groupId": 3,
-		"difficulty": "MEDIUM",
-		"priority": "HIGH",
-		"children": [2,3],
-		"status": "TODO",
-		"parents": []
-	},
-	{
-		"id": 2,
-		"title": "Formulário de Login da NutriVerde",
-		"details": "Escrever um formulário funcional responsivo",
-		"dateStarted": "2021-10-09T12:28:02",
-		"dateFinished": "2021-10-09T12:28:02",
-		"timeElapsed": 45,
-		"groupId": 3,
-		"difficulty": "EASY",
-		"priority": "HIGH",
-		"children":[] ,
-		"status": "DONE",
-		"parents": [1]
-	}
-,{
-	"id": 3,
-	"title": "Teste Unitarios da Classe do Usuário",
-	"details": "Mocha para cada função atomica da camada Model",
-	"dateStarted": "2021-10-09T12:28:02",
-	"dateFinished": "2021-10-09T12:28:02",
-	"timeElapsed": 120,
-	"groupId": 3,
-	"difficulty": "EASY",
-	"priority": "MEDIUM",
-	"children": [],
-	"status": "DOING",
-	"parents": [1]
-},
-	{
-		"id": 4,
-		"title": "combinatorial nullstellensatz by ALon",
-		"details": "Estudar a extensão do teorema de hilbert para polinomios de multiplas variáveis",
-		"dateStarted": "2021-10-09T12:28:02",
-		"dateFinished": "2021-10-09T12:28:02",
-		"timeElapsed": 400,
-		"groupId": 2,
-		"difficulty": "HARD",
-		"priority": "HIGH",
-		"children": [],
-		"status": "DOING",
-		"parents": [5,6]
-	},{
-	"id": 5,
-	"title": "Estudar Demonstração de eta para grafos bipartidos",
-	"details": "Entender a Demonstração do BaboCz..14",
-	"dateStarted": "2021-10-09T12:28:02",
-	"dateFinished": "2021-10-09T12:28:02",
-	"timeElapsed": 120,
-	"groupId": 2,
-	"difficulty": "HARD",
-	"priority": "HIGH",
-	"children": [4],
-	"status": "DOING",
-	"parents": [6]
-},
-	{
-		"id": 6,
-		"title": "Provar o limitante de eta para Cacto pelo nullstellensatz",
-		"details": "Modelar o polinomio do cacto",
-		"dateStarted": "2021-10-09T12:28:02",
-		"dateFinished": "2021-10-09T12:28:02",
-		"timeElapsed": 0,
-		"groupId": 2,
-		"difficulty": "HARD",
-		"priority": "MEDIUM",
-		"children": [4,5,7],
-		"status": "TODO",
-		"parents": []
-	},
-	{
-		"id": 7,
-		"title": "Provar os limitantes de grau de entrada para cacto",
-		"details": "mostrar que k = 2",
-		"dateStarted": "2021-10-09T12:28:02",
-		"dateFinished": "2021-10-09T12:28:02",
-		"timeElapsed": 0,
-		"groupId": 2,
-		"difficulty": "EASY",
-		"priority": "HIGH",
-		"children": [],
-		"status": "DONE",
-		"parents": [6]
-	},
-	{
-		"id": 8,
-		"title": "Escrever Resumo do projeto de pd",
-		"details": "Falar da relevancia do projeto",
-		"dateStarted": "2021-10-09T12:28:02",
-		"dateFinished": "2021-10-09T12:28:02",
-		"timeElapsed": 360,
-		"groupId": 1,
-		"difficulty": "EASY",
-		"priority": "LOW",
-		"children": [],
-		"status": "DONE",
-		"parents": [9]
-	},
-	{
-		"id": 9,
-		"title": "Enviar o Projeto de pd",
-		"details": "Formatado na abnt",
-		"dateStarted": "2021-10-09T12:28:02",
-		"dateFinished": "2021-10-09T12:28:02",
-		"timeElapsed": 0,
-		"groupId": 1,
-		"difficulty": "MEDIUM",
-		"priority": "HIGH",
-		"children": [8],
-		"status": "TODO",
-		"parents": []
-	},{
-	"id": 10,
-	"title": "Atividade 2 de padm",
-	"details": "note!",
-	"dateStarted": "2021-10-09T12:28:02",
-	"dateFinished": "2021-10-09T12:28:02",
-	"timeElapsed": 0,
-	"groupId": 4,
-	"difficulty": "HARD",
-	"priority": "HIGH",
-	"children": [11],
-	"status": "TODO",
-	"parents": []
-},{
-	"id": 11,
-	"title": "Aulas 14,15,16 de padm",
-	"details": "Seguir as aulas",
-	"dateStarted": "2021-10-09T12:28:02",
-	"dateFinished": "2021-10-09T12:28:02",
-	"timeElapsed": 240,
-	"groupId": 4,
-	"difficulty": "EASY",
-	"priority": "HIGH",
-	"children": [],
-	"status": "DONE",
-	"parents": [10]
-}
+  {
+    "id": 1,
+    "title": "Autenticação Server-Side via JWT",
+    "details": "Fazer a rota de autenticação do site nutriverde",
+    "dateStarted": "2021-10-09T00:28:02",
+    "dateFinished": "2022-02-28T12:06:23",
+    "dateDue": "2022-02-30T12:00:00",
+    "timeElapsed": 60,
+    "groupId": 3,
+    "difficulty": "MEDIUM",
+    "priority": "HIGH",
+    "children": [
+      2,
+      3
+    ],
+    "status": "TODO",
+    "parents": []
+  },
+  {
+    "id": 2,
+    "title": "Formulário de Login da NutriVerde",
+    "details": "Escrever um formulário funcional responsivo",
+    "dateStarted": "2021-10-09T12:28:02",
+    "dateFinished": "2021-10-09T12:28:02",
+    "dateDue": "2021-10-10T12:28:02",
+    "timeElapsed": 45,
+    "groupId": 3,
+    "difficulty": "EASY",
+    "priority": "HIGH",
+    "children": [],
+    "status": "DONE",
+    "parents": [
+      1
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Teste Unitarios da Classe do Usuário",
+    "details": "Mocha para cada função atomica da camada Model",
+    "dateStarted": "2021-10-09T12:28:02",
+    "dateFinished": "2021-10-09T12:28:02",
+    "dateDue": "2021-10-10T12:28:02",
+    "timeElapsed": 120,
+    "groupId": 3,
+    "difficulty": "EASY",
+    "priority": "MEDIUM",
+    "children": [],
+    "status": "DOING",
+    "parents": [
+      1
+    ]
+  },
+  {
+    "id": 4,
+    "title": "combinatorial nullstellensatz by ALon",
+    "details": "Estudar a extensão do teorema de hilbert para polinomios de multiplas variáveis",
+    "dateStarted": "2021-10-09T12:28:02",
+    "dateFinished": "2021-10-09T12:28:02",
+    "dateDue": "2021-10-10T12:28:02",
+    "timeElapsed": 400,
+    "groupId": 2,
+    "difficulty": "HARD",
+    "priority": "HIGH",
+    "children": [],
+    "status": "DOING",
+    "parents": [
+      5,
+      6
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Estudar Demonstração de eta para grafos bipartidos",
+    "details": "Entender a Demonstração do BaboCz..14",
+    "dateStarted": "2021-10-09T12:28:02",
+    "dateFinished": "2021-10-09T12:28:02",
+    "dateDue": "2021-10-10T12:28:02",
+    "timeElapsed": 120,
+    "groupId": 2,
+    "difficulty": "HARD",
+    "priority": "HIGH",
+    "children": [
+      4
+    ],
+    "status": "DOING",
+    "parents": [
+      6
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Provar o limitante de eta para Cacto pelo nullstellensatz",
+    "details": "Modelar o polinomio do cacto",
+    "dateStarted": "2021-10-09T12:28:02",
+    "dateFinished": "2021-10-09T12:28:02",
+    "dateDue": "2021-10-10T12:28:02",
+    "timeElapsed": 0,
+    "groupId": 2,
+    "difficulty": "HARD",
+    "priority": "MEDIUM",
+    "children": [
+      4,
+      5,
+      7
+    ],
+    "status": "TODO",
+    "parents": []
+  },
+  {
+    "id": 7,
+    "title": "Provar os limitantes de grau de entrada para cacto",
+    "details": "mostrar que k = 2",
+    "dateStarted": "2021-10-09T12:28:02",
+    "dateFinished": "2021-10-09T12:28:02",
+    "dateDue": "2021-10-10T12:28:02",
+    "timeElapsed": 0,
+    "groupId": 2,
+    "difficulty": "EASY",
+    "priority": "HIGH",
+    "children": [],
+    "status": "DONE",
+    "parents": [
+      6
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Escrever Resumo do projeto de pd",
+    "details": "Falar da relevancia do projeto",
+    "dateStarted": "2021-10-09T12:28:02",
+    "dateFinished": "2021-10-09T12:28:02",
+    "dateDue": "2021-10-10T12:28:02",
+    "timeElapsed": 360,
+    "groupId": 1,
+    "difficulty": "EASY",
+    "priority": "LOW",
+    "children": [],
+    "status": "DONE",
+    "parents": [
+      9
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Enviar o Projeto de pd",
+    "details": "Formatado na abnt",
+    "dateStarted": "2021-10-09T12:28:02",
+    "dateFinished": "2021-10-09T12:28:02",
+    "dateDue": "2021-10-10T12:28:02",
+    "timeElapsed": 0,
+    "groupId": 1,
+    "difficulty": "MEDIUM",
+    "priority": "HIGH",
+    "children": [
+      8
+    ],
+    "status": "TODO",
+    "parents": []
+  },
+  {
+    "id": 10,
+    "title": "Atividade 2 de padm",
+    "details": "note!",
+    "dateStarted": "2021-10-09T12:28:02",
+    "dateFinished": "2021-10-09T12:28:02",
+    "dateDue": "2021-10-10T12:28:02",
+    "timeElapsed": 0,
+    "groupId": 4,
+    "difficulty": "HARD",
+    "priority": "HIGH",
+    "children": [
+      11
+    ],
+    "status": "TODO",
+    "parents": []
+  },
+  {
+    "id": 11,
+    "title": "Aulas 14,15,16 de padm",
+    "details": "Seguir as aulas",
+    "dateStarted": "2021-10-09T12:28:02",
+    "dateFinished": "2021-10-09T12:28:02",
+    "dateDue": "2021-10-10T12:28:02",
+    "timeElapsed": 240,
+    "groupId": 4,
+    "difficulty": "EASY",
+    "priority": "HIGH",
+    "children": [],
+    "status": "DONE",
+    "parents": [
+      10
+    ]
+  }
 ]

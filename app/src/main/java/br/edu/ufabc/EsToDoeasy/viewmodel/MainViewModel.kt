@@ -48,6 +48,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      */
     val clickedItemId by lazy { SingleLiveEvent<Long?>() }
 
+    /**
+     * Maintains the currently selected scheduled task ID.
+     */
+    val clickedScheduledTaskId by lazy { SingleLiveEvent<Long?>() }
+
     val clickedSelection by lazy { SingleLiveEvent<Boolean?>() }
 
     val clickedTaskToPlay by lazy { SingleLiveEvent<Boolean?>() }
@@ -85,6 +90,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      * Returns all tasks to be done next.
      */
     fun getAllNextTasks() = repository.getAllTasks().filter { it.id != getSuggestTask()?.id && it.status!=Status.DONE }
+
+    /**
+     * Returns all tasks that aren't done or achived.
+     */
+    fun getAllDueTasks() =
+        repository.getAllTasks().filter { it.status != Status.DONE && it.status != Status.ARCHIVED }
 
     /**
      * Returns all groups.

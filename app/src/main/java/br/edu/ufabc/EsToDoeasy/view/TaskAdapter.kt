@@ -3,7 +3,9 @@ package br.edu.ufabc.EsToDoeasy.view
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.NextTaskListItemBinding
 import br.edu.ufabc.EsToDoeasy.model.Task
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
@@ -42,6 +44,11 @@ class TaskAdapter(
          */
         val timeElapsedIcon = itemBinding.nextTaskItemTimeElapsedIcon
 
+        /**
+         * List item context.
+         */
+        val context = itemBinding.root.context
+
         init {
             itemBinding.root.setOnClickListener {
                 /*
@@ -79,8 +86,12 @@ class TaskAdapter(
         holder.title.text = task.title
         holder.timeElapsed.text = DateUtils.formatElapsedTime(task.timeElapsed)
 
-        holder.timeElapsed.alpha = if (task.timeElapsed != 0L) 1.0F else 0.6F
-        holder.timeElapsedIcon.alpha = if (task.timeElapsed != 0L) 1.0F else 0.6F
+        val color = ContextCompat.getColor(
+            holder.context,
+            if (task.timeElapsed != 0L) R.color.text_primary else R.color.text_faded
+        )
+        holder.timeElapsed.setTextColor(color)
+        holder.timeElapsedIcon.setColorFilter(color)
     }
 
     override fun getItemCount(): Int = tasks.size

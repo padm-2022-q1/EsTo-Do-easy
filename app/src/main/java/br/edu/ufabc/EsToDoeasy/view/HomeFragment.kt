@@ -5,8 +5,10 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentHomeBinding
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 
@@ -56,9 +58,14 @@ class HomeFragment : Fragment() {
             binding.suggestedTaskItemTimeElapsed.text =
                 DateUtils.formatElapsedTime(task.timeElapsed)
 
-            binding.suggestedTaskItemTimeElapsed.alpha = if (task.timeElapsed != 0L) 1.0F else 0.6F
-            binding.suggestedTaskItemTimeElapsedIcon.alpha =
-                if (task.timeElapsed != 0L) 1.0F else 0.6F
+            context?.let {
+                val color = ContextCompat.getColor(
+                    it,
+                    if (task.timeElapsed != 0L) R.color.text_primary else R.color.text_faded
+                )
+                binding.suggestedTaskItemTimeElapsed.setTextColor(color)
+                binding.suggestedTaskItemTimeElapsedIcon.setColorFilter(color)
+            }
 
             binding.cardviewSuggestedTaskItem.visibility = View.VISIBLE
             binding.suggestedTaskItemNoContent.visibility = View.INVISIBLE
@@ -70,7 +77,7 @@ class HomeFragment : Fragment() {
 
     private fun bindEvents() {
         val task = viewModel.getSuggestTask()
-        task?.let {
+        task.let {
             binding.cardviewSuggestedTaskItem.setOnClickListener {
                 viewModel.clickedItemId.value = task.id
             }

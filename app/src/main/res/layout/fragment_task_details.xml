@@ -5,66 +5,183 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="8dp"
-    tools:context=".view.NewTaskDetailsFragment">
+    tools:context=".view.TaskDetailsFragment">
 
     <TextView
-        android:id="@+id/task_details_title"
+        android:id="@+id/task_details_title_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/task_details_title_default"
+        android:layout_marginHorizontal="8dp"
+        android:text="@string/task_details_title_label"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/task_details_date_created"
+        android:id="@+id/task_details_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/task_title_default"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/task_details_title_label"
+        app:layout_constraintTop_toBottomOf="@id/task_details_title_label" />
+
+    <TextView
+        android:id="@+id/task_details_group_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/task_details_date_created_default"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@id/task_details_favorite"
-        app:layout_constraintStart_toStartOf="@id/task_details_title"
+        android:text="@string/task_details_group_label"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/task_details_title_label"
         app:layout_constraintTop_toBottomOf="@id/task_details_title" />
 
     <TextView
-        android:id="@+id/task_details_date_updated"
+        android:id="@+id/task_details_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/task_details_date_updated_default"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@id/task_details_favorite"
-        app:layout_constraintStart_toEndOf="@id/task_details_date_created"
-        app:layout_constraintTop_toBottomOf="@id/task_details_title" />
+        android:text="@string/task_group_default"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/task_details_group_label"
+        app:layout_constraintTop_toBottomOf="@id/task_details_group_label" />
 
-    <androidx.constraintlayout.utils.widget.ImageFilterView
-        android:id="@+id/task_details_favorite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_favorite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/task_details_title" />
-
-    <ScrollView
-        android:id="@+id/task_details_content_scrollview"
+    <TextView
+        android:id="@+id/task_details_date_started_label"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/task_details_date_started_label"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/task_details_date_finished_label"
+        app:layout_constraintStart_toStartOf="@id/task_details_group_label"
+        app:layout_constraintTop_toBottomOf="@id/task_details_group" />
+
+    <TextView
+        android:id="@+id/task_details_date_started"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/date_default"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/task_details_date_started_label"
+        app:layout_constraintStart_toStartOf="@id/task_details_date_started_label"
+        app:layout_constraintTop_toBottomOf="@id/task_details_date_started_label" />
+
+
+    <TextView
+        android:id="@+id/task_details_date_finished_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/task_details_date_finished_label"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/task_details_date_due_label"
+        app:layout_constraintStart_toEndOf="@id/task_details_date_started_label"
+        app:layout_constraintTop_toBottomOf="@id/task_details_group" />
+
+    <TextView
+        android:id="@+id/task_details_date_finished"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/date_default"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/task_details_date_finished_label"
+        app:layout_constraintStart_toStartOf="@id/task_details_date_finished_label"
+        app:layout_constraintTop_toBottomOf="@id/task_details_date_finished_label" />
+
+    <TextView
+        android:id="@+id/task_details_date_due_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/task_details_date_due_label"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/task_details_date_finished_label"
+        app:layout_constraintTop_toBottomOf="@id/task_details_group" />
+
+    <TextView
+        android:id="@+id/task_details_date_due"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/date_default"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/task_details_date_due_label"
+        app:layout_constraintStart_toStartOf="@id/task_details_date_due_label"
+        app:layout_constraintTop_toBottomOf="@id/task_details_date_due_label" />
+
+    <TextView
+        android:id="@+id/task_details_priority_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/task_details_priority_label"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/task_details_difficulty_label"
+        app:layout_constraintStart_toStartOf="@id/task_details_title_label"
+        app:layout_constraintTop_toBottomOf="@id/task_details_date_started" />
+
+    <TextView
+        android:id="@+id/task_details_priority"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_priority_default"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/task_details_priority_label"
+        app:layout_constraintStart_toStartOf="@id/task_details_priority_label"
+        app:layout_constraintTop_toBottomOf="@id/task_details_priority_label" />
+
+    <TextView
+        android:id="@+id/task_details_difficulty_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/task_details_difficulty_label"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/task_details_priority_label"
+        app:layout_constraintTop_toBottomOf="@id/task_details_date_started" />
+
+    <TextView
+        android:id="@+id/task_details_difficulty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_difficulty_default"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/task_details_difficulty_label"
+        app:layout_constraintStart_toStartOf="@id/task_details_difficulty_label"
+        app:layout_constraintTop_toBottomOf="@id/task_details_difficulty_label" />
+
+    <TextView
+        android:id="@+id/task_details_dependencies_label"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/task_details_dependencies_label"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/task_details_favorite">
+        app:layout_constraintTop_toBottomOf="@id/task_details_priority" />
 
-        <TextView
-            android:id="@+id/task_details_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/task_details_content_default" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_next_tasks_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/task_details_dependencies_label">
 
-    </ScrollView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

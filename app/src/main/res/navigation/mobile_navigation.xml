@@ -7,48 +7,56 @@
 
     <fragment
         android:id="@+id/menu_item_list_home"
-        android:name="br.edu.ufabc.EsToDoeasy.view.HomeFragment" >
+        android:name="br.edu.ufabc.EsToDoeasy.view.HomeFragment">
         <action
             android:id="@+id/tasks_show_details"
-            app:destination="@id/navigation_details" >
+            app:destination="@id/navigation_details">
             <argument
                 android:name="id"
-                app:argType="long"
-                android:defaultValue="-1L" />
+                android:defaultValue="-1L"
+                app:argType="long" />
         </action>
         <action
             android:id="@+id/action_navigation_list_to_navigation_study_select"
             app:destination="@id/navigation_study_select" />
         <action
             android:id="@+id/action_navigation_list_to_navigation_pomodoro"
-            app:destination="@id/menu_item_list_schedule" />
+            app:destination="@id/navigation_pomodoro" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_details"
-        android:name="br.edu.ufabc.EsToDoeasy.view.NewTaskDetailsFragment" >
+        android:name="br.edu.ufabc.EsToDoeasy.view.TaskDetailsFragment">
         <argument
             android:name="id"
-            app:argType="long"
-            android:defaultValue="-1L" />
+            android:defaultValue="-1L"
+            app:argType="long" />
         <action
             android:id="@+id/action_task_details_to_task_details"
             app:destination="@id/navigation_details" />
     </fragment>
 
     <fragment
+        android:id="@+id/navigation_pomodoro"
+        android:name="br.edu.ufabc.EsToDoeasy.view.PomodoroFragment" />
+
+    <fragment
         android:id="@+id/navigation_study_select"
-        android:name="br.edu.ufabc.EsToDoeasy.view.StudyTechiqueSelect" >
-    </fragment>
+        android:name="br.edu.ufabc.EsToDoeasy.view.StudyTechiqueSelect" />
 
     <fragment
         android:id="@+id/menu_item_list_schedule"
-        android:name="br.edu.ufabc.EsToDoeasy.view.PomodoroFragment" >
+        android:name="br.edu.ufabc.EsToDoeasy.view.ScheduleFragment">
+
+        <action
+            android:id="@+id/show_task_details"
+            app:destination="@id/navigation_details" />
+
     </fragment>
 
     <fragment
         android:id="@+id/menu_item_list_profile"
-        android:name="br.edu.ufabc.EsToDoeasy.view.ProfilePageFragment" >
+        android:name="br.edu.ufabc.EsToDoeasy.view.ProfilePageFragment">
         <action
             android:id="@+id/action_menu_item_list_profile_to_navigation_login_profile"
             app:destination="@id/navigation_login_profile" />
@@ -57,13 +65,13 @@
             app:destination="@id/navigation_settings_profile" />
         <action
             android:id="@+id/action_menu_item_list_profile_to_navigation_achievements_profile"
-            app:destination="@id/navigation_achievements_profile"  />
+            app:destination="@id/navigation_achievements_profile" />
     </fragment>
 
 
     <fragment
         android:id="@+id/navigation_login_profile"
-        android:name="br.edu.ufabc.EsToDoeasy.view.LoginPage" >
+        android:name="br.edu.ufabc.EsToDoeasy.view.LoginPage">
         <action
             android:id="@+id/action_navigation_login_profile_to_menu_item_list_profile"
             app:destination="@id/menu_item_list_profile" />
@@ -71,7 +79,7 @@
 
     <fragment
         android:id="@+id/navigation_settings_profile"
-        android:name="br.edu.ufabc.EsToDoeasy.view.ProfileSettingsFragment" >
+        android:name="br.edu.ufabc.EsToDoeasy.view.ProfileSettingsFragment">
         <action
             android:id="@+id/action_navigation_login_profile_to_menu_item_list_profile"
             app:destination="@id/menu_item_list_profile" />
@@ -79,7 +87,7 @@
 
     <fragment
         android:id="@+id/navigation_achievements_profile"
-        android:name="br.edu.ufabc.EsToDoeasy.view.ProfileAchievementsFragment" >
+        android:name="br.edu.ufabc.EsToDoeasy.view.ProfileAchievementsFragment">
         <action
             android:id="@+id/action_navigation_login_profile_to_menu_item_list_profile"
             app:destination="@id/menu_item_list_profile" />
@@ -89,7 +97,7 @@
     <fragment
         android:id="@+id/menu_item_list_planner"
         android:name="br.edu.ufabc.EsToDoeasy.view.PlanningListGroupFragment"
-        tools:layout="@layout/fragment_planning_group_list" >
+        tools:layout="@layout/fragment_planning_group_list">
         <action
             android:id="@+id/action_planningListFragment_to_planningListTaskFragment"
             app:destination="@id/planningListTaskFragment" />
@@ -101,8 +109,8 @@
         tools:layout="@layout/fragment_planning_task_list">
         <argument
             android:name="id"
-            app:argType="long"
-            android:defaultValue="-1L" />
+            android:defaultValue="-1L"
+            app:argType="long" />
         <action
             android:id="@+id/action_planningListTaskFragment_to_planningTaskDetailsFragment"
             app:destination="@id/planningTaskDetailsFragment" />
@@ -112,13 +120,12 @@
         android:id="@+id/planningTaskDetailsFragment"
         android:name="br.edu.ufabc.EsToDoeasy.view.PlanningTaskDetailsFragment"
         android:label="fragment_planning_task_details"
-        tools:layout="@layout/fragment_planning_task_details" >
+        tools:layout="@layout/fragment_planning_task_details">
         <argument
             android:name="id"
-            app:argType="long"
-            android:defaultValue="-1L" />
+            android:defaultValue="-1L"
+            app:argType="long" />
     </fragment>
-
 
 
 </navigation>

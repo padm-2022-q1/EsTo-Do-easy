@@ -4,17 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.TaskListFragment">
+    android:padding="8dp"
+    tools:context=".view.ScheduleFragment">
+
+    <CalendarView
+        android:id="@+id/calendarview_scheduled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_task_list"
-        android:layout_width="0dp"
+        android:id="@+id/recyclerview_scheduled_tasks_list"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/calendarview_scheduled" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

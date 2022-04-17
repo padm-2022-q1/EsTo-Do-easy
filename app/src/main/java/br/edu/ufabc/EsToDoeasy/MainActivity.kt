@@ -57,14 +57,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun bindEvents() {
-//        binding.mainNavigation.setOnItemSelectedListener {
-//            it.onNavDestinationSelected(navController)
-//
-//        }
         // details
         viewModel.clickedItemId.observe(this) {
             it?.let {
                 val action = HomeFragmentDirections.tasksShowDetails(it)
+                navController.navigate(action)
+            }
+        }
+
+        viewModel.clickedScheduledTaskId.observe(this) {
+            it?.let {
+                val action = ScheduleFragmentDirections.showTaskDetails(it)
                 navController.navigate(action)
             }
         }
@@ -90,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         }
         viewModel.clickedAtDetails.observe( this){
             it?.let {
-                val action = NewTaskDetailsFragmentDirections.actionTaskDetailsToTaskDetails(it)
+                val action = TaskDetailsFragmentDirections.actionTaskDetailsToTaskDetails(it)
                 navController.navigate(action)
             }
         }
