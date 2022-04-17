@@ -7,14 +7,14 @@
 
     <fragment
         android:id="@+id/menu_item_list_home"
-        android:name="br.edu.ufabc.EsToDoeasy.view.HomeFragment" >
+        android:name="br.edu.ufabc.EsToDoeasy.view.HomeFragment">
         <action
             android:id="@+id/tasks_show_details"
-            app:destination="@id/navigation_details" >
+            app:destination="@id/navigation_details">
             <argument
                 android:name="id"
-                app:argType="long"
-                android:defaultValue="-1L" />
+                android:defaultValue="-1L"
+                app:argType="long" />
         </action>
         <action
             android:id="@+id/action_navigation_list_to_navigation_study_select"
@@ -26,32 +26,35 @@
 
     <fragment
         android:id="@+id/navigation_details"
-        android:name="br.edu.ufabc.EsToDoeasy.view.NewTaskDetailsFragment" >
+        android:name="br.edu.ufabc.EsToDoeasy.view.NewTaskDetailsFragment">
         <argument
             android:name="id"
-            app:argType="long"
-            android:defaultValue="-1L" />
+            android:defaultValue="-1L"
+            app:argType="long" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_study_select"
-        android:name="br.edu.ufabc.EsToDoeasy.view.StudyTechiqueSelect" >
-    </fragment>
+        android:name="br.edu.ufabc.EsToDoeasy.view.StudyTechiqueSelect" />
 
     <fragment
         android:id="@+id/menu_item_list_schedule"
-        android:name="br.edu.ufabc.EsToDoeasy.view.PomodoroFragment" >
+        android:name="br.edu.ufabc.EsToDoeasy.view.ScheduleFragment">
+
+        <action
+            android:id="@+id/show_task_details"
+            app:destination="@id/navigation_details" />
+
     </fragment>
 
     <fragment
         android:id="@+id/menu_item_list_profile"
-        android:name="br.edu.ufabc.EsToDoeasy.view.ProfilePageFragment" >
-    </fragment>
+        android:name="br.edu.ufabc.EsToDoeasy.view.ProfilePageFragment" />
 
     <fragment
         android:id="@+id/menu_item_list_planner"
         android:name="br.edu.ufabc.EsToDoeasy.view.PlanningListGroupFragment"
-        tools:layout="@layout/fragment_planning_group_list" >
+        tools:layout="@layout/fragment_planning_group_list">
         <action
             android:id="@+id/action_planningListFragment_to_planningDetailsFragment"
             app:destination="@id/planningDetailsFragment" />

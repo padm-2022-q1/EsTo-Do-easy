@@ -26,7 +26,7 @@
     <string name="task_details_group_label">Group for this Task</string>
     <string name="task_details_dependencies_label">Dependencies</string>
     <string name="study_techniques_item_default">Pomodoro</string>
-    <string name="task_item_icon_description">Show suggested task details</string>
+    <string name="task_list_item_icon_description">Show task details</string>
     <string name="study_techniques_item_icon_description">Change study technique</string>
     <string name="task_item_time_elapsed_icon_description">Task elapsed time</string>
     <string name="study_technique_item_play_description">Start study technique timer</string>
@@ -68,5 +68,6 @@
     <string name="planning_list_item_name_task_default">NomeTarefa</string>
     <string name="suggested_task_item_no_content_label">No suggested task item yet</string>
     <string name="next_tasks_item_no_content_label">No next tasks data yet</string>
+    <string name="task_list_item_due_date_default">01/01/2022</string>
 </resources>
 
