@@ -48,6 +48,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      */
     val clickedItemId by lazy { SingleLiveEvent<Long?>() }
 
+    val clickedAddNewGroup by lazy { SingleLiveEvent<Boolean?>() }
+
     /**
      * Maintains the currently selected scheduled task ID.
      */
@@ -131,7 +133,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      * Returns all achievement.
      */
     fun getAllAchievements() = repository.getAllAchievements()
-
 
     /**
      * Returns a group by its given ID.
