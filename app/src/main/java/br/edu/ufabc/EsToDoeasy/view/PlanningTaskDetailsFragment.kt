@@ -1,12 +1,11 @@
 package br.edu.ufabc.EsToDoeasy.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
+import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentPlanningTaskDetailsBinding
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 
@@ -24,16 +23,20 @@ class PlanningTaskDetailsFragment : Fragment(){
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val task = viewModel.get(args.id)
+//        val task = viewModel.get(args.id)
 
-        binding.planningDetailsTitle.text = task.title
+//        binding.planningTaskDetailsTaskName.setText(task.title)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_task_details, menu)
+    }
 }

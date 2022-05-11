@@ -115,5 +115,7 @@
     <string name="new_group_task_title">Task Group Name</string>
     <string name="new_group_task_name_hint">Task Group Name</string>
     <string name="action_save_title">Save</string>
+    <string name="planning_task_details_task_name_hint">Task Name</string>
+    <string name="planning_details_project_name_hint">Project Name</string>
 </resources>
 

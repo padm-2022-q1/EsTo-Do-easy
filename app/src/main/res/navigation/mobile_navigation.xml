@@ -128,6 +128,9 @@
         <action
             android:id="@+id/action_planningListTaskFragment_to_planningTaskDetailsFragment"
             app:destination="@id/planningTaskDetailsFragment" />
+        <action
+            android:id="@+id/action_planningListTaskFragment_to_addNewTask"
+            app:destination="@id/planningTaskDetailsFragment" />
     </fragment>
 
     <fragment

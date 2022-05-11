@@ -56,15 +56,9 @@ class PlanningListGroupFragment : Fragment() {
             }
         }
 
-        binding.addTaskItem.setOnClickListener{
+        binding.addTaskGroupItem.setOnClickListener{
             viewModel.clickedAddNewGroup.value = true
         }
-//        viewModel.clickedAddNewGroup.observe(viewLifecycleOwner) {
-//            it?.let {
-//                val action = PlanningListGroupFragmentDirections.actionMenuItemListPlannerToPlanningNewGroupFragment()
-//                navController.navigate(action)
-//            }
-//        }
     }
 
 

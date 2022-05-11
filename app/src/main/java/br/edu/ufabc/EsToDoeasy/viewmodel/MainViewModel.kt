@@ -50,6 +50,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val clickedAddNewGroup by lazy { SingleLiveEvent<Boolean?>() }
 
+    val clickedAddNewTask by lazy { SingleLiveEvent<Boolean?>() }
+
     /**
      * Maintains the currently selected scheduled task ID.
      */
