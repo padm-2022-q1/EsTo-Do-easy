@@ -1,12 +1,11 @@
 package br.edu.ufabc.EsToDoeasy.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
+import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentNewGroupBinding
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 
@@ -21,6 +20,15 @@ class PlanningNewGroupFragment : Fragment(){
     ): View {
         binding = FragmentNewGroupBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_new_group, menu)
     }
 
 
