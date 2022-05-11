@@ -177,6 +177,20 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(action)
             }
         }
+
+        viewModel.clickedAddNewGroup.observe(this) {
+            it?.let {
+                val action = PlanningListGroupFragmentDirections.actionMenuItemListPlannerToPlanningNewGroupFragment()
+                navController.navigate(action)
+            }
+        }
+
+        viewModel.clickedAddNewTask.observe(this) {
+            it?.let {
+                val action = PlanningListTaskFragmentDirections.actionPlanningListTaskFragmentToAddNewTask()
+                navController.navigate(action)
+            }
+        }
     }
 
     override fun onBackPressed() {

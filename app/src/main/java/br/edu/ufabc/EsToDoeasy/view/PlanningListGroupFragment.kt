@@ -32,6 +32,8 @@ class PlanningListGroupFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        bindEvents()
+
         activity?.let {
             updateRecyclerView()
         }
@@ -47,11 +49,15 @@ class PlanningListGroupFragment : Fragment() {
     }
 
     private fun bindEvents() {
-        viewModel.clickedItemId.observe(this) {
+        viewModel.clickedItemId.observe(viewLifecycleOwner) {
             it?.let {
                 val action = PlanningListGroupFragmentDirections.actionPlanningListFragmentToPlanningListTaskFragment()
                 navController.navigate(action)
             }
+        }
+
+        binding.addTaskGroupItem.setOnClickListener{
+            viewModel.clickedAddNewGroup.value = true
         }
     }
 

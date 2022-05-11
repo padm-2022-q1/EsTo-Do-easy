@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavController
 import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentPlanningTaskListBinding
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
@@ -17,6 +18,7 @@ class PlanningListTaskFragment : Fragment() {
     private lateinit var binding: FragmentPlanningTaskListBinding
     private val viewModel: MainViewModel by activityViewModels()
     private val args: PlanningListTaskFragmentArgs by navArgs()
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +32,8 @@ class PlanningListTaskFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        bindEvents()
+
         activity?.let {
             updateRecyclerView()
         }
@@ -41,6 +45,12 @@ class PlanningListTaskFragment : Fragment() {
                 viewModel.getTasksByGroupId(args.id),
                 viewModel
             )
+        }
+    }
+
+    private fun bindEvents() {
+        binding.addTaskItem.setOnClickListener{
+            viewModel.clickedAddNewTask.value = true
         }
     }
 }

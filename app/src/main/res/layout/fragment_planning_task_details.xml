@@ -11,16 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/planning_details_title"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/planning_task_details_task_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/planning_details_title_default"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:layout_marginTop="@dimen/planning_task_details_margin_top"
+            android:autofillHints="10/09/2022"
+            android:ems="10"
+            android:hint="@string/planning_task_details_task_name_hint"
+            android:inputType="date"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <EditText
             android:id="@+id/planning_task_details_date_start_edit_text"
@@ -32,7 +33,7 @@
             android:hint="@string/planning_task_details_date_start_hint"
             android:inputType="date"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/planning_details_title" />
+            app:layout_constraintTop_toBottomOf="@+id/planning_task_details_task_name" />
 
         <EditText
             android:id="@+id/planning_task_details_date_end_edit_text"
@@ -70,15 +71,25 @@
             android:inputType="textMultiLine"
             app:layout_constraintTop_toBottomOf="@id/planning_task_details_date_due_edit_text" />
 
-        <TextView
-            android:id="@+id/planning_details_project_name_text"
-            android:layout_width="wrap_content"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/planning_details_project_name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/planning_task_details_name_project_label_default"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/planning_task_details_mult_line_task_edit_text" />
+            app:layout_constraintBottom_toTopOf="@id/planning_details_activity_level_label"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/planning_task_details_mult_line_task_edit_text"
+            >
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:hint="@string/planning_details_project_name_hint"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/planning_details_activity_level_label"
@@ -88,7 +99,7 @@
             android:text="@string/planning_task_details_activity_level_label"
             android:textSize="11sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/planning_details_project_name_text" />
+            app:layout_constraintTop_toBottomOf="@id/planning_details_project_name" />
 
         <RadioGroup
             android:id="@+id/planning_details_activity_level_radio_group"
