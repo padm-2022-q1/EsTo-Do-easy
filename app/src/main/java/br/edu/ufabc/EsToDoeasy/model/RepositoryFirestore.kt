@@ -4,6 +4,7 @@ import android.app.Application
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.firestore
@@ -27,7 +28,7 @@ class RepositoryFirestore(application: Application) : Repository {
 
         private object ItemDoc {
             const val id = "id"
-            const val userId = "userId "
+            const val userId = "userId"
             const val title = "title"
             const val details = "details"
             const val dateStarted = "dateStarted"
@@ -117,9 +118,13 @@ class RepositoryFirestore(application: Application) : Repository {
 
     private fun getSource() = if (isConnected.get()) Source.DEFAULT else Source.CACHE
 
+    private fun getCurrentUser(): String = FirebaseAuth.getInstance().currentUser?.uid
+        ?: throw Exception("No user is signed in")
+
     private fun getCollection() = db.collection(itemsCollection)
 
     override suspend fun getAllTasks(): Tasks = getCollection()
+        .whereEqualTo(ItemDoc.userId, getCurrentUser())
         .get(getSource())
         .await()
         .toObjects(TaskFirestore::class.java).map { it.toTask() }

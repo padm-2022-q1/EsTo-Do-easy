@@ -77,6 +77,12 @@
         <action
             android:id="@+id/action_menu_item_list_profile_to_navigation_achievements_profile"
             app:destination="@id/navigation_achievements_profile" />
+        <action
+            android:id="@+id/action_menu_item_list_profile_self"
+            app:destination="@id/menu_item_list_profile" />
+        <action
+            android:id="@+id/action_menu_item_list_profile_to_menu_item_list_home"
+            app:destination="@id/menu_item_list_home" />
     </fragment>
 
 
