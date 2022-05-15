@@ -43,7 +43,7 @@ class TaskDetailsFragment : Fragment() {
         val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.US)
 
         binding.taskDetailsTitle.text = task.title
-        binding.taskDetailsGroup.text = group.name
+        binding.taskDetailsGroup.text = "group.name"
         binding.taskDetailsDateStarted.text = formatter.format(task.dateStarted)
         binding.taskDetailsDateFinished.text = formatter.format(task.dateFinished)
         binding.taskDetailsDateDue.text = formatter.format(task.dateDue)

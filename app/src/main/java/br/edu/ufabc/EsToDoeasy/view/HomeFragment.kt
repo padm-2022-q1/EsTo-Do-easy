@@ -2,6 +2,7 @@ package br.edu.ufabc.EsToDoeasy.view
 
 import android.os.Bundle
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +40,38 @@ class HomeFragment : Fragment() {
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.recyclerviewNextTasksList.apply {
+            viewModel.getAll().observe(viewLifecycleOwner) { status ->
+                when (status) {
+                    is MainViewModel.Status.Loading -> {
+                        Log.d("VIEW", "Loading")
+                    }
+                    is MainViewModel.Status.Failure -> {
+                        Log.e("VIEW", "Failed to fetch items", status.e)
+                    }
+                    is MainViewModel.Status.Success -> {
+                        val tasks = (status.result as MainViewModel.Result.TaskList).value
+                        adapter = TaskAdapter(
+                            tasks,
+                            viewModel
+                        )
+                        //swapAdapter(TaskAdapter(tasks.sortedBy { it.deadline }), false)
+//                        addItemDecoration(
+//                            DividerItemDecoration(
+//                                this.context,
+//                                DividerItemDecoration.VERTICAL
+//                            )
+//                        )
+//                        binding.progressHorizontal.visibility = View.INVISIBLE
+                    }
+                }
+            }
+        }
+    }
+
     private fun updateRecyclerView() {
         binding.recyclerviewNextTasksList.apply {
             adapter = TaskAdapter(
@@ -54,7 +87,7 @@ class HomeFragment : Fragment() {
             val group = viewModel.getGroup(task.groupId)
 
             binding.suggestedTaskItemTitle.text = task.title
-            binding.suggestedTaskItemGroup.text = group.name
+            binding.suggestedTaskItemGroup.text = "grupo"
             binding.suggestedTaskItemTimeElapsed.text =
                 DateUtils.formatElapsedTime(task.timeElapsed)
 
@@ -83,7 +116,7 @@ class HomeFragment : Fragment() {
         val task = viewModel.getSuggestTask()
         task.let {
             binding.cardviewSuggestedTaskItem.setOnClickListener {
-                viewModel.clickedItemId.value = task.id
+                viewModel.clickedItemId.value = task?.id
             }
         }
 

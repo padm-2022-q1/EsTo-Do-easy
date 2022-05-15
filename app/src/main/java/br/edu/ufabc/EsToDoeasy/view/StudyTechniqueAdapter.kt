@@ -26,7 +26,7 @@ class StudyTechniqueAdapter(
         /**
          * Unique identifier.
          */
-        var id: Long = 0
+        var id: String = ""
 
         /**
          * Title text view component.

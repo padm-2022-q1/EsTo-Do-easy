@@ -3,50 +3,84 @@ package br.edu.ufabc.EsToDoeasy.viewmodel
 import SingleLiveEvent
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import br.edu.ufabc.EsToDoeasy.model.Repository
-import br.edu.ufabc.EsToDoeasy.model.Status
+import androidx.lifecycle.liveData
+import br.edu.ufabc.EsToDoeasy.model.*
+import java.util.*
 
 /**
  * Application's main ViewModel.
  */
 class MainViewModel(application: Application) : AndroidViewModel(application) {
-    companion object {
+    private val repository = RepositoryFactory(application).create()
+
+    /**
+     * Status hierarchy.
+     */
+    sealed class Status {
         /**
-         * Tasks JSON file asset name.
+         * The error status.
+         * @property e the exception
          */
-        const val taskFile = "tasks.json"
+        class Failure(val e: Exception) : Status()
 
         /**
-         * Groups JSON file asset name.
+         * The success status.
+         * @property result the result
          */
-        const val groupFile = "groups.json"
+        class Success(val result: Result) : Status()
 
         /**
-         * Achievement JSON file asset name.
+         * The loading status.
          */
-        const val achievementFile = "achievements.json"
+        object Loading : Status()
     }
 
-    private val repository = Repository()
+    /**
+     * The result hierarchy.
+     */
+    sealed class Result {
+        /**
+         * Result type that holds a list of tasks.
+         * @property value the list of tasks
+         */
+        data class TaskList(
+            val value: Tasks
+        ) : Result()
 
-    init {
-        application.resources.assets.open(taskFile).use {
-            repository.loadDataTasks(it)
-        }
+        /**
+         * Result type that holds a single task.
+         * @property value the task
+         */
+        data class SingleTask(
+            val value: Task
+        ) : Result()
 
-        application.resources.assets.open(groupFile).use {
-            repository.loadDataGroups(it)
-        }
+        /**
+         * Result type that holds a list of tags.
+         * @property value the list of tags
+         */
+        data class TagList(
+            val value: List<String>
+        ) : Result()
 
-        application.resources.assets.open(achievementFile).use {
-            repository.loadDataAchievements(it)
-        }
+        /**
+         * Result type that holds an id.
+         * @property value the id.
+         */
+        data class Id(
+            val value: String
+        ) : Result()
+
+        /**
+         * A Result without value.
+         */
+        object EmptyResult : Result()
     }
 
     /**
      * Maintains the currently selected task ID.
      */
-    val clickedItemId by lazy { SingleLiveEvent<Long?>() }
+    val clickedItemId by lazy { SingleLiveEvent<String?>() }
 
     val clickedAddNewGroup by lazy { SingleLiveEvent<Boolean?>() }
 
@@ -55,7 +89,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * Maintains the currently selected scheduled task ID.
      */
-    val clickedScheduledTaskId by lazy { SingleLiveEvent<Long?>() }
+    val clickedScheduledTaskId by lazy { SingleLiveEvent<String?>() }
 
     val clickedStudyTechniqueSelect by lazy { SingleLiveEvent<Boolean?>() }
 
@@ -63,7 +97,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val clickedTaskToPlay by lazy { SingleLiveEvent<Boolean?>() }
 
-    val clickedAtDetails by lazy { SingleLiveEvent<Long?>() }
+    val clickedAtDetails by lazy { SingleLiveEvent<String?>() }
 
 
     val clickedAtConfigPomodoro by lazy { SingleLiveEvent<Boolean?>() }
@@ -84,60 +118,89 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val clickedSettingsProfile by lazy { SingleLiveEvent<Boolean?>() }
 
-    val clickedGroupId by lazy { SingleLiveEvent<Long?>() }
+    val clickedGroupId by lazy { SingleLiveEvent<String?>() }
 
-    val clickedPlanningTaskId by lazy { SingleLiveEvent<Long?>() }
+    val clickedPlanningTaskId by lazy { SingleLiveEvent<String?>() }
 
     val clickedAchievementProfile by lazy { SingleLiveEvent<Boolean?>() }
 
-    val clickedAchievementItemId by lazy { SingleLiveEvent<Long?>() }
+    val clickedAchievementItemId by lazy { SingleLiveEvent<String?>() }
 
     val clickedDashboardDaily by lazy { SingleLiveEvent<Boolean?>() }
 
-    fun getSuggestTask() = getAll()[0]
+    fun getAll() = liveData {
+        try {
+            emit(Status.Loading)
+            emit(Status.Success(Result.TaskList(repository.getAllTasks())))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
+        }
+    }
 
-    /**
-     * Returns all tasks.
-     */
-    fun getAll() = repository.getAllTasks()
+    fun getSuggestTask() = Task(
+        "id",
+        "userId",
+        "title",
+        "detalis",
+        Date(),
+        Date(),
+        Date(),
+        0, "groupId",
+        Difficulty.EASY,
+        Priority.HIGH,
+        br.edu.ufabc.EsToDoeasy.model.Status.TODO,
+        listOf()
+    )
 
     /**
      * Returns all tasks to be done next.
      */
-    fun getAllNextTasks() = repository.getAllTasks()
-        .filter { it.id != getSuggestTask().id && it.status != Status.DONE }
+    fun getAllNextTasks() = listOf<Task>()
 
     /**
      * Returns all tasks that aren't done or achived.
      */
     fun getAllDueTasks() =
-        repository.getAllTasks().filter { it.status != Status.DONE && it.status != Status.ARCHIVED }
+        listOf<Task>()
 
     /**
      * Returns all groups.
      */
-    fun getAllGroups() = repository.getAllGroups()
+    fun getAllGroups() = listOf<Group>()
 
 
     /**
      * Returns all dependencies for a given task.
      */
-    fun getDependencies(id: Long) = repository.getDependencies(id)
+    fun getDependencies(id: String) = listOf<Task>()
 
     /**
      * Returns a single task information by its given ID.
      */
-    fun get(id: Long) = repository.getTask(id)
+    fun get(id: String) = Task(
+        "id",
+        "userId",
+        "title",
+        "detalis",
+        Date(),
+        Date(),
+        Date(),
+        0, "groupId",
+        Difficulty.EASY,
+        Priority.HIGH,
+        br.edu.ufabc.EsToDoeasy.model.Status.TODO,
+        listOf()
+    )
 
-    fun getTasksByGroupId(id: Long) = repository.getTasksbyGroupId(id)
+    fun getTasksByGroupId(id: String) = listOf<Task>()
 
     /**
      * Returns all achievement.
      */
-    fun getAllAchievements() = repository.getAllAchievements()
+    fun getAllAchievements() = listOf<Achievement>()
 
     /**
      * Returns a group by its given ID.
      */
-    fun getGroup(id: Long) = repository.getGroup(id)
+    fun getGroup(id: String) = listOf<Group>()
 }

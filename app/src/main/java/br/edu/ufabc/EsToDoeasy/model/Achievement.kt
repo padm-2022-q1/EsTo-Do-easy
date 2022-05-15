@@ -6,7 +6,7 @@ data class Achievement(
     /**
      * The task's unique identifier.
      */
-    val id: Long,
+    val id: String,
 
     /**
      * The task's given title.

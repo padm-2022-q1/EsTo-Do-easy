@@ -13,8 +13,8 @@
             app:destination="@id/navigation_details">
             <argument
                 android:name="id"
-                android:defaultValue="-1L"
-                app:argType="long" />
+                android:defaultValue="1"
+                app:argType="string" />
         </action>
         <action
             android:id="@+id/action_navigation_list_to_navigation_study_select"
@@ -32,8 +32,8 @@
         android:name="br.edu.ufabc.EsToDoeasy.view.TaskDetailsFragment">
         <argument
             android:name="id"
-            android:defaultValue="-1L"
-            app:argType="long" />
+            android:defaultValue="1"
+            app:argType="string" />
         <action
             android:id="@+id/action_task_details_to_task_details"
             app:destination="@id/navigation_details" />
@@ -123,8 +123,8 @@
         tools:layout="@layout/fragment_planning_task_list">
         <argument
             android:name="id"
-            android:defaultValue="-1L"
-            app:argType="long" />
+            android:defaultValue="1"
+            app:argType="string" />
         <action
             android:id="@+id/action_planningListTaskFragment_to_planningTaskDetailsFragment"
             app:destination="@id/planningTaskDetailsFragment" />
@@ -140,8 +140,8 @@
         tools:layout="@layout/fragment_planning_task_details">
         <argument
             android:name="id"
-            android:defaultValue="-1L"
-            app:argType="long" />
+            android:defaultValue="1"
+            app:argType="string" />
     </fragment>
 
     <fragment

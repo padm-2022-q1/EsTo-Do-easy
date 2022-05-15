@@ -33,7 +33,7 @@ class DependenciesTaskAdapter(
         /**
          * Task identifier.
          */
-        var id: Long = 0
+        var id: String = ""
 
         /**
          * Title text view component.
@@ -95,7 +95,7 @@ class DependenciesTaskAdapter(
         holder.status.visibility = View.INVISIBLE
         holder.alter.visibility = View.INVISIBLE
 
-        holder.id = getItemId(position)
+        holder.id = task.id
         holder.title.text = task.title
         holder.timeElapsed.text = DateUtils.formatElapsedTime(task.timeElapsed)
 
@@ -117,5 +117,5 @@ class DependenciesTaskAdapter(
 
     override fun getItemCount(): Int = tasks.size
 
-    override fun getItemId(position: Int): Long = tasks[position].id
+    //override fun getItemId(position: Int): Long = tasks[position].id
 }

@@ -26,7 +26,7 @@ class ScheduledTaskAdapter(
         /**
          * Task identifier.
          */
-        var id: Long = 0
+        var id: String = ""
 
         /**
          * Title text view component.
@@ -61,12 +61,10 @@ class ScheduledTaskAdapter(
     override fun onBindViewHolder(holder: ScheduledTaskHolder, position: Int) {
         val task = tasks[position]
 
-        holder.id = getItemId(position)
+        holder.id = task.id
         holder.title.text = task.title
         holder.dueDate.text = SimpleDateFormat("dd/MM/yyyy", Locale.US).format(task.dateDue)
     }
 
     override fun getItemCount(): Int = tasks.size
-
-    override fun getItemId(position: Int): Long = tasks[position].id
 }

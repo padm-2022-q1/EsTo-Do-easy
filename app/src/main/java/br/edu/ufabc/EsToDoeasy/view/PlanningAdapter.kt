@@ -24,7 +24,7 @@ class PlanningAdapter (
             /**
              * Task identifier.
              */
-            var id: Long = 0
+            var id: String = ""
 
             /**
              * Title text view component.
@@ -58,11 +58,11 @@ class PlanningAdapter (
         override fun onBindViewHolder(holder: PlanningHolder, position: Int) {
             val group = groups[position]
 
-            holder.id = getItemId(position)
+            holder.id = group.id
             holder.name.text = group.name
         }
 
         override fun getItemCount(): Int = groups.size
 
-        override fun getItemId(position: Int): Long = groups[position].id
+        //override fun getItemId(position: Int): Long = groups[position].id
 }

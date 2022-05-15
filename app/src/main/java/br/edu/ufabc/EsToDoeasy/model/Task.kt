@@ -2,6 +2,8 @@ package br.edu.ufabc.EsToDoeasy.model
 
 import java.util.*
 
+typealias Tasks = List<Task>
+
 /**
  * Tasks difficulties.
  */
@@ -24,7 +26,12 @@ data class Task(
     /**
      * The task's unique identifier.
      */
-    val id: Long,
+    val id: String,
+
+    /**
+     * The task's user identifier.
+     */
+    val userId: String,
 
     /**
      * The task's given title.
@@ -59,7 +66,7 @@ data class Task(
     /**
      * Task group's identifier.
      */
-    val groupId: Long,
+    val groupId: String,
 
     /**
      * The task's difficulty.
@@ -79,10 +86,5 @@ data class Task(
     /**
      * The task's dependencies.
      */
-    val children: List<Long>,
-
-    /**
-     * Tasks that depends from this task.
-     */
-    val parents: List<Long>,
+    val dependencies: List<String>,
 )

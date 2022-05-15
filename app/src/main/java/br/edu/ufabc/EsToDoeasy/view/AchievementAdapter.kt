@@ -28,7 +28,7 @@ class AchievementAdapter(
         /**
          * Achievement identifier.
          */
-        var id: Long = 0
+        var id: String = ""
 
         /**
          * Title text view component.
@@ -62,12 +62,10 @@ class AchievementAdapter(
     override fun onBindViewHolder(holder: AchievementHolder, position: Int) {
         val achievement = achievements[position]
 
-        holder.id = getItemId(position)
+        holder.id = achievement.id
         holder.title.text = achievement.title
 
     }
 
     override fun getItemCount(): Int = achievements.size
-
-    override fun getItemId(position: Int): Long = achievements[position].id
 }

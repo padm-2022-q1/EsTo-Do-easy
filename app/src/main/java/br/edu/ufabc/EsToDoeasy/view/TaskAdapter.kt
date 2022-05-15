@@ -27,7 +27,7 @@ class TaskAdapter(
         /**
          * Task identifier.
          */
-        var id: Long = 0
+        var id: String = ""
 
         /**
          * Title text view component.
@@ -82,7 +82,7 @@ class TaskAdapter(
     override fun onBindViewHolder(holder: TaskHolder, position: Int) {
         val task = tasks[position]
 
-        holder.id = getItemId(position)
+        holder.id = task.id
         holder.title.text = task.title
         holder.timeElapsed.text = DateUtils.formatElapsedTime(task.timeElapsed)
 
@@ -95,6 +95,4 @@ class TaskAdapter(
     }
 
     override fun getItemCount(): Int = tasks.size
-
-    override fun getItemId(position: Int): Long = tasks[position].id
 }
