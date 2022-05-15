@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "659254217213",
+    "project_id": "esto-do-easy",
+    "storage_bucket": "esto-do-easy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:659254217213:android:150cf0cf52a23c61237194",
+        "android_client_info": {
+          "package_name": "br.edu.ufabc.EsToDoeasy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "659254217213-r77ljtq8qs09vs0de0ct38phqgt2615k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7nxZDNtMJ89kC5wFTHnTFIXDopPDSwg4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "659254217213-r77ljtq8qs09vs0de0ct38phqgt2615k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
