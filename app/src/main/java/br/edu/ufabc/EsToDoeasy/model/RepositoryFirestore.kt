@@ -18,7 +18,7 @@ class RepositoryFirestore(application: Application) : Repository {
     private val isConnected = AtomicBoolean(true)
 
     companion object {
-        private const val itemsCollection = "todoItems"
+        private const val tasksCollection = "todoItems"
         private const val achievementsCollection = "achievements"
         private const val groupsCollection = "groups"
 
@@ -26,7 +26,7 @@ class RepositoryFirestore(application: Application) : Repository {
         private const val achievementIdDoc = "achievementId"
         private const val groupIdDoc = "groupId"
 
-        private object ItemDoc {
+        private object TaskDoc {
             const val id = "id"
             const val userId = "userId"
             const val title = "title"
@@ -40,6 +40,23 @@ class RepositoryFirestore(application: Application) : Repository {
             const val priority = "priority"
             const val status = "status"
             const val dependecies = "dependecies"
+        }
+
+        private object GroupDoc {
+            const val id = "id"
+            const val userId = "userId"
+            const val name = "name"
+        }
+
+        private object AchievementDoc {
+            const val id = "id"
+            const val userId = "userId"
+            const val name = "name"
+            const val title = "title"
+            const val details = "details"
+            const val date = "date"
+            const val achieved = "achieved"
+            const val difficulty = "difficulty"
         }
     }
 
@@ -75,7 +92,7 @@ class RepositoryFirestore(application: Application) : Repository {
         )
 
         companion object {
-            fun fromTask(task: Task) = TaskFirestore(
+            fun fromTask(task: Task, user: String) = TaskFirestore(
                 id = task.id,
                 userId = task.userId,
                 title = task.title,
@@ -93,8 +110,71 @@ class RepositoryFirestore(application: Application) : Repository {
         }
     }
 
+    private data class GroupFirestore(
+        val id: String? = null,
+        val userId: String? = null,
+        val name: String? = null
+    ) {
+        fun toGroup() = Group(
+            id = id ?: "",
+            userId = userId ?: "",
+            name = name ?: ""
+        )
+
+        companion object {
+            fun fromGroup(group: Group) = GroupFirestore(
+                id = group.id,
+                userId = group.userId,
+                name = group.name
+            )
+        }
+    }
+
+    private data class AchievementFirestore(
+        val id: String? = null,
+        val userId: String? = null,
+        val title: String? = null,
+        val name: String? = null,
+        val details: String? = null,
+        val date: Date? = null,
+        val achieved: Boolean? = null,
+        val difficulty: String? = null,
+    ) {
+        fun toAchievement() = Achievement(
+            id = id ?: "",
+            userId = userId ?: "",
+            name = name ?: "",
+            title = title ?: "",
+            details = details ?: "",
+            date = date ?: Date(),
+            achieved = achieved ?: false,
+            difficulty = Difficulty.valueOf(difficulty ?: "EASY")
+        )
+
+        companion object {
+            fun fromAchievement(achievement: Achievement) = AchievementFirestore(
+                id = achievement.id,
+                userId = achievement.userId,
+                name = achievement.name,
+                title = achievement.title,
+                details = achievement.details,
+                date = achievement.date,
+                achieved = achievement.achieved,
+                difficulty = achievement.difficulty.toString()
+            )
+        }
+    }
+
     private data class TaskId(
-        val value: Long? = null
+        val value: String? = null
+    )
+
+    private data class GroupId(
+        val value: String? = null
+    )
+
+    private data class AchievementId(
+        val value: String? = null
     )
 
     init {
@@ -121,39 +201,116 @@ class RepositoryFirestore(application: Application) : Repository {
     private fun getCurrentUser(): String = FirebaseAuth.getInstance().currentUser?.uid
         ?: throw Exception("No user is signed in")
 
-    private fun getCollection() = db.collection(itemsCollection)
+    private fun getTaskCollection() = db.collection(tasksCollection)
 
-    override suspend fun getAllTasks(): Tasks = getCollection()
-        .whereEqualTo(ItemDoc.userId, getCurrentUser())
+    private fun getGroupCollection() = db.collection(groupsCollection)
+
+    private fun getAchievementCollection() = db.collection(achievementsCollection)
+
+    override suspend fun getAllTasks(): Tasks = getTaskCollection()
+        .whereEqualTo(TaskDoc.userId, getCurrentUser())
         .get(getSource())
         .await()
         .toObjects(TaskFirestore::class.java).map { it.toTask() }
 
-    override suspend fun getAllGroups() {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getAllGroups(): Groups = getGroupCollection()
+        .whereEqualTo(GroupDoc.userId,getCurrentUser())
+        .get(getSource())
+        .await()
+        .toObjects(GroupFirestore::class.java).map { it.toGroup() }
 
-    override suspend fun getAllAchievements() {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getAllAchievements(): Achievements  = getAchievementCollection()
+        .whereEqualTo(AchievementDoc.userId,getCurrentUser())
+        .get(getSource())
+        .await()
+        .toObjects(AchievementFirestore::class.java).map { it.toAchievement() }
+
 
     override suspend fun getDependencies(id: String): Tasks {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getTask(id: String) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getTask(id: String): Task = getTaskCollection()
+        .whereEqualTo(TaskDoc.userId, getCurrentUser())
+        .whereEqualTo(TaskDoc.id, id)
+        .get(getSource())
+        .await()
+        .toObjects(TaskFirestore::class.java)
+        .first()
+        .toTask()
 
-    override suspend fun getGroup(id: String) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getGroup(id: String) : Group = getGroupCollection()
+        .whereEqualTo(GroupDoc.userId, getCurrentUser())
+        .whereEqualTo(GroupDoc.id, id)
+        .get(getSource())
+        .await()
+        .toObjects(GroupFirestore::class.java)
+        .first()
+        .toGroup()
 
-    override suspend fun getAchievement(id: String) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getAchievement(id: String) : Achievement = getAchievementCollection()
+        .whereEqualTo(AchievementDoc.userId, getCurrentUser())
+        .whereEqualTo(AchievementDoc.id, id)
+        .get(getSource())
+        .await()
+        .toObjects(AchievementFirestore::class.java)
+        .first()
+        .toAchievement()
 
     override suspend fun refresh() {
         TODO("Not yet implemented")
+    }
+
+    override suspend fun addGroup(group: Group): String = GroupFirestore(
+        userId = group.userId,
+        name = group.name
+    ).let {
+        getGroupCollection().add(it)
+        it.id ?: throw Exception("Failed to add group")
+    }
+
+    override suspend fun addTask(task: Task): String = TaskFirestore(
+        userId = task.userId,
+        title = task.title,
+        details = task.details,
+        dateStarted = task.dateStarted,
+        dateFinished = task.dateFinished,
+        dateDue = task.dateDue,
+        timeElapsed = task.timeElapsed,
+        groupId = task.groupId,
+        difficulty = task.difficulty.toString(),
+        priority = task.priority.toString(),
+        status = task.status.toString(),
+        dependencies = task.dependencies,
+    ).let {
+        getTaskCollection().add(it)
+        it.id ?: throw Exception("Failed to add task")
+    }
+
+    override suspend fun removeGroupById(id: String) {
+        getGroupCollection()
+            .whereEqualTo(GroupDoc.userId, getCurrentUser())
+            .whereEqualTo(GroupDoc.id, id)
+            .get(getSource())
+            .await()
+            .let { querySnapshot ->
+                if (querySnapshot.isEmpty) {
+                    throw Exception("Failed to remove group with non-existing id $id")
+                }
+                querySnapshot.first().reference.delete()
+            }
+    }
+
+    override suspend fun updateTask(task: Task) {
+        getTaskCollection()
+            .whereEqualTo(TaskDoc.userId, getCurrentUser())
+            .whereEqualTo(TaskDoc.id, task.id)
+            .get(getSource())
+            .await()
+            .let { querySnapshot ->
+                if (querySnapshot.isEmpty)
+                    throw Exception("Failed to update Task with non-existing id ${task.id}")
+                querySnapshot.first().reference.set(TaskFirestore.fromTask(task, getCurrentUser()))
+            }
     }
 }
