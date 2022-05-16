@@ -75,6 +75,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
          * A Result without value.
          */
         object EmptyResult : Result()
+
+        data class GroupList(
+            val value: Groups
+        ) : Result()
+
+        data class SingleGroup(
+            val value: Group
+        ) : Result()
+
     }
 
     /**
@@ -170,7 +179,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * Returns all groups.
      */
-    fun getAllGroups() = listOf<Group>()
+    fun getAllGroups() = liveData {
+        try {
+            emit(Status.Loading)
+            emit(Status.Success(Result.GroupList(repository.getAllGroups())))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
+        }
+    }
 
 
     /**

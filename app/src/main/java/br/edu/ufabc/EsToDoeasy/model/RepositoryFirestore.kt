@@ -270,7 +270,7 @@ class RepositoryFirestore(application: Application) : Repository {
     }
 
     override suspend fun addTask(task: Task): String = TaskFirestore(
-        userId = task.userId,
+        userId = getCurrentUser(),
         title = task.title,
         details = task.details,
         dateStarted = task.dateStarted,
