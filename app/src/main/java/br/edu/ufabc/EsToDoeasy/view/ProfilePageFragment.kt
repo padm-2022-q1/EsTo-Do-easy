@@ -63,7 +63,10 @@ class ProfilePageFragment : Fragment() {
 
 
     private fun launchAuthUi() {
-        val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().build())
+        val providers = arrayListOf(
+            AuthUI.IdpConfig.EmailBuilder().build(),
+            AuthUI.IdpConfig.GoogleBuilder().build()
+        )
         val intent = AuthUI.getInstance()
             .createSignInIntentBuilder()
             .setAvailableProviders(providers)
