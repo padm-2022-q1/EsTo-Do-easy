@@ -2,35 +2,47 @@ package br.edu.ufabc.EsToDoeasy.model
 
 import java.util.*
 
+typealias Achievements = List<Achievement>
+
 data class Achievement(
     /**
-     * The task's unique identifier.
+     * The achievement's unique identifier.
      */
     val id: String,
 
     /**
-     * The task's given title.
+     * The achievement's user identifier.
+     */
+    val userId: String,
+
+    /**
+     * The achievement's unique identifier.
+     */
+    val name: String,
+
+    /**
+     * The achievement's given title.
      */
     val title: String,
 
     /**
-     * The task's details.
+     * The achievement's details.
      */
     val details: String,
 
     /**
-     * The task's start date.
+     * The achievement's win date.
      */
-    val date: String,
+    val date: Date,
 
     /**
-     * The task's finish date.
+     * The achievement's get achieved.
      */
-    val achieved: String,
+    val achieved: Boolean,
 
     /**
-     * The task's difficulty.
+     * The achievement's difficulty.
      */
-    val difficulty: String,
+    val difficulty: Difficulty,
 
 )

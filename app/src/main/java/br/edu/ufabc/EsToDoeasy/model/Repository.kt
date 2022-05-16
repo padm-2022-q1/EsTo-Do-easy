@@ -13,12 +13,12 @@ interface Repository {
     /**
      * Returns all groups.
      */
-    suspend fun getAllGroups()
+    suspend fun getAllGroups(): Groups
 
     /**
      * Returns all achievements.
      */
-    suspend fun getAllAchievements()
+    suspend fun getAllAchievements():Achievements
 
 
     /**
@@ -29,17 +29,17 @@ interface Repository {
     /**
      * Returns a single task information by its given ID.
      */
-    suspend fun getTask(id: String)
+    suspend fun getTask(id: String): Task
 
     /**
      * Returns a single group information by its given ID.
      */
-    suspend fun getGroup(id: String)
+    suspend fun getGroup(id: String): Group
 
     /**
      * Returns a single achievement information by its given ID.
      */
-    suspend fun getAchievement(id: String)
+    suspend fun getAchievement(id: String): Achievement
 
     /**
      * Refresh the repository.
