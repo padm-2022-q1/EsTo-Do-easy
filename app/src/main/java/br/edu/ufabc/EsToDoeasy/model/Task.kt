@@ -57,7 +57,7 @@ data class Task(
     /**
      * The task's due date.
      */
-    val dateDue: Date,
+    val dateDue: Date?,
 
     /**
      * Total elapsed task duration.

@@ -282,6 +282,7 @@ class RepositoryFirestore(application: Application) : Repository {
     override suspend fun addTask(task: Task): String = TaskFirestore(
         userId = getCurrentUser(),
         title = task.title,
+        id = nextId(),
         details = task.details,
         dateStarted = task.dateStarted,
         dateFinished = task.dateFinished,
@@ -294,7 +295,7 @@ class RepositoryFirestore(application: Application) : Repository {
         dependencies = task.dependencies,
     ).let {
         getTaskCollection().add(it)
-        it.id ?: throw Exception("Failed to add task")
+        it.id ?: throw Exception("Failed to add task") // FIXME:
     }
 
     override suspend fun removeGroupById(id: String) {
@@ -323,4 +324,20 @@ class RepositoryFirestore(application: Application) : Repository {
                 querySnapshot.first().reference.set(TaskFirestore.fromTask(task, getCurrentUser()))
             }
     }
+    private suspend fun nextId() = getTaskCollection()
+        .document(taskIdDoc)
+        .get(getSource())
+        .await()
+        .let { documentSnapshot ->
+            if (documentSnapshot.exists()) {
+                val oldValue = documentSnapshot.toObject(TaskId::class.java)?.value
+                    ?: throw Exception("Failed to retrieve previous id")
+                TaskId(oldValue + 1)
+            } else {
+                TaskId(1.toString())
+            }.let { newTaskId ->
+                documentSnapshot.reference.set(newTaskId)
+                newTaskId.value ?: throw Exception("New id should not be null")
+            }
+        }
 }

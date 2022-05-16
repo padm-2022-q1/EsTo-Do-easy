@@ -118,5 +118,6 @@
     <string name="planning_task_details_task_name_hint">Task Name</string>
     <string name="planning_details_project_name_hint">Project Name</string>
     <string name="profile_home_sign_in">SIGN IN</string>
+    <string name="add_task_floating_button">Add task floating button</string>
 </resources>
 

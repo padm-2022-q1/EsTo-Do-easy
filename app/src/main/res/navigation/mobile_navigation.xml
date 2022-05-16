@@ -155,6 +155,9 @@
             android:name="id"
             android:defaultValue="1"
             app:argType="string" />
+        <action
+            android:id="@+id/action_planningTaskDetailsFragment_to_menu_item_list_profile"
+            app:destination="@id/menu_item_list_profile" />
     </fragment>
 
     <fragment

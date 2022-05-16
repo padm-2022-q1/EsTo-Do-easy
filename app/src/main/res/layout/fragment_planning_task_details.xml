@@ -19,7 +19,7 @@
             android:autofillHints="10/09/2022"
             android:ems="10"
             android:hint="@string/planning_task_details_task_name_hint"
-            android:inputType="date"
+            android:inputType="text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 

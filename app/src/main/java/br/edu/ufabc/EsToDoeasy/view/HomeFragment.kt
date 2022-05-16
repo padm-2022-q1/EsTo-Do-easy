@@ -149,6 +149,10 @@ class HomeFragment : Fragment() {
             viewModel.clickedAtAddTask.value = true
         }
 
+        binding.floatingActionButton.setOnClickListener {
+            viewModel.clickedAtAddTask.value = true
+        }
+
         viewModel.selectedStudyTechnique.observe(this) {
             it?.let {
                 binding.studyTechniquesItem.text = it
