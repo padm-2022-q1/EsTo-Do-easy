@@ -67,7 +67,8 @@
 
     <fragment
         android:id="@+id/menu_item_list_profile"
-        android:name="br.edu.ufabc.EsToDoeasy.view.ProfilePageFragment">
+        android:name="br.edu.ufabc.EsToDoeasy.view.ProfilePageFragment"
+        >
         <action
             android:id="@+id/action_menu_item_list_profile_to_navigation_login_profile"
             app:destination="@id/navigation_login_profile" />
@@ -79,10 +80,16 @@
             app:destination="@id/navigation_achievements_profile" />
         <action
             android:id="@+id/action_menu_item_list_profile_self"
-            app:destination="@id/menu_item_list_profile" />
+            app:destination="@id/menu_item_list_profile"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/menu_item_list_profile"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_menu_item_list_profile_to_menu_item_list_home"
-            app:destination="@id/menu_item_list_home" />
+            app:destination="@id/menu_item_list_home"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 

@@ -128,6 +128,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val clickedDashboardDaily by lazy { SingleLiveEvent<Boolean?>() }
 
+    val profileUser by lazy { SingleLiveEvent<String?>() }
+
+    val profileEmail by lazy { SingleLiveEvent<String?>() }
+
     fun getAll() = liveData {
         try {
             emit(Status.Loading)

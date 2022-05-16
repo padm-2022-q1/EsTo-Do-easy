@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentProfilePageBinding
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
@@ -30,7 +31,6 @@ class ProfilePageFragment : Fragment() {
         super.onCreate(savedInstanceState)
         launcher = registerForActivityResult(FirebaseAuthUIActivityResultContract()) { result ->
             if (result.resultCode == AppCompatActivity.RESULT_OK) {
-                fillText()
                 launchHome()
                 Snackbar.make(
                     binding.root, "Login Successful",
@@ -46,6 +46,7 @@ class ProfilePageFragment : Fragment() {
         }
     }
 
+
     override fun onStart() {
         super.onStart()
         bindEvents()
@@ -57,7 +58,6 @@ class ProfilePageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentProfilePageBinding.inflate(inflater, container, false)
-        fillText()
         return binding.root
     }
 
@@ -72,8 +72,7 @@ class ProfilePageFragment : Fragment() {
     }
 
     private fun launchProfile() {
-
-        ProfilePageFragmentDirections.actionMenuItemListProfileToMenuItemListHome().let {
+        ProfilePageFragmentDirections.actionMenuItemListProfileSelf().let {
             findNavController().navigate(it)
         }
         Snackbar.make(
@@ -88,9 +87,17 @@ class ProfilePageFragment : Fragment() {
             findNavController().navigate(it)
         }
 
-    private fun fillText() {
-        binding.profileEmailProfile.text = getCurrentEmail()
-        binding.profileUsernameProfile.text = getCurrentName()
+
+    private fun linkProfileText() {
+        viewModel.profileEmail.value = getCurrentEmail()
+        viewModel.profileUser.value = getCurrentName()
+        viewModel.profileUser.observe(this) {
+            binding.profileUsernameProfile.text = it
+        }
+
+        viewModel.profileEmail.observe(this) {
+            binding.profileEmailProfile.text = it
+        }
     }
 
     private fun getCurrentUser(): String = FirebaseAuth.getInstance().currentUser?.uid
@@ -104,11 +111,22 @@ class ProfilePageFragment : Fragment() {
     private fun getCurrentName(): String = FirebaseAuth.getInstance().currentUser?.displayName
         ?: "Nameless"
 
-    private fun bindEvents() {
+    private fun dealSigninButton() {
+        if (getCurrentUser() == "")
+            binding.profileSignIn.visibility = View.VISIBLE
+        else binding.profileSignIn.visibility = View.INVISIBLE
+    }
 
+    private fun bindEvents() {
+        linkProfileText()
         binding.profileSignOut.setOnClickListener {
             AuthUI.getInstance().signOut(requireContext())
-            launchProfile()
+                .addOnCompleteListener {
+                    linkProfileText()
+                    launchProfile()
+                }
+
+
             //launchAuthUi()
             //viewModel.clickedSignOutProfile.value = true
         }
@@ -123,9 +141,8 @@ class ProfilePageFragment : Fragment() {
         binding.profileAchievementsButton.setOnClickListener {
             viewModel.clickedAchievementProfile.value = true
         }
-        if (getCurrentUser() == "")
-            binding.profileSignIn.visibility = View.VISIBLE
-        else binding.profileSignIn.visibility = View.INVISIBLE
+        dealSigninButton()
+
     }
 
 
