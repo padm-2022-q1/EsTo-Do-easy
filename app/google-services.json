@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "659254217213-1sul4s3dc6n6eeaprqogjpk83ii11jjo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.edu.ufabc.EsToDoeasy",
+            "certificate_hash": "a5af856ef6575e09d679488e858dc8028e9702d5"
+          }
+        },
+        {
           "client_id": "659254217213-r77ljtq8qs09vs0de0ct38phqgt2615k.apps.googleusercontent.com",
           "client_type": 3
         }
