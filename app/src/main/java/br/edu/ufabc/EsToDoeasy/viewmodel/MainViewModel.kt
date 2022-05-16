@@ -2,9 +2,11 @@ package br.edu.ufabc.EsToDoeasy.viewmodel
 
 import SingleLiveEvent
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.liveData
 import br.edu.ufabc.EsToDoeasy.model.*
+import br.edu.ufabc.EsToDoeasy.view.TaskAdapter
 import java.util.*
 
 /**

@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentHomeBinding
+import br.edu.ufabc.EsToDoeasy.model.AdjacencyList
+import br.edu.ufabc.EsToDoeasy.model.EdgeType
+import br.edu.ufabc.EsToDoeasy.model.Task
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 
 /**
@@ -54,8 +57,22 @@ class HomeFragment : Fragment() {
                     }
                     is MainViewModel.Status.Success -> {
                         val tasks = (status.result as MainViewModel.Result.TaskList).value
+                        var graph = AdjacencyList<Task>()
+
+                        // FIX: run once
+                        for( task in tasks ){ // task virou um vértice
+                            graph.createVertex(task)
+                        }
+                        for ( task in tasks ){ // test
+                            var neighs = tasks.filter { it.id in task.dependencies }
+                            for ( neigh in neighs){
+                                graph.add(EdgeType.DIRECTED, neigh, task, 0.0)
+                            }
+                        }
+                        val newTasks = graph.dfsUtil()
+
                         adapter = TaskAdapter(
-                            tasks,
+                            newTasks,
                             viewModel
                         )
                         //swapAdapter(TaskAdapter(tasks.sortedBy { it.deadline }), false)
