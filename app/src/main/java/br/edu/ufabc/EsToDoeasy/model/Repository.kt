@@ -20,7 +20,6 @@ interface Repository {
      */
     suspend fun getAllAchievements():Achievements
 
-
     /**
      * Returns all dependecies for a given task.
      */
@@ -45,4 +44,25 @@ interface Repository {
      * Refresh the repository.
      */
     suspend fun refresh()
+
+    /**
+     * Refresh the remove group by Id.
+     */
+    suspend fun removeGroupById(id: String)
+
+    /**
+     * Refresh the remove group by Id.
+     */
+    suspend fun addGroup(group: Group): String
+
+    /**
+     * Refresh the remove group by Id.
+     */
+    suspend fun addTask(task: Task): String
+
+    /**
+     * Refresh the remove group by Id.
+     */
+    suspend fun updateTask(task: Task)
+
 }

@@ -4,7 +4,6 @@ import android.app.Application
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
-import android.text.BoringLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
@@ -46,7 +45,7 @@ class RepositoryFirestore(application: Application) : Repository {
         private object GroupDoc {
             const val id = "id"
             const val userId = "userId"
-            const val title = "title"
+            const val name = "name"
         }
 
         private object AchievementDoc {
@@ -93,7 +92,7 @@ class RepositoryFirestore(application: Application) : Repository {
         )
 
         companion object {
-            fun fromTask(task: Task) = TaskFirestore(
+            fun fromTask(task: Task, user: String) = TaskFirestore(
                 id = task.id,
                 userId = task.userId,
                 title = task.title,
@@ -202,13 +201,13 @@ class RepositoryFirestore(application: Application) : Repository {
     private fun getCurrentUser(): String = FirebaseAuth.getInstance().currentUser?.uid
         ?: throw Exception("No user is signed in")
 
-    private fun getCollection() = db.collection(tasksCollection)
+    private fun getTaskCollection() = db.collection(tasksCollection)
 
     private fun getGroupCollection() = db.collection(groupsCollection)
 
-    private fun getAchievementCollection() = db.collection(groupsCollection)
+    private fun getAchievementCollection() = db.collection(achievementsCollection)
 
-    override suspend fun getAllTasks(): Tasks = getCollection()
+    override suspend fun getAllTasks(): Tasks = getTaskCollection()
         .whereEqualTo(TaskDoc.userId, getCurrentUser())
         .get(getSource())
         .await()
@@ -231,7 +230,7 @@ class RepositoryFirestore(application: Application) : Repository {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getTask(id: String): Task = getCollection()
+    override suspend fun getTask(id: String): Task = getTaskCollection()
         .whereEqualTo(TaskDoc.userId, getCurrentUser())
         .whereEqualTo(TaskDoc.id, id)
         .get(getSource())
@@ -260,5 +259,58 @@ class RepositoryFirestore(application: Application) : Repository {
 
     override suspend fun refresh() {
         TODO("Not yet implemented")
+    }
+
+    override suspend fun addGroup(group: Group): String = GroupFirestore(
+        userId = group.userId,
+        name = group.name
+    ).let {
+        getGroupCollection().add(it)
+        it.id ?: throw Exception("Failed to add group")
+    }
+
+    override suspend fun addTask(task: Task): String = TaskFirestore(
+        userId = task.userId,
+        title = task.title,
+        details = task.details,
+        dateStarted = task.dateStarted,
+        dateFinished = task.dateFinished,
+        dateDue = task.dateDue,
+        timeElapsed = task.timeElapsed,
+        groupId = task.groupId,
+        difficulty = task.difficulty.toString(),
+        priority = task.priority.toString(),
+        status = task.status.toString(),
+        dependencies = task.dependencies,
+    ).let {
+        getTaskCollection().add(it)
+        it.id ?: throw Exception("Failed to add task")
+    }
+
+    override suspend fun removeGroupById(id: String) {
+        getGroupCollection()
+            .whereEqualTo(GroupDoc.userId, getCurrentUser())
+            .whereEqualTo(GroupDoc.id, id)
+            .get(getSource())
+            .await()
+            .let { querySnapshot ->
+                if (querySnapshot.isEmpty) {
+                    throw Exception("Failed to remove group with non-existing id $id")
+                }
+                querySnapshot.first().reference.delete()
+            }
+    }
+
+    override suspend fun updateTask(task: Task) {
+        getTaskCollection()
+            .whereEqualTo(TaskDoc.userId, getCurrentUser())
+            .whereEqualTo(TaskDoc.id, task.id)
+            .get(getSource())
+            .await()
+            .let { querySnapshot ->
+                if (querySnapshot.isEmpty)
+                    throw Exception("Failed to update Task with non-existing id ${task.id}")
+                querySnapshot.first().reference.set(TaskFirestore.fromTask(task, getCurrentUser()))
+            }
     }
 }
