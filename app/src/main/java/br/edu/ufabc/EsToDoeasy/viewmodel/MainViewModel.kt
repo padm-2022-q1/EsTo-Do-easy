@@ -173,10 +173,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun getAllNextTasks() = listOf<Task>()
 
     /**
-     * Returns all tasks that aren't done or achived.
+     * Returns all tasks that aren't done.
      */
-    fun getAllDueTasks() =
-        listOf<Task>()
+    fun getAllDueTasks() = liveData {
+        try {
+            emit(Status.Loading)
+            emit(Status.Success(Result.TaskList(repository.getAllDueTasks())))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
+        }
+    }
 
     /**
      * Returns all groups.

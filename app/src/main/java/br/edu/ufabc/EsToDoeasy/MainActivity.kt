@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         val menu: BottomNavigationView = binding.mainNavigation
         val allBadge = menu.getOrCreateBadge(R.id.menu_item_list_home)
         allBadge.isVisible = true
-        allBadge.number = viewModel.getAllDueTasks().size
+        //allBadge.number = viewModel.getAllDueTasks().size
 
 //        val appBarConfiguration = AppBarConfiguration(
 //            setOf(
