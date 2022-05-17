@@ -68,6 +68,6 @@ interface Repository {
     /**
      * Deletes a task by its ID.
      */
-    suspend fun deleteTask(id: String)
+    suspend fun deleteTask(id: Long)
 
 }

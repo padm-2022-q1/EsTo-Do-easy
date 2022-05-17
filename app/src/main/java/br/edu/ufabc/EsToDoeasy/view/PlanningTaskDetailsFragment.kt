@@ -45,6 +45,7 @@ class PlanningTaskDetailsFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_task_details, menu)
+        inflater.inflate(R.menu.menu_task_form, menu)
 
     }
 
@@ -115,12 +116,13 @@ class PlanningTaskDetailsFragment : Fragment() {
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         when (item.itemId) {
             R.id.action_save -> {
                 add()
             }
         }
         return true
-        inflater.inflate(R.menu.menu_task_form, menu)
+
     }
 }

@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -90,7 +89,7 @@ class TaskDetailsFragment : Fragment() {
                     val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.US)
 
                     binding.taskDetailsTitle.text = task.title
-                    viewModel.getGroup(task.id).observe(viewLifecycleOwner) {   result ->
+                    viewModel.getGroup(task.groupId).observe(viewLifecycleOwner) {   result ->
 
                         when (result) {
                             is MainViewModel.Status.Success -> {
@@ -110,13 +109,6 @@ class TaskDetailsFragment : Fragment() {
                 }
             }
         }
-        binding.taskDetailsTitle.text = task.title
-        binding.taskDetailsGroup.text = ""
-        binding.taskDetailsDateStarted.text = formatter.format(task.dateStarted)
-        binding.taskDetailsDateFinished.text = formatter.format(task.dateFinished)
-        binding.taskDetailsDateDue.text = formatter.format(task.dateDue)
-        binding.taskDetailsPriority.text = task.priority.name
-        binding.taskDetailsDifficulty.text = task.difficulty.name
     }
 
     private fun updateRecyclerView() {

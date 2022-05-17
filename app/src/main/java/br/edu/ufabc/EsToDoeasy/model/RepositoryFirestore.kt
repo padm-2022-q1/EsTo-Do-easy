@@ -359,7 +359,7 @@ class RepositoryFirestore(application: Application) : Repository {
             }
         }
 
-    override suspend fun deleteTask(id: String) {
+    override suspend fun deleteTask(id: Long) {
         getTaskCollection()
             .whereEqualTo(TaskDoc.userId, getCurrentUser())
             .whereEqualTo(TaskDoc.id, id)
@@ -381,7 +381,7 @@ class RepositoryFirestore(application: Application) : Repository {
                 Log.d("REPOSITORY", "Is snapshot empty? ${snapshot.isEmpty}")
                 if (snapshot.isEmpty) return
                 snapshot.documents.forEach { document ->
-                    val dependencies = document.get(TaskDoc.dependencies) as? List<String>
+                    val dependencies = document.get(TaskDoc.dependencies) as? List<Long>
                     Log.d("REPOSITORY", "Document ${document.id} dependencies: $dependencies")
 
                     val filteredDependencies = dependencies?.filter { e -> e != id }

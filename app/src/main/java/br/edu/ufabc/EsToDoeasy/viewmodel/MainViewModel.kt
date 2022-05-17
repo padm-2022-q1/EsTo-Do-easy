@@ -284,7 +284,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
     fun getGroup(id: String) = listOf<Group>()
 
-    fun deleteTask(id: String) = liveData {
+    fun deleteTask(id: Long) = liveData {
         try {
             emit(Status.Loading)
             repository.deleteTask(id)
