@@ -6,7 +6,7 @@ data class Group(
     /**
      * The task's unique identifier.
      */
-    val id: String,
+    val id: Long,
 
     /**
      * The task's given name.

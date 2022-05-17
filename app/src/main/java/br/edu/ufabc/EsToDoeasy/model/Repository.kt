@@ -23,22 +23,22 @@ interface Repository {
     /**
      * Returns all dependecies for a given task.
      */
-    suspend fun getDependencies(id: String): Tasks
+    suspend fun getDependencies(id: Long): Tasks
 
     /**
      * Returns a single task information by its given ID.
      */
-    suspend fun getTask(id: String): Task
+    suspend fun getTask(id: Long): Task
 
     /**
      * Returns a single group information by its given ID.
      */
-    suspend fun getGroup(id: String): Group
+    suspend fun getGroup(id: Long): Group
 
     /**
      * Returns a single achievement information by its given ID.
      */
-    suspend fun getAchievement(id: String): Achievement
+    suspend fun getAchievement(id: Long): Achievement
 
     /**
      * Refresh the repository.
@@ -48,17 +48,17 @@ interface Repository {
     /**
      * Refresh the remove group by Id.
      */
-    suspend fun removeGroupById(id: String)
+    suspend fun removeGroupById(id: Long)
 
     /**
      * Refresh the remove group by Id.
      */
-    suspend fun addGroup(group: Group): String
+    suspend fun addGroup(group: Group): Long
 
     /**
      * Refresh the remove group by Id.
      */
-    suspend fun addTask(task: Task): String
+    suspend fun addTask(task: Task): Long
 
     /**
      * Refresh the remove group by Id.

@@ -24,7 +24,7 @@ class PlanningTaskAdapter(
         /**
          * Task identifier.
          */
-        var id: String = ""
+        var id: Long = 0
 
         /**
          * Title text view component.

@@ -8,7 +8,7 @@ data class Achievement(
     /**
      * The achievement's unique identifier.
      */
-    val id: String,
+    val id: Long,
 
     /**
      * The achievement's user identifier.

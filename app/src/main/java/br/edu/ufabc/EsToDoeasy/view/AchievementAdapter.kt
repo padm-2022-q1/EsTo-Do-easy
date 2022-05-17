@@ -62,7 +62,7 @@ class AchievementAdapter(
     override fun onBindViewHolder(holder: AchievementHolder, position: Int) {
         val achievement = achievements[position]
 
-        holder.id = achievement.id
+        //holder.id = achievement.id
         holder.title.text = achievement.title
 
     }

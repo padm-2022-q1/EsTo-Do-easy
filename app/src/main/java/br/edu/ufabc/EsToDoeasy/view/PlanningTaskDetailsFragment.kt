@@ -15,10 +15,11 @@ import br.edu.ufabc.EsToDoeasy.model.Status
 import br.edu.ufabc.EsToDoeasy.model.Task
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
-import java.util.*
 
 
 class PlanningTaskDetailsFragment : Fragment() {
+    private var difficulty: String = ""
+    private var priority: String = ""
     private lateinit var binding: FragmentPlanningTaskDetailsBinding
     private val viewModel: MainViewModel by activityViewModels()
     private val args: PlanningTaskDetailsFragmentArgs by navArgs()
@@ -35,9 +36,6 @@ class PlanningTaskDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val task = viewModel.get(args.id)
-
-//        binding.planningTaskDetailsTaskName.setText(task.title)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,34 +50,58 @@ class PlanningTaskDetailsFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        // TODO: fazer a tradução dos Radios para Difficulty e prioriry
+        binding.planningDetailsActivityLevelRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+            difficulty = checkedId.toString()
+            Log.d("DiFF","$difficulty")
+        }
+
+        binding.planningDetailsPriorityLevelRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+            priority = checkedId.toString()
+        }
     }
 
     fun add() {
+        fun toDifficulty() = when (difficulty) {
+            "Easy" -> {
+                Difficulty.EASY
+            }
+            "Medium" -> {
+                Difficulty.MEDIUM
+            }
+            else ->{
+                Difficulty.HARD
+            }
+
+        }
+
+
         val task = Task(
-            id = "",
-            userId = "h1MW2FdpRqOFBmPIF5ncDsRF48q1",
+            id = 0,
+            userId = "",
             title = binding.planningTaskDetailsTaskName.text.toString(),
-            details = "",
+            details = binding.planningTaskDetailsMultLineTaskEditText.text.toString(),
             dateStarted = Task.parseDate(binding.planningTaskDetailsDateStartEditText.text.toString()),
             dateFinished = Task.parseDate(binding.planningTaskDetailsDateEndEditText.text.toString()),
             dateDue = Task.parseDate(binding.planningTaskDetailsDateDueEditText.text.toString()),
             timeElapsed = 0,
-            groupId = "1", // TODO:
-            difficulty = Difficulty.EASY,
+            groupId = 1, // TODO:
+            difficulty = toDifficulty(),
             priority = Priority.LOW,
             status = Status.TODO,
-            dependencies = listOf<String>()
+            dependencies = listOf<Long>()
         )
         Log.d("add", "task build",)
         viewModel.addTask(task).observe(viewLifecycleOwner) { status ->
             when (status) {
                 is MainViewModel.Status.Success -> {
+                    Log.d("add", "deu certo")
                     PlanningTaskDetailsFragmentDirections.actionPlanningTaskDetailsFragmentToMenuItemListProfile()
                         .let {
                             findNavController().navigate(
                                 it,
 
-                            )
+                                )
                         }
                 }
 

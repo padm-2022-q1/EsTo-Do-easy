@@ -27,7 +27,7 @@ data class Task(
     /**
      * The task's unique identifier.
      */
-    val id: String,
+    val id: Long,
 
     /**
      * The task's user identifier.
@@ -67,7 +67,7 @@ data class Task(
     /**
      * Task group's identifier.
      */
-    val groupId: String,
+    val groupId: Long,
 
     /**
      * The task's difficulty.
@@ -87,7 +87,7 @@ data class Task(
     /**
      * The task's dependencies.
      */
-    val dependencies: List<String>,
+    val dependencies: List<Long>,
 
 ){
     companion object {

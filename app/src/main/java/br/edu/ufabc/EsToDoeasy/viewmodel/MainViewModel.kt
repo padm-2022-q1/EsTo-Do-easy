@@ -70,7 +70,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
          * @property value the id.
          */
         data class Id(
-            val value: String
+            val value: Long
         ) : Result()
 
         /**
@@ -91,7 +91,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * Maintains the currently selected task ID.
      */
-    val clickedItemId by lazy { SingleLiveEvent<String?>() }
+    val clickedItemId by lazy { SingleLiveEvent<Long?>() }
 
     val clickedAddNewGroup by lazy { SingleLiveEvent<Boolean?>() }
 
@@ -100,7 +100,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * Maintains the currently selected scheduled task ID.
      */
-    val clickedScheduledTaskId by lazy { SingleLiveEvent<String?>() }
+    val clickedScheduledTaskId by lazy { SingleLiveEvent<Long?>() }
 
     val clickedStudyTechniqueSelect by lazy { SingleLiveEvent<Boolean?>() }
 
@@ -108,7 +108,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val clickedTaskToPlay by lazy { SingleLiveEvent<Boolean?>() }
 
-    val clickedAtDetails by lazy { SingleLiveEvent<String?>() }
+    val clickedAtDetails by lazy { SingleLiveEvent<Long?>() }
 
 
     val clickedAtConfigPomodoro by lazy { SingleLiveEvent<Boolean?>() }
@@ -129,9 +129,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val clickedSettingsProfile by lazy { SingleLiveEvent<Boolean?>() }
 
-    val clickedGroupId by lazy { SingleLiveEvent<String?>() }
+    val clickedGroupId by lazy { SingleLiveEvent<Long?>() }
 
-    val clickedPlanningTaskId by lazy { SingleLiveEvent<String?>() }
+    val clickedPlanningTaskId by lazy { SingleLiveEvent<Long?>() }
 
     val clickedAchievementProfile by lazy { SingleLiveEvent<Boolean?>() }
 
@@ -153,7 +153,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
-    fun getTask(id: String) = liveData {
+    fun getTask(id: Long) = liveData {
         try {
             emit(Status.Loading)
             emit(Status.Success(Result.SingleTask(repository.getTask(id))))
@@ -185,14 +185,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun getSuggestTask() = Task(
-        "id",
+        0,
         "userId",
         "title",
         "detalis",
         Date(),
         Date(),
         Date(),
-        0, "groupId",
+        0, 2,
         Difficulty.EASY,
         Priority.HIGH,
         br.edu.ufabc.EsToDoeasy.model.Status.TODO,
@@ -231,7 +231,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * Returns all Dependencies.
      */
-    fun getTaskDependencies(id: String) = liveData {
+    fun getTaskDependencies(id: Long) = liveData {
         try {
             emit(Status.Loading)
             emit(Status.Success(Result.TaskList(repository.getDependencies(id))))
@@ -244,27 +244,27 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * Returns all dependencies for a given task.
      */
-    fun getDependencies(id: String) = listOf<Task>()
+    fun getDependencies(id: Long) = listOf<Task>()
 
     /**
      * Returns a single task information by its given ID.
      */
     fun get(id: String) = Task(
-        "id",
+        0,
         "userId",
         "title",
         "detalis",
         Date(),
         Date(),
         Date(),
-        0, "groupId",
+        0, 1,
         Difficulty.EASY,
         Priority.HIGH,
         br.edu.ufabc.EsToDoeasy.model.Status.TODO,
         listOf()
     )
 
-    fun getTasksByGroupId(id: String) = listOf<Task>()
+    fun getTasksByGroupId(id: Long) = listOf<Task>()
 
     /**
      * Returns all achievement.
@@ -274,7 +274,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * Returns a group by its given ID.
      */
-    fun getGroup(id: String) = liveData {
+    fun getGroup(id: Long) = liveData {
         try {
             emit(Status.Loading)
             emit(Status.Success(Result.SingleGroup(repository.getGroup(id))))

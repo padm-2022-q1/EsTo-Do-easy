@@ -61,7 +61,7 @@ class RepositoryFirestore(application: Application) : Repository {
     }
 
     private data class TaskFirestore(
-        val id: String? = null,
+        val id: Long? = null,
         val userId: String? = null,
         val title: String? = null,
         val details: String? = null,
@@ -69,14 +69,14 @@ class RepositoryFirestore(application: Application) : Repository {
         val dateFinished: Date? = null,
         val dateDue: Date? = null,
         val timeElapsed: Long? = null,
-        val groupId: String? = null,
+        val groupId: Long? = null,
         val difficulty: String? = null,
         val priority: String? = null,
         val status: String? = null,
-        val dependencies: List<String>? = null,
+        val dependencies: List<Long>? = null,
     ) {
         fun toTask() = Task(
-            id = id ?: "",
+            id = id ?: 0,
             userId = userId ?: "",
             title = title ?: "",
             details = details ?: "",
@@ -84,7 +84,7 @@ class RepositoryFirestore(application: Application) : Repository {
             dateFinished = dateFinished ?: Date(),
             dateDue = dateDue ?: Date(),
             timeElapsed = timeElapsed ?: 0,
-            groupId = groupId ?: "",
+            groupId = groupId ?: 0L,
             difficulty = Difficulty.valueOf(difficulty ?: "EASY"),
             priority = Priority.valueOf(priority ?: "LOW"),
             status = Status.valueOf(status ?: "TODO"),
@@ -111,12 +111,12 @@ class RepositoryFirestore(application: Application) : Repository {
     }
 
     private data class GroupFirestore(
-        val id: String? = null,
+        val id: Long? = null,
         val userId: String? = null,
         val name: String? = null
     ) {
         fun toGroup() = Group(
-            id = id ?: "",
+            id = id ?: 0,
             userId = userId ?: "",
             name = name ?: ""
         )
@@ -131,7 +131,7 @@ class RepositoryFirestore(application: Application) : Repository {
     }
 
     private data class AchievementFirestore(
-        val id: String? = null,
+        val id: Long? = null,
         val userId: String? = null,
         val title: String? = null,
         val name: String? = null,
@@ -141,7 +141,7 @@ class RepositoryFirestore(application: Application) : Repository {
         val difficulty: String? = null,
     ) {
         fun toAchievement() = Achievement(
-            id = id ?: "",
+            id = id ?: 0,
             userId = userId ?: "",
             name = name ?: "",
             title = title ?: "",
@@ -166,7 +166,7 @@ class RepositoryFirestore(application: Application) : Repository {
     }
 
     private data class TaskId(
-        val value: String? = null
+        val value: Long? = null
     )
 
     private data class GroupId(
@@ -174,7 +174,7 @@ class RepositoryFirestore(application: Application) : Repository {
     )
 
     private data class AchievementId(
-        val value: String? = null
+        val value: Long? = null
     )
 
     init {
@@ -236,10 +236,10 @@ class RepositoryFirestore(application: Application) : Repository {
         .toObjects(AchievementFirestore::class.java).map { it.toAchievement() }
 
 
-    override suspend fun getDependencies(id: String): Tasks = getTask(id)
+    override suspend fun getDependencies(id: Long): Tasks = getTask(id)
         .dependencies.map { getTask(it) }
 
-    override suspend fun getTask(id: String): Task = getTaskCollection()
+    override suspend fun getTask(id: Long): Task = getTaskCollection()
         .whereEqualTo(TaskDoc.userId, getCurrentUser())
         .whereEqualTo(TaskDoc.id, id)
         .get(getSource())
@@ -248,7 +248,7 @@ class RepositoryFirestore(application: Application) : Repository {
         .first()
         .toTask()
 
-    override suspend fun getGroup(id: String) : Group = getGroupCollection()
+    override suspend fun getGroup(id: Long) : Group = getGroupCollection()
         .whereEqualTo(GroupDoc.userId, getCurrentUser())
         .whereEqualTo(GroupDoc.id, id)
         .get(getSource())
@@ -257,7 +257,7 @@ class RepositoryFirestore(application: Application) : Repository {
         .first()
         .toGroup()
 
-    override suspend fun getAchievement(id: String) : Achievement = getAchievementCollection()
+    override suspend fun getAchievement(id: Long) : Achievement = getAchievementCollection()
         .whereEqualTo(AchievementDoc.userId, getCurrentUser())
         .whereEqualTo(AchievementDoc.id, id)
         .get(getSource())
@@ -270,7 +270,7 @@ class RepositoryFirestore(application: Application) : Repository {
         TODO("Not yet implemented")
     }
 
-    override suspend fun addGroup(group: Group): String = GroupFirestore(
+    override suspend fun addGroup(group: Group): Long = GroupFirestore(
         id = nextIdGroup(),
         userId = getCurrentUser(),
         name = group.name
@@ -279,7 +279,7 @@ class RepositoryFirestore(application: Application) : Repository {
         it.id ?: throw Exception("Failed to add group")
     }
 
-    override suspend fun addTask(task: Task): String = TaskFirestore(
+    override suspend fun addTask(task: Task): Long = TaskFirestore(
         userId = getCurrentUser(),
         title = task.title,
         id = nextId(),
@@ -298,7 +298,7 @@ class RepositoryFirestore(application: Application) : Repository {
         it.id ?: throw Exception("Failed to add task") // FIXME:
     }
 
-    override suspend fun removeGroupById(id: String) {
+    override suspend fun removeGroupById(id: Long) {
         getGroupCollection()
             .whereEqualTo(GroupDoc.userId, getCurrentUser())
             .whereEqualTo(GroupDoc.id, id)
@@ -334,7 +334,7 @@ class RepositoryFirestore(application: Application) : Repository {
                     ?: throw Exception("Failed to retrieve previous id")
                 TaskId(oldValue + 1)
             } else {
-                TaskId(1.toString())
+                TaskId(1)
             }.let { newTaskId ->
                 documentSnapshot.reference.set(newTaskId)
                 newTaskId.value ?: throw Exception("New id should not be null")
@@ -342,7 +342,7 @@ class RepositoryFirestore(application: Application) : Repository {
         }
 
     private suspend fun nextIdGroup() = getTaskCollection()
-        .document(taskIdDoc)
+        .document(groupIdDoc)
         .get(getSource())
         .await()
         .let { documentSnapshot ->
@@ -351,7 +351,7 @@ class RepositoryFirestore(application: Application) : Repository {
                     ?: throw Exception("Failed to retrieve previous id")
                 TaskId(oldValue + 1)
             } else {
-                TaskId(1.toString())
+                TaskId(1)
             }.let { newTaskId ->
                 documentSnapshot.reference.set(newTaskId)
                 newTaskId.value ?: throw Exception("New id should not be null")

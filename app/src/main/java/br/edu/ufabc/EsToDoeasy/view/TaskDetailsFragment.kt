@@ -79,7 +79,7 @@ class TaskDetailsFragment : Fragment() {
     private fun updateRecyclerView() {
         binding.recyclerviewNextTasksList.apply {
 
-            viewModel.getTaskDependencies(" NkExZ9uEoHjieNhGaobk").observe(viewLifecycleOwner) { result ->
+            viewModel.getTaskDependencies(1).observe(viewLifecycleOwner) { result ->
                 when (result) {
                     is MainViewModel.Status.Loading -> {
                         Log.d("VIEW", "Loading")
