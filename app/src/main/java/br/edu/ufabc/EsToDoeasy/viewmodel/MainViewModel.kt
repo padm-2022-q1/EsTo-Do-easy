@@ -282,4 +282,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
         }
     }
+    fun getGroup(id: String) = listOf<Group>()
+
+    fun deleteTask(id: String) = liveData {
+        try {
+            emit(Status.Loading)
+            repository.deleteTask(id)
+            emit(Status.Success(Result.EmptyResult))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to delete task from repository", e)))
+        }
+    }
 }

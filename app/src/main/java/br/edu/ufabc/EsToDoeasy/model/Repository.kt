@@ -65,4 +65,9 @@ interface Repository {
      */
     suspend fun updateTask(task: Task)
 
+    /**
+     * Deletes a task by its ID.
+     */
+    suspend fun deleteTask(id: String)
+
 }

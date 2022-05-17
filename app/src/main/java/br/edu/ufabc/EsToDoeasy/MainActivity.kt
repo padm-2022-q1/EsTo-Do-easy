@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.mainToolbar);
 
         initComponents()
         bindEvents()
@@ -40,13 +41,6 @@ class MainActivity : AppCompatActivity() {
         val allBadge = menu.getOrCreateBadge(R.id.menu_item_list_home)
         allBadge.isVisible = true
         //allBadge.number = viewModel.getAllDueTasks().size
-
-//        val appBarConfiguration = AppBarConfiguration(
-//            setOf(
-//                R.id.menu_item_list_home, R.id.menu_item_list_planner,R.id.menu_item_list_schedule
-//
-//        )
-//        setupActionBarWithNavController(navController, appBarConfiguration)
 
         menu.setupWithNavController(navController)
     }

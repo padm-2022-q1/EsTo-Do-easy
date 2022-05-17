@@ -121,5 +121,6 @@ class PlanningTaskDetailsFragment : Fragment() {
             }
         }
         return true
+        inflater.inflate(R.menu.menu_task_form, menu)
     }
 }

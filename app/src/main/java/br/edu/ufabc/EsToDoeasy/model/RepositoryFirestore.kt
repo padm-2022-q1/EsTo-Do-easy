@@ -4,6 +4,7 @@ import android.app.Application
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
@@ -39,7 +40,7 @@ class RepositoryFirestore(application: Application) : Repository {
             const val difficulty = "difficulty"
             const val priority = "priority"
             const val status = "status"
-            const val dependecies = "dependecies"
+            const val dependencies = "dependencies"
         }
 
         private object GroupDoc {
@@ -224,13 +225,13 @@ class RepositoryFirestore(application: Application) : Repository {
 
 
     override suspend fun getAllGroups(): Groups = getGroupCollection()
-        .whereEqualTo(GroupDoc.userId,getCurrentUser())
+        .whereEqualTo(GroupDoc.userId, getCurrentUser())
         .get(getSource())
         .await()
         .toObjects(GroupFirestore::class.java).map { it.toGroup() }
 
-    override suspend fun getAllAchievements(): Achievements  = getAchievementCollection()
-        .whereEqualTo(AchievementDoc.userId,getCurrentUser())
+    override suspend fun getAllAchievements(): Achievements = getAchievementCollection()
+        .whereEqualTo(AchievementDoc.userId, getCurrentUser())
         .get(getSource())
         .await()
         .toObjects(AchievementFirestore::class.java).map { it.toAchievement() }
@@ -357,4 +358,40 @@ class RepositoryFirestore(application: Application) : Repository {
                 newTaskId.value ?: throw Exception("New id should not be null")
             }
         }
+
+    override suspend fun deleteTask(id: String) {
+        getTaskCollection()
+            .whereEqualTo(TaskDoc.userId, getCurrentUser())
+            .whereEqualTo(TaskDoc.id, id)
+            .get(getSource())
+            .await()
+            .let { snapshot ->
+                if (snapshot.isEmpty) throw Exception("Failed to delete task with non-existing id $id")
+                snapshot.first().reference.delete()
+            }
+
+        Log.d("REPOSITORY", "Removing all tasks references...")
+        // Removes all references to this task in other tasks' dependencies.
+        getTaskCollection()
+            .whereEqualTo(TaskDoc.userId, getCurrentUser())
+            .whereArrayContains(TaskDoc.dependencies, id)
+            .get(getSource())
+            .await()
+            .let { snapshot ->
+                Log.d("REPOSITORY", "Is snapshot empty? ${snapshot.isEmpty}")
+                if (snapshot.isEmpty) return
+                snapshot.documents.forEach { document ->
+                    val dependencies = document.get(TaskDoc.dependencies) as? List<String>
+                    Log.d("REPOSITORY", "Document ${document.id} dependencies: $dependencies")
+
+                    val filteredDependencies = dependencies?.filter { e -> e != id }
+                    Log.d(
+                        "REPOSITORY",
+                        "Document ${document.id} updated dependencies: $filteredDependencies"
+                    )
+
+                    document.reference.update(TaskDoc.dependencies, filteredDependencies)
+                }
+            }
+    }
 }
