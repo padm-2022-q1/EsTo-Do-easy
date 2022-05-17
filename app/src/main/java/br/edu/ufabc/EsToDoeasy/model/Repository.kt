@@ -48,7 +48,7 @@ interface Repository {
     /**
      * Refresh the remove group by Id.
      */
-    suspend fun removeGroupById(id: Long)
+    suspend fun deleteGroup(id: Long)
 
     /**
      * Refresh the remove group by Id.

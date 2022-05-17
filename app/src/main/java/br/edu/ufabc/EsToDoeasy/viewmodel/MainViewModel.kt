@@ -294,6 +294,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun deleteGroup(id: Long) = liveData {
+        try {
+            emit(Status.Loading)
+            repository.deleteGroup(id)
+            emit(Status.Success(Result.EmptyResult))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to delete group from repository", e)))
+        }
+    }
+
     fun getAllTasksByGroup(id: Long) = liveData {
         try {
             emit(Status.Loading)

@@ -126,6 +126,13 @@
     <string name="task_remove_dialog_confirm">OK</string>
     <string name="task_remove_dialog_cancel">Cancel</string>
     <string name="task_details_delete_error">Error on deleting task.</string>
+    <string name="group_delete_error">Error on deleting task.</string>
     <string name="add_task_floating_button">Add task floating button</string>
+    <string name="title_delete_group_confirmation">Delete group?</string>
+    <string name="message_delete_title_confirmation">Are you sure want to delete the group? This operation cannot be undone.</string>
+    <string name="cancel_delete_group_label">Cancel</string>
+    <string name="confirm_delete_group_label">Confirm</string>
+    <string name="list_task_remove_group_title">Delete</string>
+
 </resources>
 

@@ -306,20 +306,6 @@ class RepositoryFirestore(application: Application) : Repository {
         it.id ?: throw Exception("Failed to add task") // FIXME:
     }
 
-    override suspend fun removeGroupById(id: Long) {
-        getGroupCollection()
-            .whereEqualTo(GroupDoc.userId, getCurrentUser())
-            .whereEqualTo(GroupDoc.id, id)
-            .get(getSource())
-            .await()
-            .let { querySnapshot ->
-                if (querySnapshot.isEmpty) {
-                    throw Exception("Failed to remove group with non-existing id $id")
-                }
-                querySnapshot.first().reference.delete()
-            }
-    }
-
     override suspend fun updateTask(task: Task) {
         getTaskCollection()
             .whereEqualTo(TaskDoc.userId, getCurrentUser())
@@ -398,6 +384,42 @@ class RepositoryFirestore(application: Application) : Repository {
                     )
 
                     document.reference.update(TaskDoc.dependencies, filteredDependencies)
+                }
+            }
+    }
+
+    override suspend fun deleteGroup(id: Long) {
+        getGroupCollection()
+            .whereEqualTo(GroupDoc.userId, getCurrentUser())
+            .whereEqualTo(GroupDoc.id, id)
+            .get(getSource())
+            .await()
+            .let { snapshot ->
+                if (snapshot.isEmpty) throw Exception("Failed to delete group with non-existing id $id")
+                snapshot.first().reference.delete()
+            }
+
+        Log.d("REPOSITORY", "Removing all tasks in this group...")
+        // Removes all tasks in the deleted group.
+        getTaskCollection()
+            .whereEqualTo(TaskDoc.userId, getCurrentUser())
+            .whereArrayContains(TaskDoc.groupId, id)
+            .get(getSource())
+            .await()
+            .let { snapshot ->
+                Log.d("REPOSITORY", "Is snapshot empty? ${snapshot.isEmpty}")
+                if (snapshot.isEmpty) return
+                snapshot.documents.forEach { document ->
+                    val tasksGroup = document.get(TaskDoc.groupId) as? List<Long>
+                    Log.d("REPOSITORY", "Document ${document.id} dependencies: $tasksGroup")
+
+                    val filteredTasksGroup = tasksGroup?.filter { e -> e != id }
+                    Log.d(
+                        "REPOSITORY",
+                        "Document ${document.id} updated tasks group: $filteredTasksGroup"
+                    )
+
+                    document.reference.update(TaskDoc.groupId, filteredTasksGroup)
                 }
             }
     }
