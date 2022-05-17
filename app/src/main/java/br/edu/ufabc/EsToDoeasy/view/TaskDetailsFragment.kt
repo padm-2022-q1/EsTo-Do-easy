@@ -53,9 +53,8 @@ class TaskDetailsFragment : Fragment() {
                     val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.US)
 
                     binding.taskDetailsTitle.text = task.title
-                    Log.d("GROUP","Entrei")
                     viewModel.getGroup(task.id).observe(viewLifecycleOwner) {   result ->
-                        Log.d("GROUP","Entrei")
+
                         when (result) {
                             is MainViewModel.Status.Success -> {
 
@@ -64,7 +63,7 @@ class TaskDetailsFragment : Fragment() {
                                 binding.taskDetailsGroup.text = group.toString()
                             }
                         }
-                        Log.d("GROUP","Entrei")
+
                     }
                     binding.taskDetailsDateStarted.text = formatter.format(task.dateStarted)
                     binding.taskDetailsDateFinished.text = formatter.format(task.dateFinished)
@@ -79,7 +78,7 @@ class TaskDetailsFragment : Fragment() {
     private fun updateRecyclerView() {
         binding.recyclerviewNextTasksList.apply {
 
-            viewModel.getTaskDependencies(1).observe(viewLifecycleOwner) { result ->
+            viewModel.getTaskDependencies(args.id).observe(viewLifecycleOwner) { result ->
                 when (result) {
                     is MainViewModel.Status.Loading -> {
                         Log.d("VIEW", "Loading")
@@ -89,7 +88,7 @@ class TaskDetailsFragment : Fragment() {
                     }
                     is MainViewModel.Status.Success -> {
                         val tasks = (result.result as MainViewModel.Result.TaskList).value
-                        Log.d("TASKS","$tasks")
+                        Log.d("TASKS", "$tasks")
                         adapter = DependenciesTaskAdapter(
                             tasks,
                             viewModel
