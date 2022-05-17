@@ -67,10 +67,12 @@
         <entry key="app/src/main/res/layout/fragment_new_task_details.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_planning_task_details.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/fragment_planning_task_list.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/fragment_pomodoro.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_study_techniques.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/fragment_study_techniques_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_task_details.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_task_list.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/fragment_timer.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/layout/next_task_list_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/planning_list_item.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/scheduled_task_list_item.xml" value="0.2125" />

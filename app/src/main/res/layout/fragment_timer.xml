@@ -3,14 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pomodoro_back"
     android:layout_width="match_parent"
-    android:background="@color/orange"
+    android:background="@color/blue"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <ProgressBar
             android:id="@+id/progressCircleDeterminate"
             android:layout_width="250dp"
@@ -23,23 +22,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/pomodoro_skip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/pomodoro_skip"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/pomodoro_action_button"
-            app:layout_constraintTop_toBottomOf="@+id/progressCircleDeterminate"
-            >
-        </TextView>
-
-        <TextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pomodoro_focus_default_time"
+            android:text="@string/timer_defalt_value"
             android:textAlignment="center"
             android:textSize="48sp"
             app:layout_constraintBottom_toBottomOf="@+id/progressCircleDeterminate"
@@ -79,29 +65,15 @@
             android:id="@+id/pomodoro_volume_slider"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/progressCircleDeterminate"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/progressCircleDeterminate"
-            app:layout_constraintTop_toBottomOf="@id/pomodoro_action_button"
-            app:layout_constraintBottom_toTopOf="@+id/pomodoro_configure"
-            >
+            app:layout_constraintStart_toStartOf="@id/progressCircleDeterminate"
+            app:layout_constraintTop_toBottomOf="@id/pomodoro_action_button">
 
         </com.google.android.material.slider.Slider>
 
 
-        <TextView
-            android:id="@+id/pomodoro_configure"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/configure_pomodoro_button"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pomodoro_volume_slider"
-            tools:layout_editor_absoluteX="-16dp">
-
-        </TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    
+
 </ScrollView>

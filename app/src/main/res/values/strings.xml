@@ -133,6 +133,9 @@
     <string name="cancel_delete_group_label">Cancel</string>
     <string name="confirm_delete_group_label">Confirm</string>
     <string name="list_task_remove_group_title">Delete</string>
-
+    <string name="time_format_pomodoro">%02d:%02d</string>
+    <string name="time_format">%02d:%02d:%02d</string>
+    <string name="return_pause">Return</string>
+    <string name="timer_defalt_value">00:00:00</string>
 </resources>
 

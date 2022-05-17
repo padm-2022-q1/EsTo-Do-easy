@@ -2,8 +2,11 @@ package br.edu.ufabc.EsToDoeasy.viewmodel
 
 import SingleLiveEvent
 import android.app.Application
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import br.edu.ufabc.EsToDoeasy.model.*
 import br.edu.ufabc.EsToDoeasy.view.TaskAdapter
@@ -312,4 +315,32 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             emit(Status.Failure(Exception("Failed to retrieve tasks from a given groupId $id", e)))
         }
     }
+
+    // TIMER
+    enum class State {INITIAL, STARTED, STOPPED}
+
+    val timeElapsed: MutableLiveData<Long> by lazy {
+        MutableLiveData<Long>(0L)
+    }
+    val state : MutableLiveData<State> by lazy {
+        MutableLiveData<State>(State.INITIAL)
+    }
+    init {
+        runTimer()
+    }
+    private fun runTimer() {
+        val handler = Handler(Looper.getMainLooper())
+
+        handler.post(object : Runnable {
+            override fun run() {
+                if (isTimerRunning())
+                    timeElapsed.value?.let {
+                        timeElapsed.value = it + 1
+                    }
+                handler.postDelayed(this, 1000)
+            }
+        })
+    }
+
+    fun isTimerRunning() = state.value == State.STARTED
 }
