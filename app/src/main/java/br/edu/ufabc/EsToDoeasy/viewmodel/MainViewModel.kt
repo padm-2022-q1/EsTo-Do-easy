@@ -164,6 +164,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun addGroup(group: Group) = liveData {
+        try {
+            emit(Status.Loading)
+            emit(Status.Success(Result.Id(repository.addGroup(group))))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
+        }
+    }
+
     fun getSuggestTask() = Task(
         "id",
         "userId",

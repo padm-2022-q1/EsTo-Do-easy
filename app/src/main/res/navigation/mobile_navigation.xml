@@ -158,6 +158,9 @@
         <action
             android:id="@+id/action_planningTaskDetailsFragment_to_menu_item_list_profile"
             app:destination="@id/menu_item_list_profile" />
+        <action
+            android:id="@+id/created_new_task"
+            app:destination="@id/planningListTaskFragment" />
     </fragment>
 
     <fragment
@@ -167,6 +170,10 @@
         android:id="@+id/planningNewGroupFragment"
         android:name="br.edu.ufabc.EsToDoeasy.view.PlanningNewGroupFragment"
         android:label="fragment_new_group"
-        tools:layout="@layout/fragment_new_group" />
+        tools:layout="@layout/fragment_new_group" >
+        <action
+            android:id="@+id/created_new_group"
+            app:destination="@id/menu_item_list_planner" />
+    </fragment>
 
 </navigation>

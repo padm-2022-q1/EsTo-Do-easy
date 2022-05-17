@@ -170,7 +170,7 @@ class RepositoryFirestore(application: Application) : Repository {
     )
 
     private data class GroupId(
-        val value: String? = null
+        val value: Long? = null
     )
 
     private data class AchievementId(
@@ -272,7 +272,8 @@ class RepositoryFirestore(application: Application) : Repository {
     }
 
     override suspend fun addGroup(group: Group): String = GroupFirestore(
-        userId = group.userId,
+        id = nextIdGroup(),
+        userId = getCurrentUser(),
         name = group.name
     ).let {
         getGroupCollection().add(it)
@@ -325,6 +326,23 @@ class RepositoryFirestore(application: Application) : Repository {
             }
     }
     private suspend fun nextId() = getTaskCollection()
+        .document(taskIdDoc)
+        .get(getSource())
+        .await()
+        .let { documentSnapshot ->
+            if (documentSnapshot.exists()) {
+                val oldValue = documentSnapshot.toObject(TaskId::class.java)?.value
+                    ?: throw Exception("Failed to retrieve previous id")
+                TaskId(oldValue + 1)
+            } else {
+                TaskId(1.toString())
+            }.let { newTaskId ->
+                documentSnapshot.reference.set(newTaskId)
+                newTaskId.value ?: throw Exception("New id should not be null")
+            }
+        }
+
+    private suspend fun nextIdGroup() = getTaskCollection()
         .document(taskIdDoc)
         .get(getSource())
         .await()
