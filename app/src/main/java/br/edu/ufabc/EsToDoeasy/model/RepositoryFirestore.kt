@@ -280,6 +280,13 @@ class RepositoryFirestore(application: Application) : Repository {
         it.id ?: throw Exception("Failed to add group")
     }
 
+    suspend fun getAllTasksByGroup(id: Long): Tasks = getTaskCollection()
+        .whereEqualTo(TaskDoc.userId, getCurrentUser())
+        .whereEqualTo(TaskDoc.groupId,id)
+        .get(getSource())
+        .await()
+        .toObjects(TaskFirestore::class.java).map { it.toTask() }
+
     override suspend fun addTask(task: Task): Long = TaskFirestore(
         userId = getCurrentUser(),
         title = task.title,

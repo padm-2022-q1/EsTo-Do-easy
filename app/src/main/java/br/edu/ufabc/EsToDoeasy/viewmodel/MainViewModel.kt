@@ -293,4 +293,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             emit(Status.Failure(Exception("Failed to delete task from repository", e)))
         }
     }
+
+    fun getAllTasksByGroup(id: Long) = liveData {
+        try {
+            emit(Status.Loading)
+            emit(Status.Success(Result.TaskList(repository.getAllTasksByGroup(id))))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to retrieve tasks from a given groupId $id", e)))
+        }
+    }
 }

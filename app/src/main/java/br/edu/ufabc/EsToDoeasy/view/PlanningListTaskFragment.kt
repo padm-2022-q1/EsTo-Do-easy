@@ -1,6 +1,7 @@
 package br.edu.ufabc.EsToDoeasy.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,10 +42,25 @@ class PlanningListTaskFragment : Fragment() {
 
     private fun updateRecyclerView() {
         binding.recyclerviewPlanningTaskList.apply {
-            adapter = PlanningTaskAdapter(
-                viewModel.getTasksByGroupId(args.id),
-                viewModel
-            )
+
+            viewModel.getAllTasksByGroup(args.id).observe(viewLifecycleOwner) { result ->
+                when (result) {
+                    is MainViewModel.Status.Loading -> {
+                        Log.d("VIEW", "Loading")
+                    }
+                    is MainViewModel.Status.Failure -> {
+                        Log.e("VIEW", "Failed to fetch items", result.e)
+                    }
+                    is MainViewModel.Status.Success -> {
+                        val tasks = (result.result as MainViewModel.Result.TaskList).value
+                        Log.d("TASKS", "PlanningListTaskFragments $tasks")
+                        adapter = PlanningTaskAdapter(
+                            tasks,
+                            viewModel
+                        )
+                    }
+                }
+            }
         }
     }
 
