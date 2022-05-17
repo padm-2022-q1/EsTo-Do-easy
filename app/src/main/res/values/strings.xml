@@ -120,5 +120,11 @@
     <string name="profile_home_sign_in">SIGN IN</string>
     <string name="action_edit">Edit</string>
     <string name="action_delete">Delete</string>
+    <string name="task_details_menu_operation_error">Error on executing selected menu operation.</string>
+    <string name="task_remove_dialog_title">Are you sure?</string>
+    <string name="task_remove_dialog_content">Are you sure you want to delete this task? This operation can not be undone.</string>
+    <string name="task_remove_dialog_confirm">OK</string>
+    <string name="task_remove_dialog_cancel">Cancel</string>
+    <string name="task_details_delete_error">Error on deleting task.</string>
 </resources>
 
