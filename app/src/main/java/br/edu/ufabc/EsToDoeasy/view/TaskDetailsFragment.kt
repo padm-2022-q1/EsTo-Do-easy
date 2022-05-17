@@ -1,12 +1,11 @@
 package br.edu.ufabc.EsToDoeasy.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
+import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentTaskDetailsBinding
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 import java.text.SimpleDateFormat
@@ -20,6 +19,11 @@ class TaskDetailsFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private val args: TaskDetailsFragmentArgs by navArgs()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,6 +31,10 @@ class TaskDetailsFragment : Fragment() {
     ): View {
         binding = FragmentTaskDetailsBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_task_details, menu)
     }
 
     override fun onStart() {
