@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         //allBadge.number = viewModel.getAllDueTasks().size
 
         menu.setupWithNavController(navController)
+
     }
 
     private fun bindEvents() {
