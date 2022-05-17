@@ -1,6 +1,7 @@
 package br.edu.ufabc.EsToDoeasy.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,25 +39,64 @@ class TaskDetailsFragment : Fragment() {
     }
 
     private fun initComponents() {
-        val task = viewModel.get(args.id)
-        val group = viewModel.getGroup(task.groupId)
-        val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.US)
 
-        binding.taskDetailsTitle.text = task.title
-        binding.taskDetailsGroup.text = "group.name"
-        binding.taskDetailsDateStarted.text = formatter.format(task.dateStarted)
-        binding.taskDetailsDateFinished.text = formatter.format(task.dateFinished)
-        binding.taskDetailsDateDue.text = formatter.format(task.dateDue)
-        binding.taskDetailsPriority.text = task.priority.name
-        binding.taskDetailsDifficulty.text = task.difficulty.name
+        viewModel.getTask(args.id).observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is MainViewModel.Status.Loading -> {
+                    Log.d("VIEW", "Loading")
+                }
+                is MainViewModel.Status.Failure -> {
+                    Log.e("VIEW", "Failed to fetch items", result.e)
+                }
+                is MainViewModel.Status.Success -> {
+                    val task = (result.result as MainViewModel.Result.SingleTask).value
+                    val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.US)
+
+                    binding.taskDetailsTitle.text = task.title
+                    Log.d("GROUP","Entrei")
+                    viewModel.getGroup(task.id).observe(viewLifecycleOwner) {   result ->
+                        Log.d("GROUP","Entrei")
+                        when (result) {
+                            is MainViewModel.Status.Success -> {
+
+                                val group = (result.result as MainViewModel.Result.SingleGroup).value.name
+                                Log.d("GROUP","$group")
+                                binding.taskDetailsGroup.text = group.toString()
+                            }
+                        }
+                        Log.d("GROUP","Entrei")
+                    }
+                    binding.taskDetailsDateStarted.text = formatter.format(task.dateStarted)
+                    binding.taskDetailsDateFinished.text = formatter.format(task.dateFinished)
+                    binding.taskDetailsDateDue.text = formatter.format(task.dateDue)
+                    binding.taskDetailsPriority.text = task.priority.name
+                    binding.taskDetailsDifficulty.text = task.difficulty.name
+                }
+            }
+        }
     }
 
     private fun updateRecyclerView() {
         binding.recyclerviewNextTasksList.apply {
-            adapter = DependenciesTaskAdapter(
-                viewModel.getDependencies(args.id),
-                viewModel
-            )
+
+            viewModel.getTaskDependencies(" NkExZ9uEoHjieNhGaobk").observe(viewLifecycleOwner) { result ->
+                when (result) {
+                    is MainViewModel.Status.Loading -> {
+                        Log.d("VIEW", "Loading")
+                    }
+                    is MainViewModel.Status.Failure -> {
+                        Log.e("VIEW", "Failed to fetch items", result.e)
+                    }
+                    is MainViewModel.Status.Success -> {
+                        val tasks = (result.result as MainViewModel.Result.TaskList).value
+                        Log.d("TASKS","$tasks")
+                        adapter = DependenciesTaskAdapter(
+                            tasks,
+                            viewModel
+                        )
+                    }
+                }
+            }
         }
     }
 }

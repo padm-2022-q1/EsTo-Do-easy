@@ -152,6 +152,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+
+    fun getTask(id: String) = liveData {
+        try {
+            emit(Status.Loading)
+            emit(Status.Success(Result.SingleTask(repository.getTask(id))))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
+        }
+    }
+
+
     /**
      *
      */
@@ -217,6 +228,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    /**
+     * Returns all Dependencies.
+     */
+    fun getTaskDependencies(id: String) = liveData {
+        try {
+            emit(Status.Loading)
+            emit(Status.Success(Result.TaskList(repository.getDependencies(id))))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
+        }
+    }
+
 
     /**
      * Returns all dependencies for a given task.
@@ -251,5 +274,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * Returns a group by its given ID.
      */
-    fun getGroup(id: String) = listOf<Group>()
+    fun getGroup(id: String) = liveData {
+        try {
+            emit(Status.Loading)
+            emit(Status.Success(Result.SingleGroup(repository.getGroup(id))))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
+        }
+    }
 }

@@ -236,9 +236,8 @@ class RepositoryFirestore(application: Application) : Repository {
         .toObjects(AchievementFirestore::class.java).map { it.toAchievement() }
 
 
-    override suspend fun getDependencies(id: String): Tasks {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getDependencies(id: String): Tasks = getTask(id)
+        .dependencies.map { getTask(it) }
 
     override suspend fun getTask(id: String): Task = getTaskCollection()
         .whereEqualTo(TaskDoc.userId, getCurrentUser())
