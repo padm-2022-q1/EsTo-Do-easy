@@ -342,7 +342,7 @@ class RepositoryFirestore(application: Application) : Repository {
             }
         }
 
-    private suspend fun nextIdGroup() = getTaskCollection()
+    private suspend fun nextIdGroup() = getGroupCollection()
         .document(groupIdDoc)
         .get(getSource())
         .await()
@@ -350,9 +350,9 @@ class RepositoryFirestore(application: Application) : Repository {
             if (documentSnapshot.exists()) {
                 val oldValue = documentSnapshot.toObject(TaskId::class.java)?.value
                     ?: throw Exception("Failed to retrieve previous id")
-                TaskId(oldValue + 1)
+                GroupId(oldValue + 1)
             } else {
-                TaskId(1)
+                GroupId(1)
             }.let { newTaskId ->
                 documentSnapshot.reference.set(newTaskId)
                 newTaskId.value ?: throw Exception("New id should not be null")
