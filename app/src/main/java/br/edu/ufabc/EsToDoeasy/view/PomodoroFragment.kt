@@ -33,7 +33,6 @@ class PomodoroFragment : Fragment() {
         //binding.pomodoroActionButton.setBackgroundColor(ContextCompat.getColor(context, R.color.purple_500))
         binding.pomodoroActionButton.text = getString(R.string.return_pause)
     }
-
     private fun formatStop() {// FIX:
         //binding.buttonStartStop.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.red))
         binding.pomodoroActionButton.text = getString(R.string.pomodoro_pause_focus)
