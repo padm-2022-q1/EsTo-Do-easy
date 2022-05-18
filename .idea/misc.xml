@@ -36,9 +36,11 @@
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/drawable/report_button_customized.xml" value="0.2085" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/dependencies_tasks_list_item.xml" value="0.1" />
+        <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/dropdown_item_project_name_new_task.xml" value="0.20416666666666666" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/fragment_home_.xml" value="0.33" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/fragment_note_list.xml" value="0.11302083333333333" />
+        <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/fragment_planning_task_edit.xml" value="0.20416666666666666" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/fragment_report.xml" value="0.20416666666666666" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/fragment_schedule.xml" value="0.22" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/fragment_study_techniques_item.xml" value="0.20416666666666666" />

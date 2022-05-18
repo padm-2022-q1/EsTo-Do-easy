@@ -6,6 +6,7 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.firestore
@@ -46,11 +47,11 @@ class RepositoryFirestore(application: Application) : Repository {
         }
 
         private object TaskTimeDoc {
-            const val id =  "id"
-            const val userId= "userId"
-            const val taskId= "taskId"
-            const val date= "date"
-            const val timeElapsed= "timeElapsed"
+            const val id = "id"
+            const val userId = "userId"
+            const val taskId = "taskId"
+            const val date = "date"
+            const val timeElapsed = "timeElapsed"
         }
 
         private object GroupDoc {
@@ -71,13 +72,13 @@ class RepositoryFirestore(application: Application) : Repository {
         }
     }
 
-    private data class TaskTimeFirestore (
-         val id: Long? = null ,
-         val userId: String? = null ,
-         val taskId: Long? = null ,
-         val date: Date? = null,
-         val timeElapsed: Long? = null
-    ){
+    private data class TaskTimeFirestore(
+        val id: Long? = null,
+        val userId: String? = null,
+        val taskId: Long? = null,
+        val date: Date? = null,
+        val timeElapsed: Long? = null
+    ) {
         fun toTaskTime() = TaskTime(
             id = id ?: 0,
             userId = userId ?: "",
@@ -85,7 +86,7 @@ class RepositoryFirestore(application: Application) : Repository {
             date = Date(),
             timeElapsed = timeElapsed ?: 0,
 
-        )
+            )
 
         companion object {
             fun fromTaskTime(taskTime: TaskTime, user: String) = TaskTimeFirestore(
@@ -97,7 +98,6 @@ class RepositoryFirestore(application: Application) : Repository {
             )
         }
     }
-
 
 
     private data class TaskFirestore(
@@ -268,7 +268,6 @@ class RepositoryFirestore(application: Application) : Repository {
         .map { it.toTask() }
 
 
-
     override suspend fun getAllGroups(): Groups = getGroupCollection()
         .whereEqualTo(GroupDoc.userId, getCurrentUser())
         .get(getSource())
@@ -299,7 +298,7 @@ class RepositoryFirestore(application: Application) : Repository {
         .first()
         .toTask()
 
-    override suspend fun getGroup(id: Long) : Group = getGroupCollection()
+    override suspend fun getGroup(id: Long): Group = getGroupCollection()
         .whereEqualTo(GroupDoc.userId, getCurrentUser())
         .whereEqualTo(GroupDoc.id, id)
         .get(getSource())
@@ -308,7 +307,7 @@ class RepositoryFirestore(application: Application) : Repository {
         .first()
         .toGroup()
 
-    override suspend fun getAchievement(id: Long) : Achievement = getAchievementCollection()
+    override suspend fun getAchievement(id: Long): Achievement = getAchievementCollection()
         .whereEqualTo(AchievementDoc.userId, getCurrentUser())
         .whereEqualTo(AchievementDoc.id, id)
         .get(getSource())
@@ -341,7 +340,7 @@ class RepositoryFirestore(application: Application) : Repository {
         it.id ?: throw Exception("Failed to add Task Time")
     }
 
-    suspend fun addTimeTask(id: Long, time:Long): Long = TaskTimeFirestore(
+    suspend fun addTimeTask(id: Long, time: Long): Long = TaskTimeFirestore(
         id = nextTaskTimeId(),
         userId = getCurrentUser(),
         taskId = id,
@@ -355,7 +354,7 @@ class RepositoryFirestore(application: Application) : Repository {
 
     suspend fun getAllTasksByGroup(id: Long): Tasks = getTaskCollection()
         .whereEqualTo(TaskDoc.userId, getCurrentUser())
-        .whereEqualTo(TaskDoc.groupId,id)
+        .whereEqualTo(TaskDoc.groupId, id)
         .get(getSource())
         .await()
         .toObjects(TaskFirestore::class.java).map { it.toTask() }
@@ -390,7 +389,7 @@ class RepositoryFirestore(application: Application) : Repository {
                     throw Exception("Failed to update Task with non-existing id $id")
                 querySnapshot.first().reference.update(
                     TaskDoc.timeElapsed,
-                    querySnapshot.first().toObject(TaskFirestore::class.java).timeElapsed?.plus(time)
+                    FieldValue.increment(time)
                 )
             }
     }
@@ -407,8 +406,6 @@ class RepositoryFirestore(application: Application) : Repository {
                 querySnapshot.first().reference.set(TaskFirestore.fromTask(task, getCurrentUser()))
             }
     }
-
-
 
 
     private suspend fun nextId() = getTaskCollection()

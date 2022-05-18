@@ -175,10 +175,6 @@ class HomeFragment : Fragment() {
             viewModel.clickedStudyTechniqueSelect.value = true
         }
 
-        binding.addTaskItem.setOnClickListener {
-            viewModel.clickedAtAddTask.value = true
-        }
-
         binding.floatingActionButton.setOnClickListener {
             viewModel.clickedAtAddTask.value = true
         }

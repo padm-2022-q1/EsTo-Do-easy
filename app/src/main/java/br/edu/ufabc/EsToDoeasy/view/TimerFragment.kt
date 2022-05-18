@@ -57,7 +57,7 @@ class TimerFragment : Fragment() {
             }
         }
         viewModel.timeElapsed.observe(this) {
-            it?.let { timeElapsed -> updateTime(timeElapsed)}
+            it?.let { timeElapsed -> updateTime(timeElapsed) }
         }
     }
 
@@ -77,55 +77,46 @@ class TimerFragment : Fragment() {
         registerObservers()
     }
 
-    private fun updateTask(time: Long) {
-        viewModel.updateTask(args.id, time / 60 ).observe(viewLifecycleOwner) {   result ->
-            when (result) {
-                is MainViewModel.Status.Failure -> {
-                    Log.e("VIEW", "Failed to fetch items", result.e)
-                }
-                is MainViewModel.Status.Success -> {
-                    Log.d("UPDATE","Update")
-                }
-            }
-        }
-    }
-
-    private fun sendTimeTracker(time: Long) {
-        viewModel.addTimeTask(args.id, time / 60 ).observe(viewLifecycleOwner) {   result ->
-            when (result) {
-                is MainViewModel.Status.Failure -> {
-                    Log.e("VIEW", "Failed to fetch items", result.e)
-                }
-                is MainViewModel.Status.Success -> {
-                    Log.d("UPDATE","Send Time Tracker")
-                }
-            }
-        }
-    }
-
     private fun bindEvents() {
         binding.pomodoroActionButton.setOnClickListener {
-            viewModel.timeElapsed.value?.let { it1 ->
-                viewModel.updateTask(args.id, it1 / 60 ).observe(viewLifecycleOwner) {   result ->
+            viewModel.timeElapsed.value?.let { time ->
+                // TODO: Check how to avoid nested observers.
+                viewModel.updateTask(args.id, time / 60).observe(viewLifecycleOwner) { result ->
                     when (result) {
                         is MainViewModel.Status.Failure -> {
                             Log.e("VIEW", "Failed to fetch items", result.e)
                         }
                         is MainViewModel.Status.Success -> {
-                            Log.d("UPDATE","Update")
-                            // sendTimeTracker(it1)
-                            Snackbar.make(binding.root, "Time elapsed $it1", Snackbar.LENGTH_LONG).show()
-                            viewModel.timeElapsed.value = 0L
-                            TimerFragmentDirections.actionTimerFragmentToMenuItemListHome().let {
-                                findNavController().navigate(it)
-                            }
+                            Log.d("UPDATE", "Update")
 
-                            viewModel.state.value = if (viewModel.isTimerRunning()) {
-                                MainViewModel.State.STOPPED
+                            viewModel.addTimeTask(args.id, time / 60)
+                                .observe(viewLifecycleOwner) { result ->
+                                    when (result) {
+                                        is MainViewModel.Status.Failure -> {
+                                            Log.e("VIEW", "Failed to fetch items", result.e)
+                                        }
+                                        is MainViewModel.Status.Success -> {
+                                            Log.d("UPDATE", "Send Time Tracker")
 
-                            } else {
-                                MainViewModel.State.STARTED
-                            }
+                                            Snackbar.make(
+                                                binding.root,
+                                                "Time elapsed $time",
+                                                Snackbar.LENGTH_LONG
+                                            )
+                                                .show()
+                                            viewModel.timeElapsed.value = 0L
+                                            TimerFragmentDirections.actionTimerFragmentToMenuItemListHome()
+                                                .let {
+                                                    findNavController().navigate(it)
+                                                }
+
+                                            viewModel.state.value =
+                                                if (viewModel.isTimerRunning()) MainViewModel.State.STOPPED
+                                                else MainViewModel.State.STARTED
+                                        }
+                                    }
+                                }
+
                         }
                     }
                 }
@@ -133,3 +124,4 @@ class TimerFragment : Fragment() {
         }
     }
 }
+
