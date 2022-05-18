@@ -144,15 +144,15 @@
             android:id="@+id/action_planningListTaskFragment_to_planningTaskDetailsFragment"
             app:destination="@id/planningTaskDetailsFragment" />
         <action
-            android:id="@+id/action_planningListTaskFragment_to_addNewTask"
-            app:destination="@id/planningTaskDetailsFragment" />
+            android:id="@+id/add_new_task"
+            app:destination="@id/planningTaskNewFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/planningTaskDetailsFragment"
-        android:name="br.edu.ufabc.EsToDoeasy.view.PlanningTaskDetailsFragment"
+        android:name="br.edu.ufabc.EsToDoeasy.view.PlanningTaskEditFragment"
         android:label="fragment_planning_task_details"
-        tools:layout="@layout/fragment_planning_task_details">
+        tools:layout="@layout/fragment_planning_task_edit">
         <argument
             android:name="id"
             android:defaultValue="-1L"
@@ -161,7 +161,7 @@
             android:id="@+id/action_planningTaskDetailsFragment_to_menu_item_list_profile"
             app:destination="@id/menu_item_list_profile" />
         <action
-            android:id="@+id/created_new_task"
+            android:id="@+id/edited_task"
             app:destination="@id/planningListTaskFragment" />
     </fragment>
 
@@ -178,6 +178,15 @@
             app:destination="@id/menu_item_list_planner" />
     </fragment>
     <fragment
+        android:id="@+id/planningTaskNewFragment"
+        android:name="br.edu.ufabc.EsToDoeasy.view.PlanningTaskNewFragment"
+        android:label="fragment_planning_task_new"
+        tools:layout="@layout/fragment_planning_task_new" >
+        <action
+            android:id="@+id/created_new_task"
+            app:destination="@id/planningListTaskFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/timerFragment"
         android:name="br.edu.ufabc.EsToDoeasy.view.TimerFragment"
         android:label="TimerFragment">
@@ -185,7 +194,6 @@
             android:name="id"
             android:defaultValue="-1L"
             app:argType="long" />
-
     </fragment>
 
 </navigation>

@@ -47,9 +47,9 @@ class TaskDetailsFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         try {
             when (item.itemId) {
-                R.id.action_edit -> {
-                    Log.d("VIEW", "Editing item ${args.id}")
-                }
+//                R.id.action_edit -> {
+//                    Log.d("VIEW", "Editing item ${args.id}")
+//                }
 
                 R.id.action_delete -> {
                     showDeleteDialog()

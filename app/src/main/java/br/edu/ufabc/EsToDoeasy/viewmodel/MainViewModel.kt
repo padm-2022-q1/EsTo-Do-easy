@@ -254,7 +254,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-
     /**
      * Returns all dependencies for a given task.
      */
@@ -296,6 +295,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
         }
     }
+
     fun getGroup(id: String) = listOf<Group>()
 
     fun deleteTask(id: Long) = liveData {

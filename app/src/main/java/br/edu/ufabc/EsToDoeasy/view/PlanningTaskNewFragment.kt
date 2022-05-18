@@ -8,7 +8,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.EsToDoeasy.R
-import br.edu.ufabc.EsToDoeasy.databinding.FragmentPlanningTaskDetailsBinding
+import br.edu.ufabc.EsToDoeasy.databinding.FragmentPlanningTaskNewBinding
 import br.edu.ufabc.EsToDoeasy.model.Difficulty
 import br.edu.ufabc.EsToDoeasy.model.Priority
 import br.edu.ufabc.EsToDoeasy.model.Status
@@ -16,20 +16,18 @@ import br.edu.ufabc.EsToDoeasy.model.Task
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
-
-class PlanningTaskDetailsFragment : Fragment() {
+class PlanningTaskNewFragment : Fragment() {
     private var difficulty: String = ""
     private var priority: String = ""
-    private lateinit var binding: FragmentPlanningTaskDetailsBinding
+    private lateinit var binding: FragmentPlanningTaskNewBinding
     private val viewModel: MainViewModel by activityViewModels()
-    private val args: PlanningTaskDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPlanningTaskDetailsBinding.inflate(inflater, container, false)
+        binding = FragmentPlanningTaskNewBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -44,9 +42,7 @@ class PlanningTaskDetailsFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_task_details, menu)
         inflater.inflate(R.menu.menu_task_form, menu)
-
     }
 
     override fun onStart() {
@@ -76,14 +72,13 @@ class PlanningTaskDetailsFragment : Fragment() {
 
         }
 
-
         val task = Task(
             id = 0,
             userId = "",
             title = binding.planningTaskDetailsTaskName.text.toString(),
             details = binding.planningTaskDetailsMultLineTaskEditText.text.toString(),
             dateStarted = Task.parseDate(binding.planningTaskDetailsDateStartEditText.text.toString()),
-            dateFinished = Task.parseDate(binding.planningTaskDetailsDateEndEditText.text.toString()),
+            dateFinished = Task.parseDate("01/01/2000"),
             dateDue = Task.parseDate(binding.planningTaskDetailsDateDueEditText.text.toString()),
             timeElapsed = 0,
             groupId = 1, // TODO:
@@ -97,12 +92,9 @@ class PlanningTaskDetailsFragment : Fragment() {
             when (status) {
                 is MainViewModel.Status.Success -> {
                     Log.d("add", "deu certo")
-                    PlanningTaskDetailsFragmentDirections.actionPlanningTaskDetailsFragmentToMenuItemListProfile()
+                    PlanningTaskEditFragmentDirections.actionPlanningTaskDetailsFragmentToMenuItemListProfile()
                         .let {
-                            findNavController().navigate(
-                                it,
-
-                                )
+                            findNavController().popBackStack()
                         }
                 }
 
@@ -114,15 +106,13 @@ class PlanningTaskDetailsFragment : Fragment() {
         }
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         when (item.itemId) {
             R.id.action_save -> {
                 add()
             }
         }
         return true
-
     }
+
 }

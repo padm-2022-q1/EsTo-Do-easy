@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".view.PlanningTaskDetailsFragment">
+    tools:context=".view.PlanningTaskEditFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -36,18 +36,6 @@
             app:layout_constraintTop_toBottomOf="@+id/planning_task_details_task_name" />
 
         <EditText
-            android:id="@+id/planning_task_details_date_end_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/planning_task_details_margin_top"
-            android:autofillHints="15/09/2022"
-            android:ems="10"
-            android:hint="@string/planning_task_details_date_end_hint"
-            android:inputType="date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/planning_task_details_date_start_edit_text" />
-
-        <EditText
             android:id="@+id/planning_task_details_date_due_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,7 +45,7 @@
             android:hint="@string/planning_task_details_date_due_hint"
             android:inputType="date"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/planning_task_details_date_end_edit_text" />
+            app:layout_constraintTop_toBottomOf="@+id/planning_task_details_date_start_edit_text" />
 
         <EditText
             android:id="@+id/planning_task_details_mult_line_task_edit_text"
