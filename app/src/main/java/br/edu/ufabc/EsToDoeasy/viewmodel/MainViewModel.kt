@@ -146,7 +146,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val profileEmail by lazy { SingleLiveEvent<String?>() }
 
+
     fun getAll() = liveData {
+        try {
+            emit(Status.Loading)
+            emit(Status.Success(Result.TaskList(repository.getAllTasks())))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
+        }
+    }
+
+    fun getTopologicalOrder(graph: AdjacencyList<Tasks>) = liveData {
         try {
             emit(Status.Loading)
             emit(Status.Success(Result.TaskList(repository.getAllTasks())))
@@ -187,25 +197,26 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun getSuggestTask() = Task(
-        0,
-        "userId",
-        "title",
-        "detalis",
-        Date(),
-        Date(),
-        Date(),
-        0, 2,
-        Difficulty.EASY,
-        Priority.HIGH,
-        br.edu.ufabc.EsToDoeasy.model.Status.TODO,
-        listOf()
-    )
+    val getSuggestTask by lazy { SingleLiveEvent<Task?>() }
+//        Task(
+//        0,
+//        "userId",
+//        "title",
+//        "detalis",
+//        Date(),
+//        Date(),
+//        Date(),
+//        0, 2,
+//        Difficulty.EASY,
+//        Priority.HIGH,
+//        br.edu.ufabc.EsToDoeasy.model.Status.TODO,
+//        listOf()
+//    )
 
     /**
      * Returns all tasks to be done next.
      */
-    fun getAllNextTasks() = listOf<Task>()
+    var getAllNextTasks = listOf<Task>()
 
     /**
      * Returns all tasks that aren't done.
