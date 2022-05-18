@@ -97,19 +97,28 @@ class TimerFragment : Fragment() {
     private fun bindEvents() {
         binding.pomodoroActionButton.setOnClickListener {
             viewModel.timeElapsed.value?.let { it1 ->
-                updateTask(it1)
-                Snackbar.make(binding.root, "Time elapsed $it1", Snackbar.LENGTH_LONG).show()
-                viewModel.timeElapsed.value = 0L
-            }
-            TimerFragmentDirections.actionTimerFragmentToMenuItemListHome().let {
-                findNavController().navigate(it)
-            }
+                viewModel.updateTask(args.id, it1 / 60 ).observe(viewLifecycleOwner) {   result ->
+                    when (result) {
+                        is MainViewModel.Status.Failure -> {
+                            Log.e("VIEW", "Failed to fetch items", result.e)
+                        }
+                        is MainViewModel.Status.Success -> {
+                            Log.d("UPDATE","Update")
+                            Snackbar.make(binding.root, "Time elapsed $it1", Snackbar.LENGTH_LONG).show()
+                            viewModel.timeElapsed.value = 0L
+                            TimerFragmentDirections.actionTimerFragmentToMenuItemListHome().let {
+                                findNavController().navigate(it)
+                            }
 
-            viewModel.state.value = if (viewModel.isTimerRunning()) {
-                MainViewModel.State.STOPPED
+                            viewModel.state.value = if (viewModel.isTimerRunning()) {
+                                MainViewModel.State.STOPPED
 
-            } else {
-                MainViewModel.State.STARTED
+                            } else {
+                                MainViewModel.State.STARTED
+                            }
+                        }
+                    }
+                }
             }
         }
     }
