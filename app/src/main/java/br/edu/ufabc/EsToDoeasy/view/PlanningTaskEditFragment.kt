@@ -203,7 +203,7 @@ class PlanningTaskEditFragment : Fragment() {
 
         val task = Task(
             id = args.id,
-            userId = "",
+            userId = viewModel.getUserId(),
             title = binding.planningTaskDetailsTaskName.text.toString(),
             details = binding.planningTaskDetailsMultLineTaskEditText.text.toString(),
             dateStarted = Task.parseDate(binding.planningTaskDetailsDateStartEditText.text.toString()),

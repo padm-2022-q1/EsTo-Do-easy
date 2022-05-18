@@ -74,4 +74,9 @@ interface Repository {
      * Finishes a task (mark as done) by its ID.
      */
     suspend fun finishTask(id: Long) : Boolean
+
+    /**
+     * Get user id.
+     */
+    fun getUserId() : String
 }
