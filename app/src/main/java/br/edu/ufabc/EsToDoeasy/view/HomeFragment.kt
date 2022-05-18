@@ -14,6 +14,7 @@ import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentHomeBinding
 import br.edu.ufabc.EsToDoeasy.model.AdjacencyList
 import br.edu.ufabc.EsToDoeasy.model.EdgeType
+import br.edu.ufabc.EsToDoeasy.model.Status
 import br.edu.ufabc.EsToDoeasy.model.Task
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 
@@ -44,115 +45,95 @@ class HomeFragment : Fragment() {
         }
     }
 
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    private fun updateRecyclerView() {
         binding.recyclerviewNextTasksList.apply {
             viewModel.getAll().observe(viewLifecycleOwner) { status ->
                 when (status) {
-                    is MainViewModel.Status.Loading -> {
-                        Log.d("VIEW", "Loading")
-                    }
                     is MainViewModel.Status.Failure -> {
                         Log.e("VIEW", "Failed to fetch items", status.e)
                     }
                     is MainViewModel.Status.Success -> {
                         val tasks = (status.result as MainViewModel.Result.TaskList).value
-                        var graph = AdjacencyList<Task>()
+
+                        val graph = AdjacencyList<Task>()
 
                         // FIX: run once
-                        for( task in tasks ){ // task virou um vértice
+                        for (task in tasks) { // task virou um vértice
                             graph.createVertex(task)
                         }
-                        for ( task in tasks ){ // test
-                            var neighs = tasks.filter { it.id in task.dependencies }
-                            for ( neigh in neighs){
-                                graph.add(EdgeType.DIRECTED, neigh, task, 0.0)
+                        for (task in tasks) { // test
+                            val neighs = tasks.filter { it.id in task.dependencies }
+                            for (neigh in neighs) {
+                                graph.add(EdgeType.DIRECTED, task, neigh, 0.0)
                             }
                         }
                         val newTasks = graph.dfsUtil()
+                            .filter { it.status == Status.TODO || it.status == Status.DOING }
+
+                        viewModel.getSuggestTask.value = newTasks.first()
 
                         adapter = TaskAdapter(
-                            newTasks,
-                            viewModel
+                            newTasks.subList(1, newTasks.size - 1),
+                            viewModel,
+                            findNavController()
                         )
-                        //swapAdapter(TaskAdapter(tasks.sortedBy { it.deadline }), false)
-//                        addItemDecoration(
-//                            DividerItemDecoration(
-//                                this.context,
-//                                DividerItemDecoration.VERTICAL
-//                            )
-//                        )
-//                        binding.progressHorizontal.visibility = View.INVISIBLE
+                        Log.d("VIEW", "Finished adapter")
                     }
                 }
             }
         }
     }
 
-    private fun updateRecyclerView() {
-        binding.recyclerviewNextTasksList.apply {
-            adapter = TaskAdapter(
-                viewModel.getAllNextTasks(),
-                viewModel
-            )
-        }
-    }
-
     private fun initComponents() {
-        val task = viewModel.getSuggestTask()
-        if (task != null) {
-            val group = viewModel.getGroup(task.groupId)
+        viewModel.getSuggestTask.observe(viewLifecycleOwner) { task ->
+            if (task != null) {
+                binding.suggestedTaskItemTitle.text = task.title
+                viewModel.getGroup(task.groupId).observe(viewLifecycleOwner) { result ->
+                    when (result) {
+                        is MainViewModel.Status.Success -> {
+                            val group =
+                                (result.result as MainViewModel.Result.SingleGroup).value.name
+                            Log.d("GROUP", group)
+                            binding.suggestedTaskItemGroup.text = group
+                        }
+                        else -> {}
+                    }
+                }
 
-            binding.suggestedTaskItemTitle.text = task.title
-            binding.suggestedTaskItemGroup.text = "grupo"
-            binding.suggestedTaskItemTimeElapsed.text =
-                DateUtils.formatElapsedTime(task.timeElapsed)
+                binding.suggestedTaskItemTimeElapsed.text =
+                    DateUtils.formatElapsedTime(task.timeElapsed)
 
-            context?.let {
-                val color = ContextCompat.getColor(
-                    it,
-                    if (task.timeElapsed != 0L) R.color.text_primary else R.color.text_faded
-                )
-                binding.suggestedTaskItemTimeElapsed.setTextColor(color)
-                binding.suggestedTaskItemTimeElapsedIcon.setColorFilter(color)
+                context?.let {
+                    val color = ContextCompat.getColor(
+                        it,
+                        if (task.timeElapsed != 0L) R.color.text_primary else R.color.text_faded
+                    )
+                    binding.suggestedTaskItemTimeElapsed.setTextColor(color)
+                    binding.suggestedTaskItemTimeElapsedIcon.setColorFilter(color)
+                }
+
+                binding.cardviewSuggestedTaskItem.visibility = View.VISIBLE
+                binding.suggestedTaskItemNoContent.visibility = View.INVISIBLE
+            } else {
+                binding.cardviewSuggestedTaskItem.visibility = View.INVISIBLE
+                binding.suggestedTaskItemNoContent.visibility = View.VISIBLE
             }
-
-            binding.cardviewSuggestedTaskItem.visibility = View.VISIBLE
-            binding.suggestedTaskItemNoContent.visibility = View.INVISIBLE
-        } else {
-            binding.cardviewSuggestedTaskItem.visibility = View.INVISIBLE
-            binding.suggestedTaskItemNoContent.visibility = View.VISIBLE
         }
-
         viewModel.selectedStudyTechnique.value?.let {
             binding.studyTechniquesItem.text = viewModel.selectedStudyTechnique.value
         }
     }
 
     private fun bindEvents() {
-        val task = viewModel.getSuggestTask()
-        task.let {
-            binding.cardviewSuggestedTaskItem.setOnClickListener {
-                viewModel.clickedItemId.value = task?.id
-            }
+        binding.cardviewSuggestedTaskItem.setOnClickListener {
+            viewModel.clickedItemId.value = viewModel.getSuggestTask.value?.id
+        }
+        binding.suggestedTaskItemPlay.setOnClickListener {
+            viewModel.getSuggestTask.value?.id?.let { openTimer(it) }
         }
 
         binding.cardviewStudyTechniquesItemSelector.setOnClickListener {
             viewModel.clickedStudyTechniqueSelect.value = true
-        }
-
-        binding.suggestedTaskItemPlay.setOnClickListener {
-            //viewModel.clickedTaskToPlay.value = true
-            HomeFragmentDirections.actionMenuItemListHomeToTimerFragment(task.id).let {
-                findNavController().navigate(it)
-            }
-        }
-
-        binding.addTaskItem.setOnClickListener {
-            viewModel.clickedAtAddTask.value = true
         }
 
         binding.floatingActionButton.setOnClickListener {
@@ -162,6 +143,34 @@ class HomeFragment : Fragment() {
         viewModel.selectedStudyTechnique.observe(this) {
             it?.let {
                 binding.studyTechniquesItem.text = it
+            }
+        }
+    }
+
+    private fun openTimer(id: Long) {
+        when (viewModel.selectedStudyTechnique.value) {
+            "Pomodoro" -> {
+                viewModel.state.value = if (viewModel.isTimerRunning()) {
+                    MainViewModel.State.STOPPED
+                } else {
+                    MainViewModel.State.STARTED
+                }
+                HomeFragmentDirections.actionNavigationListToNavigationPomodoro(id).let {
+                    findNavController().navigate(it)
+                }
+            }
+            "Free" -> {
+                viewModel.state.value = if (viewModel.isTimerRunning()) {
+                    MainViewModel.State.STOPPED
+                } else {
+                    MainViewModel.State.STARTED
+                }
+                HomeFragmentDirections.actionMenuItemListHomeToTimerFragment(id).let {
+                    findNavController().navigate(it)
+                }
+            }
+            else -> {
+                Log.e("VIEW", "Invalid study technique ${viewModel.selectedStudyTechnique.value}")
             }
         }
     }

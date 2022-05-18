@@ -11,7 +11,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentPlanningTaskEditBinding
-import br.edu.ufabc.EsToDoeasy.model.*
+import br.edu.ufabc.EsToDoeasy.model.Difficulty
+import br.edu.ufabc.EsToDoeasy.model.Priority
+import br.edu.ufabc.EsToDoeasy.model.Status
+import br.edu.ufabc.EsToDoeasy.model.Task
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
@@ -58,6 +61,43 @@ class PlanningTaskEditFragment : Fragment() {
         bindEvents()
 
         // TODO: fazer a tradução dos Radios para Difficulty e prioriry
+        binding.selectStartDate.setOnClickListener{ it ->
+            val datePickerFragment = DatePickerFragment()
+            val supportFragmentManager = requireActivity().supportFragmentManager
+
+            // we have to implement setFragmentResultListener
+            supportFragmentManager.setFragmentResultListener(
+                "REQUEST_KEY",
+                viewLifecycleOwner
+            ) { resultKey, bundle ->
+                if (resultKey == "REQUEST_KEY") {
+                    val date = bundle.getString("SELECTED_DATE")
+                    binding.planningTaskDetailsDateStartEditText.setText(date)
+                }
+            }
+
+            // show
+            datePickerFragment.show(supportFragmentManager, "DatePickerFragment")
+        }
+
+        binding.selectDueDate.setOnClickListener{ it ->
+            val datePickerFragment = DatePickerFragment()
+            val supportFragmentManager = requireActivity().supportFragmentManager
+
+            // we have to implement setFragmentResultListener
+            supportFragmentManager.setFragmentResultListener(
+                "REQUEST_KEY",
+                viewLifecycleOwner
+            ) { resultKey, bundle ->
+                if (resultKey == "REQUEST_KEY") {
+                    val date = bundle.getString("SELECTED_DATE")
+                    binding.planningTaskDetailsDateDueEditText.setText(date)
+                }
+            }
+            // show
+            datePickerFragment.show(supportFragmentManager, "DatePickerFragment")
+        }
+
         binding.planningDetailsActivityLevelRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             difficulty = checkedId.toString()
             Log.d("DiFF","$difficulty")

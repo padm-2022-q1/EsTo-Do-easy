@@ -70,4 +70,8 @@ interface Repository {
      */
     suspend fun deleteTask(id: Long)
 
+    /**
+     * Finishes a task (mark as done) by its ID.
+     */
+    suspend fun finishTask(id: Long) : Boolean
 }

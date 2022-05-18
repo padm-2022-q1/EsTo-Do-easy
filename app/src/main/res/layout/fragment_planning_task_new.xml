@@ -29,12 +29,22 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/planning_task_details_margin_top"
             android:autofillHints="10/09/2022"
+            android:focusable="false"
             android:ems="10"
             android:hint="@string/planning_task_details_date_start_hint"
             android:inputType="date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/planning_task_details_task_name" />
-
+        <ImageButton
+            android:id="@+id/select_start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_action_calendar"
+            android:contentDescription="@string/action_edit"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/planning_task_details_date_start_edit_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/planning_task_details_date_start_edit_text" />
         <EditText
             android:id="@+id/planning_task_details_date_due_edit_text"
             android:layout_width="match_parent"
@@ -44,9 +54,19 @@
             android:ems="10"
             android:hint="@string/planning_task_details_date_due_hint"
             android:inputType="date"
+            android:focusable="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/planning_task_details_date_start_edit_text" />
-
+        <ImageButton
+            android:id="@+id/select_due_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_action_calendar"
+            android:contentDescription="@string/action_edit"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/planning_task_details_date_due_edit_text"
+            app:layout_constraintEnd_toEndOf="@+id/planning_task_details_date_due_edit_text"
+            app:layout_constraintTop_toTopOf="@+id/planning_task_details_date_due_edit_text" />
         <EditText
             android:id="@+id/planning_task_details_mult_line_task_edit_text"
             android:layout_width="match_parent"

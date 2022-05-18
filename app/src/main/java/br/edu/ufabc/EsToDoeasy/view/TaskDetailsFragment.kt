@@ -2,9 +2,6 @@ package br.edu.ufabc.EsToDoeasy.view
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -51,6 +48,10 @@ class TaskDetailsFragment : Fragment() {
 //                    Log.d("VIEW", "Editing item ${args.id}")
 //                }
 
+                R.id.action_done -> {
+                    finishTask()
+                }
+
                 R.id.action_delete -> {
                     showDeleteDialog()
                 }
@@ -78,9 +79,6 @@ class TaskDetailsFragment : Fragment() {
 
         viewModel.getTask(args.id).observe(viewLifecycleOwner) { result ->
             when (result) {
-                is MainViewModel.Status.Loading -> {
-                    Log.d("VIEW", "Loading")
-                }
                 is MainViewModel.Status.Failure -> {
                     Log.e("VIEW", "Failed to fetch items", result.e)
                 }
@@ -89,18 +87,20 @@ class TaskDetailsFragment : Fragment() {
                     val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.US)
 
                     binding.taskDetailsTitle.text = task.title
-                    viewModel.getGroup(task.groupId).observe(viewLifecycleOwner) {   result ->
+                    viewModel.getGroup(task.groupId).observe(viewLifecycleOwner) { result ->
 
                         when (result) {
                             is MainViewModel.Status.Success -> {
 
-                                val group = (result.result as MainViewModel.Result.SingleGroup).value.name
-                                Log.d("GROUP","$group")
+                                val group =
+                                    (result.result as MainViewModel.Result.SingleGroup).value.name
+                                Log.d("GROUP", "$group")
                                 binding.taskDetailsGroup.text = group.toString()
                             }
                         }
 
                     }
+                    binding.taskDetailsDetails.text = task.details
                     binding.taskDetailsDateStarted.text = formatter.format(task.dateStarted)
                     binding.taskDetailsDateFinished.text = formatter.format(task.dateFinished)
                     binding.taskDetailsDateDue.text = formatter.format(task.dateDue)
@@ -116,9 +116,6 @@ class TaskDetailsFragment : Fragment() {
 
             viewModel.getTaskDependencies(args.id).observe(viewLifecycleOwner) { result ->
                 when (result) {
-                    is MainViewModel.Status.Loading -> {
-                        Log.d("VIEW", "Loading")
-                    }
                     is MainViewModel.Status.Failure -> {
                         Log.e("VIEW", "Failed to fetch items", result.e)
                     }
@@ -162,6 +159,26 @@ class TaskDetailsFragment : Fragment() {
                     Snackbar.make(
                         binding.root,
                         getString(R.string.task_details_delete_error),
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+    }
+
+    private fun finishTask() {
+        viewModel.finishTask(args.id).observe(viewLifecycleOwner) {
+            when (it) {
+                is MainViewModel.Status.Success -> {
+                    TaskDetailsFragmentDirections.backToHome().let {
+                        findNavController().navigate(it)
+                    }
+                }
+                is MainViewModel.Status.Failure -> {
+                    Log.e("FRAGMENT", "Failed to finish task", it.e)
+                    Snackbar.make(
+                        binding.root,
+                        getString(R.string.task_details_finish_error),
                         Snackbar.LENGTH_LONG
                     ).show()
                 }
