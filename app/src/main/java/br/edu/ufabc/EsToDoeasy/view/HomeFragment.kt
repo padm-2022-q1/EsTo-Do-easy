@@ -23,7 +23,7 @@ import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: MainViewModel by activityViewModels()
-
+    enum class State {INITIAL, STARTED, STOPPED}
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -143,16 +143,33 @@ class HomeFragment : Fragment() {
             viewModel.getSuggestTask.value?.id?.let { it1 ->
                 when (binding.studyTechniquesItem.text) {
                     "Pomodoro" -> {
+
+                        viewModel.state.value = if (viewModel.isTimerRunning()) {
+                            MainViewModel.State.STOPPED
+                        } else {
+                            MainViewModel.State.STARTED
+                        }
                         HomeFragmentDirections.actionNavigationListToNavigationPomodoro().let {
                             findNavController().navigate(it)
                         }
+
                     }
                     "Free" -> {
+                        viewModel.state.value = if (viewModel.isTimerRunning()) {
+                            MainViewModel.State.STOPPED
+                        } else {
+                            MainViewModel.State.STARTED
+                        }
                         HomeFragmentDirections.actionMenuItemListHomeToTimerFragment(it1).let {
                             findNavController().navigate(it)
                         }
                     }
                     else -> {
+                        viewModel.state.value = if (viewModel.isTimerRunning()) {
+                            MainViewModel.State.STOPPED
+                        } else {
+                            MainViewModel.State.STARTED
+                        }
                         HomeFragmentDirections.actionNavigationListToNavigationPomodoro().let {
                             findNavController().navigate(it)
                         }

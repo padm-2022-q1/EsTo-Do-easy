@@ -306,6 +306,22 @@ class RepositoryFirestore(application: Application) : Repository {
         it.id ?: throw Exception("Failed to add task") // FIXME:
     }
 
+    suspend fun updateTaskTime(id: Long, time: Long) {
+        getTaskCollection()
+            .whereEqualTo(TaskDoc.userId, getCurrentUser())
+            .whereEqualTo(TaskDoc.id, id)
+            .get(getSource())
+            .await()
+            .let { querySnapshot ->
+                if (querySnapshot.isEmpty)
+                    throw Exception("Failed to update Task with non-existing id $id")
+                querySnapshot.first().reference.update(
+                    TaskDoc.timeElapsed,
+                    querySnapshot.first().toObject(TaskFirestore::class.java).timeElapsed?.plus(time)
+                )
+            }
+    }
+
     override suspend fun updateTask(task: Task) {
         getTaskCollection()
             .whereEqualTo(TaskDoc.userId, getCurrentUser())
@@ -318,6 +334,7 @@ class RepositoryFirestore(application: Application) : Repository {
                 querySnapshot.first().reference.set(TaskFirestore.fromTask(task, getCurrentUser()))
             }
     }
+
     private suspend fun nextId() = getTaskCollection()
         .document(taskIdDoc)
         .get(getSource())

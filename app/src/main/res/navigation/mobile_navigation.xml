@@ -194,6 +194,9 @@
             android:name="id"
             android:defaultValue="-1L"
             app:argType="long" />
+        <action
+            android:id="@+id/action_timerFragment_to_menu_item_list_home"
+            app:destination="@id/menu_item_list_home" />
     </fragment>
 
 </navigation>
