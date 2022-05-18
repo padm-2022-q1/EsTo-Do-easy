@@ -253,6 +253,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun addTimeTask(id: Long, time: Long) = liveData {
+        try {
+            //emit(Status.Loading)
+            emit(Status.Success(Result.Id(repository.addTimeTask(id,time))))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to add time task $id", e)))
+        }
+    }
     /**
      * Returns all Dependencies.
      */

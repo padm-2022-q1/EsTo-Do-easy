@@ -281,6 +281,11 @@ class RepositoryFirestore(application: Application) : Repository {
         .await()
         .toObjects(AchievementFirestore::class.java).map { it.toAchievement() }
 
+    suspend fun getAllTaskTime(): TaskTimes = getTaskTimeCollection()
+        .whereEqualTo(TaskTimeDoc.userId, getCurrentUser())
+        .get(getSource())
+        .await()
+        .toObjects(TaskTimeFirestore::class.java).map { it.toTaskTime() }
 
     override suspend fun getDependencies(id: Long): Tasks = getTask(id)
         .dependencies.map { getTask(it) }
@@ -323,6 +328,29 @@ class RepositoryFirestore(application: Application) : Repository {
     ).let {
         getGroupCollection().add(it)
         it.id ?: throw Exception("Failed to add group")
+    }
+
+    suspend fun addTaskTime(time: TaskTime): Long = TaskTimeFirestore(
+        id = nextTaskTimeId(),
+        userId = getCurrentUser(),
+        taskId = time.taskId,
+        date = Date(),
+        timeElapsed = time.timeElapsed
+    ).let {
+        getTaskTimeCollection().add(it)
+        it.id ?: throw Exception("Failed to add Task Time")
+    }
+
+    suspend fun addTimeTask(id: Long, time:Long): Long = TaskTimeFirestore(
+        id = nextTaskTimeId(),
+        userId = getCurrentUser(),
+        taskId = id,
+        date = Date(),
+        timeElapsed = time,
+
+        ).let {
+        getTaskTimeCollection().add(it)
+        it.id ?: throw Exception("Failed to add task TIME") // FIXME:
     }
 
     suspend fun getAllTasksByGroup(id: Long): Tasks = getTaskCollection()
@@ -379,6 +407,9 @@ class RepositoryFirestore(application: Application) : Repository {
                 querySnapshot.first().reference.set(TaskFirestore.fromTask(task, getCurrentUser()))
             }
     }
+
+
+
 
     private suspend fun nextId() = getTaskCollection()
         .document(taskIdDoc)

@@ -3,7 +3,7 @@ package br.edu.ufabc.EsToDoeasy.model
 import java.text.SimpleDateFormat
 import java.util.*
 
-
+typealias TaskTimes = List<TaskTime>
 /**
  *  TaskTime object.
  */
@@ -34,7 +34,7 @@ data class TaskTime(
     val timeElapsed: Long,
 
 
-    ) {
+    ){
     companion object {
         private val format = SimpleDateFormat("MM/dd/yyyy", Locale.US)
 
