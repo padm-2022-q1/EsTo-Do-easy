@@ -28,7 +28,14 @@ class TimerFragment : Fragment() {
         val minutes = timeElapsed % 3600 / 60
         val seconds = timeElapsed % 60
 
-        binding.text.text = getString(R.string.time_format, hours, minutes, seconds)
+        binding.progressCircleDeterminate.setStepCountText(
+            getString(
+                R.string.time_format,
+                hours,
+                minutes,
+                seconds
+            )
+        )
     }
 
     private fun formatStart() { // FIX:

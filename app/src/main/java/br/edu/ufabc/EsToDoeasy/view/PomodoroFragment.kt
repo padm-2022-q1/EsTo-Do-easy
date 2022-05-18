@@ -1,6 +1,8 @@
 package br.edu.ufabc.EsToDoeasy.view
 
 import android.os.Bundle
+import android.text.format.DateUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +12,8 @@ import androidx.fragment.app.activityViewModels
 import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentPomodoroBinding
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
+import br.edu.ufabc.EsToDoeasy.viewmodel.PomodoroViewModel
+import kotlin.math.roundToInt
 
 /**
  * Tasks list view.
@@ -17,16 +21,15 @@ import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 class PomodoroFragment : Fragment() {
     private lateinit var binding: FragmentPomodoroBinding
     private val viewModel: MainViewModel by activityViewModels()
-    private val time: Long = 25*60*1000
-
+    private val pomodoroViewModel: PomodoroViewModel by activityViewModels()
 
     private fun updateTime(timeElapsed: Long) {
+        val setting = pomodoroViewModel.currentState()
+        val timeRemaining = setting.timer - timeElapsed
+        binding.progressCircleDeterminate.setStepCountText(DateUtils.formatElapsedTime(timeRemaining))
 
-        val minutes = timeElapsed % 3600 / 60
-        val seconds = timeElapsed % 60
-        binding.text.text = getString(R.string.time_format_pomodoro, 24-minutes, 59-seconds)
-
-        binding.progressCircleDeterminate.progress = (25*60) - (timeElapsed).toInt()
+        val angle = (timeElapsed.toFloat() / setting.timer.toFloat()) * 360
+        binding.progressCircleDeterminate.setPercentage(angle.roundToInt())
     }
 
     private fun formatStart() { // FIX:
@@ -56,7 +59,7 @@ class PomodoroFragment : Fragment() {
         }
 
         viewModel.timeElapsed.observe(this) {
-            it?.let { timeElapsed -> updateTime(timeElapsed)}
+            it?.let { timeElapsed -> updateTime(timeElapsed) }
         }
     }
 
@@ -77,7 +80,6 @@ class PomodoroFragment : Fragment() {
     }
 
     private fun bindEvents() {
-
         binding.pomodoroActionButton.setOnClickListener {
             viewModel.state.value = if (viewModel.isTimerRunning()) {
                 MainViewModel.State.STOPPED
@@ -89,28 +91,21 @@ class PomodoroFragment : Fragment() {
             viewModel.clickedAtConfigPomodoro.value = true
         }
         binding.pomodoroSkip.setOnClickListener {
-            // check the current state of this page through the time
-            val status = binding.text.text
+            pomodoroViewModel.nextState().observe(viewLifecycleOwner) { status ->
+                when (status) {
+                    is PomodoroViewModel.Status.Failure -> {
+                        Log.e("VIEW", "Failed to proceed to next state", status.e)
+                    }
+                    is PomodoroViewModel.Status.Success -> {
+                        val result = (status.result as PomodoroViewModel.Result.StateResult).value
 
-            if (status.equals("24:59")) {
-                binding.text.text = getString(R.string.pomodoro_shortbreak)
-                binding.pomodoroBack.setBackgroundResource(R.color.green)
-                binding.pomodoroActionButton.text = getString(R.string.skip_break_label)
-            } else if (status.equals("4:59")) {
-                binding.text.text = getString(R.string.pomodoro_longbreak)
-                binding.pomodoroActionButton.text = getString(R.string.skip_break_label)
-                binding.pomodoroBack.setBackgroundResource(R.color.purple)
-            } else if (status.equals("14:59")) {
-                binding.text.text = getString(R.string.pomodoro_end_session)
-                binding.pomodoroActionButton.text = getString(R.string.pomodoro_start_new_session)
-                binding.pomodoroBack.setBackgroundResource(R.color.yellow)
-            } else {
-                binding.text.text = getString(R.string.pomodoro_focus)
-                binding.pomodoroActionButton.text = getString(R.string.pomodoro_pause_focus)
-                binding.pomodoroBack.setBackgroundResource(R.color.orange)
+                        val timerText = DateUtils.formatElapsedTime(result.timer)
+                        binding.progressCircleDeterminate.setStepCountText(timerText)
+                        binding.pomodoroBack.setBackgroundResource(result.color)
+                        binding.pomodoroActionButton.text = getString(result.action)
+                    }
+                }
             }
-
-
         }
     }
 }

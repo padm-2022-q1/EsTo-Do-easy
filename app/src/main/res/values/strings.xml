@@ -136,7 +136,7 @@
     <string name="time_format_pomodoro">%02d:%02d</string>
     <string name="time_format">%02d:%02d:%02d</string>
     <string name="return_pause">Return</string>
-    <string name="timer_defalt_value">00:00:00</string>
+    <string name="timer_default_value">00:00:00</string>
     <string name="stop">Stop</string>
 </resources>
 
