@@ -55,7 +55,7 @@ class PlanningTaskEditFragment : Fragment() {
 
         initComponents()
 
-        bindEvents()
+        //bindEvents()
 
         // TODO: fazer a tradução dos Radios para Difficulty e prioriry
         binding.selectStartDate.setOnClickListener{ it ->
@@ -116,32 +116,26 @@ class PlanningTaskEditFragment : Fragment() {
                     val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.US)
 
                     binding.planningTaskDetailsTaskName.setText(task.title)
-
+                    binding.planningTaskDetailsMultLineTaskEditText.setText(task.details)
                     viewModel.getGroup(task.groupId).observe(viewLifecycleOwner) {   result ->
                         when (result) {
                             is MainViewModel.Status.Success -> {
                                 val group = (result.result as MainViewModel.Result.SingleGroup).value.name
                                 Log.d("GROUP","$group")
                                 binding.autoCompleteTextViewProjectName.setText(group)
-                            }
-                        }
-                    }
 
-                    viewModel.getAllGroups().observe(viewLifecycleOwner) { status ->
-                        when (status) {
-                            is MainViewModel.Status.Success -> {
-                                val groupsName = (status.result as MainViewModel.Result.GroupList).value.map { it.name }
-                                val groupsID = (status.result as MainViewModel.Result.GroupList).value.map { it.name }
-                                val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item_project_name_new_task, groupsName)
-                                binding.autoCompleteTextViewProjectName.setAdapter(arrayAdapter)
-
-                                for (i in groupsID){
-                                    var count = 0
-                                    if (i.toLong() == task.groupId){
-                                        binding.autoCompleteTextViewProjectName.setSelection(count)
-
+                                viewModel.getAllGroups().observe(viewLifecycleOwner) { status ->
+                                    when (status) {
+                                        is MainViewModel.Status.Success -> {
+                                            val groupsName = (status.result as MainViewModel.Result.GroupList).value.map { it.name }
+                                            listGroups = (status.result as MainViewModel.Result.GroupList).value
+                                            val groupsID = (status.result as MainViewModel.Result.GroupList).value.map { it.id }
+                                            val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item_project_name_new_task, groupsName)
+                                            binding.autoCompleteTextViewProjectName.setAdapter(arrayAdapter)
+                                            Log.d("GRUPOS","$groupsID")
+                                            Log.d("GRUPOS","${task.groupId}")
+                                        }
                                     }
-                                    count++
                                 }
                             }
                         }
@@ -254,7 +248,7 @@ class PlanningTaskEditFragment : Fragment() {
                 is MainViewModel.Status.Success -> {
                     val groups = (status.result as MainViewModel.Result.GroupList).value.map { it.name }
                     val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item_project_name_new_task, groups)
-                    listGroups = (status.result as MainViewModel.Result.GroupList).value
+
                     binding.autoCompleteTextViewProjectName.setAdapter(arrayAdapter)
                 }
             }

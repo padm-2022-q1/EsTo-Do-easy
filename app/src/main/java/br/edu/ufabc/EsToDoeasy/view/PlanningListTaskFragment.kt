@@ -92,7 +92,7 @@ class PlanningListTaskFragment : Fragment() {
 
     private fun bindEvents() {
         binding.floatingActionButton.setOnClickListener {
-            PlanningListTaskFragmentDirections.addNewTask().let {
+            PlanningListTaskFragmentDirections.addNewTask(args.id).let {
                 findNavController().navigate(it)
             }
         }

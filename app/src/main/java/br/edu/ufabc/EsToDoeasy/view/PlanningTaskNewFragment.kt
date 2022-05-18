@@ -10,10 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentPlanningTaskNewBinding
-import br.edu.ufabc.EsToDoeasy.model.Difficulty
-import br.edu.ufabc.EsToDoeasy.model.Priority
-import br.edu.ufabc.EsToDoeasy.model.Status
-import br.edu.ufabc.EsToDoeasy.model.Task
+import br.edu.ufabc.EsToDoeasy.model.*
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
@@ -22,6 +19,8 @@ class PlanningTaskNewFragment : Fragment() {
     private var priority: String = ""
     private lateinit var binding: FragmentPlanningTaskNewBinding
     private val viewModel: MainViewModel by activityViewModels()
+    private var listGroups: List<Group> = listOf()
+    private val args: PlanningTaskNewFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -117,6 +116,8 @@ class PlanningTaskNewFragment : Fragment() {
             else -> Difficulty.HARD
         }
 
+        val groupName = binding.planningNewTaskAutoCompleteTextViewProjectName.text
+
         val task = Task(
             id = 0,
             userId = "",
@@ -126,7 +127,7 @@ class PlanningTaskNewFragment : Fragment() {
             dateFinished = Task.parseDate("01/01/2000"),
             dateDue = Task.parseDate(binding.planningTaskDetailsDateDueEditText.text.toString()),
             timeElapsed = 0,
-            groupId = 1, // TODO:
+            groupId = listGroups.filter { it.name == groupName.toString() }.first().id, // TODO:
             difficulty = getDifficulty(binding.planningDetailsActivityLevelRadioGroup.checkedRadioButtonId),
             priority = getPriority(binding.planningDetailsPriorityLevelRadioGroup.checkedRadioButtonId),
             status = Status.TODO,
@@ -174,7 +175,11 @@ class PlanningTaskNewFragment : Fragment() {
                 is MainViewModel.Status.Success -> {
                     val groups = (status.result as MainViewModel.Result.GroupList).value.map { it.name }
                     val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item_project_name_new_task, groups)
+                    listGroups = (status.result as MainViewModel.Result.GroupList).value
                     binding.planningNewTaskAutoCompleteTextViewProjectName.setAdapter(arrayAdapter)
+
+                    binding.planningNewTaskAutoCompleteTextViewProjectName.setText(status.result.value.filter { it.id == args.id }.first().name)
+
                 }
             }
         }
