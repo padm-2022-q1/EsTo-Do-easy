@@ -61,7 +61,7 @@ interface Repository {
     suspend fun addTask(task: Task): Long
 
     /**
-     * Refresh the remove group by Id.
+     * updates a task by Id.
      */
     suspend fun updateTask(task: Task)
 
@@ -70,4 +70,8 @@ interface Repository {
      */
     suspend fun deleteTask(id: Long)
 
+    /**
+     * Finishes a task (mark as done) by its ID.
+     */
+    suspend fun finishTask(id: Long) : Boolean
 }

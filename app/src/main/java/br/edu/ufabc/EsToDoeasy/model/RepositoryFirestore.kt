@@ -134,7 +134,7 @@ class RepositoryFirestore(application: Application) : Repository {
         companion object {
             fun fromTask(task: Task, user: String) = TaskFirestore(
                 id = task.id,
-                userId = task.userId,
+                userId = user,
                 title = task.title,
                 details = task.details,
                 dateStarted = task.dateStarted,
@@ -298,7 +298,7 @@ class RepositoryFirestore(application: Application) : Repository {
         .first()
         .toTask()
 
-    override suspend fun getGroup(id: Long): Group = getGroupCollection()
+    override suspend fun getGroup(id: Long) : Group = getGroupCollection()
         .whereEqualTo(GroupDoc.userId, getCurrentUser())
         .whereEqualTo(GroupDoc.id, id)
         .get(getSource())
@@ -307,7 +307,7 @@ class RepositoryFirestore(application: Application) : Repository {
         .first()
         .toGroup()
 
-    override suspend fun getAchievement(id: Long): Achievement = getAchievementCollection()
+    override suspend fun getAchievement(id: Long) : Achievement = getAchievementCollection()
         .whereEqualTo(AchievementDoc.userId, getCurrentUser())
         .whereEqualTo(AchievementDoc.id, id)
         .get(getSource())
@@ -406,7 +406,6 @@ class RepositoryFirestore(application: Application) : Repository {
                 querySnapshot.first().reference.set(TaskFirestore.fromTask(task, getCurrentUser()))
             }
     }
-
 
     private suspend fun nextId() = getTaskCollection()
         .document(taskIdDoc)
@@ -530,4 +529,14 @@ class RepositoryFirestore(application: Application) : Repository {
                 }
             }
     }
+
+    override suspend fun finishTask(id: Long): Boolean = getTaskCollection()
+        .whereEqualTo(GroupDoc.userId, getCurrentUser())
+        .whereEqualTo(TaskDoc.id, id)
+        .get(getSource())
+        .await()
+        .let { snapshot ->
+            if (snapshot.isEmpty) throw Exception("Failed to finish task with non-existing id $id")
+            snapshot.first().reference.update(TaskDoc.status, Status.DONE).await().let { true }
+        }
 }

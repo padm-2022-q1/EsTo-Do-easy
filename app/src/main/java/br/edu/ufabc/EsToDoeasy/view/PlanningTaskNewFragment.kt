@@ -3,6 +3,7 @@ package br.edu.ufabc.EsToDoeasy.view
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -47,6 +48,9 @@ class PlanningTaskNewFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        bindEvents()
+
         // TODO: fazer a tradução dos Radios para Difficulty e prioriry
         binding.selectStartDate.setOnClickListener{ it ->
             val datePickerFragment = DatePickerFragment()
@@ -100,18 +104,17 @@ class PlanningTaskNewFragment : Fragment() {
         }
     }
 
-    fun add() {
-        fun toDifficulty() = when (difficulty) {
-            "Easy" -> {
-                Difficulty.EASY
-            }
-            "Medium" -> {
-                Difficulty.MEDIUM
-            }
-            else ->{
-                Difficulty.HARD
-            }
+    private fun add() {
+        fun getPriority (id: Int) = when (id) {
+            binding.radioButtonPriorityLevelLow.id -> Priority.LOW
+            binding.radioButtonPriorityLevelMedium.id -> Priority.MEDIUM
+            else -> Priority.HIGH
+        }
 
+        fun getDifficulty (id: Int) = when (id) {
+            binding.radioButtonActivityLevelEasy.id -> Difficulty.EASY
+            binding.radioButtonActivityLevelMedium.id -> Difficulty.MEDIUM
+            else -> Difficulty.HARD
         }
 
         val task = Task(
@@ -124,12 +127,14 @@ class PlanningTaskNewFragment : Fragment() {
             dateDue = Task.parseDate(binding.planningTaskDetailsDateDueEditText.text.toString()),
             timeElapsed = 0,
             groupId = 1, // TODO:
-            difficulty = toDifficulty(),
-            priority = Priority.LOW,
+            difficulty = getDifficulty(binding.planningDetailsActivityLevelRadioGroup.checkedRadioButtonId),
+            priority = getPriority(binding.planningDetailsPriorityLevelRadioGroup.checkedRadioButtonId),
             status = Status.TODO,
             dependencies = listOf<Long>()
         )
+
         Log.d("add", "task build",)
+
         viewModel.addTask(task).observe(viewLifecycleOwner) { status ->
             when (status) {
                 is MainViewModel.Status.Success -> {
@@ -157,4 +162,18 @@ class PlanningTaskNewFragment : Fragment() {
         return true
     }
 
+    private fun bindEvents(){
+        viewModel.getAllGroups().observe(viewLifecycleOwner, ) { status ->
+            when (status) {
+                is MainViewModel.Status.Failure -> {
+                    Log.e("VIEW", "Failed to fetch items", status.e)
+                }
+                is MainViewModel.Status.Success -> {
+                    val groups = (status.result as MainViewModel.Result.GroupList).value.map { it.name }
+                    val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item_project_name_new_task, groups)
+                    binding.planningNewTaskAutoCompleteTextViewProjectName.setAdapter(arrayAdapter)
+                }
+            }
+        }
+    }
 }

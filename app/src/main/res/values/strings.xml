@@ -136,9 +136,14 @@
     <string name="time_format_pomodoro">%02d:%02d</string>
     <string name="time_format">%02d:%02d:%02d</string>
     <string name="return_pause">Return</string>
+    <string name="timer_defalt_value">00:00:00</string>
+    <string name="drop_down_item_project_name">Choose a Project Name</string>
     <string name="timer_default_value">00:00:00</string>
     <string name="stop">Stop</string>
     <string name="pomodoro_finish">Finish</string>
+    <string name="action_done">Finish</string>
+    <string name="task_details_finish_error">Finish</string>
+    <string name="task_details_default">Details</string>
     <string name="select_tasks_dependencies">Select Tasks Dependencies</string>
 </resources>
 

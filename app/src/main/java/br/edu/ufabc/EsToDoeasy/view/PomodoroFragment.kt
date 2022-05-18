@@ -3,9 +3,7 @@ package br.edu.ufabc.EsToDoeasy.view
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -89,6 +87,11 @@ class PomodoroFragment : Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -96,6 +99,20 @@ class PomodoroFragment : Fragment() {
     ): View {
         binding = FragmentPomodoroBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_timer, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_done -> {
+                finishTask()
+            }
+            else -> Log.e("VIEW", "Invalid option ${item.itemId} selected")
+        }
+        return true
     }
 
     override fun onStart() {
@@ -193,6 +210,27 @@ class PomodoroFragment : Fragment() {
 
                         viewModel.timeElapsed.value = 0
                     }
+                    else -> {
+                        Log.i("VIEW", "Received status ${status}")
+                    }
+                }
+            }
+        }
+    }
+
+    private fun finishTask() {
+        viewModel.finishTask(args.id).observe(viewLifecycleOwner) {
+            when (it) {
+                is MainViewModel.Status.Success -> {
+                    finish()
+                }
+                is MainViewModel.Status.Failure -> {
+                    Log.e("FRAGMENT", "Failed to finish task", it.e)
+                    Snackbar.make(
+                        binding.root,
+                        getString(R.string.task_details_finish_error),
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
             }
         }

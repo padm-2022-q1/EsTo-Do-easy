@@ -91,15 +91,14 @@
             android:layout_marginTop="20dp"
             app:layout_constraintBottom_toTopOf="@id/planning_details_activity_level_label"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/planning_task_details_mult_line_task_edit_text"
-            >
+            app:layout_constraintTop_toBottomOf="@id/planning_task_details_mult_line_task_edit_text">
             <AutoCompleteTextView
+                android:id="@+id/auto_complete_text_view_project_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
                 android:hint="@string/planning_details_project_name_hint"
                 />
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView

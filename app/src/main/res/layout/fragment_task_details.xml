@@ -51,6 +51,26 @@
             app:layout_constraintTop_toBottomOf="@id/task_details_group_label" />
 
         <TextView
+            android:id="@+id/task_details_details_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/task_details_default"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/task_details_group"
+            app:layout_constraintTop_toBottomOf="@id/task_details_group" />
+
+        <TextView
+            android:id="@+id/task_details_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/task_details_default"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/task_details_group_label"
+            app:layout_constraintTop_toBottomOf="@id/task_details_details_label" />
+
+        <TextView
             android:id="@+id/task_details_date_started_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -60,7 +80,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/task_details_date_finished_label"
             app:layout_constraintStart_toStartOf="@id/task_details_group_label"
-            app:layout_constraintTop_toBottomOf="@id/task_details_group" />
+            app:layout_constraintTop_toBottomOf="@id/task_details_details" />
 
         <TextView
             android:id="@+id/task_details_date_started"
@@ -83,7 +103,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/task_details_date_due_label"
             app:layout_constraintStart_toEndOf="@id/task_details_date_started_label"
-            app:layout_constraintTop_toBottomOf="@id/task_details_group" />
+            app:layout_constraintTop_toBottomOf="@id/task_details_details" />
 
         <TextView
             android:id="@+id/task_details_date_finished"
@@ -106,7 +126,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/task_details_date_finished_label"
-            app:layout_constraintTop_toBottomOf="@id/task_details_group" />
+            app:layout_constraintTop_toBottomOf="@id/task_details_details" />
 
         <TextView
             android:id="@+id/task_details_date_due"

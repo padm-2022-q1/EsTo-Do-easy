@@ -1,9 +1,11 @@
 package br.edu.ufabc.EsToDoeasy.view
 
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.NextTaskListItemBinding
@@ -15,13 +17,18 @@ import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
  */
 class TaskAdapter(
     private val tasks: List<Task>,
-    private val viewModel: MainViewModel
+    private val viewModel: MainViewModel,
+    private val navController: NavController,
 ) : RecyclerView.Adapter<TaskAdapter.TaskHolder>() {
 
     /**
      * Task item view holder.
      */
-    class TaskHolder(itemBinding: NextTaskListItemBinding, viewModel: MainViewModel) :
+    class TaskHolder(
+        itemBinding: NextTaskListItemBinding,
+        viewModel: MainViewModel,
+        navController: NavController
+    ) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
         /**
@@ -51,18 +58,39 @@ class TaskAdapter(
 
         init {
             itemBinding.root.setOnClickListener {
-                /*
-                 * This was made using var property because it wasn't accepting
-                 * getItemId(position: Long), only getItemId(), which always returned -1.
-                 */
                 viewModel.clickedItemId.value = id
             }
             itemBinding.nextTaskItemPlay.setOnClickListener {
-                viewModel.clickedTaskToPlay.value = true
+                when (viewModel.selectedStudyTechnique.value) {
+                    "Pomodoro" -> {
+                        viewModel.state.value = if (viewModel.isTimerRunning()) {
+                            MainViewModel.State.STOPPED
+                        } else {
+                            MainViewModel.State.STARTED
+                        }
+                        HomeFragmentDirections.actionNavigationListToNavigationPomodoro(id)
+                            .let {
+                                navController.navigate(it)
+                            }
+                    }
+                    "Free" -> {
+                        viewModel.state.value = if (viewModel.isTimerRunning()) {
+                            MainViewModel.State.STOPPED
+                        } else {
+                            MainViewModel.State.STARTED
+                        }
+                        HomeFragmentDirections.actionMenuItemListHomeToTimerFragment(id).let {
+                            navController.navigate(it)
+                        }
+                    }
+                    else -> {
+                        Log.e(
+                            "VIEW",
+                            "Invalid study technique ${viewModel.selectedStudyTechnique.value}"
+                        )
+                    }
+                }
             }
-
-            //viewModel.clickedPlanningTaskId.value = id
-
         }
     }
 
@@ -76,7 +104,8 @@ class TaskAdapter(
                 parent,
                 false
             ),
-            viewModel
+            viewModel,
+            navController
         )
 
     override fun onBindViewHolder(holder: TaskHolder, position: Int) {

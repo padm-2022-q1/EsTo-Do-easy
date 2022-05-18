@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_task_details_to_task_details"
             app:destination="@id/navigation_details" />
+        <action
+            android:id="@+id/back_to_home"
+            app:destination="@id/menu_item_list_home" />
     </fragment>
 
     <fragment

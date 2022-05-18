@@ -90,6 +90,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val isLoading = MutableLiveData(false)
 
     /**
+     * Currently selected study technique.
+     */
+    val selectedStudyTechnique = MutableLiveData("Pomodoro")
+
+    /**
      * Maintains the currently selected task ID.
      */
     val clickedItemId by lazy { SingleLiveEvent<Long?>() }
@@ -104,8 +109,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val clickedScheduledTaskId by lazy { SingleLiveEvent<Long?>() }
 
     val clickedStudyTechniqueSelect by lazy { SingleLiveEvent<Boolean?>() }
-
-    val selectedStudyTechnique by lazy { SingleLiveEvent<String?>() }
 
     val clickedTaskToPlay by lazy { SingleLiveEvent<Boolean?>() }
 
@@ -193,20 +196,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     val getSuggestTask by lazy { SingleLiveEvent<Task?>() }
-//        Task(
-//        0,
-//        "userId",
-//        "title",
-//        "detalis",
-//        Date(),
-//        Date(),
-//        Date(),
-//        0, 2,
-//        Difficulty.EASY,
-//        Priority.HIGH,
-//        br.edu.ufabc.EsToDoeasy.model.Status.TODO,
-//        listOf()
-//    )
 
     /**
      * Returns all tasks to be done next.
@@ -244,7 +233,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun updateTask(id: Long, time: Long) = liveData {
         try {
             isLoading.value = true
-            repository.updateTaskTime(id,time)
+            repository.updateTaskTime(id, time)
             emit(Status.Success(Result.EmptyResult))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to update item $id", e)))
@@ -256,11 +245,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun addTimeTask(id: Long, time: Long) = liveData {
         try {
             //emit(Status.Loading)
-            emit(Status.Success(Result.Id(repository.addTimeTask(id,time))))
+            emit(Status.Success(Result.Id(repository.addTimeTask(id, time))))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to add time task $id", e)))
         }
     }
+
     /**
      * Returns all Dependencies.
      */
@@ -345,6 +335,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun updateTask(task: Task) = liveData {
+        try {
+            repository.updateTask(task)
+            emit(Status.Success(Result.EmptyResult))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to update task from repository", e)))
+        }
+    }
+
     fun getAllTasksByGroup(id: Long) = liveData {
         try {
             isLoading.value = true
@@ -355,6 +354,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             isLoading.value = false
         }
     }
+
+    fun finishTask(id: Long) = liveData {
+        try {
+            isLoading.value = true
+            repository.finishTask(id)
+            emit(Status.Success(Result.EmptyResult))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to retrieve tasks from a given groupId $id", e)))
+        } finally {
+            isLoading.value = false
+        }
+    }
+
 
     // TIMER
     enum class State { INITIAL, STARTED, STOPPED }
