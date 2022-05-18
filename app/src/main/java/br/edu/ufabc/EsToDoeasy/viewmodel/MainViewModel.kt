@@ -307,6 +307,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun updateTask(task: Task) = liveData {
+        try {
+            repository.updateTask(task)
+            emit(Status.Success(Result.EmptyResult))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to update task from repository", e)))
+        }
+    }
+
     fun getAllTasksByGroup(id: Long) = liveData {
         try {
             emit(Status.Loading)

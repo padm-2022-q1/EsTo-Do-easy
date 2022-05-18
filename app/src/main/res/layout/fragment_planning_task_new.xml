@@ -61,7 +61,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/planning_details_project_name"
+            android:id="@+id/planning_new_task_project_name"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,6 +71,7 @@
             app:layout_constraintTop_toBottomOf="@id/planning_task_details_mult_line_task_edit_text"
             >
             <AutoCompleteTextView
+                android:id="@+id/planning_new_task_auto_complete_text_view_project_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
@@ -87,7 +88,7 @@
             android:text="@string/planning_task_details_activity_level_label"
             android:textSize="11sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/planning_details_project_name" />
+            app:layout_constraintTop_toBottomOf="@id/planning_new_task_project_name" />
 
         <RadioGroup
             android:id="@+id/planning_details_activity_level_radio_group"
