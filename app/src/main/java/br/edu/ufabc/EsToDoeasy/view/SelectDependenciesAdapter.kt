@@ -62,7 +62,7 @@ class SelectDependenciesAdapter(
     override fun onBindViewHolder(holder: TaskHolder, position: Int) {
         val task = tasks[position]
         holder.id = task.id
-        holder.checkBox.isChecked = viewModel.selectedDependencies.value?.any { it == task.id } ?: false
+        holder.checkBox.isChecked = viewModel.selectedDependencies.value?.any { task.id == it } ?: holder.checkBox.isChecked
         holder.title.text = task.title
     }
 
