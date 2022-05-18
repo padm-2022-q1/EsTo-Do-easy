@@ -7,16 +7,13 @@
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.232" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/layout/activity_main.xml" value="0.1403985507246377" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/layout/dependencies_tasks_list_item.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/layout/dropdown_item.xml" value="0.25833333333333336" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/layout/fragment_dashboard.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/layout/fragment_home_.xml" value="0.25" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/layout/fragment_login_page.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/layout/fragment_new_group.xml" value="0.22" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/layout/fragment_planning_group_list.xml" value="0.1643835616438356" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/layout/fragment_planning_task_details.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/layout/fragment_planning_task_edit.xml" value="0.20697463768115942" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/layout/fragment_planning_task_list.xml" value="0.33" />
-        <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/layout/fragment_planning_task_new.xml" value="0.26403985507246375" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/layout/fragment_pomodoro.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/layout/fragment_pomodoro_settings.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/layout/fragment_profile_achievements.xml" value="0.36666666666666664" />
@@ -32,10 +29,10 @@
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/layout/planning_list_item.xml" value="0.12454710144927536" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/layout/scheduled_task_list_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/menu/main_navigation_menu.xml" value="0.1" />
-        <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/menu/menu_list_task.xml" value="0.31203703703703706" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/menu/menu_new_group.xml" value="0.18489583333333334" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/menu/menu_task_details.xml" value="0.1484375" />
-        <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/menu/menu_task_form.xml" value="0.25833333333333336" />
+        <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/drawable-anydpi/ic_action_delete.xml" value="0.1315" />
+        <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/drawable-anydpi/ic_action_edit.xml" value="0.1315" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/drawable/report_button_customized.xml" value="0.2085" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/dependencies_tasks_list_item.xml" value="0.1" />
@@ -47,12 +44,14 @@
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/fragment_study_techniques_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/fragment_task_details.xml" value="0.25" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/fragment_task_list.xml" value="0.1" />
+        <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/fragment_timer.xml" value="0.20416666666666666" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/next_task_list_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/planning_group_item.xml" value="0.1" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/schedule_task_list_item.xml" value="0.5" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/scheduled_task_list_item.xml" value="0.1" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/layout/task_list_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/menu/main_navigation_menu.xml" value="0.1" />
+        <entry key="..\:/Workspace/EsTo-Do-easy/app/src/main/res/menu/menu_task_details.xml" value="0.1" />
         <entry key="..\:/Workspace/atv02-notes-hirusora/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Workspace/atv02-notes-hirusora/app/src/main/res/layout/fragment_note_details.xml" value="0.33" />
         <entry key="..\:/Workspace/atv02-notes-hirusora/app/src/main/res/layout/fragment_note_list.xml" value="0.22" />
@@ -70,23 +69,17 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_home_.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_new_task_details.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/fragment_planning_task_details.xml" value="0.2125" />
-        <entry key="app/src/main/res/layout/fragment_planning_task_list.xml" value="0.2125" />
-        <entry key="app/src/main/res/layout/fragment_pomodoro.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_study_techniques.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/fragment_study_techniques_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_task_details.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_task_list.xml" value="0.2125" />
-        <entry key="app/src/main/res/layout/fragment_timer.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/layout/next_task_list_item.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/planning_list_item.xml" value="0.2125" />
-        <entry key="app/src/main/res/layout/scheduled_task_list_item.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/task_list_item.xml" value="0.67" />
         <entry key="app/src/main/res/menu/main_navigation_menu.xml" value="0.1078125" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

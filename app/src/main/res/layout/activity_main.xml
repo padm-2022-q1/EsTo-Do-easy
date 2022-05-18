@@ -11,9 +11,16 @@
         style="@style/Widget.MaterialComponents.Toolbar.Primary"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/main_fragment_container"
@@ -24,7 +31,7 @@
         app:layout_constraintBottom_toTopOf="@id/main_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+        app:layout_constraintTop_toBottomOf="@id/progress_linear"
         app:navGraph="@navigation/mobile_navigation" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

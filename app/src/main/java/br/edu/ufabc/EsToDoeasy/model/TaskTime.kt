@@ -34,7 +34,7 @@ data class TaskTime(
     val timeElapsed: Long,
 
 
-    ) {
+    ){
     companion object {
         private val format = SimpleDateFormat("MM/dd/yyyy", Locale.US)
 

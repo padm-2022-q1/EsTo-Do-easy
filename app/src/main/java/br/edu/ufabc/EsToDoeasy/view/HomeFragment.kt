@@ -48,9 +48,6 @@ class HomeFragment : Fragment() {
         binding.recyclerviewNextTasksList.apply {
             viewModel.getAll().observe(viewLifecycleOwner) { status ->
                 when (status) {
-                    is MainViewModel.Status.Loading -> {
-                        Log.d("VIEW", "Loading")
-                    }
                     is MainViewModel.Status.Failure -> {
                         Log.e("VIEW", "Failed to fetch items", status.e)
                     }
@@ -59,18 +56,18 @@ class HomeFragment : Fragment() {
                             (status.result as MainViewModel.Result.TaskList).value.sortedBy {
                                 it.id
                             }
-                        var graph = AdjacencyList<Task>()
+                        val graph = AdjacencyList<Task>()
                         // FIX: run once
                         for (task in tasks) { // task virou um vértice
                             graph.createVertex(task)
                         }
                         for (task in tasks) { // test
-                            var neighs = tasks.filter { it.id in task.dependencies }
+                            val neighs = tasks.filter { it.id in task.dependencies }
                             for (neigh in neighs) {
                                 graph.add(EdgeType.DIRECTED, neigh, task, 0.0)
                             }
                         }
-                        val newTasks = tasks//graph.dfsUtil()
+                        val newTasks = graph.dfsUtil()
 
                         viewModel.getSuggestTask.value = newTasks.first()
 
@@ -78,14 +75,7 @@ class HomeFragment : Fragment() {
                             newTasks.subList(1, newTasks.size - 1),
                             viewModel
                         )
-                        //swapAdapter(TaskAdapter(tasks.sortedBy { it.deadline }), false)
-//                        addItemDecoration(
-//                            DividerItemDecoration(
-//                                this.context,
-//                                DividerItemDecoration.VERTICAL
-//                            )
-//                        )
-//                        binding.progressHorizontal.visibility = View.INVISIBLE
+                        Log.d("VIEW", "Finished adapter")
                     }
                 }
             }
