@@ -90,7 +90,7 @@ class PlanningTaskEditFragment : Fragment() {
 
         binding.planningDetailsActivityLevelRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             difficulty = checkedId.toString()
-            Log.d("DiFF","$difficulty")
+            Log.d("DiFF","$checkedId")
         }
 
         binding.planningDetailsPriorityLevelRadioGroup.setOnCheckedChangeListener { group, checkedId ->
@@ -100,14 +100,26 @@ class PlanningTaskEditFragment : Fragment() {
 
     fun edit() {
         fun toDifficulty() = when (difficulty) {
-            "Easy" -> {
+            R.id.radio_button_activity_level_easy.toString() -> {
                 Difficulty.EASY
             }
-            "Medium" -> {
+            R.id.radio_button_activity_level_medium.toString() -> {
                 Difficulty.MEDIUM
             }
             else ->{
                 Difficulty.HARD
+            }
+        }
+
+        fun toPriority() = when (priority) {
+            R.id.radio_button_priority_level_low.toString() -> {
+                Priority.LOW
+            }
+            R.id.radio_button_priority_level_medium.toString() -> {
+                Priority.MEDIUM
+            }
+            else ->{
+                Priority.HIGH
             }
         }
 
@@ -122,7 +134,7 @@ class PlanningTaskEditFragment : Fragment() {
             timeElapsed = 0,
             groupId = 1, // TODO:
             difficulty = toDifficulty(),
-            priority = Priority.LOW,
+            priority = toPriority(),
             status = Status.TODO,
             dependencies = listOf<Long>()
         )
