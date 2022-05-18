@@ -155,18 +155,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun getTopologicalOrder(graph: AdjacencyList<Tasks>) = liveData {
-        try {
-            isLoading.value = true
-            emit(Status.Success(Result.TaskList(repository.getAllTasks())))
-        } catch (e: Exception) {
-            emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
-        } finally {
-            isLoading.value = false
-        }
-    }
-
-
     fun getTask(id: Long) = liveData {
         try {
             isLoading.value = true
@@ -248,6 +236,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             emit(Status.Success(Result.GroupList(repository.getAllGroups())))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
+        } finally {
+            isLoading.value = false
+        }
+    }
+
+    fun updateTask(id: Long, time: Long) = liveData {
+        try {
+            isLoading.value = true
+            repository.updateTaskTime(id,time)
+            emit(Status.Success(Result.EmptyResult))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to update item $id", e)))
         } finally {
             isLoading.value = false
         }
