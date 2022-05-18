@@ -130,8 +130,11 @@ class PlanningTaskNewFragment : Fragment() {
             difficulty = getDifficulty(binding.planningDetailsActivityLevelRadioGroup.checkedRadioButtonId),
             priority = getPriority(binding.planningDetailsPriorityLevelRadioGroup.checkedRadioButtonId),
             status = Status.TODO,
-            dependencies = listOf<Long>()
+            dependencies = viewModel.selectedDependencies.value?.toList() as List<Long>
         )
+
+        viewModel.selectedDependencies.value!!.clear()
+        Log.d("add", "task build",)
 
         Log.d("add", "task build",)
 

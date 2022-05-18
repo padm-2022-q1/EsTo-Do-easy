@@ -1,5 +1,6 @@
 package br.edu.ufabc.EsToDoeasy.view
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -37,7 +38,11 @@ class SelectDependenciesAdapter(
         val checkBox = itemBinding.dependeciesTaskItemCheckbox
 
         init {
-            // pega todos os elementos checkados e seta eles num vetor de Ids ?
+            itemBinding.root.setOnClickListener {
+                viewModel.selectedDependencies.value?.add(id)
+                Log.d("dependencies","${viewModel.selectedDependencies.value}")
+                checkBox.isChecked = true
+            }
         }
     }
 
@@ -57,8 +62,13 @@ class SelectDependenciesAdapter(
     override fun onBindViewHolder(holder: TaskHolder, position: Int) {
         val task = tasks[position]
         holder.id = task.id
+        holder.checkBox.isChecked = viewModel.selectedDependencies.value?.any { it == task.id } ?: false
         holder.title.text = task.title
     }
 
     override fun getItemCount(): Int = tasks.size
+
+    override fun onViewRecycled(holder: TaskHolder) {
+        super.onViewRecycled(holder)
+    }
 }

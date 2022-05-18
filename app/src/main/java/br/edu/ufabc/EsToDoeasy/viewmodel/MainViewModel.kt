@@ -94,6 +94,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      */
     val selectedStudyTechnique = MutableLiveData("Pomodoro")
 
+
+    val selectedDependencies =  MutableLiveData<MutableList<Long>>(mutableListOf())
+
     /**
      * Maintains the currently selected task ID.
      */
