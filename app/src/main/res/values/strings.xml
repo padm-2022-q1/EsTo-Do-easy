@@ -139,5 +139,6 @@
     <string name="timer_default_value">00:00:00</string>
     <string name="stop">Stop</string>
     <string name="pomodoro_finish">Finish</string>
+    <string name="select_tasks_dependencies">Select Tasks Dependencies</string>
 </resources>
 
