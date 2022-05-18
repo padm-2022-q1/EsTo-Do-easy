@@ -44,11 +44,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    private fun updateRecyclerView() {
         binding.recyclerviewNextTasksList.apply {
             viewModel.getAll().observe(viewLifecycleOwner) { status ->
                 when (status) {
@@ -93,15 +89,6 @@ class HomeFragment : Fragment() {
                     }
                 }
             }
-        }
-    }
-
-    private fun updateRecyclerView() {
-        binding.recyclerviewNextTasksList.apply {
-            adapter = TaskAdapter(
-                viewModel.getAllNextTasks,
-                viewModel
-            )
         }
     }
 
