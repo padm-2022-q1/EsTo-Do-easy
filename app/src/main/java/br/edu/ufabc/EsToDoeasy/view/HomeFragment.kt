@@ -23,7 +23,9 @@ import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: MainViewModel by activityViewModels()
-    enum class State {INITIAL, STARTED, STOPPED}
+
+    enum class State { INITIAL, STARTED, STOPPED }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,11 +54,10 @@ class HomeFragment : Fragment() {
                         Log.e("VIEW", "Failed to fetch items", status.e)
                     }
                     is MainViewModel.Status.Success -> {
-                        val tasks =
-                            (status.result as MainViewModel.Result.TaskList).value.sortedBy {
-                                it.id
-                            }
+                        val tasks = (status.result as MainViewModel.Result.TaskList).value
+
                         val graph = AdjacencyList<Task>()
+
                         // FIX: run once
                         for (task in tasks) { // task virou um vértice
                             graph.createVertex(task)
@@ -64,7 +65,7 @@ class HomeFragment : Fragment() {
                         for (task in tasks) { // test
                             val neighs = tasks.filter { it.id in task.dependencies }
                             for (neigh in neighs) {
-                                graph.add(EdgeType.DIRECTED, neigh, task, 0.0)
+                                graph.add(EdgeType.DIRECTED, task, neigh, 0.0)
                             }
                         }
                         val newTasks = graph.dfsUtil()
@@ -91,9 +92,10 @@ class HomeFragment : Fragment() {
                         is MainViewModel.Status.Success -> {
                             val group =
                                 (result.result as MainViewModel.Result.SingleGroup).value.name
-                            Log.d("GROUP", "$group")
+                            Log.d("GROUP", group)
                             binding.suggestedTaskItemGroup.text = group
                         }
+                        else -> {}
                     }
                 }
 

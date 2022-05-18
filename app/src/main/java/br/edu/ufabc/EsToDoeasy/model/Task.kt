@@ -89,7 +89,7 @@ data class Task(
      */
     val dependencies: List<Long>,
 
-){
+) : Comparable<Task> {
     companion object {
         private val format = SimpleDateFormat("MM/dd/yyyy", Locale.US)
 
@@ -113,5 +113,11 @@ data class Task(
          * @return the date with normalized time
          */
         fun simplifyDate(date: Date): Date? = parseDate(formatDate(date))
+    }
+
+    override fun compareTo(other: Task): Int = when{
+        this.dateDue != null && this.dateDue != other.dateDue -> this.dateDue compareTo other.dateDue
+        this.id != other.id -> this.id compareTo other.id
+        else -> 0
     }
 }
