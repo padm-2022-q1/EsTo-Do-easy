@@ -135,16 +135,14 @@ class HomeFragment : Fragment() {
             viewModel.getSuggestTask.value?.id?.let { it1 ->
                 when (binding.studyTechniquesItem.text) {
                     "Pomodoro" -> {
-
                         viewModel.state.value = if (viewModel.isTimerRunning()) {
                             MainViewModel.State.STOPPED
                         } else {
                             MainViewModel.State.STARTED
                         }
-                        HomeFragmentDirections.actionNavigationListToNavigationPomodoro().let {
+                        HomeFragmentDirections.actionNavigationListToNavigationPomodoro(it1).let {
                             findNavController().navigate(it)
                         }
-
                     }
                     "Free" -> {
                         viewModel.state.value = if (viewModel.isTimerRunning()) {
@@ -157,14 +155,7 @@ class HomeFragment : Fragment() {
                         }
                     }
                     else -> {
-                        viewModel.state.value = if (viewModel.isTimerRunning()) {
-                            MainViewModel.State.STOPPED
-                        } else {
-                            MainViewModel.State.STARTED
-                        }
-                        HomeFragmentDirections.actionNavigationListToNavigationPomodoro().let {
-                            findNavController().navigate(it)
-                        }
+                        Log.e("VIEW", "Invalid study technique ${binding.studyTechniquesItem.text}")
                     }
                 }
 

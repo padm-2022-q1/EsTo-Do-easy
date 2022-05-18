@@ -2,6 +2,7 @@ package br.edu.ufabc.EsToDoeasy.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import br.edu.ufabc.EsToDoeasy.R
 
@@ -22,16 +23,15 @@ class PomodoroViewModel(application: Application) : AndroidViewModel(application
         val state: State,
         val timer: Long,
         val color: Int,
-        val action: Int,
     ) {
         object FocusState :
-            StateSetting(State.FOCUS, 25 * 60, R.color.orange, R.string.pomodoro_pause_focus)
+            StateSetting(State.FOCUS, 25 * 60, R.color.orange)
 
         object ShortBreakState :
-            StateSetting(State.SHORT_BREAK, 5 * 60, R.color.green, R.string.skip_break_label)
+            StateSetting(State.SHORT_BREAK, 5 * 60, R.color.green)
 
         object LongBreakState :
-            StateSetting(State.LONG_BREAK, 15 * 60, R.color.purple, R.string.skip_break_label)
+            StateSetting(State.LONG_BREAK, 15 * 60, R.color.purple)
     }
 
     /**
@@ -79,11 +79,23 @@ class PomodoroViewModel(application: Application) : AndroidViewModel(application
     )
 
     private var currentIndex = 0
+    val currentTimer = MutableLiveData(0L)
 
     fun currentState() = order[currentIndex]
 
-    fun nextState() = liveData {
+    fun restartState() = liveData {
         try {
+            currentTimer.value = 0
+            currentIndex = 0
+            emit(Status.Success(Result.StateResult(order[currentIndex])))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to proceed to next pomodoro state", e)))
+        }
+    }
+
+    fun nextState(time: Long) = liveData {
+        try {
+            currentTimer.value = currentTimer.value?.plus(time)
             currentIndex++
             if (currentIndex >= order.size) currentIndex = 0
 
