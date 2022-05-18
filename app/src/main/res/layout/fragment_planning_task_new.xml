@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/planning_task_details_margin_top"
             android:autofillHints="10/09/2022"
+            android:focusable="false"
             android:ems="10"
             android:hint="@string/planning_task_details_date_start_hint"
             android:inputType="date"
@@ -53,6 +54,7 @@
             android:ems="10"
             android:hint="@string/planning_task_details_date_due_hint"
             android:inputType="date"
+            android:focusable="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/planning_task_details_date_start_edit_text" />
         <ImageButton

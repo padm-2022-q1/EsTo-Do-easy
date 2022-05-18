@@ -14,6 +14,7 @@ import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentHomeBinding
 import br.edu.ufabc.EsToDoeasy.model.AdjacencyList
 import br.edu.ufabc.EsToDoeasy.model.EdgeType
+import br.edu.ufabc.EsToDoeasy.model.Status
 import br.edu.ufabc.EsToDoeasy.model.Task
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 
@@ -68,7 +69,7 @@ class HomeFragment : Fragment() {
                                 graph.add(EdgeType.DIRECTED, task, neigh, 0.0)
                             }
                         }
-                        val newTasks = graph.dfsUtil()
+                        val newTasks = graph.dfsUtil().filter{ it.status == Status.TODO || it.status != Status.DOING  }
 
                         viewModel.getSuggestTask.value = newTasks.first()
 
