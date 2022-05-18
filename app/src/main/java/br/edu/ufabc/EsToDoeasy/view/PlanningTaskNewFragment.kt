@@ -70,6 +70,12 @@ class PlanningTaskNewFragment : Fragment() {
             // show
             datePickerFragment.show(supportFragmentManager, "DatePickerFragment")
         }
+        binding.addDependencies.setOnClickListener{
+            PlanningTaskNewFragmentDirections.actionPlanningTaskNewFragmentToFragmentSelectDependencies()
+                .let {
+                    findNavController().navigate(it)
+                }
+        }
 
         binding.selectDueDate.setOnClickListener{ it ->
             val datePickerFragment = DatePickerFragment()

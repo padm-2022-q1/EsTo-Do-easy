@@ -72,15 +72,24 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.195" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.195" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/dependencies_tasks_list_item.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/dependencies_tasks_select_list.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/layout/fragment_home_.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_new_task_details.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_planning_task_details.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/fragment_planning_task_list.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/fragment_planning_task_new.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/fragment_select_dependencies.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/fragment_study_techniques.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/fragment_study_techniques_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_task_details.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_task_list.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/fragment_timer.xml" value="0.19166666666666668" />
         <entry key="app/src/main/res/layout/next_task_list_item.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/planning_group_item.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/planning_list_item.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/scheduled_task_list_item.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/task_list_item.xml" value="0.67" />
         <entry key="app/src/main/res/menu/main_navigation_menu.xml" value="0.1078125" />
       </map>

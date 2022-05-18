@@ -171,6 +171,9 @@
         <action
             android:id="@+id/edited_task"
             app:destination="@id/planningListTaskFragment" />
+        <action
+            android:id="@+id/action_planningTaskDetailsFragment_to_fragmentSelectDependencies"
+            app:destination="@id/fragmentSelectDependencies" />
     </fragment>
 
     <fragment
@@ -191,6 +194,9 @@
         <action
             android:id="@+id/created_new_task"
             app:destination="@id/planningListTaskFragment" />
+        <action
+            android:id="@+id/action_planningTaskNewFragment_to_fragmentSelectDependencies"
+            app:destination="@id/fragmentSelectDependencies" />
     </fragment>
     <fragment
         android:id="@+id/timerFragment"
@@ -202,6 +208,16 @@
         <action
             android:id="@+id/action_timerFragment_to_menu_item_list_home"
             app:destination="@id/menu_item_list_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentSelectDependencies"
+        android:name="br.edu.ufabc.EsToDoeasy.view.FragmentSelectDependencies"
+        android:label="Select Tasks Dependencies" >
+        <argument
+            android:name="id"
+            android:defaultValue="-1L"
+            app:argType="long" />
     </fragment>
 
 </navigation>

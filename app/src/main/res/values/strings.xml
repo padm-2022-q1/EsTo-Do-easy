@@ -144,5 +144,6 @@
     <string name="action_done">Finish</string>
     <string name="task_details_finish_error">Finish</string>
     <string name="task_details_default">Details</string>
+    <string name="select_tasks_dependencies">Select Tasks Dependencies</string>
 </resources>
 
