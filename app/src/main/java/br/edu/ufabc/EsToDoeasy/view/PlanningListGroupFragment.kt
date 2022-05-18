@@ -67,8 +67,6 @@ class PlanningListGroupFragment : Fragment() {
             }
         }
     }
-
-
     private fun bindEvents() {
         viewModel.clickedItemId.observe(viewLifecycleOwner) {
             it?.let {
@@ -82,6 +80,4 @@ class PlanningListGroupFragment : Fragment() {
             viewModel.clickedAddNewGroup.value = true
         }
     }
-
-
 }

@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_navigation_list_to_navigation_planner"
             app:destination="@id/menu_item_list_planner" />
+        <action
+            android:id="@+id/action_menu_item_list_home_to_timerFragment"
+            app:destination="@id/timerFragment" />
     </fragment>
 
     <fragment
@@ -62,7 +65,6 @@
         <action
             android:id="@+id/show_task_details"
             app:destination="@id/navigation_details" />
-
     </fragment>
 
     <fragment
@@ -170,7 +172,7 @@
         android:id="@+id/planningNewGroupFragment"
         android:name="br.edu.ufabc.EsToDoeasy.view.PlanningNewGroupFragment"
         android:label="fragment_new_group"
-        tools:layout="@layout/fragment_new_group" >
+        tools:layout="@layout/fragment_new_group">
         <action
             android:id="@+id/created_new_group"
             app:destination="@id/menu_item_list_planner" />
@@ -183,6 +185,15 @@
         <action
             android:id="@+id/created_new_task"
             app:destination="@id/planningListTaskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/timerFragment"
+        android:name="br.edu.ufabc.EsToDoeasy.view.TimerFragment"
+        android:label="TimerFragment">
+        <argument
+            android:name="id"
+            android:defaultValue="-1L"
+            app:argType="long" />
     </fragment>
 
 </navigation>
