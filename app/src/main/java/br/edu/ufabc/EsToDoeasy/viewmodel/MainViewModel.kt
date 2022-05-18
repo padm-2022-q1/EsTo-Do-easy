@@ -397,4 +397,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun isTimerRunning() = state.value == State.STARTED
+
+    fun getUserId() = repository.getUserId()
 }
