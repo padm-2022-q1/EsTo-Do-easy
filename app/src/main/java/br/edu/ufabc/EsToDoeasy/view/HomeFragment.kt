@@ -25,8 +25,6 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: MainViewModel by activityViewModels()
 
-    enum class State { INITIAL, STARTED, STOPPED }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -69,13 +67,15 @@ class HomeFragment : Fragment() {
                                 graph.add(EdgeType.DIRECTED, task, neigh, 0.0)
                             }
                         }
-                        val newTasks = graph.dfsUtil().filter{ it.status == Status.TODO || it.status != Status.DOING  }
+                        val newTasks = graph.dfsUtil()
+                            .filter { it.status == Status.TODO || it.status == Status.DOING }
 
                         viewModel.getSuggestTask.value = newTasks.first()
 
                         adapter = TaskAdapter(
                             newTasks.subList(1, newTasks.size - 1),
-                            viewModel
+                            viewModel,
+                            findNavController()
                         )
                         Log.d("VIEW", "Finished adapter")
                     }
@@ -119,8 +119,6 @@ class HomeFragment : Fragment() {
                 binding.suggestedTaskItemNoContent.visibility = View.VISIBLE
             }
         }
-
-
         viewModel.selectedStudyTechnique.value?.let {
             binding.studyTechniquesItem.text = viewModel.selectedStudyTechnique.value
         }
@@ -131,36 +129,7 @@ class HomeFragment : Fragment() {
             viewModel.clickedItemId.value = viewModel.getSuggestTask.value?.id
         }
         binding.suggestedTaskItemPlay.setOnClickListener {
-            //viewModel.clickedTaskToPlay.value = true
-
-            viewModel.getSuggestTask.value?.id?.let { it1 ->
-                when (binding.studyTechniquesItem.text) {
-                    "Pomodoro" -> {
-                        viewModel.state.value = if (viewModel.isTimerRunning()) {
-                            MainViewModel.State.STOPPED
-                        } else {
-                            MainViewModel.State.STARTED
-                        }
-                        HomeFragmentDirections.actionNavigationListToNavigationPomodoro(it1).let {
-                            findNavController().navigate(it)
-                        }
-                    }
-                    "Free" -> {
-                        viewModel.state.value = if (viewModel.isTimerRunning()) {
-                            MainViewModel.State.STOPPED
-                        } else {
-                            MainViewModel.State.STARTED
-                        }
-                        HomeFragmentDirections.actionMenuItemListHomeToTimerFragment(it1).let {
-                            findNavController().navigate(it)
-                        }
-                    }
-                    else -> {
-                        Log.e("VIEW", "Invalid study technique ${binding.studyTechniquesItem.text}")
-                    }
-                }
-
-            }
+            viewModel.getSuggestTask.value?.id?.let { openTimer(it) }
         }
 
         binding.cardviewStudyTechniquesItemSelector.setOnClickListener {
@@ -174,6 +143,34 @@ class HomeFragment : Fragment() {
         viewModel.selectedStudyTechnique.observe(this) {
             it?.let {
                 binding.studyTechniquesItem.text = it
+            }
+        }
+    }
+
+    private fun openTimer(id: Long) {
+        when (viewModel.selectedStudyTechnique.value) {
+            "Pomodoro" -> {
+                viewModel.state.value = if (viewModel.isTimerRunning()) {
+                    MainViewModel.State.STOPPED
+                } else {
+                    MainViewModel.State.STARTED
+                }
+                HomeFragmentDirections.actionNavigationListToNavigationPomodoro(id).let {
+                    findNavController().navigate(it)
+                }
+            }
+            "Free" -> {
+                viewModel.state.value = if (viewModel.isTimerRunning()) {
+                    MainViewModel.State.STOPPED
+                } else {
+                    MainViewModel.State.STARTED
+                }
+                HomeFragmentDirections.actionMenuItemListHomeToTimerFragment(id).let {
+                    findNavController().navigate(it)
+                }
+            }
+            else -> {
+                Log.e("VIEW", "Invalid study technique ${viewModel.selectedStudyTechnique.value}")
             }
         }
     }

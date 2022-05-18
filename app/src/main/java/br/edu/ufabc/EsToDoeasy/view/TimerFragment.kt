@@ -2,9 +2,7 @@ package br.edu.ufabc.EsToDoeasy.view
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -68,6 +66,11 @@ class TimerFragment : Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -75,6 +78,21 @@ class TimerFragment : Fragment() {
     ): View {
         binding = FragmentTimerBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_timer, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_done -> {
+                finishTask()
+            }
+            else -> Log.e("VIEW", "Invalid option ${item.itemId} selected")
+        }
+        return true
     }
 
     override fun onStart() {
@@ -86,46 +104,68 @@ class TimerFragment : Fragment() {
 
     private fun bindEvents() {
         binding.pomodoroActionButton.setOnClickListener {
-            viewModel.timeElapsed.value?.let { time ->
-                // TODO: Check how to avoid nested observers.
-                viewModel.updateTask(args.id, time / 60).observe(viewLifecycleOwner) { result ->
-                    when (result) {
-                        is MainViewModel.Status.Failure -> {
-                            Log.e("VIEW", "Failed to fetch items", result.e)
-                        }
-                        is MainViewModel.Status.Success -> {
-                            Log.d("UPDATE", "Update")
+            finish()
+        }
+    }
 
-                            viewModel.addTimeTask(args.id, time / 60)
-                                .observe(viewLifecycleOwner) { result ->
-                                    when (result) {
-                                        is MainViewModel.Status.Failure -> {
-                                            Log.e("VIEW", "Failed to fetch items", result.e)
-                                        }
-                                        is MainViewModel.Status.Success -> {
-                                            Log.d("UPDATE", "Send Time Tracker")
+    private fun finish() {
+        viewModel.timeElapsed.value?.let { time ->
+            // TODO: Check how to avoid nested observers.
+            viewModel.updateTask(args.id, time / 60).observe(viewLifecycleOwner) { result ->
+                when (result) {
+                    is MainViewModel.Status.Failure -> {
+                        Log.e("VIEW", "Failed to fetch items", result.e)
+                    }
+                    is MainViewModel.Status.Success -> {
+                        Log.d("UPDATE", "Update")
 
-                                            Snackbar.make(
-                                                binding.root,
-                                                "Time elapsed $time",
-                                                Snackbar.LENGTH_LONG
-                                            )
-                                                .show()
-                                            viewModel.timeElapsed.value = 0L
-                                            TimerFragmentDirections.actionTimerFragmentToMenuItemListHome()
-                                                .let {
-                                                    findNavController().navigate(it)
-                                                }
+                        viewModel.addTimeTask(args.id, time / 60)
+                            .observe(viewLifecycleOwner) { result ->
+                                when (result) {
+                                    is MainViewModel.Status.Failure -> {
+                                        Log.e("VIEW", "Failed to fetch items", result.e)
+                                    }
+                                    is MainViewModel.Status.Success -> {
+                                        Log.d("UPDATE", "Send Time Tracker")
 
-                                            viewModel.state.value =
-                                                if (viewModel.isTimerRunning()) MainViewModel.State.STOPPED
-                                                else MainViewModel.State.STARTED
-                                        }
+                                        Snackbar.make(
+                                            binding.root,
+                                            "Time elapsed $time",
+                                            Snackbar.LENGTH_LONG
+                                        )
+                                            .show()
+                                        viewModel.timeElapsed.value = 0L
+                                        TimerFragmentDirections.actionTimerFragmentToMenuItemListHome()
+                                            .let {
+                                                findNavController().navigate(it)
+                                            }
+
+                                        viewModel.state.value =
+                                            if (viewModel.isTimerRunning()) MainViewModel.State.STOPPED
+                                            else MainViewModel.State.STARTED
                                     }
                                 }
+                            }
 
-                        }
                     }
+                }
+            }
+        }
+    }
+
+    private fun finishTask() {
+        viewModel.finishTask(args.id).observe(viewLifecycleOwner) {
+            when (it) {
+                is MainViewModel.Status.Success -> {
+                    finish()
+                }
+                is MainViewModel.Status.Failure -> {
+                    Log.e("FRAGMENT", "Failed to finish task", it.e)
+                    Snackbar.make(
+                        binding.root,
+                        getString(R.string.task_details_finish_error),
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
             }
         }
