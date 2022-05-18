@@ -9,10 +9,13 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentPomodoroBinding
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 import br.edu.ufabc.EsToDoeasy.viewmodel.PomodoroViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlin.math.roundToInt
 
 /**
@@ -22,6 +25,7 @@ class PomodoroFragment : Fragment() {
     private lateinit var binding: FragmentPomodoroBinding
     private val viewModel: MainViewModel by activityViewModels()
     private val pomodoroViewModel: PomodoroViewModel by activityViewModels()
+    private val args: PomodoroFragmentArgs by navArgs()
 
     private fun updateTime(timeElapsed: Long) {
         val setting = pomodoroViewModel.currentState()
@@ -29,7 +33,11 @@ class PomodoroFragment : Fragment() {
         binding.progressCircleDeterminate.setStepCountText(DateUtils.formatElapsedTime(timeRemaining))
 
         val angle = (timeElapsed.toFloat() / setting.timer.toFloat()) * 360
-        binding.progressCircleDeterminate.setPercentage(angle.roundToInt())
+        binding.progressCircleDeterminate.setPercentage(if (angle.roundToInt() <= 0) 1 else angle.roundToInt())
+
+        if (timeRemaining <= 0) {
+            nextState()
+        }
     }
 
     private fun formatStart() { // FIX:
@@ -61,6 +69,24 @@ class PomodoroFragment : Fragment() {
         viewModel.timeElapsed.observe(this) {
             it?.let { timeElapsed -> updateTime(timeElapsed) }
         }
+
+        pomodoroViewModel.restartState().observe(viewLifecycleOwner) { status ->
+            when (status) {
+                is PomodoroViewModel.Status.Failure -> {
+                    Log.e("VIEW", "Failed to restart state", status.e)
+                }
+                is PomodoroViewModel.Status.Success -> {
+                    val result =
+                        (status.result as PomodoroViewModel.Result.StateResult).value
+
+                    val timerText = DateUtils.formatElapsedTime(result.timer)
+                    binding.progressCircleDeterminate.setStepCountText(timerText)
+                    binding.pomodoroBack.setBackgroundResource(result.color)
+
+                    viewModel.timeElapsed.value = 0
+                }
+            }
+        }
     }
 
     override fun onCreateView(
@@ -79,6 +105,8 @@ class PomodoroFragment : Fragment() {
         registerObservers()
     }
 
+    // TODO: Finish Pomodoro on back button.
+
     private fun bindEvents() {
         binding.pomodoroActionButton.setOnClickListener {
             viewModel.state.value = if (viewModel.isTimerRunning()) {
@@ -87,11 +115,71 @@ class PomodoroFragment : Fragment() {
                 MainViewModel.State.STARTED
             }
         }
+
         binding.pomodoroConfigure.setOnClickListener {
             viewModel.clickedAtConfigPomodoro.value = true
         }
+
+        binding.pomodoroFinishButton.setOnClickListener {
+            finish()
+        }
+
         binding.pomodoroSkip.setOnClickListener {
-            pomodoroViewModel.nextState().observe(viewLifecycleOwner) { status ->
+            nextState()
+        }
+    }
+
+    private fun finish() {
+        viewModel.timeElapsed.value?.let { elapsed ->
+            pomodoroViewModel.currentTimer.value?.let { current ->
+                val time = elapsed + current
+
+                // TODO: Check how to avoid nested observers.
+                viewModel.updateTask(args.id, time / 60).observe(viewLifecycleOwner) { result ->
+                    when (result) {
+                        is MainViewModel.Status.Failure -> {
+                            Log.e("VIEW", "Failed to fetch items", result.e)
+                        }
+                        is MainViewModel.Status.Success -> {
+                            Log.d("UPDATE", "Update")
+
+                            viewModel.addTimeTask(args.id, time / 60)
+                                .observe(viewLifecycleOwner) { result ->
+                                    when (result) {
+                                        is MainViewModel.Status.Failure -> {
+                                            Log.e("VIEW", "Failed to fetch items", result.e)
+                                        }
+                                        is MainViewModel.Status.Success -> {
+                                            Log.d("UPDATE", "Send Time Tracker")
+
+                                            Snackbar.make(
+                                                binding.root,
+                                                "Time elapsed $time",
+                                                Snackbar.LENGTH_LONG
+                                            ).show()
+
+                                            viewModel.timeElapsed.value = 0L
+                                            pomodoroViewModel.currentTimer.value = 0L
+                                            PomodoroFragmentDirections.backToHome().let {
+                                                findNavController().navigate(it)
+                                            }
+
+                                            viewModel.state.value =
+                                                if (viewModel.isTimerRunning()) MainViewModel.State.STOPPED
+                                                else MainViewModel.State.STARTED
+                                        }
+                                    }
+                                }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun nextState() {
+        viewModel.timeElapsed.value?.let { time ->
+            pomodoroViewModel.nextState(time).observe(viewLifecycleOwner) { status ->
                 when (status) {
                     is PomodoroViewModel.Status.Failure -> {
                         Log.e("VIEW", "Failed to proceed to next state", status.e)
@@ -102,7 +190,8 @@ class PomodoroFragment : Fragment() {
                         val timerText = DateUtils.formatElapsedTime(result.timer)
                         binding.progressCircleDeterminate.setStepCountText(timerText)
                         binding.pomodoroBack.setBackgroundResource(result.color)
-                        binding.pomodoroActionButton.text = getString(result.action)
+
+                        viewModel.timeElapsed.value = 0
                     }
                 }
             }
