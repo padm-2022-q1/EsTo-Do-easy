@@ -27,13 +27,13 @@ class TimerFragment : Fragment() {
     }
 
     private fun formatStart() { // FIX:
-        context?.let { ContextCompat.getColor(it, R.color.purple_500) }
+        context?.let { ContextCompat.getColor(it, R.color.danger) }
             ?.let { binding.pomodoroActionButton.setBackgroundColor(it) }
         binding.pomodoroActionButton.text = getString(R.string.return_pause)
     }
 
-    private fun formatStop() {// FIX:
-        context?.let { ContextCompat.getColor(it, R.color.white) }
+    private fun formatStop() {// FIX:\
+        context?.let { ContextCompat.getColor(it, R.color.black) }
             ?.let { binding.pomodoroActionButton.setBackgroundColor(it) }
         binding.pomodoroActionButton.text = getString(R.string.pomodoro_pause_focus)
     }

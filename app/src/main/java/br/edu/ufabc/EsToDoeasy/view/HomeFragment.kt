@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentHomeBinding
 import br.edu.ufabc.EsToDoeasy.model.AdjacencyList
@@ -144,7 +145,10 @@ class HomeFragment : Fragment() {
         }
 
         binding.suggestedTaskItemPlay.setOnClickListener {
-            viewModel.clickedTaskToPlay.value = true
+            //viewModel.clickedTaskToPlay.value = true
+            HomeFragmentDirections.actionMenuItemListHomeToTimerFragment(task.id).let {
+                findNavController().navigate(it)
+            }
         }
 
         binding.addTaskItem.setOnClickListener {
