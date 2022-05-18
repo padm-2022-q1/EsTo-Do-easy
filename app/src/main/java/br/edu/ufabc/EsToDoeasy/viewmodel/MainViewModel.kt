@@ -356,6 +356,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun finishTask(id: Long) = liveData {
+        try {
+            isLoading.value = true
+            repository.finishTask(id)
+            emit(Status.Success(Result.EmptyResult))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to retrieve tasks from a given groupId $id", e)))
+        } finally {
+            isLoading.value = false
+        }}
+
+
     // TIMER
     enum class State { INITIAL, STARTED, STOPPED }
 

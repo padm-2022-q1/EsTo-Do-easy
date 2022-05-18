@@ -530,4 +530,14 @@ class RepositoryFirestore(application: Application) : Repository {
                 }
             }
     }
+
+    override suspend fun finishTask(id: Long): Boolean = getTaskCollection()
+        .whereEqualTo(GroupDoc.userId, getCurrentUser())
+        .whereEqualTo(TaskDoc.id, id)
+        .get(getSource())
+        .await()
+        .let { snapshot ->
+            if (snapshot.isEmpty) throw Exception("Failed to finish task with non-existing id $id")
+            snapshot.first().reference.update(TaskDoc.status, Status.DONE).await().let { true }
+        }
 }
