@@ -34,7 +34,7 @@ data class TaskTime(
     val timeElapsed: Long,
 
 
-    ){
+    ) {
     companion object {
         private val format = SimpleDateFormat("MM/dd/yyyy", Locale.US)
 
@@ -59,3 +59,4 @@ data class TaskTime(
          */
         fun simplifyDate(date: Date): Date? = parseDate(formatDate(date))
     }
+}
