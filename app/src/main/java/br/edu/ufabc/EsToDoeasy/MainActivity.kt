@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.mainToolbar);
+        setSupportActionBar(binding.mainToolbar)
 
         initComponents()
         bindEvents()
@@ -43,10 +43,14 @@ class MainActivity : AppCompatActivity() {
         //allBadge.number = viewModel.getAllDueTasks().size
 
         menu.setupWithNavController(navController)
-
+        binding.mainToolbar.setupWithNavController(navController)
     }
 
     private fun bindEvents() {
+        viewModel.isLoading.observe(this) { isLoading ->
+            binding.progressLinear.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+
         // details
         viewModel.clickedItemId.observe(this) {
             it?.let {
@@ -175,7 +179,8 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.clickedAddNewGroup.observe(this) {
             it?.let {
-                val action = PlanningListGroupFragmentDirections.actionMenuItemListPlannerToPlanningNewGroupFragment()
+                val action =
+                    PlanningListGroupFragmentDirections.actionMenuItemListPlannerToPlanningNewGroupFragment()
                 navController.navigate(action)
             }
         }

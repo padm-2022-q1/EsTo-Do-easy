@@ -34,9 +34,6 @@ class ScheduleFragment : Fragment() {
 
         viewModel.getAllDueTasks().observe(viewLifecycleOwner) { status ->
             when (status) {
-                is MainViewModel.Status.Loading -> {
-                    Log.d("VIEW", "Loading")
-                }
                 is MainViewModel.Status.Failure -> {
                     Log.e("VIEW", "Failed to fetch items", status.e)
                 }

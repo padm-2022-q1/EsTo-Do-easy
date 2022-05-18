@@ -4,12 +4,10 @@ import SingleLiveEvent
 import android.app.Application
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import br.edu.ufabc.EsToDoeasy.model.*
-import br.edu.ufabc.EsToDoeasy.view.TaskAdapter
 import java.util.*
 
 /**
@@ -33,11 +31,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
          * @property result the result
          */
         class Success(val result: Result) : Status()
-
-        /**
-         * The loading status.
-         */
-        object Loading : Status()
     }
 
     /**
@@ -90,6 +83,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         ) : Result()
 
     }
+
+    /**
+     * Indicates if there are data / operation being loaded.
+     */
+    val isLoading = MutableLiveData(false)
 
     /**
      * Maintains the currently selected task ID.
@@ -146,32 +144,37 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val profileEmail by lazy { SingleLiveEvent<String?>() }
 
-
     fun getAll() = liveData {
         try {
-            emit(Status.Loading)
+            isLoading.value = true
             emit(Status.Success(Result.TaskList(repository.getAllTasks())))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
+        } finally {
+            isLoading.value = false
         }
     }
 
     fun getTopologicalOrder(graph: AdjacencyList<Tasks>) = liveData {
         try {
-            emit(Status.Loading)
+            isLoading.value = true
             emit(Status.Success(Result.TaskList(repository.getAllTasks())))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
+        } finally {
+            isLoading.value = false
         }
     }
 
 
     fun getTask(id: Long) = liveData {
         try {
-            emit(Status.Loading)
+            isLoading.value = true
             emit(Status.Success(Result.SingleTask(repository.getTask(id))))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
+        } finally {
+            isLoading.value = false
         }
     }
 
@@ -181,19 +184,23 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      */
     fun addTask(task: Task) = liveData {
         try {
-            emit(Status.Loading)
+            isLoading.value = true
             emit(Status.Success(Result.Id(repository.addTask(task))))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
+        } finally {
+            isLoading.value = false
         }
     }
 
     fun addGroup(group: Group) = liveData {
         try {
-            emit(Status.Loading)
+            isLoading.value = true
             emit(Status.Success(Result.Id(repository.addGroup(group))))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
+        } finally {
+            isLoading.value = false
         }
     }
 
@@ -223,10 +230,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      */
     fun getAllDueTasks() = liveData {
         try {
-            emit(Status.Loading)
+            isLoading.value = true
             emit(Status.Success(Result.TaskList(repository.getAllDueTasks())))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
+        } finally {
+            isLoading.value = false
         }
     }
 
@@ -235,10 +244,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      */
     fun getAllGroups() = liveData {
         try {
-            emit(Status.Loading)
+            isLoading.value = true
             emit(Status.Success(Result.GroupList(repository.getAllGroups())))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
+        } finally {
+            isLoading.value = false
         }
     }
 
@@ -247,10 +258,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      */
     fun getTaskDependencies(id: Long) = liveData {
         try {
-            emit(Status.Loading)
+            isLoading.value = true
             emit(Status.Success(Result.TaskList(repository.getDependencies(id))))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
+        } finally {
+            isLoading.value = false
         }
     }
 
@@ -289,10 +302,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      */
     fun getGroup(id: Long) = liveData {
         try {
-            emit(Status.Loading)
+            isLoading.value = true
             emit(Status.Success(Result.SingleGroup(repository.getGroup(id))))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to fetch pending items from repository", e)))
+        } finally {
+            isLoading.value = false
         }
     }
 
@@ -300,45 +315,53 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun deleteTask(id: Long) = liveData {
         try {
-            emit(Status.Loading)
+            isLoading.value = true
             repository.deleteTask(id)
             emit(Status.Success(Result.EmptyResult))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to delete task from repository", e)))
+        } finally {
+            isLoading.value = false
         }
     }
 
     fun deleteGroup(id: Long) = liveData {
         try {
-            emit(Status.Loading)
+            isLoading.value = true
             repository.deleteGroup(id)
             emit(Status.Success(Result.EmptyResult))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to delete group from repository", e)))
+        } finally {
+            isLoading.value = false
         }
     }
 
     fun getAllTasksByGroup(id: Long) = liveData {
         try {
-            emit(Status.Loading)
+            isLoading.value = true
             emit(Status.Success(Result.TaskList(repository.getAllTasksByGroup(id))))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to retrieve tasks from a given groupId $id", e)))
+        } finally {
+            isLoading.value = false
         }
     }
 
     // TIMER
-    enum class State {INITIAL, STARTED, STOPPED}
+    enum class State { INITIAL, STARTED, STOPPED }
 
     val timeElapsed: MutableLiveData<Long> by lazy {
         MutableLiveData<Long>(0L)
     }
-    val state : MutableLiveData<State> by lazy {
+    val state: MutableLiveData<State> by lazy {
         MutableLiveData<State>(State.INITIAL)
     }
+
     init {
         runTimer()
     }
+
     private fun runTimer() {
         val handler = Handler(Looper.getMainLooper())
 

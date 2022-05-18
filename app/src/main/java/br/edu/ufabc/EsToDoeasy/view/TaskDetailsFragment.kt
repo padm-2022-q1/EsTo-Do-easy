@@ -78,9 +78,6 @@ class TaskDetailsFragment : Fragment() {
 
         viewModel.getTask(args.id).observe(viewLifecycleOwner) { result ->
             when (result) {
-                is MainViewModel.Status.Loading -> {
-                    Log.d("VIEW", "Loading")
-                }
                 is MainViewModel.Status.Failure -> {
                     Log.e("VIEW", "Failed to fetch items", result.e)
                 }
@@ -116,9 +113,6 @@ class TaskDetailsFragment : Fragment() {
 
             viewModel.getTaskDependencies(args.id).observe(viewLifecycleOwner) { result ->
                 when (result) {
-                    is MainViewModel.Status.Loading -> {
-                        Log.d("VIEW", "Loading")
-                    }
                     is MainViewModel.Status.Failure -> {
                         Log.e("VIEW", "Failed to fetch items", result.e)
                     }

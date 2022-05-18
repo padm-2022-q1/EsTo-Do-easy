@@ -74,9 +74,6 @@ class PlanningListTaskFragment : Fragment() {
         binding.recyclerviewPlanningTaskList.apply {
             viewModel.getAllTasksByGroup(args.id).observe(viewLifecycleOwner) { result ->
                 when (result) {
-                    is MainViewModel.Status.Loading -> {
-                        Log.d("VIEW", "Loading")
-                    }
                     is MainViewModel.Status.Failure -> {
                         Log.e("VIEW", "Failed to fetch items", result.e)
                     }
