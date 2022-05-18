@@ -11,10 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentPlanningTaskEditBinding
-import br.edu.ufabc.EsToDoeasy.model.Difficulty
-import br.edu.ufabc.EsToDoeasy.model.Priority
-import br.edu.ufabc.EsToDoeasy.model.Status
-import br.edu.ufabc.EsToDoeasy.model.Task
+import br.edu.ufabc.EsToDoeasy.model.*
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
@@ -111,9 +108,6 @@ class PlanningTaskEditFragment : Fragment() {
     private fun initComponents() {
         viewModel.getTask(args.id).observe(viewLifecycleOwner) { result ->
             when (result) {
-                is MainViewModel.Status.Loading -> {
-                    Log.d("VIEW", "Loading")
-                }
                 is MainViewModel.Status.Failure -> {
                     Log.e("VIEW", "Failed to fetch items", result.e)
                 }
@@ -254,9 +248,6 @@ class PlanningTaskEditFragment : Fragment() {
     private fun bindEvents(){
         viewModel.getAllGroups().observe(viewLifecycleOwner, ) { status ->
             when (status) {
-                is MainViewModel.Status.Loading -> {
-                    Log.d("VIEW", "Loading")
-                }
                 is MainViewModel.Status.Failure -> {
                     Log.e("VIEW", "Failed to fetch items", status.e)
                 }

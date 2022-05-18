@@ -159,9 +159,6 @@ class PlanningTaskNewFragment : Fragment() {
     private fun bindEvents(){
         viewModel.getAllGroups().observe(viewLifecycleOwner, ) { status ->
             when (status) {
-                is MainViewModel.Status.Loading -> {
-                    Log.d("VIEW", "Loading")
-                }
                 is MainViewModel.Status.Failure -> {
                     Log.e("VIEW", "Failed to fetch items", status.e)
                 }
