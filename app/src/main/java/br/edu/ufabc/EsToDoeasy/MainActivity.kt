@@ -179,12 +179,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.clickedAddNewTask.observe(this) {
-            it?.let {
-                val action = PlanningListTaskFragmentDirections.actionPlanningListTaskFragmentToAddNewTask()
-                navController.navigate(action)
-            }
-        }
+//        viewModel.clickedAddNewTask.observe(this) {
+//            it?.let {
+//                val action = PlanningListTaskFragmentDirections.actionPlanningListTaskFragmentToAddNewTask()
+//                navController.navigate(action)
+//            }
+//        }
     }
 
     override fun onBackPressed() {

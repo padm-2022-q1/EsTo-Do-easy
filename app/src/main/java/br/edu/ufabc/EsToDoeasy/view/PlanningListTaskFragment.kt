@@ -72,7 +72,6 @@ class PlanningListTaskFragment : Fragment() {
 
     private fun updateRecyclerView() {
         binding.recyclerviewPlanningTaskList.apply {
-
             viewModel.getAllTasksByGroup(args.id).observe(viewLifecycleOwner) { result ->
                 when (result) {
                     is MainViewModel.Status.Loading -> {
@@ -95,8 +94,10 @@ class PlanningListTaskFragment : Fragment() {
     }
 
     private fun bindEvents() {
-        binding.addTaskItem.setOnClickListener{
-            viewModel.clickedAddNewTask.value = true
+        binding.floatingActionButton.setOnClickListener {
+            PlanningListTaskFragmentDirections.addNewTask().let {
+                findNavController().navigate(it)
+            }
         }
     }
 
