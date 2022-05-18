@@ -98,6 +98,7 @@ class TaskDetailsFragment : Fragment() {
                         }
 
                     }
+                    binding.taskDetailsDetails.text = task.details
                     binding.taskDetailsDateStarted.text = formatter.format(task.dateStarted)
                     binding.taskDetailsDateFinished.text = formatter.format(task.dateFinished)
                     binding.taskDetailsDateDue.text = formatter.format(task.dateDue)
