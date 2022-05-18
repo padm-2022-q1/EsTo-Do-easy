@@ -22,6 +22,7 @@
                 android:id="@+id/dependecies_task_item_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -37,8 +38,6 @@
                 app:layout_constraintBottom_toBottomOf="@+id/dependecies_task_item_checkbox"
                 app:layout_constraintStart_toEndOf="@+id/dependecies_task_item_checkbox"
                 app:layout_constraintTop_toTopOf="@+id/dependecies_task_item_checkbox" />
-
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

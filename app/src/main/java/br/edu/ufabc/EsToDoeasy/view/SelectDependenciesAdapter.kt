@@ -39,9 +39,16 @@ class SelectDependenciesAdapter(
 
         init {
             itemBinding.root.setOnClickListener {
-                viewModel.selectedDependencies.value?.add(id)
+
+                if(viewModel.selectedDependencies.value?.contains(id) == true){
+                    checkBox.isChecked = false
+                    viewModel.selectedDependencies.value?.remove(id)
+                }else{
+                    viewModel.selectedDependencies.value?.add(id)
+                    checkBox.isChecked = true
+                }
                 Log.d("dependencies","${viewModel.selectedDependencies.value}")
-                checkBox.isChecked = true
+
             }
         }
     }
@@ -62,7 +69,7 @@ class SelectDependenciesAdapter(
     override fun onBindViewHolder(holder: TaskHolder, position: Int) {
         val task = tasks[position]
         holder.id = task.id
-        holder.checkBox.isChecked = viewModel.selectedDependencies.value?.any { it == task.id } ?: false
+        holder.checkBox.isChecked = viewModel.selectedDependencies.value?.any { it == task.id } ?: holder.checkBox.isChecked
         holder.title.text = task.title
     }
 
