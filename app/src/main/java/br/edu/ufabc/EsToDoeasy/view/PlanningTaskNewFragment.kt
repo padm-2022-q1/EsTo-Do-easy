@@ -48,6 +48,42 @@ class PlanningTaskNewFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         // TODO: fazer a tradução dos Radios para Difficulty e prioriry
+        binding.selectStartDate.setOnClickListener{ it ->
+            val datePickerFragment = DatePickerFragment()
+            val supportFragmentManager = requireActivity().supportFragmentManager
+
+            // we have to implement setFragmentResultListener
+            supportFragmentManager.setFragmentResultListener(
+                "REQUEST_KEY",
+                viewLifecycleOwner
+            ) { resultKey, bundle ->
+                if (resultKey == "REQUEST_KEY") {
+                    val date = bundle.getString("SELECTED_DATE")
+                    binding.planningTaskDetailsDateStartEditText.setText(date)
+                }
+            }
+
+            // show
+            datePickerFragment.show(supportFragmentManager, "DatePickerFragment")
+        }
+
+        binding.selectDueDate.setOnClickListener{ it ->
+            val datePickerFragment = DatePickerFragment()
+            val supportFragmentManager = requireActivity().supportFragmentManager
+
+            // we have to implement setFragmentResultListener
+            supportFragmentManager.setFragmentResultListener(
+                "REQUEST_KEY",
+                viewLifecycleOwner
+            ) { resultKey, bundle ->
+                if (resultKey == "REQUEST_KEY") {
+                    val date = bundle.getString("SELECTED_DATE")
+                    binding.planningTaskDetailsDateDueEditText.setText(date)
+                }
+            }
+            // show
+            datePickerFragment.show(supportFragmentManager, "DatePickerFragment")
+        }
         binding.planningDetailsActivityLevelRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             difficulty = checkedId.toString()
             Log.d("DiFF","$difficulty")

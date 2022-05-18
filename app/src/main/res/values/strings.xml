@@ -141,5 +141,6 @@
     <string name="pomodoro_finish">Finish</string>
     <string name="action_done">Finish</string>
     <string name="task_details_finish_error">Finish</string>
+    <string name="task_details_default">Details</string>
 </resources>
 
