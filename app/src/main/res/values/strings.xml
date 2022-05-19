@@ -145,5 +145,9 @@
     <string name="task_details_finish_error">Finish</string>
     <string name="task_details_default">Details</string>
     <string name="select_tasks_dependencies">Select Tasks Dependencies</string>
+    <string name="task_details_time_label_default">Time Elapsed</string>
+    <string name="task_details_time_default">0</string>
+    <string name="task_details_status_label">Status</string>
+    <string name="task_details_status_default">TODO</string>
 </resources>
 

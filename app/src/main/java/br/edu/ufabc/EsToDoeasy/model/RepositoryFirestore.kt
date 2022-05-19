@@ -260,12 +260,12 @@ class RepositoryFirestore(application: Application) : Repository {
         .toObjects(TaskFirestore::class.java).map { it.toTask() }
 
     suspend fun getAllDueTasks(): Tasks = getTaskCollection()
-        .whereGreaterThan(TaskDoc.dateDue, Task.simplifyDate(Date()) ?: Date())
+        .whereGreaterThanOrEqualTo(TaskDoc.dateDue, Task.simplifyDate(Date()) ?: Date())
+        .whereEqualTo(TaskDoc.userId, getCurrentUser())
         .orderBy(TaskDoc.dateDue)
         .get(getSource())
         .await()
-        .toObjects(TaskFirestore::class.java)
-        .map { it.toTask() }
+        .toObjects(TaskFirestore::class.java).map { it.toTask() }
 
 
     override suspend fun getAllGroups(): Groups = getGroupCollection()
