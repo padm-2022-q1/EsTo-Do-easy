@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentPlanningGroupListBinding
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 
@@ -73,8 +74,10 @@ class PlanningListGroupFragment : Fragment() {
             }
         }
 
-        binding.addTaskGroupItem.setOnClickListener {
-            viewModel.clickedAddNewGroup.value = true
+        binding.floatingActionButton.setOnClickListener {
+            PlanningListGroupFragmentDirections.actionMenuItemListPlannerToPlanningNewGroupFragment().let {
+                findNavController().navigate(it)
+            }
         }
     }
 }
