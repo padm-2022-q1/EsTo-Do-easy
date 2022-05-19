@@ -71,9 +71,8 @@ class HomeFragment : Fragment() {
                             .filter { it.status == Status.TODO || it.status == Status.DOING }
 
                         viewModel.getSuggestTask.value = newTasks.first()
-
                         adapter = TaskAdapter(
-                            newTasks.subList(1, newTasks.size - 1),
+                            newTasks.subList(1, newTasks.size),
                             viewModel,
                             findNavController()
                         )
