@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -55,8 +56,6 @@ class PlanningTaskEditFragment : Fragment() {
 
         initComponents()
 
-        //bindEvents()
-
         // TODO: fazer a tradução dos Radios para Difficulty e prioriry
         binding.selectStartDate.setOnClickListener{ it ->
             val datePickerFragment = DatePickerFragment()
@@ -95,14 +94,14 @@ class PlanningTaskEditFragment : Fragment() {
             datePickerFragment.show(supportFragmentManager, "DatePickerFragment")
         }
 
-        binding.planningDetailsActivityLevelRadioGroup.setOnCheckedChangeListener { group, checkedId ->
-            difficulty = checkedId.toString()
-            Log.d("DiFF","$difficulty")
-        }
+//        binding.planningDetailsActivityLevelRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+//            difficulty = checkedId.toString()
+//            Log.d("DiFF","$difficulty")
+//        }
 
-        binding.planningDetailsPriorityLevelRadioGroup.setOnCheckedChangeListener { group, checkedId ->
-            priority = checkedId.toString()
-        }
+//        binding.planningDetailsPriorityLevelRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+//            priority = checkedId.toString()
+//        }
     }
 
     private fun initComponents() {
@@ -235,21 +234,42 @@ class PlanningTaskEditFragment : Fragment() {
             R.id.action_save -> {
                 edit()
             }
+            R.id.action_delete -> {
+                showDeleteDialog()
+            }
         }
         return true
     }
 
-    private fun bindEvents(){
-        viewModel.getAllGroups().observe(viewLifecycleOwner, ) { status ->
-            when (status) {
-                is MainViewModel.Status.Failure -> {
-                    Log.e("VIEW", "Failed to fetch items", status.e)
+    private fun showDeleteDialog() {
+        activity?.let {
+            AlertDialog.Builder(it).setTitle(getString(R.string.task_remove_dialog_title))
+                .setMessage(getString(R.string.task_remove_dialog_content))
+                .setPositiveButton(getString(R.string.task_remove_dialog_confirm)) { _, _ ->
+                    delete()
                 }
-                is MainViewModel.Status.Success -> {
-                    val groups = (status.result as MainViewModel.Result.GroupList).value.map { it.name }
-                    val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item_project_name_new_task, groups)
+                .setNegativeButton(getString(R.string.task_remove_dialog_cancel)) { _, _ ->
+                    Log.i("VIEW", "Task ${args.id} removal cancelled")
+                }
+                .create()
+                .show()
+        } ?: throw IllegalStateException("Activity cannot be null")
+    }
 
-                    binding.autoCompleteTextViewProjectName.setAdapter(arrayAdapter)
+    private fun delete() {
+        val id = args.id
+        viewModel.deleteTask(id).observe(viewLifecycleOwner) {
+            when (it) {
+                is MainViewModel.Status.Success -> {
+                    findNavController().popBackStack()
+                }
+                is MainViewModel.Status.Failure -> {
+                    Log.e("FRAGMENT", "Failed to delete item", it.e)
+                    Snackbar.make(
+                        binding.root,
+                        getString(R.string.task_details_delete_error),
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
             }
         }
