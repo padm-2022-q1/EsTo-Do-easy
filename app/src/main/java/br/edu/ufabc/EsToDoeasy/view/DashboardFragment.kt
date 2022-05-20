@@ -10,9 +10,6 @@ import androidx.fragment.app.activityViewModels
 import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentDashboardBinding
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
-import com.anychart.anychart.AnyChart
-import com.anychart.anychart.DataEntry
-import com.anychart.anychart.ValueDataEntry
 
 /**
  * Dashboard view.
@@ -37,27 +34,7 @@ class DashboardFragment : Fragment() {
         bindEvents()
     }
 
-    private fun initComponents() {
-        val pie = AnyChart.pie()
-        val data = listOf<DataEntry>(
-            ValueDataEntry("PADM", 100),
-            ValueDataEntry("PD", 50),
-            ValueDataEntry("EngSoft", 200)
-        )
-        pie.setData(data)
-
-        binding.dashboardChartTimeSpentByGroup.setChart(pie)
-
-        val timeSpentByActivityChart = AnyChart.bar()
-        val timeSpentByActivityChartData = listOf<DataEntry>(
-            ValueDataEntry("PADM", 100),
-            ValueDataEntry("PD", 50),
-            ValueDataEntry("EngSoft", 200)
-        )
-        timeSpentByActivityChart.setData(timeSpentByActivityChartData)
-
-        binding.dashboardChartTimeSpentByActivity.setChart(timeSpentByActivityChart)
-    }
+    private fun initComponents() {}
 
     private fun bindEvents() {
         context?.let {

@@ -57,25 +57,12 @@
             app:strokeColor="@color/purple_700"
             app:strokeWidth="2dp" />
 
-        <LinearLayout
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/dashboard_chart_time_spent_by_group"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical"
+            android:layout_height="400dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/report_button_diary">
-
-            <com.anychart.anychart.AnyChartView
-                android:id="@+id/dashboard_chart_time_spent_by_activity"
-                android:layout_width="match_parent"
-                android:layout_height="200dp" />
-
-            <com.anychart.anychart.AnyChartView
-                android:id="@+id/dashboard_chart_time_spent_by_group"
-                android:layout_width="match_parent"
-                android:layout_height="200dp" />
-
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@id/report_button_monthly" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
