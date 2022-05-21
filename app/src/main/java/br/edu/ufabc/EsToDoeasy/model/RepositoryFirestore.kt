@@ -537,7 +537,7 @@ class RepositoryFirestore(application: Application) : Repository {
         .await()
         .let { snapshot ->
             if (snapshot.isEmpty) throw Exception("Failed to finish task with non-existing id $id")
-            snapshot.first().reference.update(TaskDoc.status, Status.DONE).await().let { true }
+            snapshot.first().reference.update(TaskDoc.status, Status.DONE, TaskDoc.dateFinished, Date()).await().let { true }
         }
 
     override fun getUserId(): String = getCurrentUser()

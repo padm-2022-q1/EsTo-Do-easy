@@ -1,6 +1,7 @@
 package br.edu.ufabc.EsToDoeasy.view
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AlertDialog
@@ -10,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentTaskDetailsBinding
+import br.edu.ufabc.EsToDoeasy.model.Status
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
@@ -101,10 +103,16 @@ class TaskDetailsFragment : Fragment() {
 
                     }
                     binding.taskDetailsDetails.text = task.details
-                    binding.taskDetailsTime.text = task.timeElapsed.toString()
+                    binding.taskDetailsTime.text = DateUtils.formatElapsedTime(task.timeElapsed)
                     binding.taskDetailsStatus.text = task.status.toString()
                     binding.taskDetailsDateStarted.text = formatter.format(task.dateStarted)
-                    binding.taskDetailsDateFinished.text = formatter.format(task.dateFinished)
+                    if (task.status.equals(Status.DONE)){ // se não finalizou, não mostra o finish
+                        binding.taskDetailsDateFinished.text = formatter.format(task.dateFinished)
+                    }else {
+                        binding.taskDetailsDateFinishedLabel.visibility = View.GONE
+                        binding.taskDetailsDateFinished.visibility = View.GONE
+                    }
+
                     binding.taskDetailsDateDue.text = formatter.format(task.dateDue)
                     binding.taskDetailsPriority.text = task.priority.name
                     binding.taskDetailsDifficulty.text = task.difficulty.name

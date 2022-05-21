@@ -170,7 +170,7 @@ class PomodoroFragment : Fragment() {
 
                                             Snackbar.make(
                                                 binding.root,
-                                                "Time elapsed $time",
+                                                "Time elapsed ${DateUtils.formatElapsedTime(time)}",
                                                 Snackbar.LENGTH_LONG
                                             ).show()
 

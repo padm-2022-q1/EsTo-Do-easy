@@ -38,10 +38,6 @@ class MainActivity : AppCompatActivity() {
         binding.mainNavigation.visibility = View.VISIBLE
 
         val menu: BottomNavigationView = binding.mainNavigation
-        val allBadge = menu.getOrCreateBadge(R.id.menu_item_list_home)
-        allBadge.isVisible = true
-        //allBadge.number = viewModel.getAllDueTasks().size
-
         menu.setupWithNavController(navController)
         binding.mainToolbar.setupWithNavController(navController)
     }

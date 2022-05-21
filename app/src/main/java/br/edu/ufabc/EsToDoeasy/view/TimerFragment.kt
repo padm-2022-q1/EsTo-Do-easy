@@ -1,6 +1,7 @@
 package br.edu.ufabc.EsToDoeasy.view
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.util.Log
 import android.view.*
 import androidx.core.content.ContextCompat
@@ -130,7 +131,7 @@ class TimerFragment : Fragment() {
 
                                         Snackbar.make(
                                             binding.root,
-                                            "Time elapsed $time",
+                                            "Time elapsed ${DateUtils.formatElapsedTime(time)}",
                                             Snackbar.LENGTH_LONG
                                         )
                                             .show()

@@ -57,7 +57,6 @@ class HomeFragment : Fragment() {
 
                         val graph = AdjacencyList<Task>()
 
-                        // FIX: run once
                         for (task in tasks) { // task virou um vértice
                             graph.createVertex(task)
                         }
