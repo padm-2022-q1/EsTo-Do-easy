@@ -80,6 +80,7 @@
         <entry key="app/src/main/res/layout/fragment_planning_task_details.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/fragment_planning_task_list.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/fragment_planning_task_new.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/fragment_pomodoro.xml" value="0.1703125" />
         <entry key="app/src/main/res/layout/fragment_select_dependencies.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/fragment_study_techniques.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/fragment_study_techniques_item.xml" value="0.25" />

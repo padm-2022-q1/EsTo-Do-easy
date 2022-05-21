@@ -80,8 +80,7 @@ class PomodoroFragment : Fragment() {
                     val timerText = DateUtils.formatElapsedTime(result.timer)
                     binding.progressCircleDeterminate.setStepCountText(timerText)
                     binding.pomodoroBack.setBackgroundResource(result.color)
-
-                    viewModel.timeElapsed.value = 0
+                    viewModel.timeElapsed.value?.let { updateTime(it) }
                 }
             }
         }

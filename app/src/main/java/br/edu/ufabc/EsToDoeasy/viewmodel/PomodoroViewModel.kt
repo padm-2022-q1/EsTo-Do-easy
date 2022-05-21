@@ -85,8 +85,8 @@ class PomodoroViewModel(application: Application) : AndroidViewModel(application
 
     fun restartState() = liveData {
         try {
-            currentTimer.value = 0
-            currentIndex = 0
+            //currentTimer.value = 0
+            //currentIndex = 0
             emit(Status.Success(Result.StateResult(order[currentIndex])))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to proceed to next pomodoro state", e)))
