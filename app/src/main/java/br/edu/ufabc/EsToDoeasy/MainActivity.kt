@@ -181,6 +181,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        viewModel.state.observe(this){
+            it?.let{ state ->
+                when (state) {
+                    MainViewModel.State.STARTED -> binding.mainNavigation.visibility = View.GONE
+                    MainViewModel.State.STOPPED -> binding.mainNavigation.visibility = View.GONE
+                    MainViewModel.State.INITIAL -> {
+                        binding.mainNavigation.visibility = View.VISIBLE
+                    }
+                }
+
+            }
+        }
+
+        viewModel.timeElapsed.observe(this){
+            binding.mainToolbar.navigationIcon = null
+        }
 //        viewModel.clickedAddNewTask.observe(this) {
 //            it?.let {
 //                val action = PlanningListTaskFragmentDirections.actionPlanningListTaskFragmentToAddNewTask()
@@ -189,10 +205,5 @@ class MainActivity : AppCompatActivity() {
 //        }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-
-        binding.mainNavigation.visibility = View.VISIBLE
-    }
 }
 
