@@ -117,9 +117,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun initComponents() {
-        if(viewModel.getCurrentUser().equals("")){
+        if(viewModel.getCurrentUser().equals("")) {
             binding.suggestedTaskItemTitle.text = "Login or Create a user First !"
-
+        }
         viewModel.getSuggestTask.observe(viewLifecycleOwner) { task ->
             if (task != null) {
                 Log.d("USER","$task")
