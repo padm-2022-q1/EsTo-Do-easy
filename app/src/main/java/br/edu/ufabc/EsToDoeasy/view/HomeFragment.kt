@@ -118,11 +118,12 @@ class HomeFragment : Fragment() {
 
     private fun initComponents() {
         if(viewModel.getCurrentUser().equals("")){
-            binding.cardviewSuggestedTaskItem.visibility = View.GONE
+            binding.suggestedTaskItemTitle.text = "Login or Create a user First !"
         }
 
         viewModel.getSuggestTask.observe(viewLifecycleOwner) { task ->
             if (task != null) {
+                Log.d("USER","$task")
                 binding.suggestedTaskItemTitle.text = task.title
                 viewModel.getGroup(task.groupId).observe(viewLifecycleOwner) { result ->
                     when (result) {
@@ -151,8 +152,9 @@ class HomeFragment : Fragment() {
                 binding.cardviewSuggestedTaskItem.visibility = View.VISIBLE
                 binding.suggestedTaskItemNoContent.visibility = View.INVISIBLE
             } else {
-                binding.cardviewSuggestedTaskItem.visibility = View.INVISIBLE
-                binding.suggestedTaskItemNoContent.visibility = View.VISIBLE
+                Log.d("USER","Logado sem Task")
+                binding.cardviewSuggestedTaskItem.visibility = View.GONE
+                binding.suggestedTaskItemNoContent.visibility = View.GONE
             }
         }
         viewModel.selectedStudyTechnique.value?.let {
