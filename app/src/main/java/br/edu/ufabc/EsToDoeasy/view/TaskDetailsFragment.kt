@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentTaskDetailsBinding
+import br.edu.ufabc.EsToDoeasy.model.Status
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
@@ -103,8 +104,14 @@ class TaskDetailsFragment : Fragment() {
                     binding.taskDetailsDetails.text = task.details
                     binding.taskDetailsTime.text = task.timeElapsed.toString()
                     binding.taskDetailsStatus.text = task.status.toString()
+                    if (!task.status.equals(Status.DONE)){
+                        binding.taskDetailsDateFinishedLabel.visibility = View.GONE
+                        binding.taskDetailsDateFinished.visibility = View.GONE
+                    }else {
+                        binding.taskDetailsDateFinished.text = formatter.format(task.dateFinished)
+                    }
                     binding.taskDetailsDateStarted.text = formatter.format(task.dateStarted)
-                    binding.taskDetailsDateFinished.text = formatter.format(task.dateFinished)
+
                     binding.taskDetailsDateDue.text = formatter.format(task.dateDue)
                     binding.taskDetailsPriority.text = task.priority.name
                     binding.taskDetailsDifficulty.text = task.difficulty.name
