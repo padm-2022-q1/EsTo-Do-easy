@@ -99,6 +99,8 @@ class DashboardFragment : Fragment() {
             .filter { it.second > 0 }
             .sortedByDescending { it.second }
             .take(5)
+        if (values.isEmpty()) return
+
         val entries = values.map { BarEntry(space++, it.second) }
 
         Log.d("VIEW", values.toString())
@@ -134,8 +136,30 @@ class DashboardFragment : Fragment() {
             }
             .filter { it.second > 0 }
             .sortedByDescending { it.second }
-        val entries = values.map { PieEntry(it.second, it.first) }
+        if (values.isEmpty()) return
 
+        val treatedValues = arrayListOf<Pair<String, Float>>()
+        val total = values.map { it.second }.reduce { acc, v -> acc + v }
+        var accTotal = 0f
+        for (value in values) {
+            if (accTotal / total >= 0.9) {
+                val index =
+                    treatedValues.indexOfFirst { it.first == getString(R.string.chart_others) }
+                if (index < 0) {
+                    val treatedValue = Pair(getString(R.string.chart_others), value.second)
+                    treatedValues.add(treatedValue)
+                } else {
+                    val treatedValue = treatedValues[index]
+                    treatedValues[index] =
+                        Pair(treatedValue.first, treatedValue.second + value.second)
+                }
+            } else {
+                treatedValues.add(Pair(value.first, value.second))
+            }
+            accTotal += value.second
+        }
+
+        val entries = treatedValues.map { PieEntry(it.second, it.first) }
         val dataSet =
             PieDataSet(entries, getString(R.string.chart_time_spent_per_group_label)).apply {
                 setDrawIcons(false)
