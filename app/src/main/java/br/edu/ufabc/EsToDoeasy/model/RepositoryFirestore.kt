@@ -522,23 +522,14 @@ class RepositoryFirestore(application: Application) : Repository {
         // Removes all tasks in the deleted group.
         getTaskCollection()
             .whereEqualTo(TaskDoc.userId, getCurrentUser())
-            .whereArrayContains(TaskDoc.groupId, id)
+            .whereEqualTo(TaskDoc.groupId, id)
             .get(getSource())
             .await()
             .let { snapshot ->
-                Log.d("REPOSITORY", "Is snapshot empty? ${snapshot.isEmpty}")
-                if (snapshot.isEmpty) return
+                Log.d("REPOSITORY", "Is snapshot empty? ${snapshot.isEmpty} $id ${getCurrentUser()}")
+                if (snapshot.isEmpty) throw Exception("Failed to tasks group ")
                 snapshot.documents.forEach { document ->
-                    val tasksGroup = document.get(TaskDoc.groupId) as? List<Long>
-                    Log.d("REPOSITORY", "Document ${document.id} dependencies: $tasksGroup")
-
-                    val filteredTasksGroup = tasksGroup?.filter { e -> e != id }
-                    Log.d(
-                        "REPOSITORY",
-                        "Document ${document.id} updated tasks group: $filteredTasksGroup"
-                    )
-
-                    document.reference.update(TaskDoc.groupId, filteredTasksGroup)
+                    document.reference.delete()
                 }
             }
     }
