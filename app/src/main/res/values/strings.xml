@@ -149,5 +149,6 @@
     <string name="task_details_time_default">0</string>
     <string name="task_details_status_label">Status</string>
     <string name="task_details_status_default">TODO</string>
+    <string name="dashboard_data_error">Error on retrieving data</string>
 </resources>
 

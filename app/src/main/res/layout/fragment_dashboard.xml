@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/report_button_diary"
+            android:id="@+id/report_button_daily"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -37,7 +37,7 @@
             android:text="@string/report_button_text_weekly"
             app:cornerRadius="0dp"
             app:layout_constraintEnd_toStartOf="@+id/report_button_monthly"
-            app:layout_constraintStart_toEndOf="@+id/report_button_diary"
+            app:layout_constraintStart_toEndOf="@+id/report_button_daily"
             app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="@color/purple_700"
             app:strokeWidth="2dp" />

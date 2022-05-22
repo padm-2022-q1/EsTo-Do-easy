@@ -54,14 +54,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         ) : Result()
 
         /**
-         * Result type that holds a list of tags.
-         * @property value the list of tags
-         */
-        data class TagList(
-            val value: List<String>
-        ) : Result()
-
-        /**
          * Result type that holds an id.
          * @property value the id.
          */
@@ -74,14 +66,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
          */
         object EmptyResult : Result()
 
-        data class GroupList(
-            val value: Groups
-        ) : Result()
+        data class GroupList(val value: Groups) : Result()
 
-        data class SingleGroup(
-            val value: Group
-        ) : Result()
+        data class SingleGroup(val value: Group) : Result()
 
+        data class TimeList(val value: TaskTimes) : Result()
     }
 
     /**
@@ -95,7 +84,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val selectedStudyTechnique = MutableLiveData("Pomodoro")
 
 
-    val selectedDependencies =  MutableLiveData<MutableList<Long>>(mutableListOf())
+    val selectedDependencies = MutableLiveData<MutableList<Long>>(mutableListOf())
 
     /**
      * Maintains the currently selected task ID.
@@ -370,6 +359,40 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    // DASHBOARD
+
+    /**
+     * Possible dashboard filter status.
+     */
+    enum class DashboardFilter { DAILY, WEEKLY, MONTHLY }
+
+    /**
+     *  Currently selected dashboard filter.
+     */
+    val dashboardFilter = MutableLiveData(DashboardFilter.DAILY)
+
+    /**
+     * Retrieves all Task times between the start and end dates.
+     * @param startDate the start date range
+     * @param endDate the end date range
+     */
+    fun getAllTaskTimes(startDate: Date, endDate: Date) = liveData {
+        try {
+            isLoading.value = true
+            emit(Status.Success(Result.TimeList(repository.getAllTaskTime(startDate, endDate))))
+        } catch (e: Exception) {
+            emit(
+                Status.Failure(
+                    Exception(
+                        "Failed to retrieve tasks from $startDate to $endDate",
+                        e
+                    )
+                )
+            )
+        } finally {
+            isLoading.value = false
+        }
+    }
 
     // TIMER
     enum class State { INITIAL, STARTED, STOPPED }

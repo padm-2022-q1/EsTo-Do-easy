@@ -280,8 +280,10 @@ class RepositoryFirestore(application: Application) : Repository {
         .await()
         .toObjects(AchievementFirestore::class.java).map { it.toAchievement() }
 
-    suspend fun getAllTaskTime(): TaskTimes = getTaskTimeCollection()
+    suspend fun getAllTaskTime(startDate: Date, endDate: Date): TaskTimes = getTaskTimeCollection()
         .whereEqualTo(TaskTimeDoc.userId, getCurrentUser())
+        .whereGreaterThanOrEqualTo(TaskTimeDoc.date, startDate)
+        .whereLessThan(TaskTimeDoc.date, endDate)
         .get(getSource())
         .await()
         .toObjects(TaskTimeFirestore::class.java).map { it.toTaskTime() }
@@ -298,7 +300,7 @@ class RepositoryFirestore(application: Application) : Repository {
         .first()
         .toTask()
 
-    override suspend fun getGroup(id: Long) : Group = getGroupCollection()
+    override suspend fun getGroup(id: Long): Group = getGroupCollection()
         .whereEqualTo(GroupDoc.userId, getCurrentUser())
         .whereEqualTo(GroupDoc.id, id)
         .get(getSource())
@@ -307,7 +309,7 @@ class RepositoryFirestore(application: Application) : Repository {
         .first()
         .toGroup()
 
-    override suspend fun getAchievement(id: Long) : Achievement = getAchievementCollection()
+    override suspend fun getAchievement(id: Long): Achievement = getAchievementCollection()
         .whereEqualTo(AchievementDoc.userId, getCurrentUser())
         .whereEqualTo(AchievementDoc.id, id)
         .get(getSource())
