@@ -170,7 +170,7 @@ class PomodoroFragment : Fragment() {
                         is MainViewModel.Status.Success -> {
                             Log.d("UPDATE", "Update")
 
-                            viewModel.addTimeTask(args.id, time / 60)
+                            viewModel.addTaskTime(args.id, time / 60)
                                 .observe(viewLifecycleOwner) { result ->
                                     when (result) {
                                         is MainViewModel.Status.Failure -> {

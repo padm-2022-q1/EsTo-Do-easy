@@ -153,5 +153,9 @@
     <string name="sort_by">Sort by</string>
     <string name="default_sort">Default sort</string>
     <string name="list_task_edit_group_title">Edit</string>
+    <string name="dashboard_data_error">Error on retrieving data</string>
+    <string name="chart_time_spent_per_group_label">Time spent per group (minutes)</string>
+    <string name="chart_top_tasks_time_spent_label">Top 5 time spent tasks (minutes)</string>
+    <string name="chart_unknown">Unknown</string>
 </resources>
 

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/report_button_diary"
+            android:id="@+id/report_button_daily"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -37,7 +37,7 @@
             android:text="@string/report_button_text_weekly"
             app:cornerRadius="0dp"
             app:layout_constraintEnd_toStartOf="@+id/report_button_monthly"
-            app:layout_constraintStart_toEndOf="@+id/report_button_diary"
+            app:layout_constraintStart_toEndOf="@+id/report_button_daily"
             app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="@color/purple_700"
             app:strokeWidth="2dp" />
@@ -57,25 +57,45 @@
             app:strokeColor="@color/purple_700"
             app:strokeWidth="2dp" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/dashboard_chart_top_tasks_time_spent_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:orientation="vertical"
+            android:gravity="center"
+            android:text="@string/chart_top_tasks_time_spent_label"
+            android:textSize="14sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/report_button_diary">
+            app:layout_constraintTop_toBottomOf="@id/report_button_daily" />
 
-            <com.anychart.anychart.AnyChartView
-                android:id="@+id/dashboard_chart_time_spent_by_activity"
-                android:layout_width="match_parent"
-                android:layout_height="200dp" />
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/dashboard_chart_top_tasks_time_spent"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dashboard_chart_top_tasks_time_spent_label" />
 
-            <com.anychart.anychart.AnyChartView
-                android:id="@+id/dashboard_chart_time_spent_by_group"
-                android:layout_width="match_parent"
-                android:layout_height="200dp" />
+        <TextView
+            android:id="@+id/dashboard_chart_time_spent_per_group_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="@string/chart_time_spent_per_group_label"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dashboard_chart_top_tasks_time_spent" />
 
-        </LinearLayout>
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/dashboard_chart_time_spent_by_group"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dashboard_chart_time_spent_per_group_label" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
