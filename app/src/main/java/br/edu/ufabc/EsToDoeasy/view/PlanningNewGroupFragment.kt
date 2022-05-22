@@ -39,7 +39,7 @@ class PlanningNewGroupFragment : Fragment(){
     private fun addGroup() {
         val group = Group(
             id = 0,
-            userId = "h1MW2FdpRqOFBmPIF5ncDsRF48q1",
+            userId = "",
             name = binding.planningTaskDetailsNameStartEditText.text.toString(),
         )
         Log.d("add", "task build",)

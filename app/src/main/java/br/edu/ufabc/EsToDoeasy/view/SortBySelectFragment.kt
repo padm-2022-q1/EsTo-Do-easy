@@ -12,7 +12,7 @@ import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 /**
  * Study techniques list view.
  */
-class StudyTechniqueSelectFragment : Fragment() {
+class SortBySelectFragment : Fragment() {
     private lateinit var binding: FragmentStudyTechniquesSelectBinding
     private val viewModel: MainViewModel by activityViewModels()
 
@@ -35,8 +35,8 @@ class StudyTechniqueSelectFragment : Fragment() {
     private fun updateRecyclerView() {
 
         binding.recyclerviewStudyTechniquesList.apply {
-            adapter = StudyTechniqueAdapter(
-                listOf("Pomodoro","Free Timer"),
+            adapter = SortByAdapter(
+                listOf("Default Sort", "Easiest first","Hardest first"),
                 viewModel
             )
         }

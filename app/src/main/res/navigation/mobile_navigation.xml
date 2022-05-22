@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_menu_item_list_home_to_timerFragment"
             app:destination="@id/timerFragment" />
+        <action
+            android:id="@+id/action_menu_item_list_home_to_sortBySelectFragment"
+            app:destination="@id/sortBySelectFragment" />
     </fragment>
 
     <fragment
@@ -225,5 +228,8 @@
             android:defaultValue="-1L"
             app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/sortBySelectFragment"
+        android:name="br.edu.ufabc.EsToDoeasy.view.SortBySelectFragment" />
 
 </navigation>

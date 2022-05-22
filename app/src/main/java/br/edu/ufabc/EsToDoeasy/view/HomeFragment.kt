@@ -45,41 +45,79 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun updateRecyclerView() {
-        binding.recyclerviewNextTasksList.apply {
-            viewModel.getAll().observe(viewLifecycleOwner) { status ->
-                when (status) {
-                    is MainViewModel.Status.Failure -> {
-                        Log.e("VIEW", "Failed to fetch items", status.e)
-                    }
-                    is MainViewModel.Status.Success -> {
-                        val tasks = (status.result as MainViewModel.Result.TaskList).value
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-                        val graph = AdjacencyList<Task>()
+        viewModel.tasks.observe(viewLifecycleOwner) { tasks ->
+            binding.recyclerviewNextTasksList.apply {
+                if (tasks.isEmpty()) {
+                    viewModel.getAll().observe(viewLifecycleOwner) { status ->
+                        when (status) {
+                            is MainViewModel.Status.Failure -> {
+                                Log.e("VIEW", "Failed to fetch items", status.e)
+                            }
+                            is MainViewModel.Status.Success -> {
+                                // case com o valor da variavel, se não está nulo
+                                // usa essas tasks
+                                //  se está nulo, então, pega todas e recalcula tudo.
+                                val tasks =
+                                    (status.result as MainViewModel.Result.TaskList).value
+                                when (viewModel.sortBy.value) {
+                                    "Hardest first" -> {
+                                        tasks.sorted()
+                                    }
+                                    "Easiest first" -> {
+                                        tasks.sorted()
+                                    }
+                                    else -> {
+                                        // default Sort
+                                    }
+                                }
 
-                        for (task in tasks) { // task virou um vértice
-                            graph.createVertex(task)
-                        }
-                        for (task in tasks) { // test
-                            val neighs = tasks.filter { it.id in task.dependencies }
-                            for (neigh in neighs) {
-                                graph.add(EdgeType.DIRECTED, task, neigh, 0.0)
+                                val graph = AdjacencyList<Task>()
+
+                                for (task in tasks) { // task virou um vértice
+                                    graph.createVertex(task)
+                                }
+                                for (task in tasks) { // test
+                                    val neighs = tasks.filter { it.id in task.dependencies }
+                                    for (neigh in neighs) {
+                                        graph.add(EdgeType.DIRECTED, task, neigh, 0.0)
+                                    }
+                                }
+                                val newTasks = graph.dfsUtil()
+                                    .filter { it.status == Status.TODO || it.status == Status.DOING }
+
+                                viewModel.getSuggestTask.value = newTasks.first()
+
+                                viewModel.tasks.value = newTasks
+
+                                adapter = TaskAdapter(
+                                    newTasks.subList(1, newTasks.size),
+                                    viewModel,
+                                    findNavController()
+                                )
+                                Log.d("VIEW", "Finished adapter")
                             }
                         }
-                        val newTasks = graph.dfsUtil()
-                            .filter { it.status == Status.TODO || it.status == Status.DOING }
-
-                        viewModel.getSuggestTask.value = newTasks.first()
-                        adapter = TaskAdapter(
-                            newTasks.subList(1, newTasks.size),
-                            viewModel,
-                            findNavController()
-                        )
-                        Log.d("VIEW", "Finished adapter")
                     }
+                } else {
+                    viewModel.getSuggestTask.value = tasks.first()
+                    adapter = TaskAdapter(
+                        tasks.subList(1, tasks.size),
+                        viewModel,
+                        findNavController()
+                    )
+                    Log.d("graph-tasks", "$tasks")
+
                 }
             }
         }
+    }
+
+
+    private fun updateRecyclerView() {
+
     }
 
     private fun initComponents() {
@@ -134,12 +172,24 @@ class HomeFragment : Fragment() {
             viewModel.clickedStudyTechniqueSelect.value = true
         }
 
+        binding.cardviewTimerTechniquesItemSelector.setOnClickListener {
+            viewModel.clickedSortBy.value = true
+        }
+
+        viewModel.sortBy.observe(this) {
+            it?.let {
+                Log.d("ORDER", "$it")
+                binding.timerTechniquesItem.text = it
+            }
+        }
+
         binding.floatingActionButton.setOnClickListener {
             viewModel.clickedAtAddTask.value = true
         }
 
         viewModel.selectedStudyTechnique.observe(this) {
             it?.let {
+                Log.d("Timer", "$it")
                 binding.studyTechniquesItem.text = it
             }
         }

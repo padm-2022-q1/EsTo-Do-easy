@@ -95,6 +95,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val selectedStudyTechnique = MutableLiveData("Pomodoro")
 
 
+    val sortBy = MutableLiveData("Default Sort")
+
+    val tasks = MutableLiveData<Tasks>(mutableListOf())
+
     val selectedDependencies =  MutableLiveData<MutableList<Long>>(mutableListOf())
 
     /**
@@ -112,6 +116,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val clickedScheduledTaskId by lazy { SingleLiveEvent<Long?>() }
 
     val clickedStudyTechniqueSelect by lazy { SingleLiveEvent<Boolean?>() }
+
+    val clickedSortBy by lazy { SingleLiveEvent<Boolean?>() }
+
 
     val clickedTaskToPlay by lazy { SingleLiveEvent<Boolean?>() }
 
@@ -178,6 +185,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      */
     fun addTask(task: Task) = liveData {
         try {
+            tasks.value = mutableListOf()
             isLoading.value = true
             emit(Status.Success(Result.Id(repository.addTask(task))))
         } catch (e: Exception) {
@@ -316,6 +324,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun deleteTask(id: Long) = liveData {
         try {
+            tasks.value = mutableListOf()
             isLoading.value = true
             repository.deleteTask(id)
             emit(Status.Success(Result.EmptyResult))
@@ -340,6 +349,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun updateTask(task: Task) = liveData {
         try {
+            tasks.value = mutableListOf()
             repository.updateTask(task)
             emit(Status.Success(Result.EmptyResult))
         } catch (e: Exception) {
@@ -360,6 +370,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun finishTask(id: Long) = liveData {
         try {
+            tasks.value = mutableListOf()
             isLoading.value = true
             repository.finishTask(id)
             emit(Status.Success(Result.EmptyResult))

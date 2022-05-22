@@ -149,5 +149,8 @@
     <string name="task_details_time_default">0</string>
     <string name="task_details_status_label">Status</string>
     <string name="task_details_status_default">TODO</string>
+    <string name="timer_select">Timer Select</string>
+    <string name="sort_by">Sort by</string>
+    <string name="default_sort">Default sort</string>
 </resources>
 
