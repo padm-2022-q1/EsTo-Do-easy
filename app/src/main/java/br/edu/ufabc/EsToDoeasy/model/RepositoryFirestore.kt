@@ -162,7 +162,7 @@ class RepositoryFirestore(application: Application) : Repository {
         )
 
         companion object {
-            fun fromGroup(group: Group) = GroupFirestore(
+            fun fromGroup(group: Group, user: String) = GroupFirestore(
                 id = group.id,
                 userId = group.userId,
                 name = group.name
@@ -404,6 +404,19 @@ class RepositoryFirestore(application: Application) : Repository {
                 if (querySnapshot.isEmpty)
                     throw Exception("Failed to update Task with non-existing id ${task.id}")
                 querySnapshot.first().reference.set(TaskFirestore.fromTask(task, getCurrentUser()))
+            }
+    }
+
+    override suspend fun updateGroup(group: Group) {
+        getGroupCollection()
+            .whereEqualTo(GroupDoc.userId, getCurrentUser())
+            .whereEqualTo(GroupDoc.id, group.id)
+            .get(getSource())
+            .await()
+            .let { querySnapshot ->
+                if (querySnapshot.isEmpty)
+                    throw Exception("Failed to update Group with non-existing id ${group.id}")
+                querySnapshot.first().reference.set(GroupFirestore.fromGroup(group, getCurrentUser()))
             }
     }
 
