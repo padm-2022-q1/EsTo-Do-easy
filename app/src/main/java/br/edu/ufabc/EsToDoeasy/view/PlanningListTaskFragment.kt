@@ -116,9 +116,10 @@ class PlanningListTaskFragment : Fragment() {
             when (it) {
                 is MainViewModel.Status.Success -> {
                     findNavController().popBackStack()
+                    Snackbar.make(binding.root, "Group deleted", Snackbar.LENGTH_LONG).show()
                 }
                 is MainViewModel.Status.Failure -> {
-                    Log.e("FRAGMENT", "Failed to delete item", it.e)
+                    Log.e("FRAGMENT", "Failed to delete group", it.e)
                     Snackbar.make(
                         binding.root,
                         getString(R.string.group_delete_error),
