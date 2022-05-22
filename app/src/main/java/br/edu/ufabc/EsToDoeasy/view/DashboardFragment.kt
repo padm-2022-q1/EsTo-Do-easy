@@ -14,10 +14,10 @@ import br.edu.ufabc.EsToDoeasy.databinding.FragmentDashboardBinding
 import br.edu.ufabc.EsToDoeasy.model.TaskTimes
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 import com.github.mikephil.charting.animation.Easing
-import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.DefaultValueFormatter
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
@@ -29,6 +29,13 @@ import java.util.*
 class DashboardFragment : Fragment() {
     private lateinit var binding: FragmentDashboardBinding
     private val viewModel: MainViewModel by activityViewModels()
+    private val chartColors = arrayListOf(ColorTemplate.getHoloBlue()).apply {
+        for (c in ColorTemplate.VORDIPLOM_COLORS) add(c)
+        for (c in ColorTemplate.JOYFUL_COLORS) add(c)
+        for (c in ColorTemplate.COLORFUL_COLORS) add(c)
+        for (c in ColorTemplate.LIBERTY_COLORS) add(c)
+        for (c in ColorTemplate.PASTEL_COLORS) add(c)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,38 +54,94 @@ class DashboardFragment : Fragment() {
     }
 
     private fun initComponents() {
+        binding.dashboardChartTopTasksTimeSpent.apply {
+            description.isEnabled = false
+            isHighlightPerTapEnabled = true
+            legend.isEnabled = false
+            setDrawValueAboveBar(true)
+            setMaxVisibleValueCount(100)
+            xAxis.apply {
+                position = XAxis.XAxisPosition.BOTTOM
+                setDrawGridLines(false)
+                granularity = 1f
+            }
+            axisLeft.apply {
+                axisMinimum = 0f
+                isEnabled = false
+            }
+            axisRight.apply {
+                axisMinimum = 0f
+                isEnabled = false
+            }
+        }
+
         binding.dashboardChartTimeSpentByGroup.apply {
             description.isEnabled = false
             isDrawHoleEnabled = false
             isHighlightPerTapEnabled = true
             setEntryLabelColor(Color.BLACK)
             setEntryLabelTextSize(12f)
-            animateY(1400, Easing.EaseInOutQuad)
+            rotationAngle = 180f
             legend.isEnabled = false
         }
     }
 
-    private fun setTimeSpentByGroupData(times: TaskTimes) {
-        val entries = times.groupBy { it.taskId }.map { g ->
-            PieEntry(
-                g.value.map { it.timeElapsed }.reduce { acc, v -> acc + v }.toFloat(),
-                g.key.toString()
-            )
-        }.filter { it.value > 0 }
+    private fun setTopTimeSpentTasksData(times: TaskTimes) {
+        var space = 0f
 
-        val colors = arrayListOf<Int>()
-        for (c in ColorTemplate.VORDIPLOM_COLORS) colors.add(c)
-        for (c in ColorTemplate.JOYFUL_COLORS) colors.add(c)
-        for (c in ColorTemplate.COLORFUL_COLORS) colors.add(c)
-        for (c in ColorTemplate.LIBERTY_COLORS) colors.add(c)
-        for (c in ColorTemplate.PASTEL_COLORS) colors.add(c)
-        colors.add(ColorTemplate.getHoloBlue())
+        val values = times.groupBy { it.task }
+            .map { g ->
+                Pair(
+                    g.key,
+                    g.value.map { it.timeElapsed }.reduce { acc, v -> acc + v }.toFloat()
+                )
+            }
+            .filter { it.second > 0 }
+            .sortedByDescending { it.second }
+            .take(5)
+        val entries = values.map { BarEntry(space++, it.second) }
 
-        val dataSet = PieDataSet(entries, "Time spent by group").apply {
-            setDrawIcons(false)
-            sliceSpace = 1f
-            this.colors = colors
+        Log.d("VIEW", values.toString())
+
+        val dataSet =
+            BarDataSet(entries, getString(R.string.chart_top_tasks_time_spent_label)).apply {
+                setDrawIcons(false)
+                this.colors = chartColors
+            }
+
+        val data = BarData(dataSet).apply {
+            setValueFormatter(DefaultValueFormatter(0))
+            setValueTextSize(11f)
         }
+
+        binding.dashboardChartTopTasksTimeSpent.apply {
+            this.data = data
+            animateY(1400, Easing.EaseInOutQuad)
+            xAxis.valueFormatter = IndexAxisValueFormatter(values.map {
+                it.first.ifBlank { getString(R.string.chart_unknown) }
+            })
+            invalidate()
+        }
+    }
+
+    private fun setTimeSpentByGroupData(times: TaskTimes) {
+        val values = times.groupBy { it.group }
+            .map { g ->
+                Pair(
+                    g.key.ifBlank { getString(R.string.chart_unknown) },
+                    g.value.map { it.timeElapsed }.reduce { acc, v -> acc + v }.toFloat()
+                )
+            }
+            .filter { it.second > 0 }
+            .sortedByDescending { it.second }
+        val entries = values.map { PieEntry(it.second, it.first) }
+
+        val dataSet =
+            PieDataSet(entries, getString(R.string.chart_time_spent_per_group_label)).apply {
+                setDrawIcons(false)
+                sliceSpace = 1f
+                this.colors = chartColors
+            }
 
         val data = PieData(dataSet).apply {
             setValueFormatter(DefaultValueFormatter(0))
@@ -91,6 +154,7 @@ class DashboardFragment : Fragment() {
             invalidate()
         }
     }
+
 
     private fun bindEvents() {
         binding.reportButtonDaily.setOnClickListener {
@@ -147,6 +211,7 @@ class DashboardFragment : Fragment() {
                 }
                 is MainViewModel.Status.Success -> {
                     val times = (status.result as MainViewModel.Result.TimeList).value
+                    setTopTimeSpentTasksData(times)
                     setTimeSpentByGroupData(times)
                 }
             }

@@ -50,8 +50,11 @@ class RepositoryFirestore(application: Application) : Repository {
             const val id = "id"
             const val userId = "userId"
             const val taskId = "taskId"
+            const val task = "task"
             const val date = "date"
             const val timeElapsed = "timeElapsed"
+            const val groupId = "groupId"
+            const val group = "group"
         }
 
         private object GroupDoc {
@@ -76,25 +79,33 @@ class RepositoryFirestore(application: Application) : Repository {
         val id: Long? = null,
         val userId: String? = null,
         val taskId: Long? = null,
+        val task: String? = null,
         val date: Date? = null,
-        val timeElapsed: Long? = null
+        val timeElapsed: Long? = null,
+        val groupId: Long? = null,
+        val group: String? = null
     ) {
         fun toTaskTime() = TaskTime(
             id = id ?: 0,
             userId = userId ?: "",
             taskId = taskId ?: 0,
+            task = task?: "",
             date = Date(),
             timeElapsed = timeElapsed ?: 0,
-
-            )
+            groupId = groupId ?: 0,
+            group = group ?: "",
+        )
 
         companion object {
             fun fromTaskTime(taskTime: TaskTime, user: String) = TaskTimeFirestore(
                 id = taskTime.id,
-                userId = taskTime.userId,
+                userId = user,
                 taskId = taskTime.taskId,
+                task = taskTime.task,
                 date = taskTime.date,
-                timeElapsed = taskTime.timeElapsed
+                timeElapsed = taskTime.timeElapsed,
+                groupId = taskTime.groupId,
+                group = taskTime.group,
             )
         }
     }
@@ -335,23 +346,14 @@ class RepositoryFirestore(application: Application) : Repository {
         id = nextTaskTimeId(),
         userId = getCurrentUser(),
         taskId = time.taskId,
+        task = time.task,
         date = Date(),
-        timeElapsed = time.timeElapsed
+        timeElapsed = time.timeElapsed,
+        groupId = time.groupId,
+        group = time.group,
     ).let {
         getTaskTimeCollection().add(it)
         it.id ?: throw Exception("Failed to add Task Time")
-    }
-
-    suspend fun addTimeTask(id: Long, time: Long): Long = TaskTimeFirestore(
-        id = nextTaskTimeId(),
-        userId = getCurrentUser(),
-        taskId = id,
-        date = Date(),
-        timeElapsed = time,
-
-        ).let {
-        getTaskTimeCollection().add(it)
-        it.id ?: throw Exception("Failed to add task TIME") // FIXME:
     }
 
     suspend fun getAllTasksByGroup(id: Long): Tasks = getTaskCollection()

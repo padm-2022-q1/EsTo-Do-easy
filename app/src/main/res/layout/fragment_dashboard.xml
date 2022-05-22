@@ -57,12 +57,45 @@
             app:strokeColor="@color/purple_700"
             app:strokeWidth="2dp" />
 
+        <TextView
+            android:id="@+id/dashboard_chart_top_tasks_time_spent_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="@string/chart_top_tasks_time_spent_label"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/report_button_daily" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/dashboard_chart_top_tasks_time_spent"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dashboard_chart_top_tasks_time_spent_label" />
+
+        <TextView
+            android:id="@+id/dashboard_chart_time_spent_per_group_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="@string/chart_time_spent_per_group_label"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dashboard_chart_top_tasks_time_spent" />
+
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/dashboard_chart_time_spent_by_group"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/report_button_monthly" />
+            app:layout_constraintTop_toBottomOf="@id/dashboard_chart_time_spent_per_group_label" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

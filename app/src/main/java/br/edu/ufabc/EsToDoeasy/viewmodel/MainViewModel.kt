@@ -234,12 +234,26 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun addTimeTask(id: Long, time: Long) = liveData {
+    fun addTaskTime(id: Long, time: Long) = liveData {
         try {
-            //emit(Status.Loading)
-            emit(Status.Success(Result.Id(repository.addTimeTask(id, time))))
+            isLoading.value = true
+            val task = repository.getTask(id)
+            val group = repository.getGroup(task.groupId)
+            val taskTime = TaskTime(
+                0,
+                "",
+                task.id,
+                task.title,
+                Date(),
+                time,
+                group.id,
+                group.name
+            )
+            emit(Status.Success(Result.Id(repository.addTaskTime(taskTime))))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to add time task $id", e)))
+        } finally {
+            isLoading.value = false
         }
     }
 
@@ -415,7 +429,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             override fun run() {
                 if (isTimerRunning())
                     timeElapsed.value?.let {
-                        timeElapsed.value = it + 1
+                        timeElapsed.value = it + 30
                     }
                 handler.postDelayed(this, 1000)
             }

@@ -150,5 +150,8 @@
     <string name="task_details_status_label">Status</string>
     <string name="task_details_status_default">TODO</string>
     <string name="dashboard_data_error">Error on retrieving data</string>
+    <string name="chart_time_spent_per_group_label">Time spent per group (minutes)</string>
+    <string name="chart_top_tasks_time_spent_label">Top 5 time spent tasks (minutes)</string>
+    <string name="chart_unknown">Unknown</string>
 </resources>
 
