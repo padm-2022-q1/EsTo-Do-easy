@@ -210,7 +210,7 @@ class HomeFragment : Fragment() {
                     findNavController().navigate(it)
                 }
             }
-            "Free" -> {
+            "Free Timer" -> {
                 viewModel.state.value = if (viewModel.isTimerRunning()) {
                     MainViewModel.State.STOPPED
                 } else {

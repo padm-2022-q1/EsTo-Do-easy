@@ -234,6 +234,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun updateTask(id: Long, time: Long) = liveData {
         try {
+            tasks.value = mutableListOf()
             isLoading.value = true
             repository.updateTaskTime(id, time)
             emit(Status.Success(Result.EmptyResult))

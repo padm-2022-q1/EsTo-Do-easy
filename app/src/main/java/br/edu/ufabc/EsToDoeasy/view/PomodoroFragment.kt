@@ -148,6 +148,7 @@ class PomodoroFragment : Fragment() {
         }
 
         binding.pomodoroFinishButton.setOnClickListener {
+            viewModel.tasks.value = mutableListOf()
             finish()
         }
 
