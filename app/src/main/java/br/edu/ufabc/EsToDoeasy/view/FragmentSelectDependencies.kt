@@ -81,7 +81,7 @@ class FragmentSelectDependencies : Fragment() {
                     is MainViewModel.Status.Success -> {
                         val tasks = (result.result as MainViewModel.Result.TaskList).value
                         Log.d("TASKS", "PlanningListTaskFragments $tasks")
-                        adapter = SelectDependenciesAdapter( // TODO:
+                        adapter = SelectDependenciesAdapter(
                             tasks,
                             viewModel
                         )

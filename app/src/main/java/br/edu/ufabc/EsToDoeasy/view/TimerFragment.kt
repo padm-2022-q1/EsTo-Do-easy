@@ -123,7 +123,6 @@ class TimerFragment : Fragment() {
 
     private fun finish() {
         viewModel.timeElapsed.value?.let { time ->
-            // TODO: Check how to avoid nested observers.
             viewModel.updateTask(args.id, time / 60).observe(viewLifecycleOwner) { result ->
                 when (result) {
                     is MainViewModel.Status.Failure -> {

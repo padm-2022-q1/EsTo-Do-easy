@@ -50,7 +50,6 @@ class PlanningTaskNewFragment : Fragment() {
 
         bindEvents()
 
-        // TODO: fazer a tradução dos Radios para Difficulty e prioriry
         binding.selectStartDate.setOnClickListener{ it ->
             val datePickerFragment = DatePickerFragment()
             val supportFragmentManager = requireActivity().supportFragmentManager
@@ -127,7 +126,7 @@ class PlanningTaskNewFragment : Fragment() {
             dateFinished = Task.parseDate("01/01/2000"),
             dateDue = Task.parseDate(binding.planningTaskDetailsDateDueEditText.text.toString()),
             timeElapsed = 0,
-            groupId = listGroups.filter { it.name == groupName.toString() }.first().id, // TODO:
+            groupId = listGroups.filter { it.name == groupName.toString() }.first().id,
             difficulty = getDifficulty(binding.planningDetailsActivityLevelRadioGroup.checkedRadioButtonId),
             priority = getPriority(binding.planningDetailsPriorityLevelRadioGroup.checkedRadioButtonId),
             status = Status.TODO,

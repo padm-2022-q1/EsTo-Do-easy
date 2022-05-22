@@ -162,7 +162,6 @@ class PomodoroFragment : Fragment() {
             pomodoroViewModel.currentTimer.value?.let { current ->
                 val time = elapsed + current
 
-                // TODO: Check how to avoid nested observers.
                 viewModel.updateTask(args.id, time / 60).observe(viewLifecycleOwner) { result ->
                     when (result) {
                         is MainViewModel.Status.Failure -> {
