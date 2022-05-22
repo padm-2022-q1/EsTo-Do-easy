@@ -48,9 +48,7 @@ class PlanningNewGroupFragment : Fragment(){
                 is MainViewModel.Status.Success -> {
                     PlanningNewGroupFragmentDirections.createdNewGroup()
                         .let {
-                            findNavController().navigate(it, navOptions {
-                                popUpTo(R.id.created_new_group)
-                            })
+                            findNavController().navigate(it)
                         }
                 }
                 is MainViewModel.Status.Failure -> {

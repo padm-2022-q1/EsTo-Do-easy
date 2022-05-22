@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/menu_item_list_home">
+    app:startDestination="@id/login">
 
     <fragment
         android:id="@+id/menu_item_list_home"
@@ -154,7 +154,9 @@
             app:destination="@id/planningTaskDetailsFragment" />
         <action
             android:id="@+id/add_new_task"
-            app:destination="@id/planningTaskNewFragment" />
+            app:destination="@id/planningTaskNewFragment"
+            app:popUpTo="@id/planningListTaskFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
@@ -185,7 +187,9 @@
         tools:layout="@layout/fragment_new_group">
         <action
             android:id="@+id/created_new_group"
-            app:destination="@id/menu_item_list_planner" />
+            app:destination="@id/menu_item_list_planner"
+            app:popUpTo="@id/menu_item_list_planner"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/planningTaskNewFragment"
