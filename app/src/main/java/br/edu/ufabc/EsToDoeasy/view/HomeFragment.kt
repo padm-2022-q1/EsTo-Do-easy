@@ -12,10 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import br.edu.ufabc.EsToDoeasy.R
 import br.edu.ufabc.EsToDoeasy.databinding.FragmentHomeBinding
-import br.edu.ufabc.EsToDoeasy.model.AdjacencyList
-import br.edu.ufabc.EsToDoeasy.model.EdgeType
-import br.edu.ufabc.EsToDoeasy.model.Status
-import br.edu.ufabc.EsToDoeasy.model.Task
+import br.edu.ufabc.EsToDoeasy.model.*
 import br.edu.ufabc.EsToDoeasy.viewmodel.MainViewModel
 
 /**
@@ -39,10 +36,6 @@ class HomeFragment : Fragment() {
 
         initComponents()
         bindEvents()
-
-        activity?.let {
-            updateRecyclerView()
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,41 +45,48 @@ class HomeFragment : Fragment() {
             binding.recyclerviewNextTasksList.apply {
                 if (tasks.isEmpty()) {
                     viewModel.getAll().observe(viewLifecycleOwner) { status ->
+                        Log.d("Sort-P","${tasks.map{ it.id}}")
                         when (status) {
                             is MainViewModel.Status.Failure -> {
                                 Log.e("VIEW", "Failed to fetch items", status.e)
                             }
                             is MainViewModel.Status.Success -> {
-                                // case com o valor da variavel, se não está nulo
-                                // usa essas tasks
-                                //  se está nulo, então, pega todas e recalcula tudo.
-                                val tasks =
+                                var currentTasks =
                                     (status.result as MainViewModel.Result.TaskList).value
-                                when (viewModel.sortBy.value) {
-                                    "Hardest first" -> {
-                                        tasks.sorted()
-                                    }
-                                    "Easiest first" -> {
-                                        tasks.sorted()
-                                    }
-                                    else -> {
-                                        // default Sort
-                                    }
-                                }
+
+                                var newTasks = listOf<Task>()
 
                                 val graph = AdjacencyList<Task>()
 
-                                for (task in tasks) { // task virou um vértice
+                                for (task in currentTasks) { // task virou um vértice
                                     graph.createVertex(task)
                                 }
-                                for (task in tasks) { // test
-                                    val neighs = tasks.filter { it.id in task.dependencies }
+                                for (task in currentTasks) { // test
+                                    val neighs = currentTasks.filter { it.id in task.dependencies }
                                     for (neigh in neighs) {
                                         graph.add(EdgeType.DIRECTED, task, neigh, 0.0)
                                     }
                                 }
-                                val newTasks = graph.dfsUtil()
-                                    .filter { it.status == Status.TODO || it.status == Status.DOING }
+
+                                when (viewModel.sortBy.value) {
+                                    "Hardest first" -> {
+                                        newTasks = graph.dfsUtil(currentTasks.sortedBy { it.difficulty.ordinal }.reversed())
+                                            .filter { it.status == Status.TODO || it.status == Status.DOING }
+                                        Log.d("sort-H", "${currentTasks.map { it.id }}")
+                                    }
+                                    "Easiest first" -> {
+                                        newTasks = graph.dfsUtil(currentTasks.sortedBy { it.difficulty.ordinal })
+                                            .filter { it.status == Status.TODO || it.status == Status.DOING }
+                                        Log.d("sort-E", "${currentTasks.map { it.id }}")
+                                    }
+                                    else -> {
+                                        newTasks = graph.dfsUtil(currentTasks.sortedBy { it.dateDue })
+                                            .filter { it.status == Status.TODO || it.status == Status.DOING }
+                                        Log.d("sort-D", "${currentTasks.map { it.id }}")
+                                    }
+                                }
+
+
 
                                 viewModel.getSuggestTask.value = newTasks.first()
 
@@ -99,6 +99,7 @@ class HomeFragment : Fragment() {
                                 )
                                 Log.d("VIEW", "Finished adapter")
                             }
+
                         }
                     }
                 } else {
@@ -108,19 +109,18 @@ class HomeFragment : Fragment() {
                         viewModel,
                         findNavController()
                     )
-                    Log.d("graph-tasks", "$tasks")
+                    Log.d("TASKS-R","$tasks")
 
                 }
             }
         }
     }
 
-
-    private fun updateRecyclerView() {
-
-    }
-
     private fun initComponents() {
+        if(viewModel.getCurrentUser().equals("")){
+            binding.cardviewSuggestedTaskItem.visibility = View.GONE
+        }
+
         viewModel.getSuggestTask.observe(viewLifecycleOwner) { task ->
             if (task != null) {
                 binding.suggestedTaskItemTitle.text = task.title
@@ -178,7 +178,10 @@ class HomeFragment : Fragment() {
 
         viewModel.sortBy.observe(this) {
             it?.let {
-                Log.d("ORDER", "$it")
+                if (binding.timerTechniquesItem.text.equals(it)){
+                    viewModel.tasks.value = mutableListOf()
+                    Log.d("TASK", "REGEREI AS TASKS :$it")
+                }
                 binding.timerTechniquesItem.text = it
             }
         }

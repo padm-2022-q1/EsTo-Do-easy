@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import br.edu.ufabc.EsToDoeasy.model.*
+import com.google.firebase.auth.FirebaseAuth
 import java.util.*
 
 /**
@@ -179,6 +180,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun getCurrentUser(): String = FirebaseAuth.getInstance().currentUser?.uid
+        ?: ""
 
     /**
      *

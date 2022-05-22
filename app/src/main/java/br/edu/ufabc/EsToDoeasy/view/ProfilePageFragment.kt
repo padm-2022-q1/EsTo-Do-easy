@@ -132,6 +132,7 @@ class ProfilePageFragment : Fragment() {
                 .addOnCompleteListener {
                     linkProfileText()
                     launchProfile()
+                    viewModel.tasks.value = mutableListOf()
                 }
 
 

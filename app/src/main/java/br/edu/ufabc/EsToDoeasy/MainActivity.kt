@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.clickedSortBy.observe(this) {
             it?.let {
                 if (it) {
-                    Log.d("Clickei","clickedSortBy")
+                    Log.d("SORTBY","PRESSIONADO")
                     val action =
                         HomeFragmentDirections.actionMenuItemListHomeToSortBySelectFragment()
                     navController.navigate(action)

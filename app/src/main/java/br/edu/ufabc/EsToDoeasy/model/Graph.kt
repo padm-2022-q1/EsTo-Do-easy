@@ -124,13 +124,12 @@ class AdjacencyList<T : Comparable<T>> {
     /**
      * Utils functions for dfs.
      * returns a topological order that satisfies dependencies.
-     * TODO: implements GTD (EAT THAT FROG) params for sort a TopologicalSort by Priority, by difficulty ?.
      */
-    fun dfsUtil(): ArrayList<T> { // O(V + E )
+    fun dfsUtil(ordering: List<T>): ArrayList<T> { // O(V + E)
         val visited: HashMap<T, Int> = HashMap()
         val topologicalSortVertex: ArrayList<T> = ArrayList()
 
-        adjacencies.forEach { (vertex, _) ->
+        ordering.forEach { vertex ->
             if (visited[vertex] == null) {
                 dfs(visited, topologicalSortVertex, vertex)
             }
@@ -149,32 +148,4 @@ class AdjacencyList<T : Comparable<T>> {
         }
         topologicalSortVertex.add(vertex)
     }
-}
-
-
-fun main() {
-    println("Teste Grafos  em kotlin")
-    val graph = AdjacencyList<String>()
-    graph.createVertex("meia")
-    graph.createVertex("cuecas")
-    graph.createVertex("calças")
-    graph.createVertex("sapatos")
-    graph.createVertex("cinto")
-    graph.createVertex("camisa")
-    graph.createVertex("gravata")
-    graph.createVertex("paleto")
-    graph.createVertex("relogio")
-
-    graph.add(EdgeType.DIRECTED, "meia", "sapatos", 300.0)
-    graph.add(EdgeType.DIRECTED, "calças", "sapatos", 500.0)
-    graph.add(EdgeType.DIRECTED, "cuecas", "sapatos", 250.0)
-    graph.add(EdgeType.DIRECTED, "cuecas", "calças", 250.0)
-    graph.add(EdgeType.DIRECTED, "calças", "cinto", 450.0)
-    graph.add(EdgeType.DIRECTED, "cinto", "paleto", 300.0)
-    graph.add(EdgeType.DIRECTED, "camisa", "cinto", 600.0)
-    graph.add(EdgeType.DIRECTED, "camisa", "gravata", 50.0)
-    graph.add(EdgeType.DIRECTED, "gravata", "paleto", 292.0)
-
-    println(graph.toString())
-    println(graph.dfsUtil())
 }
