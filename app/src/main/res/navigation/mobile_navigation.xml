@@ -158,6 +158,9 @@
         <action
             android:id="@+id/add_new_task"
             app:destination="@id/planningTaskNewFragment" />
+        <action
+            android:id="@+id/edit_group"
+            app:destination="@id/planningGroupEditFragment" />
     </fragment>
 
     <fragment
@@ -190,6 +193,7 @@
             android:id="@+id/created_new_group"
             app:destination="@id/menu_item_list_planner" />
     </fragment>
+
     <fragment
         android:id="@+id/planningTaskNewFragment"
         android:name="br.edu.ufabc.EsToDoeasy.view.PlanningTaskNewFragment"
@@ -231,5 +235,17 @@
     <fragment
         android:id="@+id/sortBySelectFragment"
         android:name="br.edu.ufabc.EsToDoeasy.view.SortBySelectFragment" />
+
+    <fragment
+        android:id="@+id/planningGroupEditFragment"
+        android:name="br.edu.ufabc.EsToDoeasy.view.PlanningGroupEditFragment">
+        <argument
+            android:name="id"
+            app:argType="long"
+            android:defaultValue="-1L" />
+        <action
+            android:id="@+id/edited_group"
+            app:destination="@id/planningListTaskFragment" />
+    </fragment>
 
 </navigation>

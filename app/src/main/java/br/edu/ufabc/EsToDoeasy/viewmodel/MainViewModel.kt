@@ -360,6 +360,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun updateGroup(group: Group) = liveData {
+        try {
+            repository.updateGroup(group)
+            emit(Status.Success(Result.EmptyResult))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to update group from repository", e)))
+        }
+    }
+
     fun getAllTasksByGroup(id: Long) = liveData {
         try {
             isLoading.value = true

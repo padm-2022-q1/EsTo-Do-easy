@@ -66,6 +66,11 @@ interface Repository {
     suspend fun updateTask(task: Task)
 
     /**
+     * updates a group by Id.
+     */
+    suspend fun updateGroup(group: Group)
+
+    /**
      * Deletes a task by its ID.
      */
     suspend fun deleteTask(id: Long)

@@ -220,10 +220,11 @@ class PlanningTaskEditFragment : Fragment() {
                         .let {
                             findNavController().popBackStack()
                         }
+                    Snackbar.make(binding.root, "Task saved successfully", Snackbar.LENGTH_LONG).show()
                 }
                 is MainViewModel.Status.Failure -> {
-                    Log.e("edit", "Failed to edit item", status.e)
-                    Snackbar.make(binding.root, "Failed to edit item", Snackbar.LENGTH_LONG).show()
+                    Log.e("edit", "Failed to edit task", status.e)
+                    Snackbar.make(binding.root, "Failed to edit task", Snackbar.LENGTH_LONG).show()
                 }
             }
         }
@@ -262,9 +263,10 @@ class PlanningTaskEditFragment : Fragment() {
             when (it) {
                 is MainViewModel.Status.Success -> {
                     findNavController().popBackStack()
+                    Snackbar.make(binding.root, "Task deleted", Snackbar.LENGTH_LONG).show()
                 }
                 is MainViewModel.Status.Failure -> {
-                    Log.e("FRAGMENT", "Failed to delete item", it.e)
+                    Log.e("FRAGMENT", "Failed to delete task", it.e)
                     Snackbar.make(
                         binding.root,
                         getString(R.string.task_details_delete_error),

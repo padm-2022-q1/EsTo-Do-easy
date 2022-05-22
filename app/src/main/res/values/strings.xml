@@ -152,5 +152,6 @@
     <string name="timer_select">Timer Select</string>
     <string name="sort_by">Sort by</string>
     <string name="default_sort">Default sort</string>
+    <string name="list_task_edit_group_title">Edit</string>
 </resources>
 

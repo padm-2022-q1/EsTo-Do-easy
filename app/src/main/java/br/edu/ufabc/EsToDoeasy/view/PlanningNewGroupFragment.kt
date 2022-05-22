@@ -52,6 +52,8 @@ class PlanningNewGroupFragment : Fragment(){
                                 popUpTo(R.id.created_new_group)
                             })
                         }
+                    Log.d("add", "grupo criado com sucesso")
+                    Snackbar.make(binding.root, "Group created successfully", Snackbar.LENGTH_LONG).show()
                 }
                 is MainViewModel.Status.Failure -> {
                     Log.e("add", "Failed to add item", status.e)
