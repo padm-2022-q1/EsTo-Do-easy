@@ -24,6 +24,11 @@ data class TaskTime(
     val taskId: Long,
 
     /**
+     * The task's name.
+     */
+    val task: String,
+
+    /**
      * The TaskTime's date.
      */
     val date: Date?,
@@ -33,6 +38,15 @@ data class TaskTime(
      */
     val timeElapsed: Long,
 
+    /**
+     * The group's identifier.
+     */
+    val groupId: Long,
+
+    /**
+     * The group's name.
+     */
+    val group: String
 
     ){
     companion object {

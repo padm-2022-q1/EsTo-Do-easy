@@ -50,8 +50,11 @@ class RepositoryFirestore(application: Application) : Repository {
             const val id = "id"
             const val userId = "userId"
             const val taskId = "taskId"
+            const val task = "task"
             const val date = "date"
             const val timeElapsed = "timeElapsed"
+            const val groupId = "groupId"
+            const val group = "group"
         }
 
         private object GroupDoc {
@@ -76,25 +79,33 @@ class RepositoryFirestore(application: Application) : Repository {
         val id: Long? = null,
         val userId: String? = null,
         val taskId: Long? = null,
+        val task: String? = null,
         val date: Date? = null,
-        val timeElapsed: Long? = null
+        val timeElapsed: Long? = null,
+        val groupId: Long? = null,
+        val group: String? = null
     ) {
         fun toTaskTime() = TaskTime(
             id = id ?: 0,
             userId = userId ?: "",
             taskId = taskId ?: 0,
+            task = task?: "",
             date = Date(),
             timeElapsed = timeElapsed ?: 0,
-
-            )
+            groupId = groupId ?: 0,
+            group = group ?: "",
+        )
 
         companion object {
             fun fromTaskTime(taskTime: TaskTime, user: String) = TaskTimeFirestore(
                 id = taskTime.id,
-                userId = taskTime.userId,
+                userId = user,
                 taskId = taskTime.taskId,
+                task = taskTime.task,
                 date = taskTime.date,
-                timeElapsed = taskTime.timeElapsed
+                timeElapsed = taskTime.timeElapsed,
+                groupId = taskTime.groupId,
+                group = taskTime.group,
             )
         }
     }
@@ -280,8 +291,10 @@ class RepositoryFirestore(application: Application) : Repository {
         .await()
         .toObjects(AchievementFirestore::class.java).map { it.toAchievement() }
 
-    suspend fun getAllTaskTime(): TaskTimes = getTaskTimeCollection()
+    suspend fun getAllTaskTime(startDate: Date, endDate: Date): TaskTimes = getTaskTimeCollection()
         .whereEqualTo(TaskTimeDoc.userId, getCurrentUser())
+        .whereGreaterThanOrEqualTo(TaskTimeDoc.date, startDate)
+        .whereLessThan(TaskTimeDoc.date, endDate)
         .get(getSource())
         .await()
         .toObjects(TaskTimeFirestore::class.java).map { it.toTaskTime() }
@@ -298,7 +311,7 @@ class RepositoryFirestore(application: Application) : Repository {
         .first()
         .toTask()
 
-    override suspend fun getGroup(id: Long) : Group = getGroupCollection()
+    override suspend fun getGroup(id: Long): Group = getGroupCollection()
         .whereEqualTo(GroupDoc.userId, getCurrentUser())
         .whereEqualTo(GroupDoc.id, id)
         .get(getSource())
@@ -307,7 +320,7 @@ class RepositoryFirestore(application: Application) : Repository {
         .first()
         .toGroup()
 
-    override suspend fun getAchievement(id: Long) : Achievement = getAchievementCollection()
+    override suspend fun getAchievement(id: Long): Achievement = getAchievementCollection()
         .whereEqualTo(AchievementDoc.userId, getCurrentUser())
         .whereEqualTo(AchievementDoc.id, id)
         .get(getSource())
@@ -333,23 +346,14 @@ class RepositoryFirestore(application: Application) : Repository {
         id = nextTaskTimeId(),
         userId = getCurrentUser(),
         taskId = time.taskId,
+        task = time.task,
         date = Date(),
-        timeElapsed = time.timeElapsed
+        timeElapsed = time.timeElapsed,
+        groupId = time.groupId,
+        group = time.group,
     ).let {
         getTaskTimeCollection().add(it)
         it.id ?: throw Exception("Failed to add Task Time")
-    }
-
-    suspend fun addTimeTask(id: Long, time: Long): Long = TaskTimeFirestore(
-        id = nextTaskTimeId(),
-        userId = getCurrentUser(),
-        taskId = id,
-        date = Date(),
-        timeElapsed = time,
-
-        ).let {
-        getTaskTimeCollection().add(it)
-        it.id ?: throw Exception("Failed to add task TIME") // FIXME:
     }
 
     suspend fun getAllTasksByGroup(id: Long): Tasks = getTaskCollection()
