@@ -39,7 +39,7 @@ class PlanningNewGroupFragment : Fragment(){
     private fun addGroup() {
         val group = Group(
             id = 0,
-            userId = "h1MW2FdpRqOFBmPIF5ncDsRF48q1",
+            userId = "",
             name = binding.planningTaskDetailsNameStartEditText.text.toString(),
         )
         Log.d("add", "task build",)
@@ -50,6 +50,8 @@ class PlanningNewGroupFragment : Fragment(){
                         .let {
                             findNavController().navigate(it)
                         }
+                    Log.d("add", "grupo criado com sucesso")
+                    Snackbar.make(binding.root, "Group created successfully", Snackbar.LENGTH_LONG).show()
                 }
                 is MainViewModel.Status.Failure -> {
                     Log.e("add", "Failed to add item", status.e)

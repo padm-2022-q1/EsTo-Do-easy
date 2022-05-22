@@ -22,11 +22,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
-                android:text="@string/study_techniques_label"
+                android:text="@string/timer_select"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview_study_techniques_item_selector"
@@ -89,6 +90,77 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
+                android:id="@+id/timer_techniques_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="@string/sort_by"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardview_study_techniques_item_selector" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview_timer_techniques_item_selector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="@id/study_techniques_label"
+                app:layout_constraintTop_toBottomOf="@id/timer_techniques_label">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
+
+                    <!-- Used just for same spacing as the other list items. -->
+                    <ImageButton
+                        android:id="@+id/play_timer_techniques_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_action_play_task"
+                        android:contentDescription="@string/study_technique_item_play_description"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/timer_techniques_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="@string/default_sort"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/play_timer_techniques_item"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/timer_techniques_item_selector_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/study_techniques_item_selector_label"
+                        android:textColor="@color/text_faded"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/timer_techniques_item_icon"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/timer_techniques_item_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/study_techniques_item_icon_description"
+                        android:src="@drawable/ic_action_next"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/text_faded" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
                 android:id="@+id/suggested_task_item_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -98,7 +170,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/study_techniques_label"
-                app:layout_constraintTop_toBottomOf="@id/cardview_study_techniques_item_selector">
+                app:layout_constraintTop_toBottomOf="@id/cardview_timer_techniques_item_selector">
 
             </TextView>
 

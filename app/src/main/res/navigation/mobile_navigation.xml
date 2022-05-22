@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/login">
+    app:startDestination="@id/menu_item_list_home">
 
     <fragment
         android:id="@+id/menu_item_list_home"
@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_menu_item_list_home_to_timerFragment"
             app:destination="@id/timerFragment" />
+        <action
+            android:id="@+id/action_menu_item_list_home_to_sortBySelectFragment"
+            app:destination="@id/sortBySelectFragment" />
     </fragment>
 
     <fragment
@@ -154,9 +157,10 @@
             app:destination="@id/planningTaskDetailsFragment" />
         <action
             android:id="@+id/add_new_task"
-            app:destination="@id/planningTaskNewFragment"
-            app:popUpTo="@id/planningListTaskFragment"
-            app:popUpToInclusive="true"/>
+            app:destination="@id/planningTaskNewFragment" />
+        <action
+            android:id="@+id/edit_group"
+            app:destination="@id/planningGroupEditFragment" />
     </fragment>
 
     <fragment
@@ -191,6 +195,7 @@
             app:popUpTo="@id/menu_item_list_planner"
             app:popUpToInclusive="true"/>
     </fragment>
+
     <fragment
         android:id="@+id/planningTaskNewFragment"
         android:name="br.edu.ufabc.EsToDoeasy.view.PlanningTaskNewFragment"
@@ -228,6 +233,21 @@
             android:name="id"
             android:defaultValue="-1L"
             app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/sortBySelectFragment"
+        android:name="br.edu.ufabc.EsToDoeasy.view.SortBySelectFragment" />
+
+    <fragment
+        android:id="@+id/planningGroupEditFragment"
+        android:name="br.edu.ufabc.EsToDoeasy.view.PlanningGroupEditFragment">
+        <argument
+            android:name="id"
+            app:argType="long"
+            android:defaultValue="-1L" />
+        <action
+            android:id="@+id/edited_group"
+            app:destination="@id/planningListTaskFragment" />
     </fragment>
 
 </navigation>

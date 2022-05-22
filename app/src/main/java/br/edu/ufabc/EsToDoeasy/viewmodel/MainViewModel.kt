@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import br.edu.ufabc.EsToDoeasy.model.*
+import com.google.firebase.auth.FirebaseAuth
 import java.util.*
 
 /**
@@ -95,6 +96,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val selectedStudyTechnique = MutableLiveData("Pomodoro")
 
 
+    val sortBy = MutableLiveData("Default Sort")
+
+    val tasks = MutableLiveData<Tasks>(mutableListOf())
+
     val selectedDependencies =  MutableLiveData<MutableList<Long>>(mutableListOf())
 
     /**
@@ -112,6 +117,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val clickedScheduledTaskId by lazy { SingleLiveEvent<Long?>() }
 
     val clickedStudyTechniqueSelect by lazy { SingleLiveEvent<Boolean?>() }
+
+    val clickedSortBy by lazy { SingleLiveEvent<Boolean?>() }
+
 
     val clickedTaskToPlay by lazy { SingleLiveEvent<Boolean?>() }
 
@@ -172,12 +180,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun getCurrentUser(): String = FirebaseAuth.getInstance().currentUser?.uid
+        ?: ""
 
     /**
      *
      */
     fun addTask(task: Task) = liveData {
         try {
+            tasks.value = mutableListOf()
             isLoading.value = true
             emit(Status.Success(Result.Id(repository.addTask(task))))
         } catch (e: Exception) {
@@ -316,6 +327,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun deleteTask(id: Long) = liveData {
         try {
+            tasks.value = mutableListOf()
             isLoading.value = true
             repository.deleteTask(id)
             emit(Status.Success(Result.EmptyResult))
@@ -340,10 +352,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun updateTask(task: Task) = liveData {
         try {
+            tasks.value = mutableListOf()
             repository.updateTask(task)
             emit(Status.Success(Result.EmptyResult))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to update task from repository", e)))
+        }
+    }
+
+    fun updateGroup(group: Group) = liveData {
+        try {
+            repository.updateGroup(group)
+            emit(Status.Success(Result.EmptyResult))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to update group from repository", e)))
         }
     }
 
@@ -360,6 +382,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun finishTask(id: Long) = liveData {
         try {
+            tasks.value = mutableListOf()
             isLoading.value = true
             repository.finishTask(id)
             emit(Status.Success(Result.EmptyResult))

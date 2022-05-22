@@ -1,6 +1,7 @@
 package br.edu.ufabc.EsToDoeasy
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -82,6 +83,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        viewModel.clickedSortBy.observe(this) {
+            it?.let {
+                if (it) {
+                    Log.d("SORTBY","PRESSIONADO")
+                    val action =
+                        HomeFragmentDirections.actionMenuItemListHomeToSortBySelectFragment()
+                    navController.navigate(action)
+                } else {
+                    navController.popBackStack()
+                }
+            }
+        }
 
         viewModel.clickedAtDetails.observe(this) {
             it?.let {

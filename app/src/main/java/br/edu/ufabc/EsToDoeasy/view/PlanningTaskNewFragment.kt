@@ -137,21 +137,20 @@ class PlanningTaskNewFragment : Fragment() {
         viewModel.selectedDependencies.value!!.clear()
         Log.d("add", "task build",)
 
-        Log.d("add", "task build",)
-
         viewModel.addTask(task).observe(viewLifecycleOwner) { status ->
             when (status) {
                 is MainViewModel.Status.Success -> {
-                    Log.d("add", "deu certo")
+                    Log.d("add", "task criada com sucesso")
                     PlanningTaskEditFragmentDirections.actionPlanningTaskDetailsFragmentToMenuItemListProfile()
                         .let {
                             findNavController().popBackStack()
                         }
+                    Snackbar.make(binding.root, "Task created successfully", Snackbar.LENGTH_LONG).show()
                 }
 
                 is MainViewModel.Status.Failure -> {
-                    Log.e("add", "Failed to add item", status.e)
-                    Snackbar.make(binding.root, "Failed to add item", Snackbar.LENGTH_LONG).show()
+                    Log.e("add", "Failed to add task", status.e)
+                    Snackbar.make(binding.root, "Failed to add task", Snackbar.LENGTH_LONG).show()
                 }
             }
         }

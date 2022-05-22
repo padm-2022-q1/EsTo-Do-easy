@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="../../../../layout/custom_preview.xml" value="0.17056354916067146" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/drawable/ic_launcher_background.xml" value="0.232" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.232" />
         <entry key="..\:/Users/miiki/AndroidStudioProjects/EsTo-Do-easy/app/src/main/res/layout/activity_main.xml" value="0.1403985507246377" />
@@ -80,10 +79,9 @@
         <entry key="app/src/main/res/layout/fragment_login_page.xml" value="0.29583333333333334" />
         <entry key="app/src/main/res/layout/fragment_new_task_details.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_planning_task_details.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/fragment_planning_task_edit.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/fragment_planning_task_list.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/fragment_planning_task_new.xml" value="0.2125" />
-        <entry key="app/src/main/res/layout/fragment_pomodoro.xml" value="0.20572916666666666" />
-        <entry key="app/src/main/res/layout/fragment_profile_page.xml" value="0.3390625" />
         <entry key="app/src/main/res/layout/fragment_schedule.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/fragment_select_dependencies.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/fragment_study_techniques.xml" value="0.2125" />
@@ -97,9 +95,6 @@
         <entry key="app/src/main/res/layout/scheduled_task_list_item.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/task_list_item.xml" value="0.67" />
         <entry key="app/src/main/res/menu/main_navigation_menu.xml" value="0.1078125" />
-        <entry key="app/src/main/res/menu/menu_new_group.xml" value="0.20572916666666666" />
-        <entry key="app/src/main/res/menu/menu_task_details.xml" value="0.20572916666666666" />
-        <entry key="app/src/main/res/menu/menu_timer.xml" value="0.1703125" />
       </map>
     </option>
   </component>

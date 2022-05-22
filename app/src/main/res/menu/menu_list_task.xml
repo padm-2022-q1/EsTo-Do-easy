@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_edit"
+        android:title="@string/list_task_edit_group_title"
+        app:showAsAction="never"
+        />
+    <item
         android:id="@+id/action_delete"
         android:title="@string/list_task_remove_group_title"
         app:showAsAction="never"
