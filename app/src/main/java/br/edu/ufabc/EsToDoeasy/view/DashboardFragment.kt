@@ -80,7 +80,7 @@ class DashboardFragment : Fragment() {
             isDrawHoleEnabled = false
             isHighlightPerTapEnabled = true
             setEntryLabelColor(Color.BLACK)
-            setEntryLabelTextSize(12f)
+            setEntryLabelTextSize(11f)
             rotationAngle = 180f
             legend.isEnabled = false
         }
