@@ -157,5 +157,6 @@
     <string name="chart_time_spent_per_group_label">Time spent per group (minutes)</string>
     <string name="chart_top_tasks_time_spent_label">Top 5 time spent tasks (minutes)</string>
     <string name="chart_unknown">Unknown</string>
+    <string name="chart_others">Others</string>
 </resources>
 
