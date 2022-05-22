@@ -531,7 +531,7 @@ class RepositoryFirestore(application: Application) : Repository {
             .await()
             .let { snapshot ->
                 Log.d("REPOSITORY", "Is snapshot empty? ${snapshot.isEmpty} $id ${getCurrentUser()}")
-                if (snapshot.isEmpty) throw Exception("Failed to tasks group ")
+                if (snapshot.isEmpty) return
                 snapshot.documents.forEach { document ->
                     document.reference.delete()
                 }
