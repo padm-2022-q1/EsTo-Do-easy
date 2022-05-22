@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
 import android.view.*
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -70,6 +71,17 @@ class TimerFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                isEnabled = true
+                Snackbar.make(
+                    binding.root,
+                    "STOP the current Timer first",
+                    Snackbar.LENGTH_LONG
+                ).show()
+
+            }
+        })
     }
 
     override fun onCreateView(
@@ -142,7 +154,7 @@ class TimerFragment : Fragment() {
                                             }
 
                                         viewModel.state.value =
-                                            if (viewModel.isTimerRunning()) MainViewModel.State.STOPPED
+                                            if (viewModel.isTimerRunning()) MainViewModel.State.INITIAL
                                             else MainViewModel.State.STARTED
                                     }
                                 }

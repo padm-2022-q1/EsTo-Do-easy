@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
 import android.view.*
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -39,7 +40,7 @@ class PomodoroFragment : Fragment() {
     }
 
     private fun formatStart() { // FIX:
-        context?.let { ContextCompat.getColor(it, R.color.danger) }
+        context?.let { ContextCompat.getColor(it, R.color.bluedark) }
             ?.let { binding.pomodoroActionButton.setBackgroundColor(it) }
         binding.pomodoroActionButton.text = getString(R.string.return_pause)
     }
@@ -89,6 +90,18 @@ class PomodoroFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                    isEnabled = true
+                    Snackbar.make(
+                        binding.root,
+                        "Finish the current Timer first",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+
+            }
+        })
     }
 
     override fun onCreateView(
@@ -117,11 +130,9 @@ class PomodoroFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         bindEvents()
-
         registerObservers()
     }
 
-    // TODO: Finish Pomodoro on back button.
 
     private fun bindEvents() {
         binding.pomodoroActionButton.setOnClickListener {
@@ -181,7 +192,7 @@ class PomodoroFragment : Fragment() {
                                             }
 
                                             viewModel.state.value =
-                                                if (viewModel.isTimerRunning()) MainViewModel.State.STOPPED
+                                                if (viewModel.isTimerRunning()) MainViewModel.State.INITIAL
                                                 else MainViewModel.State.STARTED
                                         }
                                     }
@@ -234,4 +245,7 @@ class PomodoroFragment : Fragment() {
             }
         }
     }
+
+
+
 }

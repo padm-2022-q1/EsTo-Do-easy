@@ -15,7 +15,7 @@
         tools:ignore="ScrollViewCount">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/profile_image_profile"
@@ -25,7 +25,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintVertical_bias="0.05"
+                app:layout_constraintVertical_bias="0.075"
                 android:src="@drawable/ic_action_profile"
                 >
             </com.google.android.material.imageview.ShapeableImageView>
@@ -33,13 +33,15 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/profile_username_profile"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/profile_username_text_base"
+                android:textColor="@color/black"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profile_image_profile"
+                app:layout_constraintBottom_toTopOf="@id/profile_email_profile"
                 android:textSize="32sp"
                 android:textStyle="bold"
                 android:padding="12dp"
@@ -51,32 +53,19 @@
                 android:id="@+id/profile_email_profile"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/profile_email_text_base"
+                android:textColor="@color/black"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profile_username_profile"
+                app:layout_constraintBottom_toTopOf="@id/profile_settings_button"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:padding="12dp"
                 >
             </com.google.android.material.textview.MaterialTextView>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/profile_sync_google_calendar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@string/profile_sync_google_calendar_button_text"
-                app:icon="@drawable/ic_icons8_google"
-                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                app:layout_constraintLeft_toLeftOf="@id/profile_email_profile"
-                app:layout_constraintTop_toBottomOf="@id/profile_email_profile"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:padding="12dp"
-                />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/profile_settings_button"
@@ -88,9 +77,11 @@
                 app:iconSize="48sp"
                 style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                 app:layout_constraintLeft_toLeftOf="@id/profile_email_profile"
-                app:layout_constraintTop_toBottomOf="@id/profile_sync_google_calendar"
+                app:layout_constraintTop_toBottomOf="@id/profile_email_profile"
+                app:layout_constraintBottom_toTopOf="@id/profile_achievements_button"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginTop="24dp"
                 android:padding="12dp"
                 />
 
@@ -105,6 +96,7 @@
                 style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                 app:layout_constraintLeft_toLeftOf="@id/profile_email_profile"
                 app:layout_constraintTop_toBottomOf="@id/profile_settings_button"
+                app:layout_constraintBottom_toTopOf="@id/profile_sign_out"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:padding="12dp"
@@ -121,6 +113,7 @@
                 android:textSize="11sp"
                 app:layout_constraintRight_toRightOf="@id/profile_achievements_button"
                 app:layout_constraintTop_toBottomOf="@id/profile_achievements_button"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:padding="12dp"
@@ -134,6 +127,7 @@
                 android:textSize="11sp"
                 app:layout_constraintLeft_toLeftOf="@id/profile_achievements_button"
                 app:layout_constraintTop_toBottomOf="@id/profile_achievements_button"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:padding="12dp"

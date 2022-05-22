@@ -115,9 +115,14 @@ class ProfilePageFragment : Fragment() {
         ?: "Nameless"
 
     private fun dealSigninButton() {
-        if (getCurrentUser() == "")
+        if (getCurrentUser() == "") {
             binding.profileSignIn.visibility = View.VISIBLE
-        else binding.profileSignIn.visibility = View.INVISIBLE
+            binding.profileSignOut.visibility = View.INVISIBLE
+        }
+        else {
+            binding.profileSignIn.visibility = View.INVISIBLE
+            binding.profileSignOut.visibility = View.VISIBLE
+        }
     }
 
     private fun bindEvents() {
